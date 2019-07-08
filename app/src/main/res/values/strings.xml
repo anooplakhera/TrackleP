@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">Trackle</string>
+
+
+    <!--Login-->
+    <string name="login_title">Hey There, Welcome to</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password ?</string>
+    <string name="register_now">Register Now</string>
+    <string name="pay_bill">Pay Bill</string>
+    <string name="connect_with_utility">Connect with Utility</string>
+    <string name="powered_by">Powered by</string>
+
+    <!--Forgot Password-->
+    <string name="step1">Step 1</string>
+    <string name="step2">Step 2</string>
+    <string name="validate_email">Please validate your Email</string>
+    <string name="submit">Submit</string>
+    <string name="security_answer">Security Answer</string>
+    <string name="question_eg">What was the name of your elementary / primary school?</string>
+    <string name="answer_security_ques">Please answer security questions tro verify your identity.</string>
+
+    <!--Register User-->
+    <string name="registration_title">Registration</string>
+    <string name="utility">Utility Name</string>
+    <string name="mandatory">Mandatory</string>
+    <string name="acc_no">Account Number</string>
+    <string name="meter_no">Meter Number</string>
+    <string name="service_zip_code">Service Zip Code</string>
+    <string name="confirm_pass">Confirm Password</string>
+    <string name="security_ques1">Security Question 1</string>
+    <string name="security_ques2">Security Question 2</string>
+    <string name="security_ans1">Security Answer 1</string>
+    <string name="security_ans2">Security Answer 2</string>
+
+    <!--Dashboard-->
+    <string name="welcome_text">Welcome DES JARDINS ROBERT</string>
+    <string name="my_account">My EOCWD Account</string>
+    <string name="billing">Billing</string>
+    <string name="track_usage">Track Usage</string>
+    <string name="compare">Compare</string>
+    <string name="water_conversation">Water Conversation</string>
+
+
+    <!--Profile-->
+    <string name="home_phone_number">Home Phone Number</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="address">Communication Address</string>
+
+
+    <!--Navigation Menu-->
+    <string name="nav_menu_1">Connect with EOCWD</string>
+    <string name="nav_menu_2">Company Website</string>
+    <string name="nav_menu_3">Payment Locations</string>
+    <string name="nav_menu_4">Visit Facebook</string>
+    <string name="nav_menu_5">Visit Twitter</string>
+    <string name="nav_menu_6">Privacy Policy</string>
+    <string name="nav_menu_7">Logout</string>
+    <string name="version">2019 Aquatrax Water Solutions \nVersion: 1.0(1)</string>
+
+    <string name="loading">Loading…</string>
+    <string name="internet">Please Check Internet Connection</string>
+
+</resources>

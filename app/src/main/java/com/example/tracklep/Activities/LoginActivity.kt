@@ -1,0 +1,86 @@
+package com.example.tracklep.Activities
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import com.example.hp.togelresultapp.Preferences.AppPrefences
+import com.example.tracklep.ApiClient.ApiClient
+import com.example.tracklep.ApiClient.ApiInterface
+import com.example.tracklep.ApiClient.ApiUrls
+import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.R
+import com.example.tracklep.Utils.Utils
+import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class LoginActivity : BaseActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+
+        clickPerform()
+
+    }
+
+    private fun validationFields(): Boolean {
+        var isValid = true
+        if (editUserName.text!!.isEmpty()) isValid = false
+        else if (editUserPass.text!!.isEmpty()) isValid = false
+        return isValid
+    }
+
+    private fun clickPerform() {
+        txtForgotPassword.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, ForgotPasswordFirstActivity::class.java))
+        }
+        lytRegisterUser.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+        }
+        btnLogin.setOnClickListener {
+            if (validationFields())
+                if (switchBtn.isChecked) {
+//                    loginApi()
+                    AppPrefences.setLogin(this, true)
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    finish()
+                } else showToast("Please Enable Remember me")
+            else showToast("Please enter correct username & password")
+
+        }
+    }
+
+
+    private fun loginApi() = if (Utils.isConnected(this)) {
+        try {
+            var map = HashMap<String, String>()
+            map.put(ApiUrls.UserName, editUserName.text.toString());
+            map.put(ApiUrls.Password, editUserPass.text.toString());
+            map.put(ApiUrls.GrantType, ApiUrls.Password.toLowerCase());
+            map.put(ApiUrls.TanentId, "1");
+            val apiService = ApiClient.getClient(ApiUrls.BASE_URL).create(ApiInterface::class.java)
+            val call: Call<String> = apiService.getLogin(map)
+            call.enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    Log.d("LoginResponse", response.toString())
+                    if (response.body() != null) {
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    // Log error here since request failed
+                }
+            })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    } else {
+        dismissDialog()
+        showToast(getString(R.string.internet))
+    }
+
+}

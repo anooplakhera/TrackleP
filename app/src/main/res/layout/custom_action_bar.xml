@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:background="@color/colorPrimary">
+    <ImageView
+            android:id="@+id/imgCABback"
+            android:layout_width="@dimen/sp_30"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back_icon"/>
+
+    <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtCABtitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dp_17"/>
+
+
+</RelativeLayout>

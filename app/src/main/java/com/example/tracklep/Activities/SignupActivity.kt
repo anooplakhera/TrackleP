@@ -1,0 +1,235 @@
+package com.example.tracklep.Activities
+
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
+import android.view.ViewGroup
+import android.view.Window
+import android.widget.LinearLayout
+import android.widget.TextView
+import com.example.tracklep.Adapter.QuestionListAdapter
+import com.example.tracklep.ApiClient.ApiClient
+import com.example.tracklep.ApiClient.ApiInterface
+import com.example.tracklep.ApiClient.ApiUrls
+import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataClasses.SecurityQuestionData
+import com.example.tracklep.DataModels.ResponseModelClasses
+import com.example.tracklep.R
+import com.example.tracklep.Utils.Utils
+import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.custom_action_bar.*
+import kotlinx.android.synthetic.main.dialog_layout.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+
+
+class SignupActivity : BaseActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_signup)
+
+        txtCABtitle.text = getString(R.string.registration_title)
+        imgCABback.setOnClickListener {
+            finish()
+        }
+
+        getSecurityQues(false, txtQuestion2)
+
+        clickPerform()
+    }
+
+
+    private fun clickPerform() {
+        r_lyt_ques1.setOnClickListener {
+            if (SecurityQuestionData.getCount() > 0) {
+                openDialog(txtQuestion1)
+            } else {
+                getSecurityQues(true, txtQuestion1)
+
+            }
+        }
+        r_lyt_ques2.setOnClickListener {
+            if (SecurityQuestionData.getCount() > 0) {
+                openDialog(txtQuestion2)
+            } else {
+                getSecurityQues(true, txtQuestion2)
+            }
+        }
+
+        btnSubmitRegister.setOnClickListener {
+            validationField()
+        }
+    }
+
+    private fun validationField() {
+        var allValid = true
+        if (txtUtilityName.text == getString(R.string.mandatory)) {
+            showToast("Please Select Utility name")
+            !allValid
+            return
+        } else if (editAccountNo.text!!.isEmpty()) {
+            showToast("Please Enter Account Number")
+            !allValid
+            return
+        } else if (editMeterNo.text!!.isEmpty()) {
+            showToast("Please Enter Meter Number")
+            !allValid
+            return
+        } else if (editServiceZipCode.text!!.isEmpty()) {
+            showToast("Please Enter Zip Code")
+            !allValid
+            return
+        } else if (editEmail.text!!.isEmpty()) {
+            showToast("Please Enter Email")
+            !allValid
+            return
+        } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
+            showToast("Please Enter Valid Email")
+            !allValid
+            return
+        } else if (editPassword.text!!.isEmpty()) {
+            showToast("Please Enter Password")
+            !allValid
+            return
+        } else if (editCPassword.text!!.isEmpty()) {
+            showToast("Please Enter Confirm Password")
+            !allValid
+            return
+        } else if (!editCPassword!!.text!!.isEmpty() && !editPassword!!.text!!.isEmpty() &&
+            !editPassword.text.toString()!!.equals(editCPassword.text.toString())
+        ) {
+            showToast("Password can't match")
+            !allValid
+            return
+        } else if (editAnswer1.text!!.isEmpty()) {
+            showToast("Please Enter Answer")
+            !allValid
+            return
+        } else if (txtQuestion1.text.toString() == getString(R.string.mandatory)) {
+            showToast("Please Select Question")
+            !allValid
+            return
+        } else if (txtQuestion2.text.toString() == getString(R.string.mandatory)) {
+            showToast("Please Select Question")
+            !allValid
+            return
+        } else if (editAnswer2.text!!.isEmpty()) {
+            showToast("Please Enter Answer")
+            !allValid
+            return
+        } else if (allValid) {
+            saveUser()
+        }
+    }
+
+    private fun saveUser() = if (Utils.isConnected(this)) {
+        try {
+            var map = HashMap<String, String>()
+            map.put(ApiUrls.EmailID, "");
+            map.put(ApiUrls.Password, "");
+            map.put(ApiUrls.CustomerUtilityId, "");
+            map.put(ApiUrls.ConfirmPassword, "");
+            map.put(ApiUrls.UtilityAccountNumber, "");
+            map.put(ApiUrls.PostalCode, "");
+            map.put(ApiUrls.UserId, "");
+            map.put(ApiUrls.MeterNumber, "");
+            map.put(ApiUrls.SecurityQuestionId, "");
+            map.put(ApiUrls.SecurityQuestionId2, "");
+            map.put(ApiUrls.HintAns, "");
+            map.put(ApiUrls.HintsAns2, "");
+            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call: Call<ResponseModelClasses.RegistrationResponse> = apiService.registerUser(map)
+            call.enqueue(object : Callback<ResponseModelClasses.RegistrationResponse> {
+                override fun onResponse(
+                    call: Call<ResponseModelClasses.RegistrationResponse>,
+                    response: Response<ResponseModelClasses.RegistrationResponse>
+                ) {
+                    if (response.body() != null) {
+                        Log.d("send RegID===", response.body()!!.Message)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseModelClasses.RegistrationResponse>, t: Throwable) {
+                    // Log error here since request failed
+                }
+            })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    } else {
+        dismissDialog()
+        showToast(getString(R.string.internet))
+    }
+
+    private fun getSecurityQues(dialogOpen: Boolean = false, txtview: TextView) = if (Utils.isConnected(this)) {
+        showDialog()
+        try {
+            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call = apiService.getSecurityQuestion()
+            call.enqueue(object : Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
+                override fun onResponse(
+                    call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
+                    response: Response<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
+                ) {
+                    dismissDialog()
+                    if (response.body() != null) {
+                        SecurityQuestionData.clearArrayList()
+                        SecurityQuestionData.addArrayList(response.body()!!)
+                        if (dialogOpen) {
+                            openDialog(txtview)
+                        }
+                    }
+                }
+
+
+                override fun onFailure(
+                    call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
+                    t: Throwable
+                ) {
+                    dismissDialog()
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dismissDialog()
+        }
+    } else {
+        dismissDialog()
+        showToast(getString(R.string.internet))
+    }
+
+    private fun openDialog(textView: TextView) {
+        val dialog = Dialog(this@SignupActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_layout)
+        dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(true)
+        dialog.show()
+        dialog.txtTitleTop.text = "Select Security Question"
+
+        val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        dialog.dialogRecycleView.layoutManager = layoutManager as RecyclerView.LayoutManager?
+        val mAdapter = QuestionListAdapter() { position ->
+            val data = SecurityQuestionData.getArrayItem(position)
+            textView.text = data.Question
+            textView.setTextColor(resources.getColor(R.color.colorBlack))
+            dialog.dismiss()
+        }
+        dialog.dialogRecycleView.adapter = mAdapter
+
+    }
+
+}
