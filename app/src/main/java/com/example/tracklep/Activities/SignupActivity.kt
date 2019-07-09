@@ -21,7 +21,6 @@ import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
-import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.activity_signup.btnSubmitRegister
 import kotlinx.android.synthetic.main.activity_signup.editAccountNo
@@ -203,6 +202,8 @@ class SignupActivity : BaseActivity() {
                     response: Response<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
                 ) {
                     dismissDialog()
+                    if(response.message()!=null)
+                        AppLog.printLog("Response- ", response.message().toString())
                     if (response.body() != null) {
                         AppLog.printLog("Security Question Response: ", response.body().toString())
                         SecurityQuestionData.clearArrayList()
@@ -218,6 +219,7 @@ class SignupActivity : BaseActivity() {
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
                     t: Throwable
                 ) {
+                    AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }
             })

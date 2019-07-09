@@ -38,6 +38,29 @@ object ResponseModelClasses {
         val SqlQuery: String,
         val Parameters: String
     )
+
+
+    data class LoginResponseModel(
+        val expires: String,
+        val issued: String,
+        val AccountNumber: String,
+        val CompanyWebsite: String,
+        val CustomerId: String,
+        val CustomerTypeDesc: String,
+        val Email: String,
+        val FacebookUrl: String,
+        val IsAMI: String,
+        val MeterType: String,
+        val Name: String,
+        val PrivacyPolicy: String,
+        val TwitterURL: String,
+        val UtilityAccountNumber: String,
+        val UtilityLogo: String,
+        val access_token: String,
+        val expires_in: Int,
+        val token_type: String
+    )
+
 }
 
 

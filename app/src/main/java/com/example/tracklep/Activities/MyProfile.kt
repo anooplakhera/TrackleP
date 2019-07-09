@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.activity_my_profile.*
 import android.widget.TextView
 import com.example.tracklep.Adapter.QuestionListAdapter
 import com.example.tracklep.ApiClient.ApiClient
@@ -35,6 +36,8 @@ class MyProfile : BaseActivity() {
         imgCABback.setOnClickListener {
             finish()
         }
+
+        getSecurityQues(false, txtQuestion1)
     }
 
     private fun getSecurityQues(dialogOpen: Boolean = false, txtview: TextView) = if (Utils.isConnected(this)) {

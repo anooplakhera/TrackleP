@@ -10,7 +10,7 @@ interface ApiInterface {
 
     @FormUrlEncoded
     @POST(ApiUrls.LOGIN)
-    fun getLogin(@FieldMap fieldMap: Map<String, String>): Call<String>
+    fun getLogin(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.LoginResponseModel>
 
     @FormUrlEncoded
     @POST(ApiUrls.REGISTER_USER)

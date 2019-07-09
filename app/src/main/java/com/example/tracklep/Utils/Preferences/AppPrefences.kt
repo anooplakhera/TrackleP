@@ -1,6 +1,8 @@
 package com.example.hp.togelresultapp.Preferences
 
 import android.content.Context
+import com.example.tracklep.DataModels.ResponseModelClasses
+import com.google.gson.Gson
 
 
 object AppPrefences {
@@ -16,6 +18,7 @@ object AppPrefences {
     private val DateWiseData = "date_wise"
     private val TokenID = "tokenId"
     private val Login = "login"
+    private val LoginModel = "LoginModel"
 
 
     fun clearAll(ctx: Context) {
@@ -55,10 +58,27 @@ object AppPrefences {
         editor.commit()
     }
 
+    fun getLoginModel(ctx: Context): ResponseModelClasses.LoginResponseModel? {
+        var data = ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE).getString(LoginModel, "")
+        val gson = Gson().fromJson(data, ResponseModelClasses.LoginResponseModel::class.java)
+        return gson
+    }
+
+    fun setLoginModel(ctx: Context, data: ResponseModelClasses.LoginResponseModel) {
+        val prefs = ctx.getSharedPreferences(
+            PREFS_FILE_NAME, Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString(LoginModel, data.toString())
+        editor.commit()
+    }
+
+
     fun getDeviceId(ctx: Context): String {
         return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
             .getString(DeviceId, "").toString()
     }
+
 
     fun setDeviceId(ctx: Context, data: String) {
         val prefs = ctx.getSharedPreferences(

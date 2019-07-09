@@ -8,7 +8,9 @@ import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
@@ -42,10 +44,7 @@ class LoginActivity : BaseActivity() {
         btnLogin.setOnClickListener {
             if (validationFields())
                 if (switchBtn.isChecked) {
-//                    loginApi()
-                    AppPrefences.setLogin(this, true)
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    finish()
+                    loginApi()
                 } else showToast("Please Enable Remember me")
             else showToast("Please enter correct username & password")
 
@@ -56,21 +55,42 @@ class LoginActivity : BaseActivity() {
     private fun loginApi() = if (Utils.isConnected(this)) {
         try {
             var map = HashMap<String, String>()
-            map.put(ApiUrls.UserName, editUserName.text.toString());
-            map.put(ApiUrls.Password, editUserPass.text.toString());
+            map.put(ApiUrls.UserName, "utkarsh3441@gmail.com");
+            map.put(ApiUrls.Password, "Trackle@999");
+            /* map.put(ApiUrls.UserName, editUserName.text.toString());
+             map.put(ApiUrls.Password, editUserPass.text.toString());*/
             map.put(ApiUrls.GrantType, ApiUrls.Password.toLowerCase());
             map.put(ApiUrls.TanentId, "1");
+            map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+            map.put(ApiUrls.Database, ApiUrls.Database_value)
+            map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
+            map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
             val apiService = ApiClient.getClient(ApiUrls.BASE_URL).create(ApiInterface::class.java)
-            val call: Call<String> = apiService.getLogin(map)
-            call.enqueue(object : Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
-                    Log.d("LoginResponse", response.toString())
+            val call: Call<ResponseModelClasses.LoginResponseModel> = apiService.getLogin(map)
+            call.enqueue(object : Callback<ResponseModelClasses.LoginResponseModel> {
+                override fun onResponse(
+                    call: Call<ResponseModelClasses.LoginResponseModel>,
+                    response: Response<ResponseModelClasses.LoginResponseModel>
+                ) {
+                    // Log.d("LoginResponse", response.toString())
+
+                    if (response.message() != null)
+                        AppLog.printLog("Response- ", response.message().toString())
+                    if (response.body() != null)
+                        AppLog.printLog("Login Response: ", response.body().toString())
                     if (response.body() != null) {
+
+                        AppPrefences.setLoginModel(this@LoginActivity, response.body()!!)
+
+                        AppPrefences.setLogin(this@LoginActivity, true)
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        finish()
                     }
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseModelClasses.LoginResponseModel>, t: Throwable) {
                     // Log error here since request failed
+                    AppLog.printLog("Failure()- ", t.message.toString())
                 }
             })
 
