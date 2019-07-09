@@ -1,10 +1,12 @@
 package com.example.tracklep.ApiClient
 
+import org.json.JSONObject
+
 object ApiUrls {
 
     /*-----------------Api+Urls----------------*/
     const val BASE_URL: String = "https://aquatraxapi-dev.azurewebsites.net/"
-//    const val BASE_URL: String = "https://aquatraxapi.azurewebsites.net/"
+    //    const val BASE_URL: String = "https://aquatraxapi.azurewebsites.net/"
     const val BASE_PATH: String = "api/customer/"
     const val LOGIN = "token";
     const val REGISTER_USER = "register"
@@ -24,6 +26,7 @@ object ApiUrls {
     const val SecurityQuestion2 = "SecurityQuestion2"
     const val Answer1 = "Answer1"
     const val Answer2 = "Answer2"
+
     /*SignUp*/
     const val EmailID = "EmailID"
     const val Password = "Password"
@@ -40,9 +43,27 @@ object ApiUrls {
     const val GrantType = "grant_type"
     const val TanentId = "tanentid"
 
+    const val DataSource = "DataSource"
+    const val Database = "Database"
+    const val DBUserName = "DBUserName"
+    const val DBPassword = "DBPassword"
+
+    const val DataSource_value = "aquatraxserver.database.windows.net"
+    const val Database_value = "AQUATRAXDEV"
+    const val DBUserName_value = "aquatrax@aquatraxserver"
+    const val DBPassword_value = "newaqt@123"
+
 
     fun getBasePathUrl(): String {
         return BASE_URL + BASE_PATH
     }
 
+    fun getBodyMap(): String {
+        var bMap = JSONObject()
+        bMap.put(DataSource, DataSource_value)
+        bMap.put(Database, Database_value)
+        bMap.put(DBUserName, DBUserName_value)
+        bMap.put(DBPassword, DBPassword_value)
+        return bMap.toString()
+    }
 }

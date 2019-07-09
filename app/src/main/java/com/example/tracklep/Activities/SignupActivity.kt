@@ -19,8 +19,21 @@ import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.SecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
+import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.activity_signup.*
+import kotlinx.android.synthetic.main.activity_signup.btnSubmitRegister
+import kotlinx.android.synthetic.main.activity_signup.editAccountNo
+import kotlinx.android.synthetic.main.activity_signup.editAnswer1
+import kotlinx.android.synthetic.main.activity_signup.editAnswer2
+import kotlinx.android.synthetic.main.activity_signup.editEmail
+import kotlinx.android.synthetic.main.activity_signup.editMeterNo
+import kotlinx.android.synthetic.main.activity_signup.editServiceZipCode
+import kotlinx.android.synthetic.main.activity_signup.r_lyt_ques1
+import kotlinx.android.synthetic.main.activity_signup.r_lyt_ques2
+import kotlinx.android.synthetic.main.activity_signup.txtQuestion1
+import kotlinx.android.synthetic.main.activity_signup.txtQuestion2
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
@@ -49,24 +62,28 @@ class SignupActivity : BaseActivity() {
 
 
     private fun clickPerform() {
-        r_lyt_ques1.setOnClickListener {
-            if (SecurityQuestionData.getCount() > 0) {
-                openDialog(txtQuestion1)
-            } else {
-                getSecurityQues(true, txtQuestion1)
+        try {
+            r_lyt_ques1.setOnClickListener {
+                if (SecurityQuestionData.getCount() > 0) {
+                    openDialog(txtQuestion1)
+                } else {
+                    getSecurityQues(true, txtQuestion1)
 
+                }
             }
-        }
-        r_lyt_ques2.setOnClickListener {
-            if (SecurityQuestionData.getCount() > 0) {
-                openDialog(txtQuestion2)
-            } else {
-                getSecurityQues(true, txtQuestion2)
+            r_lyt_ques2.setOnClickListener {
+                if (SecurityQuestionData.getCount() > 0) {
+                    openDialog(txtQuestion2)
+                } else {
+                    getSecurityQues(true, txtQuestion2)
+                }
             }
-        }
 
-        btnSubmitRegister.setOnClickListener {
-            validationField()
+            btnSubmitRegister.setOnClickListener {
+                validationField()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -105,25 +122,25 @@ class SignupActivity : BaseActivity() {
             !allValid
             return
         } else if (!editCPassword!!.text!!.isEmpty() && !editPassword!!.text!!.isEmpty() &&
-            !editPassword.text.toString()!!.equals(editCPassword.text.toString())
+            !editPassword.text.toString().equals(editCPassword.text.toString())
         ) {
-            showToast("Password can't match")
+            showToast("Password doesn't match")
             !allValid
             return
         } else if (editAnswer1.text!!.isEmpty()) {
-            showToast("Please Enter Answer")
+            showToast("Please Enter Security Answer")
             !allValid
             return
         } else if (txtQuestion1.text.toString() == getString(R.string.mandatory)) {
-            showToast("Please Select Question")
+            showToast("Please Select Security Question")
             !allValid
             return
         } else if (txtQuestion2.text.toString() == getString(R.string.mandatory)) {
-            showToast("Please Select Question")
+            showToast("Please Select Security Question")
             !allValid
             return
         } else if (editAnswer2.text!!.isEmpty()) {
-            showToast("Please Enter Answer")
+            showToast("Please Enter Security Answer")
             !allValid
             return
         } else if (allValid) {
@@ -134,18 +151,18 @@ class SignupActivity : BaseActivity() {
     private fun saveUser() = if (Utils.isConnected(this)) {
         try {
             var map = HashMap<String, String>()
-            map.put(ApiUrls.EmailID, "");
-            map.put(ApiUrls.Password, "");
-            map.put(ApiUrls.CustomerUtilityId, "");
-            map.put(ApiUrls.ConfirmPassword, "");
-            map.put(ApiUrls.UtilityAccountNumber, "");
-            map.put(ApiUrls.PostalCode, "");
-            map.put(ApiUrls.UserId, "");
-            map.put(ApiUrls.MeterNumber, "");
-            map.put(ApiUrls.SecurityQuestionId, "");
-            map.put(ApiUrls.SecurityQuestionId2, "");
-            map.put(ApiUrls.HintAns, "");
-            map.put(ApiUrls.HintsAns2, "");
+            map.put(ApiUrls.EmailID, editEmail.text.toString())
+            map.put(ApiUrls.Password, editPassword.text.toString())
+            map.put(ApiUrls.CustomerUtilityId, txtUtilityName.text.toString())
+            map.put(ApiUrls.ConfirmPassword, editCPassword.text.toString())
+            map.put(ApiUrls.UtilityAccountNumber, editAccountNo.text.toString())
+            map.put(ApiUrls.PostalCode, editServiceZipCode.text.toString())
+            map.put(ApiUrls.UserId, editEmail.text.toString())
+            map.put(ApiUrls.MeterNumber, editMeterNo.text.toString())
+            map.put(ApiUrls.SecurityQuestionId, txtQuestion1.text.toString())
+            map.put(ApiUrls.SecurityQuestionId2, txtQuestion2.text.toString())
+            map.put(ApiUrls.HintAns, editAnswer1.text.toString())
+            map.put(ApiUrls.HintsAns2, editAnswer2.text.toString())
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.RegistrationResponse> = apiService.registerUser(map)
             call.enqueue(object : Callback<ResponseModelClasses.RegistrationResponse> {
@@ -153,6 +170,7 @@ class SignupActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.RegistrationResponse>,
                     response: Response<ResponseModelClasses.RegistrationResponse>
                 ) {
+                    AppLog.printLog("Params " + map.toString() + "\n" + "URL " + apiService.toString() + "\n" + "Response " + response.body().toString())
                     if (response.body() != null) {
                         Log.d("send RegID===", response.body()!!.Message)
 
@@ -176,8 +194,9 @@ class SignupActivity : BaseActivity() {
     private fun getSecurityQues(dialogOpen: Boolean = false, txtview: TextView) = if (Utils.isConnected(this)) {
         showDialog()
         try {
+
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getSecurityQuestion()
+            val call = apiService.getSecurityQuestion(ApiUrls.getBodyMap())
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
@@ -185,6 +204,7 @@ class SignupActivity : BaseActivity() {
                 ) {
                     dismissDialog()
                     if (response.body() != null) {
+                        AppLog.printLog("Security Question Response: ", response.body().toString())
                         SecurityQuestionData.clearArrayList()
                         SecurityQuestionData.addArrayList(response.body()!!)
                         if (dialogOpen) {
@@ -221,7 +241,7 @@ class SignupActivity : BaseActivity() {
         dialog.txtTitleTop.text = "Select Security Question"
 
         val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-        dialog.dialogRecycleView.layoutManager = layoutManager as RecyclerView.LayoutManager?
+        dialog.dialogRecycleView.layoutManager = layoutManager
         val mAdapter = QuestionListAdapter() { position ->
             val data = SecurityQuestionData.getArrayItem(position)
             textView.text = data.Question
