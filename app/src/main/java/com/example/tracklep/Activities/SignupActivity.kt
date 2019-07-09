@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.ViewGroup
 import android.view.Window
@@ -22,25 +21,11 @@ import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_signup.*
-import kotlinx.android.synthetic.main.activity_signup.btnSubmitRegister
-import kotlinx.android.synthetic.main.activity_signup.editAccountNo
-import kotlinx.android.synthetic.main.activity_signup.editAnswer1
-import kotlinx.android.synthetic.main.activity_signup.editAnswer2
-import kotlinx.android.synthetic.main.activity_signup.editEmail
-import kotlinx.android.synthetic.main.activity_signup.editMeterNo
-import kotlinx.android.synthetic.main.activity_signup.editServiceZipCode
-import kotlinx.android.synthetic.main.activity_signup.r_lyt_ques1
-import kotlinx.android.synthetic.main.activity_signup.r_lyt_ques2
-import kotlinx.android.synthetic.main.activity_signup.txtQuestion1
-import kotlinx.android.synthetic.main.activity_signup.txtQuestion2
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 
 class SignupActivity : BaseActivity() {
@@ -195,7 +180,7 @@ class SignupActivity : BaseActivity() {
         try {
 
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getSecurityQuestion(ApiUrls.getBodyMap())
+            val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap()))
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
@@ -205,7 +190,6 @@ class SignupActivity : BaseActivity() {
                     if(response.message()!=null)
                         AppLog.printLog("Response- ", response.message().toString())
                     if (response.body() != null) {
-                        AppLog.printLog("Security Question Response: ", response.body().toString())
                         SecurityQuestionData.clearArrayList()
                         SecurityQuestionData.addArrayList(response.body()!!)
                         if (dialogOpen) {

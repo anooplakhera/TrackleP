@@ -1,6 +1,10 @@
 package com.example.tracklep.ApiClient
 
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import org.json.JSONException
 import org.json.JSONObject
+import java.util.HashMap
 
 object ApiUrls {
 
@@ -58,12 +62,28 @@ object ApiUrls {
         return BASE_URL + BASE_PATH
     }
 
-    fun getBodyMap(): String {
-        var bMap = JSONObject()
+    fun getBodyMap(): HashMap<String,String> {
+        var bMap = HashMap<String,String>()
         bMap.put(DataSource, DataSource_value)
         bMap.put(Database, Database_value)
         bMap.put(DBUserName, DBUserName_value)
         bMap.put(DBPassword, DBPassword_value)
-        return bMap.toString()
+        return bMap
+    }
+
+    fun getJSONRequestBody(stringHashMap: HashMap<String, String>?): RequestBody {
+        val jsonObject = JSONObject()
+        if (stringHashMap != null && stringHashMap.size > 0) {
+            try {
+
+                for ((key, value) in stringHashMap) {
+                    jsonObject.put(key, value)
+                }
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+        }
+        return RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
     }
 }

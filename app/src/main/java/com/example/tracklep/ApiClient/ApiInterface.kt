@@ -1,10 +1,9 @@
 package com.example.tracklep.ApiClient
 
 import com.example.tracklep.DataModels.ResponseModelClasses
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 interface ApiInterface {
 
@@ -17,7 +16,10 @@ interface ApiInterface {
     fun registerUser(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.RegistrationResponse>
 
     @POST(ApiUrls.SECURITY_QUESTION)
-    fun getSecurityQuestion(@Body bodyMap:  String): Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
+    fun getSecurityQuestion(@Body bodyMap: RequestBody): Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
+
+    @POST(ApiUrls.SECURITY_QUESTION)
+    fun getSecurityQuestion1(@Body bodyMap: String): Call<String>
 
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)

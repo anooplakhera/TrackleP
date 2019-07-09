@@ -44,7 +44,7 @@ class MyProfile : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getSecurityQuestion(ApiUrls.getBodyMap())
+            val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap()))
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
@@ -82,7 +82,7 @@ class MyProfile : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getSecurityQuestion(ApiUrls.getBodyMap())
+            val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap()))
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
