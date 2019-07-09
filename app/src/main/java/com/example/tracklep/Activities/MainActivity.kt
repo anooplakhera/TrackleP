@@ -75,7 +75,7 @@ class MainActivity : BaseActivity() {
     fun logoutAlertDialog() {
         var alertDialog = AlertDialog.Builder(this)
         alertDialog.setTitle(getString(R.string.app_name))
-        alertDialog.setMessage("Did you want to logout? ")
+        alertDialog.setMessage("Are you sure you want to logout? ")
         alertDialog.setNeutralButton("Cancel") { _, _ ->
         }
 

@@ -8,6 +8,7 @@
         android:orientation="vertical"
         android:focusableInTouchMode="true"
         tools:context=".Activities.MyProfile">
+
     <include layout="@layout/custom_action_bar"
              android:id="@+id/lytAction"/>
 
@@ -24,6 +25,7 @@
                 android:orientation="vertical"
                 android:padding="@dimen/dp_10"
                 android:gravity="center_horizontal">
+
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
