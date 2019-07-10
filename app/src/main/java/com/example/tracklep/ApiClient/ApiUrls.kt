@@ -13,14 +13,19 @@ object ApiUrls {
     //    const val BASE_URL: String = "https://aquatraxapi.azurewebsites.net/"
     const val BASE_PATH: String = "api/customer/"
     const val LOGIN = "token";
+    const val GET_UTILS = "getutilities";
     const val REGISTER_USER = "register"
     const val FORGET = "reset-password/";
     const val STEP_ONE = "step-one";
     const val STEP_TWO = "step-two";
     const val SECURITY_QUESTION = "security-questions"
-    const val Authorization = "authorization";
+    const val BILLING_DETAILS = "Billing-Details"
+    const val Authorization = "authorization"
+    const val ContentType = "Content-Type"
     const val Account = "account";
     const val UpdateAccount = "update-account";
+    const val AuthKey =
+        "Bearer KQut6fhk1BLmO8eVIaMteTcljOes4CfuB2QiuqDvp4Gmoy9Yk_k-umomjcq_IndzuyyMTFm5gVLAcWClmJrdks3Uvhwqg-SYNH74AzVpjYMcgdY4WDIdo-EGHktAYrF70KjUzxeWXLVxeQVs2prmeNWZKlYm73DI16ls4dwoAMBVij4hISTcqCnWat9Ou3-8jRt_TWLCQAG7K6Iq_0yAoVaa1AF6sOgBf-wBB8OMx6MtnAdgzIUY4iLnA2iy4EvGdVmmL4LpHmpL92GxJi2BAL8vn3wAzUhhxu1mPRsk6PacOT5oJQq3eWhM-ZyYGLv3V_xnkfBBnkM1cM2RLFeJ6kYY7Jh1sb1mQ0F-3UurErsA9Y95HvEGDJo7kg_o2ZzivnQhbIiZqX8gbmsiWI_d-DjSnWPHO_RtlpIAcM55r_XCHjlKMcAR-TaI_9nhpKmAWi0DyF6ySBK0RT9_OA8J-w";
 
 
     /*---------------Params-----------------*/
@@ -62,8 +67,8 @@ object ApiUrls {
         return BASE_URL + BASE_PATH
     }
 
-    fun getBodyMap(): HashMap<String,String> {
-        var bMap = HashMap<String,String>()
+    fun getBodyMap(): HashMap<String, String> {
+        var bMap = HashMap<String, String>()
         bMap.put(DataSource, DataSource_value)
         bMap.put(Database, Database_value)
         bMap.put(DBUserName, DBUserName_value)

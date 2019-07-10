@@ -64,8 +64,7 @@
                             android:gravity="center"
                             android:fontFamily="@font/roboto"
                             android:textSize="@dimen/dp_19"
-                            android:textStyle="bold"
-                            android:text="@string/welcome_text"/>
+                            android:textStyle="bold"/>
 
                     <android.support.v7.widget.AppCompatTextView
                             android:layout_below="@id/txtDashTitle"

@@ -32,16 +32,22 @@ class MyProfile : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_profile)
 
-        txtCABtitle.text = getString(R.string.my_account)
-        imgCABback.setOnClickListener {
-            finish()
-        }
+        try {
+            txtCABtitle.text = getString(R.string.my_account)
+            imgCABback.setOnClickListener {
+                finish()
+            }
 
-        getSecurityQues(false, txtQuestion1)
+            getSecurityQues(false, txtQuestion1)
+            getUserProfile()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun getSecurityQues(dialogOpen: Boolean = false, txtview: TextView) = if (Utils.isConnected(this)) {
         showDialog()
+
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap()))
@@ -50,17 +56,20 @@ class MyProfile : BaseActivity() {
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
                     response: Response<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        AppLog.printLog("Security Question Response: ", response.body().toString())
-                        SecurityQuestionData.clearArrayList()
-                        SecurityQuestionData.addArrayList(response.body()!!)
-                        if (dialogOpen) {
-                            openDialog(txtview)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            AppLog.printLog("Security Question Response: ", response.body().toString())
+                            SecurityQuestionData.clearArrayList()
+                            SecurityQuestionData.addArrayList(response.body()!!)
+                            if (dialogOpen) {
+                                openDialog(txtview)
+                            }
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
-
 
                 override fun onFailure(
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
@@ -78,7 +87,7 @@ class MyProfile : BaseActivity() {
         showToast(getString(R.string.internet))
     }
 
-    private fun getUserProfile(dialogOpen: Boolean = false, txtview: TextView) = if (Utils.isConnected(this)) {
+    private fun getUserProfile() = if (Utils.isConnected(this)) {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
@@ -88,17 +97,16 @@ class MyProfile : BaseActivity() {
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
                     response: Response<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        AppLog.printLog("User Prfile Response: ", response.body().toString())
-                        SecurityQuestionData.clearArrayList()
-                        SecurityQuestionData.addArrayList(response.body()!!)
-                        if (dialogOpen) {
-                            openDialog(txtview)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            AppLog.printLog("User Prfile Response: ", response.body().toString())
+
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
-
 
                 override fun onFailure(
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
@@ -117,24 +125,28 @@ class MyProfile : BaseActivity() {
     }
 
     private fun openDialog(textView: TextView) {
-        val dialog = Dialog(this@MyProfile)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_layout)
-        dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setCancelable(true)
-        dialog.show()
-        dialog.txtTitleTop.text = "Select Security Question"
+        try {
+            val dialog = Dialog(this@MyProfile)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.dialog_layout)
+            dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCancelable(true)
+            dialog.show()
+            dialog.txtTitleTop.text = "Select Security Question"
 
-        val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-        dialog.dialogRecycleView.layoutManager = layoutManager
-        val mAdapter = QuestionListAdapter() { position ->
-            val data = SecurityQuestionData.getArrayItem(position)
-            textView.text = data.Question
-            textView.setTextColor(resources.getColor(R.color.colorBlack))
-            dialog.dismiss()
+            val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+            dialog.dialogRecycleView.layoutManager = layoutManager
+            val mAdapter = QuestionListAdapter() { position ->
+                val data = SecurityQuestionData.getArrayItem(position)
+                textView.text = data.Question
+                textView.setTextColor(resources.getColor(R.color.colorBlack))
+                dialog.dismiss()
+            }
+            dialog.dialogRecycleView.adapter = mAdapter
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-        dialog.dialogRecycleView.adapter = mAdapter
 
     }
 }
