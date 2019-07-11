@@ -18,9 +18,6 @@ interface ApiInterface {
     @POST(ApiUrls.SECURITY_QUESTION)
     fun getSecurityQuestion(@Body bodyMap: RequestBody): Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
 
-    @POST(ApiUrls.SECURITY_QUESTION)
-    fun getSecurityQuestion1(@Body bodyMap: String): Call<String>
-
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)
     fun getResetUserPass1(@Field(ApiUrls.UserName) UserName: String): Call<ResponseModelClasses.ResetPassStep1Response>

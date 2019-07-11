@@ -80,6 +80,7 @@ class LoginActivity : BaseActivity() {
                         AppLog.printLog("Login Response: ", response.body().toString())
                     if (response.body() != null) {
 
+
                         AppPrefences.setLoginModel(this@LoginActivity, response.body()!!)
 
                         AppPrefences.setLogin(this@LoginActivity, true)
