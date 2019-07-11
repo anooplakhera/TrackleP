@@ -76,5 +76,11 @@
     <string name="total_due">Total Due</string>
     <string name="penalty_charges_adjustments">Penalty Charges/Adjustments</string>
     <string name="pay_now">Pay Now</string>
+    <string name="contactus_description">If you need assistance please use the below contact information to reach our customer service staff.   </string>
+    
+    <string name="contactus_email">Email : <u>admin@eocwd.com</u></string>
+    <string name="contactus_phone">Phone : <u>714-538-815</u></string>
+    <string name="contactus_online">Online : Please visit us at <u>www.eocwd.com/contact</u></string>
+
 
 </resources>

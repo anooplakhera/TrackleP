@@ -1,0 +1,127 @@
+package com.example.tracklep.Activities
+
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
+import android.view.KeyEvent
+import android.view.MenuItem
+import android.view.View
+import android.webkit.*
+import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.R
+import com.example.tracklep.Utils.Utils
+
+class WebViewActivity : BaseActivity() {
+
+    internal var contentUrl = ""
+    internal var contentTitle = ""
+
+    //    @BindView(R.id.chat_button)
+    lateinit var chat_button: FloatingActionButton
+    //    @BindView(R.id.webView)
+    lateinit var contentWebView: WebView
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_web_view)
+        //setUnBinder(ButterKnife.bind(this))
+
+        contentTitle = intent.getStringExtra("contentTitle")
+
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar!!.title = "" + contentTitle
+
+
+        contentWebView = findViewById(R.id.webView)
+        contentUrl = intent.getStringExtra("contentUrl")
+        contentWebView.settings.javaScriptEnabled = true
+        contentWebView.addJavascriptInterface(WebAppInterface(this), "Android")
+        contentWebView.webChromeClient = object : WebChromeClient() {
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                if (contentWebView != null) {
+                    contentWebView.visibility = View.GONE
+                    //showLoading()
+                    if (newProgress == 100) {
+                        contentWebView.visibility = View.VISIBLE
+                      //  hideLoading()
+                    }
+                }
+            }
+        }
+
+        contentWebView.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView, url: String) {
+                if (contentWebView != null) {
+                    contentWebView.visibility = View.VISIBLE
+                    view.clearCache(true)
+                }
+            }
+
+            override fun onReceivedError(view: WebView, request: WebResourceRequest, error: WebResourceError) {
+
+            }
+
+        }
+
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (event.action == KeyEvent.ACTION_DOWN) {
+            when (keyCode) {
+                KeyEvent.KEYCODE_BACK -> {
+                    if (contentWebView.canGoBack()) {
+                        contentWebView.goBack()
+                    } else {
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                        finish()
+                    }
+                    return true
+                }
+            }
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (Utils.isConnected(this)) {
+            contentWebView.loadUrl(contentUrl)
+        } else run {
+
+            /*val retryDialog = RetryDialog(this, getString(R.string.no_internet_connection), getString(R.string.no_internet_connection_message))
+            retryDialog.setOnRetryButtonClickListener {
+                retryDialog.dismiss()
+                contentWebView.loadUrl(AppConstants.WEB_PAGE_URL + contentUrl)
+            }
+            retryDialog.show()*/
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == android.R.id.home) {
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+    internal inner class WebAppInterface
+    /**
+     * Instantiate the interface and set the context
+     */
+    (var mContext: Context) {
+
+
+        @JavascriptInterface
+        fun gotoDaftarLink() {
+            val intent = Intent(this@WebViewActivity, MainActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+    }
+
+}

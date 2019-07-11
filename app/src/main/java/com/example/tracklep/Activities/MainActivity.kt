@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.view.GravityCompat
 import android.view.Gravity
+import android.view.LayoutInflater
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppConstants
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.dialog_contact_us.view.*
 import kotlinx.android.synthetic.main.navigation_menu_layout.*
 
 class MainActivity : BaseActivity() {
@@ -24,34 +27,64 @@ class MainActivity : BaseActivity() {
                 else drawer_layout.closeDrawer(Gravity.END);
             }
 
-
             navigationClick()
             clickPerform()
-            if (AppPrefences.getLoginModel(this@MainActivity)?.Name != null)
-                txtDashTitle.setText("Welcome " + AppPrefences.getLoginModel(this@MainActivity)!!.Name)
+            txtDashTitle.setText("Welcome " + AppConstants.loginResponseModel!!.Name)
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
     private fun navigationClick() {
-        lytCompanyWebsite.setOnClickListener {
-            closeDrawer()
-        }
-        lytPayLocation.setOnClickListener {
-            closeDrawer()
-        }
-        lytVisitFb.setOnClickListener {
-            closeDrawer()
-        }
-        lytVisitTwitter.setOnClickListener {
-            closeDrawer()
-        }
-        lytPrivacyPolicy.setOnClickListener {
-            closeDrawer()
-        }
-        lytLogout.setOnClickListener {
-            userLogOut()
+        try {
+            lytCompanyWebsite.setOnClickListener {
+                try {
+                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
+                    intent.putExtra("contentTitle", "Company Website")
+                    intent.putExtra("contentUrl", AppConstants.loginResponseModel!!.CompanyWebsite)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            lytPayLocation.setOnClickListener {
+                closeDrawer()
+            }
+            lytVisitFb.setOnClickListener {
+                try {
+                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
+                    intent.putExtra("contentTitle", "Facebook")
+                    intent.putExtra("contentUrl", AppConstants.loginResponseModel!!.FacebookUrl)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            lytVisitTwitter.setOnClickListener {
+                try {
+                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
+                    intent.putExtra("contentTitle", "Twitter")
+                    intent.putExtra("contentUrl", AppConstants.loginResponseModel!!.TwitterURL)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            lytPrivacyPolicy.setOnClickListener {
+                try {
+                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
+                    intent.putExtra("contentTitle", "Privacy Policy")
+                    intent.putExtra("contentUrl", AppConstants.loginResponseModel!!.PrivacyPolicy)
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            lytLogout.setOnClickListener {
+                userLogOut()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -68,7 +101,32 @@ class MainActivity : BaseActivity() {
         lytBilling.setOnClickListener {
             startActivity(Intent(this, BillingDashboard::class.java))
         }
-        lytConnectUtility.setOnClickListener {}
+        lytConnectUtility.setOnClickListener {
+
+            val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_contact_us, null)
+            //AlertDialogBuilder
+            val mBuilder = AlertDialog.Builder(this)
+                .setView(mDialogView)
+            //show dialog
+            val mAlertDialog = mBuilder.show()
+
+            mDialogView.txtContactUsPhone.setOnClickListener {
+
+                mAlertDialog.dismiss()
+            }
+            mDialogView.txtContactUsOnline.setOnClickListener {
+
+                try {
+                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
+                    intent.putExtra("contentTitle", "ContactUs")
+                    intent.putExtra("contentUrl", "www.eocwd.com/contact")
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+
         lytTrackUsage.setOnClickListener {}
         lytCompare.setOnClickListener {}
         lytWaterConversation.setOnClickListener {}

@@ -10,6 +10,7 @@ import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppConstants
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_login.*
@@ -78,9 +79,8 @@ class LoginActivity : BaseActivity() {
                     if (response.body() != null) {
                         AppLog.printLog("Login Response: ", response.body().toString())
 
-
-                        AppPrefences.setLoginModel(this@LoginActivity, response.body()!!)
-
+                        AppConstants.loginResponseModel = response.body()
+                        AppLog.printLog(AppConstants.loginResponseModel!!.Name)
                         AppPrefences.setLogin(this@LoginActivity, true)
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()

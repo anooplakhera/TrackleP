@@ -94,6 +94,13 @@ object ResponseModelClasses {
         val SqlQuery: String
     )
 
+    data class MyProfileResponse(
+        val Parameters: String,
+        val Question: String,
+        val SecurityQuestionId: String,
+        val SqlQuery: String
+    )
+
 }
 
 
