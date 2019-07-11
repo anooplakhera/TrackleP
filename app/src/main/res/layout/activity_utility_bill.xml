@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    tools:context=".Activities.MyProfile">
+    
+    <include
+        layout="@layout/custom_action_bar"
+        android:id="@+id/lytAction" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:layout_below="@id/lytAction">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_10"
+            android:gravity="center_horizontal">
+            
+            <TextView
+                android:id="@+id/txtTotalDueMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="$9.06"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:textSize="@dimen/sp_26"
+                android:fontFamily="@font/roboto"
+                android:padding="@dimen/dp_5"
+                android:textColor="@color/colorPrimaryDark" />
+            
+            <TextView
+                android:id="@+id/txtPaymentDueDateMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Payment Due Aug 05, 2019"
+                android:gravity="center"
+                android:textSize="@dimen/sp_18"
+                android:fontFamily="@font/roboto"
+                android:padding="@dimen/dp_5"
+                android:textColor="@color/colorLightBlack" />
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:background="@color/colorLightGray100" />
+            
+            <!--Billing Period-->
+            <RelativeLayout
+                android:id="@+id/relBillingPeriod"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2">
+                
+                <TextView
+                    android:id="@+id/txtBillingPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_2"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/colorAppGray"
+                    android:text="@string/billing_period" />
+                
+                <TextView
+                    android:id="@+id/txtBillingPeriodValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="07/06/2019-07/07/2019"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorAppGray"
+                    android:enabled="false"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+            
+            </RelativeLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:background="@color/colorLightGray100" />
+            
+            
+            <!--Previous Balance-->
+            <RelativeLayout
+                android:id="@+id/relPreviousBalance"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2">
+                
+                <TextView
+                    android:id="@+id/txtPreviousBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/colorAppGray"
+                    android:text="@string/previous_balance" />
+                
+                <TextView
+                    android:id="@+id/txtPreviousBalanceValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="2019"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorAppGray"
+                    android:enabled="false"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+            
+            </RelativeLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:background="@color/colorLightGray100" />
+            
+            
+            <!--Payments-->
+            <RelativeLayout
+                android:id="@+id/relPayments"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2">
+                
+                <TextView
+                    android:id="@+id/txtPayments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_2"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/colorAppGray"
+                    android:text="Payments" />
+                
+                <TextView
+                    android:id="@+id/txtPaymentsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="2019"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorAppGray"
+                    android:enabled="false"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+            
+            </RelativeLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:background="@color/colorLightGray100" />
+            
+            
+            <!--Balance Forward-->
+            <RelativeLayout
+                android:id="@+id/relBalanceForward"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2">
+                
+                <TextView
+                    android:id="@+id/txtBalanceForward"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/colorAppGray"
+                    android:text="Balance Forward" />
+                
+                <TextView
+                    android:id="@+id/txtBalanceForwardValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="2019"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:textColor="@color/colorAppGray"
+                    android:enabled="false"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+            
+            </RelativeLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:background="@color/colorLightGray100" />
+            
+            
+            <!--Current Charges-->
+            <RelativeLayout
+                android:id="@+id/relCurrentCharges"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2">
+                
+                <TextView
+                    android:id="@+id/txtCurrentCharges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/colorAppGray"
+                    android:text="@string/current_charges" />
+                
+                <TextView
+                    android:id="@+id/txtCurrentChargesValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="2019"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorAppGray"
+                    android:enabled="false"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+            
+            </RelativeLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:background="@color/colorLightGray100" />
+            
+            
+            <!--Total Due-->
+            <RelativeLayout
+                android:id="@+id/relTotalDue"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2">
+                
+                <TextView
+                    android:id="@+id/txtTotalDue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_2"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/colorAppGray"
+                    android:text="@string/total_due" />
+                
+                <TextView
+                    android:id="@+id/txtTotalDueValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="2019"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorAppGray"
+                    android:enabled="false"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+            
+            </RelativeLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:background="@color/colorLightGray100" />
+            
+            
+            <!--Amount Paid this Period-->
+            <RelativeLayout
+                android:id="@+id/relAmountPaidthisPeriod"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_margin="@dimen/dp_2">
+                
+                <TextView
+                    android:id="@+id/txtAmountPaidthisPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/colorAppGray"
+                    android:text="@string/amount_paid_this_period" />
+                
+                <TextView
+                    android:id="@+id/txtAmountPaidthisPeriodValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="2019"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorAppGray"
+                    android:enabled="false"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+            
+            </RelativeLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:background="@color/colorLightGray100" />
+            
+            
+            <!--Penalty Charges/Adjustments-->
+            <RelativeLayout
+                android:id="@+id/relPenalty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2">
+                
+                <TextView
+                    android:id="@+id/txtPenalty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_2"
+                    android:layout_alignParentLeft="true"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/colorAppGray"
+                    android:textSize="@dimen/sp_16"
+                    android:text="@string/penalty_charges_adjustments" />
+                
+                <TextView
+                    android:id="@+id/txtPenaltyValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2019"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorAppGray"
+                    android:enabled="false"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+            
+            </RelativeLayout>
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="@dimen/dp_3"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:layout_marginRight="@dimen/dp_6"
+                android:layout_marginBottom="@dimen/dp_3"
+                android:background="@color/colorLightGray100" />
+        
+        
+        </LinearLayout>
+    
+    </ScrollView>
+    
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnPayNow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentBottom="true"
+        android:text="@string/pay_now"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/roboto"
+        android:textSize="@dimen/sp_18"
+        android:background="@color/colorPrimaryDark" />
+</RelativeLayout>

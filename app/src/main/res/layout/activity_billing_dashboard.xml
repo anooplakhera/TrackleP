@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    tools:context=".Activities.MyProfile">
+    
+    <include
+        layout="@layout/custom_action_bar"
+        android:id="@+id/lytAction" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:layout_below="@id/lytAction">
+        
+        <FrameLayout
+            android:id="@+id/lytfragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10"
+                android:gravity="center_horizontal">
+                
+                <!--Utility Bill Layout-->
+                <LinearLayout
+                    android:id="@+id/lytUtilityBill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@drawable/menu_button_background"
+                    android:orientation="horizontal">
+                    
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imgUtilityBill"
+                        android:layout_width="@dimen/dp_35"
+                        android:layout_height="@dimen/dp_35"
+                        android:src="@drawable/nav_company_website" />
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txtUtilityBill"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/utility_bill"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/dp_16"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:textColor="@color/colorPrimaryDark" />
+                        
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txtUtilityDueDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Due Date"
+                            android:gravity="center"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/dp_13"
+                            android:textColor="@color/colorAppGray" />
+                    </LinearLayout>
+                
+                </LinearLayout>
+                
+                <!--History Layout-->
+                <LinearLayout
+                    android:id="@+id/lytHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@drawable/menu_button_background"
+                    android:orientation="horizontal">
+                    
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imgHistory"
+                        android:layout_width="@dimen/dp_35"
+                        android:layout_height="@dimen/dp_35"
+                        android:src="@drawable/nav_company_website" />
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txtHistory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/history"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/dp_16"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:textColor="@color/colorPrimaryDark" />
+                        
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txtHistoryDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/history_detail"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/dp_10"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:textColor="@color/colorAppGray" />
+                    </LinearLayout>
+                
+                </LinearLayout>
+                
+                <!--Budget My Bill Layout-->
+                <LinearLayout
+                    android:id="@+id/lytBudgetMyBill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:background="@drawable/menu_button_background"
+                    android:orientation="horizontal">
+                    
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imgBudgetMyBill"
+                        android:layout_width="@dimen/dp_35"
+                        android:layout_height="@dimen/dp_35"
+                        android:src="@drawable/nav_company_website" />
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txtBudgetMyBill"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/budget_my_bill"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/dp_16"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:textColor="@color/colorPrimaryDark" />
+                        
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txtBudgetMyBillDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/nav_menu_2"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/dp_10"
+                            android:layout_marginLeft="@dimen/dp_15"
+                            android:textColor="@color/colorAppGray" />
+                    </LinearLayout>
+                
+                </LinearLayout>
+            
+            </LinearLayout>
+        </FrameLayout>
+    
+    </ScrollView>
+
+</RelativeLayout>

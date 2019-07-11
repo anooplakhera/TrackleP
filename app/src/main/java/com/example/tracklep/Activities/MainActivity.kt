@@ -18,14 +18,20 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        imgNavIcon.setOnClickListener {
-            if (!drawer_layout.isDrawerOpen(GravityCompat.START)) drawer_layout.openDrawer(Gravity.RIGHT);
-            else drawer_layout.closeDrawer(Gravity.END);
+        try {
+            imgNavIcon.setOnClickListener {
+                if (!drawer_layout.isDrawerOpen(GravityCompat.START)) drawer_layout.openDrawer(Gravity.RIGHT);
+                else drawer_layout.closeDrawer(Gravity.END);
+            }
+
+
+            navigationClick()
+            clickPerform()
+            if (AppPrefences.getLoginModel(this@MainActivity)?.Name != null)
+                txtDashTitle.setText("Welcome " + AppPrefences.getLoginModel(this@MainActivity)!!.Name)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-
-        navigationClick()
-        clickPerform()
-
     }
 
     private fun navigationClick() {
@@ -59,7 +65,9 @@ class MainActivity : BaseActivity() {
         lytAccount.setOnClickListener {
             startActivity(Intent(this, MyProfile::class.java))
         }
-        lytBilling.setOnClickListener {}
+        lytBilling.setOnClickListener {
+            startActivity(Intent(this, BillingDashboard::class.java))
+        }
         lytConnectUtility.setOnClickListener {}
         lytTrackUsage.setOnClickListener {}
         lytCompare.setOnClickListener {}

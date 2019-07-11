@@ -41,6 +41,9 @@ class LoginActivity : BaseActivity() {
         lytRegisterUser.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
         }
+        editUserName.setText("utkarsh3441@gmail.com")
+        editUserPass.setText("Trackle@999")
+
         btnLogin.setOnClickListener {
             if (validationFields())
                 if (switchBtn.isChecked) {
@@ -55,10 +58,10 @@ class LoginActivity : BaseActivity() {
     private fun loginApi() = if (Utils.isConnected(this)) {
         try {
             var map = HashMap<String, String>()
-            map.put(ApiUrls.UserName, "utkarsh3441@gmail.com");
-            map.put(ApiUrls.Password, "Trackle@999");
-            /* map.put(ApiUrls.UserName, editUserName.text.toString());
-             map.put(ApiUrls.Password, editUserPass.text.toString());*/
+//            map.put(ApiUrls.UserName, "utkarsh3441@gmail.com");
+//            map.put(ApiUrls.Password, "Trackle@999");
+            map.put(ApiUrls.UserName, editUserName.text.toString());
+            map.put(ApiUrls.Password, editUserPass.text.toString());
             map.put(ApiUrls.GrantType, ApiUrls.Password.toLowerCase());
             map.put(ApiUrls.TanentId, "1");
             map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
@@ -72,13 +75,9 @@ class LoginActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.LoginResponseModel>,
                     response: Response<ResponseModelClasses.LoginResponseModel>
                 ) {
-                    // Log.d("LoginResponse", response.toString())
-
-                    if (response.message() != null)
-                        AppLog.printLog("Response- ", response.message().toString())
-                    if (response.body() != null)
-                        AppLog.printLog("Login Response: ", response.body().toString())
                     if (response.body() != null) {
+                        AppLog.printLog("Login Response: ", response.body().toString())
+
 
 
                         AppPrefences.setLoginModel(this@LoginActivity, response.body()!!)
