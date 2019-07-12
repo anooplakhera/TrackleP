@@ -1,7 +1,7 @@
 package com.example.hp.togelresultapp.Preferences
 
 import android.content.Context
-import com.example.tracklep.DataModels.ResponseModelClasses
+import com.example.tracklep.DataModels.ResponseModelClasses.LoginResponseModel
 import com.google.gson.Gson
 
 
@@ -18,6 +18,7 @@ object AppPrefences {
     private val DateWiseData = "date_wise"
     private val TokenID = "tokenId"
     private val Login = "login"
+    private val LoginData = "logindata"
 
 
     fun clearAll(ctx: Context) {
@@ -167,5 +168,42 @@ object AppPrefences {
         return prefs.getBoolean(WakeUpStatus, false)
     }
 
+    //Registrations UserData Model
+    fun setLoginUserInfo(c: Context, loginResponseModel: LoginResponseModel?) {
+        if (loginResponseModel != null) {
+            saveJsonData(c, LoginData, loginResponseModel)
+        }
+    }
+
+    @Throws(InstantiationException::class)
+    fun getLoginUserInfo(ctx: Context): LoginResponseModel {
+        val prefs = ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = prefs.getString(LoginData, "")
+        val obj = gson.fromJson<LoginResponseModel>(json, LoginResponseModel::class.java)
+        return obj
+//        return getData(ctx, LoginData, LoginResponseModel::class.java) as LoginResponseModel
+    }
+
+    private fun saveJsonData(ctx: Context, key: String, `object`: Any?) {
+        if (`object` != null) {
+            val gson = Gson()
+            val prefs = ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+            val json = gson.toJson(`object`)
+            val editor = prefs.edit()
+            editor.putString(key, json)
+            editor.commit()
+        }
+    }
+
+    @Throws(InstantiationException::class)
+    fun getData(ctx: Context, key: String, `object1`: Any): Any {
+        val gson = Gson()
+        val prefs = ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+        val json = prefs.getString(key, "")
+        val obj = gson.fromJson(json, object1::class.java).javaClass
+        return obj
+//        return gson.fromJson<Any>(json, `object1`.javaClass)
+    }
 
 }

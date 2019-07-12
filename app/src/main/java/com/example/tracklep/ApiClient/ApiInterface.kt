@@ -22,9 +22,6 @@ interface ApiInterface {
     @POST(ApiUrls.BILLING_DETAILS)
     fun getBillingDashboard(@Body bodyMap: RequestBody): Call<ArrayList<ResponseModelClasses.BillingDashboardResponse>>
 
-    @POST(ApiUrls.SECURITY_QUESTION)
-    fun getSecurityQuestion1(@Body bodyMap: String): Call<String>
-
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)
     fun getResetUserPass1(@Field(ApiUrls.UserName) UserName: String): Call<ResponseModelClasses.ResetPassStep1Response>
@@ -37,7 +34,7 @@ interface ApiInterface {
     @GET(ApiUrls.Account + "/7")
     fun getAccount(@Field(ApiUrls.Account) UserName: String): Call<ResponseModelClasses.MyProfileResponse>
 
-    @Headers(ApiUrls.Authorization + ":" + ApiUrls.AuthKey)
+    //    @Headers(ApiUrls.Authorization + ":" + ApiUrls.AuthKey)
     @GET(ApiUrls.GET_UTILS)
     fun getUtilityList(/*@Header(ApiUrls.Authorization) Auth: String*/): Call<ResponseModelClasses.UtilityListResponseModel>
 

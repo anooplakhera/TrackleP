@@ -10,6 +10,7 @@ import android.view.Window
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import android.widget.TextView
+import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.Adapter.QuestionListAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -92,7 +93,7 @@ class MyProfile : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getAccount(AppConstants.loginResponseModel!!.AccountNumber)
+            val call = apiService.getAccount(AppPrefences.getLoginUserInfo(this)!!.AccountNumber)
             call.enqueue(object : Callback<ResponseModelClasses.MyProfileResponse> {
                 override fun onResponse(
                     call: Call<ResponseModelClasses.MyProfileResponse>,

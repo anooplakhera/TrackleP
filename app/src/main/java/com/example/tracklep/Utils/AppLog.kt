@@ -1,7 +1,7 @@
 package com.example.tracklep.Utils
 
 object AppLog {
-    val TAG = "TogelMatrix"
+    val TAG = "Trackle_logs"
 
     val LOG_ENABLED = true
 

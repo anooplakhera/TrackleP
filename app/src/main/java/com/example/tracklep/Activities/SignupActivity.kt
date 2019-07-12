@@ -11,11 +11,13 @@ import android.view.Window
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.tracklep.Adapter.QuestionListAdapter
+import com.example.tracklep.Adapter.UtilitiesListAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.SecurityQuestionData
+import com.example.tracklep.DataClasses.UtilitiesData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
@@ -57,6 +59,14 @@ class SignupActivity : BaseActivity() {
                     openDialog(txtQuestion1)
                 } else {
                     getSecurityQues(true, txtQuestion1)
+
+                }
+            }
+            r_lyt_utility.setOnClickListener {
+                if (UtilitiesData.getCount() > 0) {
+                    openDialog("Select Utility", txtUtilityName)
+                } else {
+                    getUtilityList(true, txtUtilityName)
 
                 }
             }
@@ -187,7 +197,6 @@ class SignupActivity : BaseActivity() {
     private fun getSecurityQues(dialogOpen: Boolean = false, txtview: TextView) = if (Utils.isConnected(this)) {
         showDialog()
         try {
-
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap()))
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
@@ -207,10 +216,8 @@ class SignupActivity : BaseActivity() {
                     }
                 }
 
-
                 override fun onFailure(
-                    call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
-                    t: Throwable
+                    call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>, t: Throwable
                 ) {
                     AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
@@ -221,14 +228,12 @@ class SignupActivity : BaseActivity() {
             dismissDialog()
         }
     } else {
-        dismissDialog()
         showToast(getString(R.string.internet))
     }
 
-    private fun getUtilityList(dialogOpen: Boolean = false, txtview: TextView) = if (Utils.isConnected(this)) {
-        showDialog()
+    private fun getUtilityList(dialogOpen: Boolean = false, textView: TextView) = if (Utils.isConnected(this)) {
+//        showDialog()
         try {
-
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getUtilityList(/*ApiUrls.AuthKey*/)
             call.enqueue(object : Callback<ResponseModelClasses.UtilityListResponseModel> {
@@ -239,10 +244,13 @@ class SignupActivity : BaseActivity() {
                     dismissDialog()
                     try {
                         if (response.body() != null)
-                            AppLog.printLog("UtilityList Response- ", response.body().toString())
-                        if (response.message() != null) {
-                            AppLog.printLog("UtilityList Response- ", response.message().toString())
+                            UtilitiesData.clearArrayList()
+                        UtilitiesData.addArrayList(response.body()!!.Results.Table)
+                        if (dialogOpen) {
+                            openDialog("Select Utilities", textView)
                         }
+                        AppLog.printLog("UtilityList Response- ", response.body().toString())
+
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -255,6 +263,7 @@ class SignupActivity : BaseActivity() {
                     try {
                         dismissDialog()
                         AppLog.printLog("Failure()- ", t.message.toString())
+
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -262,10 +271,9 @@ class SignupActivity : BaseActivity() {
             })
         } catch (e: Exception) {
             e.printStackTrace()
-            dismissDialog()
+//            dismissDialog()
         }
     } else {
-        dismissDialog()
         showToast(getString(R.string.internet))
     }
 
@@ -285,6 +293,32 @@ class SignupActivity : BaseActivity() {
             val mAdapter = QuestionListAdapter() { position ->
                 val data = SecurityQuestionData.getArrayItem(position)
                 textView.text = data.Question
+                textView.setTextColor(resources.getColor(R.color.colorBlack))
+                dialog.dismiss()
+            }
+            dialog.dialogRecycleView.adapter = mAdapter
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    private fun openDialog(title: String, textView: TextView) {
+        try {
+            val dialog = Dialog(this@SignupActivity)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.dialog_layout)
+            dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCancelable(true)
+            dialog.show()
+            dialog.txtTitleTop.text = title
+
+            val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+            dialog.dialogRecycleView.layoutManager = layoutManager
+            val mAdapter = UtilitiesListAdapter() { position ->
+                val data = UtilitiesData.getArrayItem(position)
+                textView.text = data.Name
                 textView.setTextColor(resources.getColor(R.color.colorBlack))
                 dialog.dismiss()
             }

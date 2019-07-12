@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.R
-import com.example.tracklep.Utils.AppConstants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_contact_us.view.*
 import kotlinx.android.synthetic.main.navigation_menu_layout.*
@@ -29,7 +28,7 @@ class MainActivity : BaseActivity() {
 
             navigationClick()
             clickPerform()
-            txtDashTitle.setText("Welcome " + AppConstants.loginResponseModel!!.Name)
+            txtDashTitle.setText("Welcome " + AppPrefences.getLoginUserInfo(this)!!.Name)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -38,51 +37,38 @@ class MainActivity : BaseActivity() {
     private fun navigationClick() {
         try {
             lytCompanyWebsite.setOnClickListener {
-                try {
-                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
-                    intent.putExtra("contentTitle", "Company Website")
-                    intent.putExtra("contentUrl", AppConstants.loginResponseModel!!.CompanyWebsite)
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                closeDrawer()
+                startWebActivity("Company Website", AppPrefences.getLoginUserInfo(this)!!.CompanyWebsite)
             }
             lytPayLocation.setOnClickListener {
                 closeDrawer()
             }
             lytVisitFb.setOnClickListener {
-                try {
-                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
-                    intent.putExtra("contentTitle", "Facebook")
-                    intent.putExtra("contentUrl", AppConstants.loginResponseModel!!.FacebookUrl)
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                closeDrawer()
+                startWebActivity("Facebook", AppPrefences.getLoginUserInfo(this)!!.FacebookUrl)
             }
             lytVisitTwitter.setOnClickListener {
-                try {
-                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
-                    intent.putExtra("contentTitle", "Twitter")
-                    intent.putExtra("contentUrl", AppConstants.loginResponseModel!!.TwitterURL)
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                closeDrawer()
+                startWebActivity("Twitter", AppPrefences.getLoginUserInfo(this)!!.TwitterURL)
             }
             lytPrivacyPolicy.setOnClickListener {
-                try {
-                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
-                    intent.putExtra("contentTitle", "Privacy Policy")
-                    intent.putExtra("contentUrl", AppConstants.loginResponseModel!!.PrivacyPolicy)
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                closeDrawer()
+                startWebActivity("Privacy Policy", AppPrefences.getLoginUserInfo(this)!!.PrivacyPolicy)
             }
             lytLogout.setOnClickListener {
                 userLogOut()
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun startWebActivity(title: String, url: String) {
+        try {
+            intent = Intent(this@MainActivity, WebViewActivity::class.java)
+            intent.putExtra("contentTitle", title)
+            intent.putExtra("contentUrl", url)
+            startActivity(intent)
         } catch (e: Exception) {
             e.printStackTrace()
         }
