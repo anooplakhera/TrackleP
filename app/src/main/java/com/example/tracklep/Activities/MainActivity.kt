@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.R
-import com.example.tracklep.Utils.AppConstants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_contact_us.view.*
 import kotlinx.android.synthetic.main.navigation_menu_layout.*
@@ -29,7 +28,7 @@ class MainActivity : BaseActivity() {
 
             navigationClick()
             clickPerform()
-            txtDashTitle.setText("Welcome " + AppConstants.loginResponseModel!!.Name)
+            txtDashTitle.setText("Welcome " + AppPrefences.getLoginUserInfo(this)!!.Name)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -38,19 +37,23 @@ class MainActivity : BaseActivity() {
     private fun navigationClick() {
         try {
             lytCompanyWebsite.setOnClickListener {
-                startWebActivity("Company Website", AppConstants.loginResponseModel!!.CompanyWebsite)
+                closeDrawer()
+                startWebActivity("Company Website", AppPrefences.getLoginUserInfo(this)!!.CompanyWebsite)
             }
             lytPayLocation.setOnClickListener {
                 closeDrawer()
             }
             lytVisitFb.setOnClickListener {
-                startWebActivity("Facebook", AppConstants.loginResponseModel!!.FacebookUrl)
+                closeDrawer()
+                startWebActivity("Facebook", AppPrefences.getLoginUserInfo(this)!!.FacebookUrl)
             }
             lytVisitTwitter.setOnClickListener {
-                startWebActivity("Twitter", AppConstants.loginResponseModel!!.TwitterURL)
+                closeDrawer()
+                startWebActivity("Twitter", AppPrefences.getLoginUserInfo(this)!!.TwitterURL)
             }
             lytPrivacyPolicy.setOnClickListener {
-                startWebActivity("Privacy Policy", AppConstants.loginResponseModel!!.PrivacyPolicy)
+                closeDrawer()
+                startWebActivity("Privacy Policy", AppPrefences.getLoginUserInfo(this)!!.PrivacyPolicy)
             }
             lytLogout.setOnClickListener {
                 userLogOut()

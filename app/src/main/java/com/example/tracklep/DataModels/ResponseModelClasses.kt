@@ -40,6 +40,7 @@ object ResponseModelClasses {
     )
 
     //Login Response
+
     data class LoginResponseModel(
         val expires: String,
         val issued: String,
@@ -64,8 +65,8 @@ object ResponseModelClasses {
     //Get Utility List - Registration
     data class UtilityListResponseModel(val Query: Query1, val Results: Results1) {
         data class Query1(val Parameters: Any, val SqlQuery: Any)
-        data class Results1(val Table1: ArrayList<Table>) {
-            data class Table(
+        data class Results1(val Table: ArrayList<Table1>) {
+            data class Table1(
                 val AdminUserCount: Int,
                 val CreatedBy: Int,
                 val CreatedDate: String,
