@@ -99,7 +99,7 @@ class MainActivity : BaseActivity() {
             startActivity(Intent(this, MyProfile::class.java))
         }
         lytBilling.setOnClickListener {
-            startActivity(Intent(this, BillingDashboard::class.java))
+            //startActivity(Intent(this, BillingDashboard::class.java))
         }
         lytConnectUtility.setOnClickListener {
 

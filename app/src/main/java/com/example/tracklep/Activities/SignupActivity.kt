@@ -236,8 +236,8 @@ class SignupActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.UtilityListResponseModel>,
                     response: Response<ResponseModelClasses.UtilityListResponseModel>
                 ) {
+                    dismissDialog()
                     try {
-                        dismissDialog()
                         if (response.body() != null)
                             AppLog.printLog("UtilityList Response- ", response.body().toString())
                         if (response.message() != null) {
@@ -253,8 +253,8 @@ class SignupActivity : BaseActivity() {
                     t: Throwable
                 ) {
                     try {
-                        AppLog.printLog("Failure()- ", t.message.toString())
                         dismissDialog()
+                        AppLog.printLog("Failure()- ", t.message.toString())
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
