@@ -241,8 +241,8 @@ class SignupActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.UtilityListResponseModel>,
                     response: Response<ResponseModelClasses.UtilityListResponseModel>
                 ) {
+                    dismissDialog()
                     try {
-//                        dismissDialog()
                         if (response.body() != null)
                             UtilitiesData.clearArrayList()
                         UtilitiesData.addArrayList(response.body()!!.Results.Table)
@@ -261,8 +261,9 @@ class SignupActivity : BaseActivity() {
                     t: Throwable
                 ) {
                     try {
+                        dismissDialog()
                         AppLog.printLog("Failure()- ", t.message.toString())
-//                        dismissDialog()
+
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
