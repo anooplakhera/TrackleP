@@ -156,7 +156,7 @@ class SignupActivity : BaseActivity() {
             var map = HashMap<String, String>()
             map.put(ApiUrls.EmailID, editEmail.text.toString())
             map.put(ApiUrls.Password, editPassword.text.toString())
-            map.put(ApiUrls.CustomerUtilityId, txtUtilityName.text.toString())
+            map.put(ApiUrls.CustomerUtilityId, UtilitiesData.getArrayItem(0).UtilityId.toString())
             map.put(ApiUrls.ConfirmPassword, editCPassword.text.toString())
             map.put(ApiUrls.UtilityAccountNumber, editAccountNo.text.toString())
             map.put(ApiUrls.PostalCode, editServiceZipCode.text.toString())
