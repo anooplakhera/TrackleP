@@ -56,7 +56,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         
         <activity
-            android:name=".Activities.BillingDashboard"
+            android:name=".Activities.BillingActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.ConservationActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
