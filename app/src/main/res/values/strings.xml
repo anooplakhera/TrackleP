@@ -81,6 +81,24 @@
     <string name="contactus_email">Email : <u>admin@eocwd.com</u></string>
     <string name="contactus_phone">Phone : <u>714-538-815</u></string>
     <string name="contactus_online">Online : Please visit us at <u>www.eocwd.com/contact</u></string>
+    <string name="conservation_tip1">THINK. You can\'t do anything wiouth water. Save it. Every Drop Counts !</string>
+    <string name="conservatino_tip2">Water Conservation is our Nature, Habit, Groove, Sty;e, Thing, Save our water Be Water Wise !</string>
+    <string name="conservation_tip3">Water is Life. Don\'t Waste it. Save Water Save Life !</string>
+    <string name="previous_meter_reading">Previous Meter Reading</string>
+    <string name="total_water_bill_this_period">Total water bill this period</string>
+    <string name="meter_number">Meter Number</string>
+    <string name="account_balance">Account Balance</string>
+    <string name="billing_period_from">Billing Period From</string>
+    <string name="billing_period_to">Billing Period To</string>
+    <string name="account_information">Account Information</string>
+    <string name="n_a">N/A</string>
+    <string name="current_meter_reading">Current Meter Reading</string>
+    <string name="total_water_usage">Total Water Usage</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="consumption_charge">Consumption Charge</string>
+    <string name="meter_service_charge">Meter Service Charge</string>
+    <string name="capital_project_charge">Capital Project Charge</string>
+    <string name="account_total">Account Total</string>
 
 
 </resources>

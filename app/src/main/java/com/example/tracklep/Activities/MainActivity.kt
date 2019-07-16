@@ -85,7 +85,7 @@ class MainActivity : BaseActivity() {
             startActivity(Intent(this, MyProfile::class.java))
         }
         lytBilling.setOnClickListener {
-            //startActivity(Intent(this, BillingDashboard::class.java))
+            startActivity(Intent(this, BillingActivity::class.java))
         }
         lytConnectUtility.setOnClickListener {
 
@@ -115,7 +115,9 @@ class MainActivity : BaseActivity() {
 
         lytTrackUsage.setOnClickListener {}
         lytCompare.setOnClickListener {}
-        lytWaterConversation.setOnClickListener {}
+        lytWaterConversation.setOnClickListener {
+            startActivity(Intent(this, ConservationActivity::class.java))
+        }
     }
 
 

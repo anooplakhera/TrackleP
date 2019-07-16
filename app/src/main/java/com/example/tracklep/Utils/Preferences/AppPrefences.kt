@@ -7,7 +7,6 @@ import com.google.gson.Gson
 
 object AppPrefences {
 
-
     private val PREFS_FILE_NAME = "Trackle"
     private val DeviceId = "deviceId"
     private val USERID = "userid"
@@ -19,7 +18,6 @@ object AppPrefences {
     private val TokenID = "tokenId"
     private val Login = "login"
     private val LoginData = "logindata"
-
 
     fun clearAll(ctx: Context) {
         val prefs = ctx.getSharedPreferences(
