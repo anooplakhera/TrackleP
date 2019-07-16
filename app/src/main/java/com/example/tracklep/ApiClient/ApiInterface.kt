@@ -24,7 +24,7 @@ interface ApiInterface {
 
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)
-    fun getResetUserPass1(@Field(ApiUrls.UserName) UserName: String): Call<ResponseModelClasses.ResetPassStep1Response>
+    fun getResetUserPass1(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.ResetPassStep1Response>
 
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_TWO)

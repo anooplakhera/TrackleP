@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
@@ -20,6 +21,7 @@ import com.example.tracklep.DataClasses.UtilitiesData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
+import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
@@ -73,21 +75,16 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-
     private fun loginApi() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            var map = HashMap<String, String>()
-            map.put(ApiUrls.UserName, editUserName.text.toString());
-            map.put(ApiUrls.Password, editUserPass.text.toString());
-            map.put(ApiUrls.GrantType, ApiUrls.Password.toLowerCase());
-            map.put(ApiUrls.TanentId, "1");
-            map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-            map.put(ApiUrls.Database, ApiUrls.Database_value)
-            map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-            map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
             val apiService = ApiClient.getClient(ApiUrls.BASE_URL).create(ApiInterface::class.java)
-            val call: Call<ResponseModelClasses.LoginResponseModel> = apiService.getLogin(map)
+            val call: Call<ResponseModelClasses.LoginResponseModel> = apiService.getLogin(
+                RequestClass.getLoginRequestModel(
+                    editUserName.text.toString(),
+                    editUserPass.text.toString()
+                )
+            )
             call.enqueue(object : Callback<ResponseModelClasses.LoginResponseModel> {
                 override fun onResponse(
                     call: Call<ResponseModelClasses.LoginResponseModel>,
@@ -180,7 +177,7 @@ class LoginActivity : BaseActivity() {
             dialog.txtTitleTop.text = title
 
             val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
-            dialog.dialogRecycleView.layoutManager = layoutManager
+            dialog.dialogRecycleView.layoutManager = layoutManager as RecyclerView.LayoutManager?
             val mAdapter = UtilitiesListAdapter() { position ->
                 val data = UtilitiesData.getArrayItem(position)
                 textView.text = data.Name

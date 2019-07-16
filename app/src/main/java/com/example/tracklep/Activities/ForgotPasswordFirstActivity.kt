@@ -9,6 +9,7 @@ import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.ResetPassSecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_forgot_password_first.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
@@ -40,7 +41,7 @@ class ForgotPasswordFirstActivity : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getResetUserPass1(editEmailF1.text.toString())
+            val call = apiService.getResetUserPass1(RequestClass.getForgetRequestStepOne(editEmailF1.text.toString()))
             call.enqueue(object : Callback<ResponseModelClasses.ResetPassStep1Response> {
                 override fun onResponse(
                     call: Call<ResponseModelClasses.ResetPassStep1Response>,
@@ -53,12 +54,10 @@ class ForgotPasswordFirstActivity : BaseActivity() {
                         } else {
                             ResetPassSecurityQuestionData.clearArrayList()
                             ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
-                            startActivity(
-                                Intent(
-                                    this@ForgotPasswordFirstActivity,
-                                    ForgotPasswordSecondActivity::class.java
-                                )
-                            )
+                            val intent =
+                                Intent(this@ForgotPasswordFirstActivity, ForgotPasswordSecondActivity::class.java)
+                            intent.putExtra(ApiUrls.EmailID, editEmailF1.text.toString())
+                            startActivity(intent)
                         }
                     }
                 }
@@ -74,7 +73,6 @@ class ForgotPasswordFirstActivity : BaseActivity() {
             dismissDialog()
         }
     } else {
-        dismissDialog()
         showToast(getString(R.string.internet))
     }
 }

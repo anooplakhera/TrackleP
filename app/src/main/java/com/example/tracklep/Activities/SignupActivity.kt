@@ -21,6 +21,7 @@ import com.example.tracklep.DataClasses.UtilitiesData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
+import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
@@ -31,6 +32,10 @@ import retrofit2.Response
 
 
 class SignupActivity : BaseActivity() {
+
+    private var utilityID = ""
+    private var sQuesID1 = ""
+    private var sQuesID2 = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +55,6 @@ class SignupActivity : BaseActivity() {
             e.printStackTrace()
         }
     }
-
 
     private fun clickPerform() {
         try {
@@ -152,45 +156,48 @@ class SignupActivity : BaseActivity() {
     }
 
     private fun saveUser() = if (Utils.isConnected(this)) {
+        showDialog()
         try {
-            var map = HashMap<String, String>()
-            map.put(ApiUrls.EmailID, editEmail.text.toString())
-            map.put(ApiUrls.Password, editPassword.text.toString())
-            map.put(ApiUrls.CustomerUtilityId, UtilitiesData.getArrayItem(0).UtilityId.toString())
-            map.put(ApiUrls.ConfirmPassword, editCPassword.text.toString())
-            map.put(ApiUrls.UtilityAccountNumber, editAccountNo.text.toString())
-            map.put(ApiUrls.PostalCode, editServiceZipCode.text.toString())
-            map.put(ApiUrls.UserId, editEmail.text.toString())
-            map.put(ApiUrls.MeterNumber, editMeterNo.text.toString())
-            map.put(ApiUrls.SecurityQuestionId, txtQuestion1.text.toString())
-            map.put(ApiUrls.SecurityQuestionId2, txtQuestion2.text.toString())
-            map.put(ApiUrls.HintAns, editAnswer1.text.toString())
-            map.put(ApiUrls.HintsAns2, editAnswer2.text.toString())
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call: Call<ResponseModelClasses.RegistrationResponse> = apiService.registerUser(map)
+            val call: Call<ResponseModelClasses.RegistrationResponse> =
+                apiService.registerUser(
+                    RequestClass.getSignupRequestModel(
+                        editEmail.text.toString(),
+                        editPassword.text.toString(),
+                        utilityID,
+                        editAccountNo.text.toString(),
+                        editServiceZipCode.text.toString(),
+                        editMeterNo.text.toString(),
+                        editAnswer1.text.toString(),
+                        editAnswer2.text.toString(),
+                        sQuesID1,
+                        sQuesID2,
+                        editCPassword.text.toString()
+                    )
+                )
             call.enqueue(object : Callback<ResponseModelClasses.RegistrationResponse> {
                 override fun onResponse(
                     call: Call<ResponseModelClasses.RegistrationResponse>,
                     response: Response<ResponseModelClasses.RegistrationResponse>
                 ) {
-                    AppLog.printLog("Params " + map.toString() + "\n" + "URL " + apiService.toString() + "\n" + "Response " + response.body().toString())
+                    dismissDialog()
+//                    AppLog.printLog("Params " + map.toString() + "\n" + "URL " + apiService.toString() + "\n" + "Response " + response.body().toString())
                     if (response.body() != null) {
                         Log.d("send RegID===", response.body()!!.Message)
-
                     }
                 }
 
                 override fun onFailure(call: Call<ResponseModelClasses.RegistrationResponse>, t: Throwable) {
-                    // Log error here since request failed
+                    dismissDialog()
                 }
             })
 
         } catch (e: Exception) {
             e.printStackTrace()
+            dismissDialog()
         }
 
     } else {
-        dismissDialog()
         showToast(getString(R.string.internet))
     }
 
@@ -293,6 +300,10 @@ class SignupActivity : BaseActivity() {
             val mAdapter = QuestionListAdapter() { position ->
                 val data = SecurityQuestionData.getArrayItem(position)
                 textView.text = data.Question
+                when (textView) {
+                    txtQuestion1 -> sQuesID1 = data.SecurityQuestionId
+                    txtQuestion2 -> sQuesID2 = data.SecurityQuestionId
+                }
                 textView.setTextColor(resources.getColor(R.color.colorBlack))
                 dialog.dismiss()
             }
@@ -318,6 +329,7 @@ class SignupActivity : BaseActivity() {
             dialog.dialogRecycleView.layoutManager = layoutManager
             val mAdapter = UtilitiesListAdapter() { position ->
                 val data = UtilitiesData.getArrayItem(position)
+                utilityID = data.UtilityId.toString()
                 textView.text = data.Name
                 textView.setTextColor(resources.getColor(R.color.colorBlack))
                 dialog.dismiss()

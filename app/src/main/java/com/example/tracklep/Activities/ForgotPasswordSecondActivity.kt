@@ -9,6 +9,7 @@ import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.ResetPassSecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_forgot_password_second.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
@@ -19,6 +20,7 @@ import retrofit2.Response
 
 class ForgotPasswordSecondActivity : BaseActivity() {
 
+    var emailId = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password_second)
@@ -27,6 +29,8 @@ class ForgotPasswordSecondActivity : BaseActivity() {
         imgCABback.setOnClickListener {
             finish()
         }
+
+        emailId = intent.getStringExtra(ApiUrls.EmailID)
 
         txtFirstQuestion.text = ResetPassSecurityQuestionData.getArrayItem(0).Question
         txtSecondQuestion.text = ResetPassSecurityQuestionData.getArrayItem(1).Question
@@ -49,14 +53,13 @@ class ForgotPasswordSecondActivity : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            var map = HashMap<String, String>()
-            map.put(ApiUrls.UserName, "sharadtripathi204@yahoo.co.in");
-            map.put(ApiUrls.SecurityQuestion1, ResetPassSecurityQuestionData.getArrayItem(0).SecurityQuestionId);
-            map.put(ApiUrls.SecurityQuestion2, ResetPassSecurityQuestionData.getArrayItem(1).SecurityQuestionId);
-            map.put(ApiUrls.Answer1, editAnswer1RP!!.text.toString());
-            map.put(ApiUrls.Answer2, editAnswer2RP!!.text.toString());
-            Log.d("Paramsss", map.entries.toString())
-            val call = apiService.getResetUserPass2(map)
+            val call = apiService.getResetUserPass2(
+                RequestClass.getForgetRequestStepTwo(
+                    emailId,
+                    editAnswer1RP!!.text.toString(),
+                    editAnswer2RP!!.text.toString()
+                )
+            )
             call.enqueue(object : Callback<ResponseModelClasses.ResetPassStep2Response> {
                 override fun onResponse(
                     call: Call<ResponseModelClasses.ResetPassStep2Response>,
@@ -64,18 +67,6 @@ class ForgotPasswordSecondActivity : BaseActivity() {
                 ) {
                     dismissDialog()
                     if (response.body() != null) {
-//                        if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
-//                            showToast(response.body()!!.Table[0].Message)
-//                        } else {
-//                            ResetPassSecurityQuestionData.clearArrayList()
-//                            ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
-//                            startActivity(
-//                                Intent(
-//                                    this@ForgotPasswordSecondActivity,
-//                                    ForgotPasswordSecondActivity::class.java
-//                                )
-//                            )
-//                        }
                         Log.d("ResponseBodyIs", response.body()!!.toString())
                     }
                 }
@@ -91,7 +82,6 @@ class ForgotPasswordSecondActivity : BaseActivity() {
             dismissDialog()
         }
     } else {
-        dismissDialog()
         showToast(getString(R.string.internet))
     }
 }
