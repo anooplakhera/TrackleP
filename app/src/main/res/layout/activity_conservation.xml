@@ -5,20 +5,27 @@
     android:id="@+id/ryl_conservationParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/colorBlack"
     tools:context=".Activities.ConservationActivity">
+    
+    <include
+        layout="@layout/custom_action_bar"
+        android:id="@+id/lytAction" />
     
     <ImageView
         android:id="@+id/imgConservationTipImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/billing_blue"
         android:layout_above="@+id/txtConservationTip" />
     
     <TextView
         android:id="@+id/txtConservationTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/conservation_tip3"
-        android:layout_centerInParent="true" />
+        android:layout_marginLeft="@dimen/dp_40"
+        android:gravity="center"
+        android:padding="@dimen/dp_4"
+        android:layout_marginRight="@dimen/dp_40"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorWhite" />
 </RelativeLayout>

@@ -67,6 +67,7 @@
             android:name=".Activities.WebViewActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.AddAccountActivity" />
     </application>
 
 </manifest>
