@@ -31,8 +31,8 @@ interface ApiInterface {
     fun getResetUserPass2(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.ResetPassStep2Response>
 
     @Headers(ApiUrls.Authorization + ":" + ApiUrls.AuthKey)
-    @GET(ApiUrls.Account + "/7")
-    fun getAccount(@Field(ApiUrls.Account) UserName: String): Call<ResponseModelClasses.MyProfileResponse>
+    @GET(ApiUrls.Account + "/{id}")
+    fun getAccount(@Path("id") id: String): Call<ResponseModelClasses.MyProfileResponse>
 
     //    @Headers(ApiUrls.Authorization + ":" + ApiUrls.AuthKey)
     @GET(ApiUrls.GET_UTILS)

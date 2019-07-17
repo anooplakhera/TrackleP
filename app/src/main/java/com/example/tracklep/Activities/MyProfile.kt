@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.activity_my_profile.*
 import android.widget.TextView
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.Adapter.QuestionListAdapter
@@ -20,9 +19,10 @@ import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.SecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
-import com.example.tracklep.Utils.AppConstants
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
@@ -41,9 +41,9 @@ class MyProfile : BaseActivity() {
             imgCABback.setOnClickListener {
                 finish()
             }
-
-            getSecurityQues(false, txtQuestion1)
             getUserProfile()
+//            getSecurityQues(false, txtQuestion1)
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -51,7 +51,6 @@ class MyProfile : BaseActivity() {
 
     private fun getSecurityQues(dialogOpen: Boolean = false, txtview: TextView) = if (Utils.isConnected(this)) {
         showDialog()
-
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap()))
@@ -63,9 +62,13 @@ class MyProfile : BaseActivity() {
                     try {
                         dismissDialog()
                         if (response.body() != null) {
-                            AppLog.printLog("Security Question Response: ", response.body().toString())
+
+                            AppLog.printLog("getSecurityQuesReposen " + Gson().toJson(response.body()))
                             SecurityQuestionData.clearArrayList()
                             SecurityQuestionData.addArrayList(response.body()!!)
+
+//                            getUserProfile()
+
                             if (dialogOpen) {
                                 openDialog(txtview)
                             }
@@ -103,8 +106,8 @@ class MyProfile : BaseActivity() {
                 ) {
                     try {
                         dismissDialog()
+                        AppLog.printLog("User Profile Response: " + Gson().toJson(response.body()))
                         if (response.body() != null) {
-                            AppLog.printLog("User Profile Response: ", response.body().toString())
 
                         }
                     } catch (e: Exception) {

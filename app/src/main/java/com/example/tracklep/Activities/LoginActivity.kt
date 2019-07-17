@@ -92,10 +92,10 @@ class LoginActivity : BaseActivity() {
                 ) {
                     dismissDialog()
                     if (response.body() != null) {
-                        val loginResponseModel: ResponseModelClasses.LoginResponseModel? = response.body()
+                        var loginResponseModel: ResponseModelClasses.LoginResponseModel? = response.body()
                         AppPrefences.setLoginUserInfo(this@LoginActivity, loginResponseModel)
 
-                        AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@LoginActivity).Name))
+                        AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@LoginActivity)!!.Name))
                         AppPrefences.setLogin(this@LoginActivity, true)
 
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
