@@ -4,7 +4,10 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -12,6 +15,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.Adapter.QuestionListAdapter
+import com.example.tracklep.Adapter.SwipeItemAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
@@ -20,9 +24,9 @@ import com.example.tracklep.DataClasses.SecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
+import com.example.tracklep.Utils.SwipeToDeleteCallback
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
@@ -40,6 +44,9 @@ class MyProfile : BaseActivity() {
             imgCABadd.visibility = View.VISIBLE
             imgCABback.setOnClickListener {
                 finish()
+            }
+            imgCABadd.setOnClickListener {
+                openDialogList()
             }
             getUserProfile()
 //            getSecurityQues(false, txtQuestion1)
@@ -152,6 +159,42 @@ class MyProfile : BaseActivity() {
                 dialog.dismiss()
             }
             dialog.dialogRecycleView.adapter = mAdapter
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun openDialogList() {
+        try {
+            val dialog = Dialog(this@MyProfile)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.dialog_layout)
+            dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCancelable(true)
+            dialog.show()
+            dialog.txtTitleTop.text = title
+
+            val mSwipeItemAdapter = SwipeItemAdapter((1..5).map { "Item: $it" }.toMutableList()) { position ->
+                dialog.dismiss()
+            }
+
+
+            dialog.dialogRecycleView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+            dialog.dialogRecycleView.layoutManager = LinearLayoutManager(this)
+            dialog.dialogRecycleView.adapter = mSwipeItemAdapter
+
+            val swipeHandler = object : SwipeToDeleteCallback(this) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val adapter = dialog.dialogRecycleView.adapter as SwipeItemAdapter
+                    adapter.removeAt(viewHolder.adapterPosition)
+                    if (adapter.isEmpty()) {
+                        dialog.dismiss()
+                    }
+                }
+            }
+            val itemTouchHelper = ItemTouchHelper(swipeHandler)
+            itemTouchHelper.attachToRecyclerView(dialog.dialogRecycleView)
         } catch (e: Exception) {
             e.printStackTrace()
         }

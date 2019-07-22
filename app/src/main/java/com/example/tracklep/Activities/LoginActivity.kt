@@ -41,11 +41,25 @@ class LoginActivity : BaseActivity() {
 
     }
 
-    private fun validationFields(): Boolean {
+    private fun validationFields() {
         var isValid = true
-        if (editUserName.text!!.isEmpty()) isValid = false
-        else if (editUserPass.text!!.isEmpty()) isValid = false
-        return isValid
+        if (editUserName.text!!.isEmpty()) {
+            !isValid
+            return
+        } else if (editUserPass.text!!.isEmpty()) {
+            !isValid
+            return
+        } else if (textUtilities.text.toString() == getString(R.string.select_utility)) {
+            showToast("Please Select Utility")
+            !isValid
+            return
+        } else if (!switchBtn.isChecked) {
+            showToast("Please Enable Remember me")
+            !isValid
+            return
+        } else if (isValid) {
+            loginApi()
+        }
     }
 
     private fun clickPerform() {
@@ -66,12 +80,7 @@ class LoginActivity : BaseActivity() {
         editUserPass.setText("Trackle@999")
 
         btnLogin.setOnClickListener {
-            if (validationFields())
-                if (switchBtn.isChecked) {
-                    loginApi()
-                } else showToast("Please Enable Remember me")
-            else showToast("Please enter correct username & password")
-
+            validationFields()
         }
     }
 
