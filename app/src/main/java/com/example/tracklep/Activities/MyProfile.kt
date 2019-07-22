@@ -1,6 +1,8 @@
 package com.example.tracklep.Activities
 
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -27,6 +29,7 @@ import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.SwipeToDeleteCallback
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
@@ -48,8 +51,11 @@ class MyProfile : BaseActivity() {
             imgCABadd.setOnClickListener {
                 openDialogList()
             }
+            rytCommunicationAddress.setOnClickListener {
+                openDialogList()
+            }
             getUserProfile()
-//            getSecurityQues(false, txtQuestion1)
+            //getSecurityQues(false, txtQuestion1)
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -66,29 +72,22 @@ class MyProfile : BaseActivity() {
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
                     response: Response<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
                 ) {
-                    try {
-                        dismissDialog()
-                        if (response.body() != null) {
-
-                            AppLog.printLog("getSecurityQuesReposen " + Gson().toJson(response.body()))
-                            SecurityQuestionData.clearArrayList()
-                            SecurityQuestionData.addArrayList(response.body()!!)
-
-//                            getUserProfile()
-
-                            if (dialogOpen) {
-                                openDialog(txtview)
-                            }
+                    dismissDialog()
+                    if (response.message() != null)
+                        AppLog.printLog("Response- ", response.message().toString())
+                    if (response.body() != null) {
+                        SecurityQuestionData.clearArrayList()
+                        SecurityQuestionData.addArrayList(response.body()!!)
+                        if (dialogOpen) {
+                            openDialog(txtview)
                         }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
                     }
                 }
 
                 override fun onFailure(
-                    call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
-                    t: Throwable
+                    call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>, t: Throwable
                 ) {
+                    AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }
             })
@@ -97,7 +96,6 @@ class MyProfile : BaseActivity() {
             dismissDialog()
         }
     } else {
-        dismissDialog()
         showToast(getString(R.string.internet))
     }
 
@@ -186,11 +184,25 @@ class MyProfile : BaseActivity() {
 
             val swipeHandler = object : SwipeToDeleteCallback(this) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                    val adapter = dialog.dialogRecycleView.adapter as SwipeItemAdapter
-                    adapter.removeAt(viewHolder.adapterPosition)
-                    if (adapter.isEmpty()) {
-                        dialog.dismiss()
+
+                    var alertDialog = AlertDialog.Builder(this@MyProfile)
+                    alertDialog.setTitle(getString(R.string.app_name))
+                    alertDialog.setMessage("Are you sure you want to delete communication address?")
+                    alertDialog.setNeutralButton("Cancel") { _, _ ->
+
                     }
+
+                    alertDialog.setPositiveButton("Yes") { dialog, which ->
+                        dialog.dismiss()
+                        val adapter = dialogRecycleView.adapter as SwipeItemAdapter
+                        adapter.removeAt(viewHolder.adapterPosition)
+                        if (adapter.isEmpty()) {
+                            dialog.dismiss()
+                        }
+                    }
+
+                    alertDialog.show()
+
                 }
             }
             val itemTouchHelper = ItemTouchHelper(swipeHandler)
@@ -200,4 +212,24 @@ class MyProfile : BaseActivity() {
         }
 
     }
+
+
+    fun deleteCommunicationAddress() {
+        var alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle(getString(R.string.app_name))
+        alertDialog.setMessage("Are you sure you want to delete communication address?")
+        alertDialog.setNeutralButton("Cancel") { _, _ ->
+        }
+
+        alertDialog.setPositiveButton("Yes") { dialog, which ->
+            dialog.dismiss()
+            AppPrefences.clearAll(this)
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
+        alertDialog.show()
+
+    }
+
 }
