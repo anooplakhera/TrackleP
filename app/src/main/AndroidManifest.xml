@@ -67,7 +67,19 @@
             android:name=".Activities.WebViewActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.AddAccountActivity" />
+        <activity
+            android:name=".Activities.AddAccountActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.ConnectWithUtilityActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.UsageActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.CompareActivity" />
     </application>
 
 </manifest>

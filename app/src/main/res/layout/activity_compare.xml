@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:focusableInTouchMode="true"
+    tools:context=".Activities.CompareActivity"
+    android:orientation="vertical">
+    
+    <include
+        layout="@layout/custom_action_bar"
+        android:id="@+id/lytAction" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_10"
+            android:gravity="center_horizontal">
+            
+            <!--View CCF, Gallon, Dollar-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:id="@+id/lytUsageTabs"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/layout_border"
+                android:weightSum="3">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/dp_4"
+                    android:gravity="center"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/view_ccf" />
+                
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark" />
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/dp_2"
+                    android:padding="@dimen/dp_4"
+                    android:gravity="center"
+                    android:text="@string/view_gallon" />
+                
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimaryDark" />
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/dp_2"
+                    android:padding="@dimen/dp_4"
+                    android:gravity="center"
+                    android:text="@string/view_dollar" />
+            </LinearLayout>
+            
+            <TextView
+                android:id="@+id/txt_date_from_to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_4"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:gravity="left"
+                android:textColor="@color/colorBlack"
+                android:text="Jun 2018 - May 2019" />
+            
+            <!--Graph Layout-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+                
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                
+                </LinearLayout>
+            </FrameLayout>
+            
+            <!--Compare Me, Compare Zip, Compare Utility & Compare All-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_margin="@dimen/dp_10"
+                android:weightSum="4">
+                
+                <!--Compare Me-->
+                <LinearLayout
+                    android:id="@+id/lytCompareMe"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_10"
+                    android:weightSum="3">
+                    
+                    <ImageView
+                        android:id="@+id/imgCompareMe"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="@dimen/dp_4"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorWhite" />
+                    
+                    <TextView
+                        android:id="@+id/txtCompareMe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_4"
+                        android:textSize="@dimen/sp_14"
+                        android:gravity="center"
+                        android:text="@string/compare_me" />
+                
+                </LinearLayout>
+                
+                <!--Compare Zip-->
+                <LinearLayout
+                    android:id="@+id/lytCompareZip"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_10"
+                    android:weightSum="3">
+                    
+                    <ImageView
+                        android:id="@+id/imgCompareZip"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="@dimen/dp_4"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorWhite" />
+                    
+                    <TextView
+                        android:id="@+id/txtCompareZip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_4"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_14"
+                        android:text="@string/compare_zip" />
+                
+                </LinearLayout>
+                
+                <!--Compare Utility-->
+                <LinearLayout
+                    android:id="@+id/lytCompareUtility"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_10"
+                    android:weightSum="3">
+                    
+                    <ImageView
+                        android:id="@+id/imgCompareUtility"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="@dimen/dp_4"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorWhite" />
+                    
+                    <TextView
+                        android:id="@+id/txtCompareUtility"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_4"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_14"
+                        android:text="@string/compare_utility" />
+                
+                </LinearLayout>
+                
+                <!--Compare All-->
+                <LinearLayout
+                    android:id="@+id/lytCompareAll"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_10"
+                    android:weightSum="3">
+                    
+                    <ImageView
+                        android:id="@+id/imgCompareAll"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:padding="@dimen/dp_4"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:background="@color/colorPrimary"
+                        android:textColor="@color/colorWhite" />
+                    
+                    <TextView
+                        android:id="@+id/txtCompareAll"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_4"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_14"
+                        android:text="@string/compare_all" />
+                
+                </LinearLayout>
+            
+            </LinearLayout>
+            
+            <!--Usage Disclaimer-->
+            <TextView
+                android:id="@+id/txtusage_disclaimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/usage_disclaimer" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:focusableInTouchMode="true"
+    tools:context=".Activities.ConnectWithUtilityActivity"
+    android:orientation="vertical">
+    
+    <include
+        layout="@layout/custom_action_bar"
+        android:id="@+id/lytAction" />
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_10"
+            android:gravity="center_horizontal">
+            
+            <!--connect_with_utility Header-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+                
+                <TextView
+                    android:id="@+id/txtContactUsHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_2"
+                    android:gravity="center"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_20"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/connect_with_utility" />
+            </RelativeLayout>
+            
+            <!--connect_with_utility description-->
+            <LinearLayout
+                android:id="@+id/relBillingPeriod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/dp_14">
+                
+                <TextView
+                    android:id="@+id/txtContactUsDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_2"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
+                    android:textColor="@color/colorBlack"
+                    android:text="@string/contactus_description" />
+                
+                <TextView
+                    android:id="@+id/txtContactUsEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/contactus_email"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+                
+                <TextView
+                    android:id="@+id/txtContactUsPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/contactus_phone"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+                
+                <TextView
+                    android:id="@+id/txtContactUsOnline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/contactus_online"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2"
+                    android:visibility="gone" />
+                
+                <TextView
+                    android:id="@+id/txtContactUsAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/contactus_address"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+                
+                <TextView
+                    android:id="@+id/txtContactUsOpenTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/contactus_opentime"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/dp_2" />
+            
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10"
+                android:gravity="center_horizontal">
+                
+                
+                <TextView
+                    android:id="@+id/txtReportAnIssue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_15"
+                    android:gravity="center"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/report_an_issue" />
+                
+                <!--Topic-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_2">
+                    
+                    <TextView
+                        android:id="@+id/txtTopic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_2"
+                        android:textSize="@dimen/sp_16"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="@string/topic" />
+                    
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/editTopic"
+                        android:layout_below="@id/txtTopic"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/mandatory"
+                        android:textColor="@color/colorBlack"
+                        android:enabled="false"
+                        android:textSize="@dimen/sp_16"
+                        android:fontFamily="@font/roboto"
+                        android:background="@android:color/transparent"
+                        android:padding="@dimen/dp_2" />
+                
+                </RelativeLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
+                    android:background="@color/colorLightGray100" />
+                
+                <!--Subject-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_2">
+                    
+                    <TextView
+                        android:id="@+id/txtSubject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_2"
+                        android:textSize="@dimen/sp_16"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="@string/subject" />
+                    
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/editMeterNumberValue"
+                        android:layout_below="@id/txtSubject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/mandatory"
+                        android:textColor="@color/colorBlack"
+                        android:enabled="false"
+                        android:textSize="@dimen/sp_16"
+                        android:fontFamily="@font/roboto"
+                        android:background="@android:color/transparent"
+                        android:padding="@dimen/dp_2" />
+                
+                </RelativeLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
+                    android:background="@color/colorLightGray100" />
+                
+                <!--Contact Us Message-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_2">
+                    
+                    <TextView
+                        android:id="@+id/txtMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_2"
+                        android:textSize="@dimen/sp_16"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="@string/postal_code" />
+                    
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/editMessage"
+                        android:layout_below="@id/txtMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/mandatory"
+                        android:textColor="@color/colorBlack"
+                        android:enabled="false"
+                        android:textSize="@dimen/sp_16"
+                        android:fontFamily="@font/roboto"
+                        android:background="@android:color/transparent"
+                        android:padding="@dimen/dp_2" />
+                
+                </RelativeLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
+                    android:background="@color/colorLightGray100" />
+                
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnAddAccountSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_marginTop="@dimen/dp_40"
+                    android:text="@string/submit"
+                    android:textColor="@color/colorWhite"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_18"
+                    android:background="@color/colorPrimaryDark" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

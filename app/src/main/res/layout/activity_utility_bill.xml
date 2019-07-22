@@ -16,13 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never"
+        android:background="@color/colorWhite"
         android:layout_below="@id/lytAction">
         
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/colorLightGray"
+            android:background="@color/colorLightGray100"
             android:layout_margin="@dimen/dp_10"
             android:gravity="center_horizontal">
             
@@ -68,6 +69,7 @@
                         android:text="Aug 05, 2019"
                         android:gravity="left"
                         android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_5"
                         android:textColor="@color/colorLightBlack" />
@@ -134,7 +136,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/meter_number"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
@@ -145,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/n_a"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold"
                         android:fontFamily="@font/roboto"
@@ -165,6 +167,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/account_balance"
                         android:textSize="@dimen/sp_16"
+                        android:gravity="start"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
                         android:textColor="@color/colorBlack" />
@@ -174,7 +177,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="$2019"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textStyle="bold"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
@@ -212,7 +215,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/billing_period_from"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
@@ -223,7 +226,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Aug 05, 2019"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textStyle="bold"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
@@ -243,6 +246,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/billing_period_to"
                         android:textSize="@dimen/sp_16"
+                        android:gravity="start"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
                         android:textColor="@color/colorBlack" />
@@ -252,7 +256,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Aug 05, 2019"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold"
                         android:fontFamily="@font/roboto"
@@ -290,7 +294,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/previous_meter_reading"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
@@ -301,8 +305,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Aug 05, 2019"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
                         android:textColor="@color/colorLightBlack" />
@@ -320,6 +325,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/current_meter_reading"
                         android:textSize="@dimen/sp_16"
+                        android:gravity="start"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
                         android:textColor="@color/colorBlack" />
@@ -329,7 +335,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="7171"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:textStyle="bold"
@@ -367,7 +373,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/total_water_usage"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
@@ -378,7 +384,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="99 CCF"
-                        android:gravity="left"
+                        android:gravity="start"
                         android:textSize="@dimen/sp_16"
                         android:textStyle="bold"
                         android:fontFamily="@font/roboto"
@@ -429,6 +435,7 @@
                     android:text="99 CCF"
                     android:gravity="left"
                     android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/dp_2"
                     android:textColor="@color/colorLightBlack" />
@@ -469,7 +476,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="$99"
-                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:gravity="start"
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/dp_2"
@@ -511,6 +519,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="$99"
+                    android:textStyle="bold"
                     android:gravity="left"
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
@@ -540,9 +549,10 @@
                     android:id="@+id/txtAccountTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/account_total"
+                    android:text="@string/total_payable_amount"
                     android:layout_alignParentLeft="true"
                     android:textSize="@dimen/sp_16"
+                    android:gravity="start"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/dp_2"
                     android:textStyle="bold"
@@ -554,25 +564,54 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="$99"
-                    android:gravity="left"
+                    android:gravity="start"
+                    android:textStyle="bold"
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/dp_2"
                     android:textColor="@color/colorLightBlack" />
             
             </RelativeLayout>
+            
+            <TextView
+                android:id="@+id/txtBillingDisclaimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/billing_disclaimer"
+                android:background="@color/colorWhite"
+                android:layout_marginTop="@dimen/dp_10"
+                android:textSize="@dimen/sp_12"
+                android:fontFamily="@font/roboto"
+                android:padding="@dimen/dp_2"
+                android:textColor="@color/colorLightBlack" />
+            
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnPayNow"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:text="@string/pay_now"
+                android:layout_marginTop="@dimen/dp_10"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/sp_16"
+                android:background="@color/colorPrimaryDark" />
+            
+            
+            <TextView
+                android:id="@+id/txtLinkBillingHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/billing_history_link"
+                android:background="@color/colorWhite"
+                android:layout_marginTop="@dimen/dp_10"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold|italic"
+                android:fontFamily="@font/roboto"
+                android:padding="@dimen/dp_2"
+                android:textColor="@color/colorBlack" />
         </LinearLayout>
     
     </ScrollView>
-    
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnPayNow"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:text="@string/pay_now"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/roboto"
-        android:textSize="@dimen/sp_16"
-        android:visibility="gone"
-        android:background="@color/colorPrimaryDark" />
+
+
 </RelativeLayout>

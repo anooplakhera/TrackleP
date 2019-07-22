@@ -32,7 +32,7 @@
                     android:text="Des jardins Robert"
                     android:textAllCaps="true"
                     android:gravity="center"
-                    android:textSize="@dimen/dp_19"
+                    android:textSize="@dimen/sp_19"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/dp_5"
                     android:textColor="@color/colorBlack"/>
@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:text="Account Number : 034566543"
                     android:gravity="center"
-                    android:textSize="@dimen/dp_18"
+                    android:textSize="@dimen/sp_18"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/dp_5"
                     android:textColor="@color/colorLightBlack"/>
@@ -75,7 +75,7 @@
                         android:text="98654987"
                         android:textColor="@color/colorBlack"
                         android:enabled="false"
-                        android:textSize="@dimen/dp_16"
+                        android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:background="@android:color/transparent"
                         android:padding="@dimen/dp_2"/>
@@ -109,7 +109,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorBlack"
                         android:text="4567898234"
-                        android:textSize="@dimen/dp_16"
+                        android:textSize="@dimen/sp_16"
                         android:enabled="false"
                         android:fontFamily="@font/roboto"
                         android:background="@android:color/transparent"
@@ -145,7 +145,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="example@gmail.com"
-                        android:textSize="@dimen/dp_16"
+                        android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:background="@android:color/transparent"
                         android:padding="@dimen/dp_2"/>
@@ -180,7 +180,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/answer_security_ques"
-                        android:textSize="@dimen/dp_16"
+                        android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:background="@android:color/transparent"
                         android:padding="@dimen/dp_2"/>
@@ -220,7 +220,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
                         android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/dp_16"
+                        android:textSize="@dimen/sp_16"
                         android:padding="@dimen/dp_2"
                         android:text="@string/mandatory"/>
 
@@ -252,7 +252,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="********"
-                        android:textSize="@dimen/dp_16"
+                        android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:background="@android:color/transparent"
                         android:padding="@dimen/dp_2"/>
@@ -290,7 +290,7 @@
                         android:layout_below="@id/txtQues2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/dp_16"
+                        android:textSize="@dimen/sp_16"
                         android:textColor="@color/colorBlack"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
@@ -325,7 +325,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="***************"
-                        android:textSize="@dimen/dp_16"
+                        android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:background="@android:color/transparent"
                         android:padding="@dimen/dp_2"/>
@@ -352,6 +352,6 @@
             android:text="@string/submit"
             android:textColor="@color/colorWhite"
             android:fontFamily="@font/roboto"
-            android:textSize="@dimen/dp_18"
+            android:textSize="@dimen/sp_18"
             android:background="@color/colorPrimaryDark"/>
 </RelativeLayout>

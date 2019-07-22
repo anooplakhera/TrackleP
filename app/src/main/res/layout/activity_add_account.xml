@@ -6,7 +6,7 @@
     android:background="@color/colorWhite"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
-    tools:context=".Activities.MyProfile">
+    tools:context=".Activities.AddAccountActivity">
     
     <include
         layout="@layout/custom_action_bar"

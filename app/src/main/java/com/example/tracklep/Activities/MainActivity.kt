@@ -11,7 +11,7 @@ import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.dialog_contact_us.view.*
+import kotlinx.android.synthetic.main.activity_contact_us.view.*
 import kotlinx.android.synthetic.main.navigation_menu_layout.*
 
 class MainActivity : BaseActivity() {
@@ -89,7 +89,8 @@ class MainActivity : BaseActivity() {
         }
         lytConnectUtility.setOnClickListener {
 
-            val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_contact_us, null)
+            startActivity(Intent(this, ConnectWithUtilityActivity::class.java))
+            /*val mDialogView = LayoutInflater.from(this).inflate(R.layout.activity_contact_us, null)
             //AlertDialogBuilder
             val mBuilder = AlertDialog.Builder(this)
                 .setView(mDialogView)
@@ -110,11 +111,15 @@ class MainActivity : BaseActivity() {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-            }
+            }*/
         }
 
-        lytTrackUsage.setOnClickListener {}
-        lytCompare.setOnClickListener {}
+        lytTrackUsage.setOnClickListener {
+            startActivity(Intent(this, UsageActivity::class.java))
+        }
+        lytCompare.setOnClickListener {
+            startActivity(Intent(this, CompareActivity::class.java))
+        }
         lytWaterConversation.setOnClickListener {
             startActivity(Intent(this, ConservationActivity::class.java))
         }

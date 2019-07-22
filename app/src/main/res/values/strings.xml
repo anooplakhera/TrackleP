@@ -11,7 +11,7 @@
     <string name="forgot_password">Forgot Password ?</string>
     <string name="register_now">Register Now</string>
     <string name="pay_bill">Pay Bill</string>
-    <string name="connect_with_utility">Connect with Utility</string>
+    <string name="connect_with_utility">Connect with Agency</string>
     <string name="powered_by">Powered by</string>
     
     <!--Forgot Password-->
@@ -26,6 +26,7 @@
     <!--Register User-->
     <string name="registration_title">Registration</string>
     <string name="utility">Utility Name</string>
+    <string name="select_utility">Select Utility</string>
     <string name="mandatory">Mandatory</string>
     <string name="acc_no">Account Number</string>
     <string name="meter_no">Meter Number</string>
@@ -38,8 +39,8 @@
     
     <!--Dashboard-->
     <string name="welcome_text">Welcome DES JARDINS ROBERT</string>
-    <string name="my_account">My EOCWD Account</string>
-    <string name="billing">Billing</string>
+    <string name="my_account">Account Details</string>
+    <string name="billing">Billing Information</string>
     <string name="track_usage">Track Usage</string>
     <string name="compare">Compare</string>
     <string name="water_conversation">Water Conversation</string>
@@ -81,6 +82,8 @@
     <string name="contactus_email">Email : <u>admin@eocwd.com</u></string>
     <string name="contactus_phone">Phone : <u>714-538-815</u></string>
     <string name="contactus_online">Online : Please visit us at <u>www.eocwd.com/contact</u></string>
+    <string name="contactus_address">Address : 185 N McPherson Rd, Orange, CA 92869, USA</string>
+    <string name="contactus_opentime">Open Time : 8:00 AM to 5:00 PM</string>
     <string name="conservation_tip1">THINK. You can\'t do anything wiouth water. Save it. Every Drop Counts !</string>
     <string name="conservation_tip2">Water Conservation is our Nature, Habit, Groove, Sty;e, Thing, Save our water Be Water Wise !</string>
     <string name="conservation_tip3">Water is Life. Don\'t Waste it. Save Water Save Life !</string>
@@ -98,14 +101,31 @@
     <string name="consumption_charge">Consumption Charge</string>
     <string name="meter_service_charge">Meter Service Charge</string>
     <string name="capital_project_charge">Capital Project Charge</string>
-    <string name="account_total">Account Total</string>
-    <string name="lowest_this_period">Lowest This Period</string>
-    <string name="highest_this_period">Highest This Period</string>
-    <string name="mandatory">Mandatory</string>
+    <string name="total_payable_amount">Total Payable Amount</string>
+    <string name="lowest_this_period">Lowest Usage</string>
+    <string name="highest_this_period">Highest Usage</string>
     <string name="utility_account_number">Utility Account Number</string>
-    <string name="meter_number">Meter Number</string>
     <string name="add_account_header">Please enter below details to add account</string>
     <string name="postal_code">Postal Code</string>
+    <string name="usage_forecast">Usage Forecast</string>
+    <string name="current_usage">Current Usage</string>
+    <string name="usage_disclaimer">Disclaimer : 1 CFF (100 CU. FT.) = 1 HCF = 748 Gallons</string>
+    <string name="report_an_issue">Report an issue</string>
+    <string name="compare_me">My Comparison</string>
+    <string name="compare_zip">Compare Neighbours</string>
+    <string name="compare_utility">Compare with Everyone</string>
+    <string name="compare_all">Composite View</string>
+    <string name="view_ccf">View CCF</string>
+    <string name="view_dollar">View Dollar</string>
+    <string name="view_gallon">View Gallon</string>
+    <string name="bi_monthly">Bi Monthly</string>
+    <string name="monthly">Monthly</string>
+    <string name="daily">Daily</string>
+    <string name="hourly">Hourly</string>
+    <string name="topic">Topic</string>
+    <string name="subject">Subject</string>
+    <string name="billing_history_link">Billing History >></string>
+    <string name="billing_disclaimer">The billing information on this page is informational only and may not display total of all charges currently due. To pay your bill please log into EOCWD online bill payment system or visit our payment location.</string>
 
 
 </resources>
