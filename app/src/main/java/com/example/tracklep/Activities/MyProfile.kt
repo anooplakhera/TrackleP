@@ -212,24 +212,4 @@ class MyProfile : BaseActivity() {
         }
 
     }
-
-
-    fun deleteCommunicationAddress() {
-        var alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle(getString(R.string.app_name))
-        alertDialog.setMessage("Are you sure you want to delete communication address?")
-        alertDialog.setNeutralButton("Cancel") { _, _ ->
-        }
-
-        alertDialog.setPositiveButton("Yes") { dialog, which ->
-            dialog.dismiss()
-            AppPrefences.clearAll(this)
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }
-
-        alertDialog.show()
-
-    }
-
 }
