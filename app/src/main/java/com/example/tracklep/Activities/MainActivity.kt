@@ -8,11 +8,22 @@ import android.support.v4.view.GravityCompat
 import android.view.Gravity
 import android.view.LayoutInflater
 import com.example.hp.togelresultapp.Preferences.AppPrefences
+import com.example.tracklep.ApiClient.ApiClient
+import com.example.tracklep.ApiClient.ApiInterface
+import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppLog
+import com.example.tracklep.Utils.RequestClass
+import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_contact_us.view.*
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.navigation_menu_layout.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : BaseActivity() {
 
@@ -21,6 +32,8 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         try {
+
+            getMeterDetailsAMI()
             imgNavIcon.setOnClickListener {
                 if (!drawer_layout.isDrawerOpen(GravityCompat.START)) drawer_layout.openDrawer(Gravity.RIGHT);
                 else drawer_layout.closeDrawer(Gravity.END);
@@ -29,6 +42,8 @@ class MainActivity : BaseActivity() {
             navigationClick()
             clickPerform()
             txtDashTitle.setText("Welcome " + AppPrefences.getLoginUserInfo(this)!!.Name)
+
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -148,4 +163,41 @@ class MainActivity : BaseActivity() {
         alertDialog.show()
 
     }
+
+    private fun getMeterDetailsAMI() = if (Utils.isConnected(this)) {
+        showDialog()
+        try {
+            val apiService = ApiClient.getClient(ApiUrls.BASE_URL).create(ApiInterface::class.java)
+            val call: Call<String> = apiService.getMeterDetails(
+                RequestClass.getMeterDetailsRequestModel(
+                    AppPrefences.getLoginUserInfo(this).AccountNumber
+                ), AppPrefences.getLoginUserInfo(this).AccountNumber
+            )
+            call.enqueue(object : Callback<String> {
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>
+                ) {
+                    dismissDialog()
+                    if (response.body() != null) {
+                        AppLog.printLog("Meter details response: ", response.body()!!)
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    AppLog.printLog("Failure()- ", t.message.toString())
+                    dismissDialog()
+                }
+            })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dismissDialog()
+        }
+
+    } else {
+        //dismissDialog()
+        showToast(getString(R.string.internet))
+    }
+
 }

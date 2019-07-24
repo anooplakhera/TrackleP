@@ -20,6 +20,23 @@ object RequestClass {
         return map;
     }
 
+    fun getMeterDetailsRequestModel(AccountNumber: String): Map<String, String> {
+        var map = HashMap<String, String>()
+        map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
+        AppLog.printLog("getMeterDetailsRequestModel: " + Gson().toJson(map))
+
+        /*https://aquatraxapi-dev.azurewebsites.net/api/customer/meter-
+        details/11) ["AccountNumber": "11", "DBUserName": "aquatrax",
+        "DBPassword": "newaqt@123", "DataSource":
+        "aquatraxserver.database.windows.net", "Database":
+        "AQUATRAXDEV"]*/
+        return map;
+    }
+
     fun getSignupRequestModel(
         email: String,
         password: String,

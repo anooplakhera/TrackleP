@@ -41,5 +41,9 @@ interface ApiInterface {
     @POST(ApiUrls.UpdateAccount)
     fun getupdateAccount(@Header(ApiUrls.Authorization) Auth: String, @FieldMap fieldMap: Map<String, String>): Call<String>
 
+    @FormUrlEncoded
+    @POST(ApiUrls.MeterDetails + "/{AccountNumber}")
+    fun getMeterDetails(@FieldMap fieldMap: Map<String, String>, @Path("AccountNumber") value: String): Call<String>
+
 
 }
