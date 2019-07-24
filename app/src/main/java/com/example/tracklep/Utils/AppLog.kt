@@ -7,11 +7,11 @@ object AppLog {
 
     fun printLog(message: String) {
         if (LOG_ENABLED)
-            android.util.Log.i(TAG, message)
+            android.util.Log.e(TAG, message)
     }
 
     fun printLog(tag: String, message: String) {
         if (LOG_ENABLED)
-            android.util.Log.i(tag, message)
+            android.util.Log.e(tag, message)
     }
 }

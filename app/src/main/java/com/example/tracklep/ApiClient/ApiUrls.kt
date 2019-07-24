@@ -1,5 +1,7 @@
 package com.example.tracklep.ApiClient
 
+import com.example.tracklep.Utils.AppLog
+import com.google.gson.Gson
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONException
@@ -13,17 +15,19 @@ object ApiUrls {
     //    const val BASE_URL: String = "https://aquatraxapi.azurewebsites.net/"
     const val BASE_PATH: String = "api/customer/"
     const val LOGIN = "token";
-    const val GET_UTILS = "getutilities";
+    const val GET_UTILS = "getutilities"
     const val REGISTER_USER = "register"
-    const val FORGET = "reset-password/";
-    const val STEP_ONE = "step-one";
-    const val STEP_TWO = "step-two";
+    const val FORGET = "reset-password/"
+    const val STEP_ONE = "step-one"
+    const val STEP_TWO = "step-two"
     const val SECURITY_QUESTION = "security-questions"
     const val BILLING_DETAILS = "Billing-Details"
     const val Authorization = "authorization"
     const val ContentType = "Content-Type"
-    const val Account = "account";
-    const val UpdateAccount = "update-account";
+    const val Account = "account"
+    const val UpdateAccount = "update-account"
+    const val MeterDetails = "meter-details"
+    const val WaterUsages = "water-usages"
     const val AuthKey =
         "Bearer KQut6fhk1BLmO8eVIaMteTcljOes4CfuB2QiuqDvp4Gmoy9Yk_k-umomjcq_IndzuyyMTFm5gVLAcWClmJrdks3Uvhwqg-SYNH74AzVpjYMcgdY4WDIdo-EGHktAYrF70KjUzxeWXLVxeQVs2prmeNWZKlYm73DI16ls4dwoAMBVij4hISTcqCnWat9Ou3-8jRt_TWLCQAG7K6Iq_0yAoVaa1AF6sOgBf-wBB8OMx6MtnAdgzIUY4iLnA2iy4EvGdVmmL4LpHmpL92GxJi2BAL8vn3wAzUhhxu1mPRsk6PacOT5oJQq3eWhM-ZyYGLv3V_xnkfBBnkM1cM2RLFeJ6kYY7Jh1sb1mQ0F-3UurErsA9Y95HvEGDJo7kg_o2ZzivnQhbIiZqX8gbmsiWI_d-DjSnWPHO_RtlpIAcM55r_XCHjlKMcAR-TaI_9nhpKmAWi0DyF6ySBK0RT9_OA8J-w";
 
@@ -42,15 +46,21 @@ object ApiUrls {
     const val CustomerUtilityId = "CustomerUtilityId"
     const val ConfirmPassword = "ConfirmPassword"
     const val UtilityAccountNumber = "UtilityAccountNumber"
+    const val AccountNumber = "AccountNumber"
     const val PostalCode = "PostalCode"
     const val UserId = "UserId"
     const val MeterNumber = "MeterNumber"
     const val SecurityQuestionId = "SecurityQuestionId"
     const val SecurityQuestionId2 = "SecurityQuestionId2"
-    const val HintAns = "HintAns"
+    const val HintsAns = "HintsAns"
     const val HintsAns2 = "HintsAns2"
     const val GrantType = "grant_type"
     const val TanentId = "tanentid"
+
+    //Update Account
+    const val HomePhone = "HomePhone"
+    const val MobilePhone = "MobilePhone"
+    const val Custid = "Custid"
 
     const val DataSource = "DataSource"
     const val Database = "Database"
@@ -63,6 +73,7 @@ object ApiUrls {
     const val DBPassword_value = "newaqt@123"
 
 
+
     fun getBasePathUrl(): String {
         return BASE_URL + BASE_PATH
     }
@@ -73,6 +84,7 @@ object ApiUrls {
         bMap.put(Database, Database_value)
         bMap.put(DBUserName, DBUserName_value)
         bMap.put(DBPassword, DBPassword_value)
+        AppLog.printLog("getWaterUsageRequestModel: " + Gson().toJson(bMap))
         return bMap
     }
 

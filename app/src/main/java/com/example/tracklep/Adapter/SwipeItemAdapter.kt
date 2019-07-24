@@ -41,7 +41,6 @@ class SwipeItemAdapter(private val items: MutableList<String>, private val itemC
         LayoutInflater.from(parent.context).inflate(R.layout.row_item, parent, false)
     ) {
 
-
         fun bind(name: String) = with(itemView) {
             rowName.text = name
             itemView.setOnClickListener {

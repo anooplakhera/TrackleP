@@ -30,16 +30,21 @@ interface ApiInterface {
     @POST(ApiUrls.FORGET + ApiUrls.STEP_TWO)
     fun getResetUserPass2(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.ResetPassStep2Response>
 
-    @Headers(ApiUrls.Authorization + ":" + ApiUrls.AuthKey)
-    @GET(ApiUrls.Account + "/{id}")
-    fun getAccount(@Path("id") id: String): Call<ResponseModelClasses.MyProfileResponse>
+    @POST(ApiUrls.Account + "/{AccountNumber}")
+    fun getAccount(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<List<ResponseModelClasses.MyProfile>>
 
     //    @Headers(ApiUrls.Authorization + ":" + ApiUrls.AuthKey)
     @GET(ApiUrls.GET_UTILS)
     fun getUtilityList(/*@Header(ApiUrls.Authorization) Auth: String*/): Call<ResponseModelClasses.UtilityListResponseModel>
 
     @POST(ApiUrls.UpdateAccount)
-    fun getupdateAccount(@Header(ApiUrls.Authorization) Auth: String, @FieldMap fieldMap: Map<String, String>): Call<String>
+    fun getUpdateAccount(@Header(ApiUrls.Authorization) Auth: String,  @Body bodyMap: RequestBody): Call<String>
+
+    @POST(ApiUrls.MeterDetails + "/{AccountNumber}")
+    fun getMeterDetails(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path("AccountNumber") value: String): Call<ResponseModelClasses.MeterDetails>
+
+    @POST(ApiUrls.WaterUsages)
+    fun getWaterUsages(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.WaterUsages>
 
 
 }

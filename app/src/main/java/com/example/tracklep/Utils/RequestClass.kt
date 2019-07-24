@@ -20,6 +20,35 @@ object RequestClass {
         return map;
     }
 
+    fun getMeterDetailsRequestModel(AccountNumber: String): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
+        AppLog.printLog("getMeterDetailsRequestModel: " + Gson().toJson(map))
+
+
+        return map;
+    }
+
+    fun getWaterUsageRequestModel(AccountNumber: String): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
+        map.put("Type", "G")//ApiUrls.DBPassword_value)
+        map.put("HourlyType", "H")//ApiUrls.DBPassword_value)
+        map.put("Mode", "B")//ApiUrls.DBPassword_value)
+        map.put("Year", "0")//ApiUrls.DBPassword_value)
+        AppLog.printLog("getWaterUsageRequestModel: " + Gson().toJson(map))
+
+        return map;
+    }
+
     fun getSignupRequestModel(
         email: String,
         password: String,
@@ -44,13 +73,42 @@ object RequestClass {
         map.put(ApiUrls.MeterNumber, editMeterNo)
         map.put(ApiUrls.SecurityQuestionId, sQuesID1)
         map.put(ApiUrls.SecurityQuestionId2, sQuesID2)
-        map.put(ApiUrls.HintAns, editAnswer1)
+        map.put(ApiUrls.HintsAns, editAnswer1)
         map.put(ApiUrls.HintsAns2, editAnswer2)
         map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
         map.put(ApiUrls.Database, ApiUrls.Database_value)
         map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
         map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
         AppLog.printLog("getSignupRequestModel: " + Gson().toJson(map))
+        return map;
+    }
+
+    fun getUpdateAccountRequestModel(
+        email: String,
+        HomePhone: String,
+        MobilePhone: String,
+        Custid: String,
+        AccountNumber: String,
+        editAnswer1: String,
+        editAnswer2: String,
+        sQuesID1: String,
+        sQuesID2: String
+    ): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        map.put(ApiUrls.EmailID, email)
+        map.put(ApiUrls.HomePhone, HomePhone)
+        map.put(ApiUrls.MobilePhone, MobilePhone)
+        map.put(ApiUrls.Custid, Custid)
+        map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.SecurityQuestionId, sQuesID1)
+        map.put(ApiUrls.SecurityQuestionId2, sQuesID2)
+        map.put(ApiUrls.HintsAns, editAnswer1)
+        map.put(ApiUrls.HintsAns2, editAnswer2)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        AppLog.printLog("getUpdateAccountRequestModel: " + Gson().toJson(map))
         return map;
     }
 

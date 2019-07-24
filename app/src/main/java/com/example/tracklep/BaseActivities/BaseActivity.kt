@@ -1,9 +1,7 @@
 package com.example.tracklep.BaseActivities
 
-import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -13,8 +11,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import com.example.hp.togelresultapp.Preferences.AppPrefences
-import com.example.tracklep.Activities.LoginActivity
-import com.example.tracklep.R
 import com.example.tracklep.Utils.Utils
 
 public abstract class BaseActivity : AppCompatActivity(), BaseFragment.Callback {
@@ -94,5 +90,8 @@ public abstract class BaseActivity : AppCompatActivity(), BaseFragment.Callback 
         Snackbar.make(layout, msg, Snackbar.LENGTH_LONG).show()
     }
 
+    fun getHeader(): String {
+        return AppPrefences.getLoginUserInfo(this).token_type + " " + AppPrefences.getLoginUserInfo(this).access_token
+    }
 
 }

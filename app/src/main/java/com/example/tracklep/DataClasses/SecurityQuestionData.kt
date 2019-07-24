@@ -42,7 +42,17 @@ object SecurityQuestionData {
     @Synchronized
     fun clearArrayList() {
         questArrayList!!.removeAll(questArrayList!!)
+    }
 
+    @Synchronized
+    fun getQuestionName(id: String): String {
+        var ques = ""
+        for (i in 0 until getCount()) {
+            if (questArrayList!!.get(i).SecurityQuestionId.equals(id)) {
+                ques = questArrayList!![i].Question
+            }
+        }
+        return ques
     }
 
     @Synchronized

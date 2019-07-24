@@ -59,7 +59,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener {
             }
 
 
-            getUsageDetails()
 
             mulitBarChart!!.setOnChartValueSelectedListener(this)
             mulitBarChart!!.getDescription().setEnabled(false)
@@ -117,42 +116,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener {
     }
 
 
-    private fun getUsageDetails() = if (Utils.isConnected(this)) {
-        showDialog()
-        try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getAccount(AppPrefences.getLoginUserInfo(this)!!.AccountNumber)
-            call.enqueue(object : Callback<ResponseModelClasses.MyProfileResponse> {
-                override fun onResponse(
-                    call: Call<ResponseModelClasses.MyProfileResponse>,
-                    response: Response<ResponseModelClasses.MyProfileResponse>
-                ) {
-                    try {
-                        dismissDialog()
-                        if (response.body() != null) {
-                            AppLog.printLog("User Profile Response: ", response.body().toString())
 
-                        }
-                    } catch (e: Exception) {
-                        dismissDialog()
-                        e.printStackTrace()
-                    }
-                }
-
-                override fun onFailure(
-                    call: Call<ResponseModelClasses.MyProfileResponse>,
-                    t: Throwable
-                ) {
-                    dismissDialog()
-                }
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
-            dismissDialog()
-        }
-    } else {
-        dismissDialog()
-        showToast(getString(R.string.internet))
-    }
 
 }
