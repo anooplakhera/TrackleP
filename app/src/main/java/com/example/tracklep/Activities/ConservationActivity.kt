@@ -1,35 +1,24 @@
 package com.example.tracklep.Activities
 
 import android.os.Bundle
-import com.example.hp.togelresultapp.Preferences.AppPrefences
-import com.example.tracklep.ApiClient.ApiClient
-import com.example.tracklep.ApiClient.ApiInterface
-import com.example.tracklep.ApiClient.ApiUrls
-import com.example.tracklep.BaseActivities.BaseActivity
-import com.example.tracklep.DataModels.ResponseModelClasses
-import com.example.tracklep.R
-import com.example.tracklep.Utils.AppLog
-import com.example.tracklep.Utils.Utils
-import kotlinx.android.synthetic.main.custom_action_bar.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import android.support.v4.os.HandlerCompat.postDelayed
 import android.os.Handler
+import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.R
 import kotlinx.android.synthetic.main.activity_conservation.*
+import kotlinx.android.synthetic.main.custom_action_bar.*
 
 
 class ConservationActivity : BaseActivity() {
 
     val imageArray = intArrayOf(
-        R.drawable.billing_blue,
+        R.drawable.conserve_water,
         R.drawable.connect_blue,
         R.drawable.conserve_water
     )
     val backgroundColorArray = intArrayOf(
-        R.color.colorAppGray,
-        R.color.colorPrimary,
-        R.color.colorPrimaryDark
+        R.color.colorConservation1,
+        R.color.colorConservation2,
+        R.color.colorConservation3
     )
     val tipsArray = intArrayOf(
         R.string.conservation_tip1,
@@ -54,11 +43,11 @@ class ConservationActivity : BaseActivity() {
                 override fun run() {
 
                     imgConservationTipImage.setImageResource(imageArray[i])
-                    ryl_conservationParent.setBackgroundColor(backgroundColorArray[i])
+                    ryl_conservationParent.setBackgroundResource(backgroundColorArray[i])
                     txtConservationTip.setText(tipsArray[i])
 
                     i++
-                    if (i > imageArray.size-1) {
+                    if (i > imageArray.size - 1) {
                         i = 0
                     }
                     handler.postDelayed(this, 5000)

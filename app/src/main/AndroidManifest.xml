@@ -79,7 +79,10 @@
             android:name=".Activities.UsageActivity"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.CompareActivity" />
+        <activity
+            android:name=".Activities.CompareActivity"
+            android:screenOrientation="sensorPortrait"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
