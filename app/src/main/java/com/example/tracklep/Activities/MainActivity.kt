@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.navigation_menu_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.roundToInt
 
 class MainActivity : BaseActivity() {
 
@@ -32,6 +33,9 @@ class MainActivity : BaseActivity() {
         try {
             getMeterDetailsAMI()
 
+            if (AppPrefences.getMeterUsageData(this) != null) {
+                setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
+            }
             imgNavIcon.setOnClickListener {
                 if (!drawer_layout.isDrawerOpen(GravityCompat.START)) drawer_layout.openDrawer(Gravity.RIGHT);
                 else drawer_layout.closeDrawer(Gravity.END);
@@ -213,6 +217,14 @@ class MainActivity : BaseActivity() {
                 ) {
                     dismissDialog()
                     if (response.body() != null) {
+                        var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
+                        data.addAll(response.body()!!.Results.Table)
+                        data.reverse()
+
+                        AppPrefences.setMeterUsageData(this@MainActivity, data[0])
+
+                        setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
+
                         AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
                     }
                 }
@@ -231,4 +243,12 @@ class MainActivity : BaseActivity() {
         showToast(getString(R.string.internet))
     }
 
+    fun setMeterData(data: ResponseModelClasses.WaterUsages.Results1.TableOne) {
+        txtUsagesMessage.text =
+            "You have consumed " + data.AVERAGE + " Gallons water so far this calendar month"
+        txtMeterValue.text = data.AVERAGE + " \n Gallons"
+        arc_progress.progress =
+            Utils.getProgressValue(data.AllocationValue.toDouble(), data.AVERAGE.toDouble())
+                .roundToInt()
+    }
 }

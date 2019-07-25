@@ -87,13 +87,7 @@ object ResponseModelClasses {
         }
     }
 
-    //Billing Dashboard
-    data class BillingDashboardResponse(
-        val Parameters: String,
-        val Question: String,
-        val SecurityQuestionId: String,
-        val SqlQuery: String
-    )
+
 
     data class MyProfileResponse(
         val Parameters: String,
@@ -193,6 +187,47 @@ object ResponseModelClasses {
         val StateName: String,
         val UtilityAccountNumber: String
     )
+
+
+    //Billing Dashboard
+
+    data class BillingDashboardResponse(
+        val Query: Query1,
+        val Results: Results1
+    ) {
+        data class Results1(
+            val Table: List<TableOne>,
+            val Table1: List<TableTwo>
+        ) {
+            data class TableTwo(
+                val CustomerId: String,
+                val UtilityAccountNumber: String,
+                val AccountBalance: String,
+                val HeaderName: String
+            )
+
+            data class TableOne(
+                val HeadId: Int,
+                val Section: String,
+                val HeaderName: String,
+                val SortOrder: Int,
+                val HeaderType: Int,
+                val ColorCode: String,
+                val Value: Any,
+                val ImagePath: Any,
+                val ImageToolTipTextKey: Any,
+                val ImageLinkPath: Any,
+                val IsShow: Int,
+                val BillingId: Any,
+                val LastRechargeAmount: Int
+            )
+        }
+
+        data class Query1(
+            val Parameters: Any,
+            val SqlQuery: Any
+        )
+    }
 
 }
 

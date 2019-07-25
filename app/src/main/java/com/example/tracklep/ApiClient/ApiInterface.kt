@@ -18,9 +18,8 @@ interface ApiInterface {
     @POST(ApiUrls.SECURITY_QUESTION)
     fun getSecurityQuestion(@Body bodyMap: RequestBody): Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
 
-    //Billing Dashboard
     @POST(ApiUrls.BILLING_DETAILS)
-    fun getBillingDashboard(@Body bodyMap: RequestBody): Call<ArrayList<ResponseModelClasses.BillingDashboardResponse>>
+    fun getBillingDashboard(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.BillingDashboardResponse>
 
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)

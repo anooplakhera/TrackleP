@@ -1,6 +1,7 @@
 package com.example.hp.togelresultapp.Preferences
 
 import android.content.Context
+import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.DataModels.ResponseModelClasses.LoginResponseModel
 import com.google.gson.Gson
 
@@ -18,6 +19,7 @@ object AppPrefences {
     private val TokenID = "tokenId"
     private val Login = "login"
     private val LoginData = "logindata"
+    private val MeterUsage = "MeterUsage"
 
     fun clearAll(ctx: Context) {
         val prefs = ctx.getSharedPreferences(
@@ -179,6 +181,23 @@ object AppPrefences {
         val gson = Gson()
         val json = prefs.getString(LoginData, "")
         val obj = gson.fromJson<LoginResponseModel>(json, LoginResponseModel::class.java)
+        return obj
+//        return getData(ctx, LoginData, LoginResponseModel::class.java) as LoginResponseModel
+    }
+
+    //Registrations UserData Model
+    fun setMeterUsageData(c: Context, data: ResponseModelClasses.WaterUsages.Results1.TableOne) {
+        if (data != null) {
+            saveJsonData(c, MeterUsage, data)
+        }
+    }
+
+    @Throws(InstantiationException::class)
+    fun getMeterUsageData(ctx: Context): ResponseModelClasses.WaterUsages.Results1.TableOne {
+        val prefs = ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = prefs.getString(MeterUsage, "")
+        val obj = gson.fromJson<ResponseModelClasses.WaterUsages.Results1.TableOne>(json, ResponseModelClasses.WaterUsages.Results1.TableOne::class.java)
         return obj
 //        return getData(ctx, LoginData, LoginResponseModel::class.java) as LoginResponseModel
     }

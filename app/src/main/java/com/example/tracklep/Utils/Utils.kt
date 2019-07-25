@@ -267,4 +267,15 @@ object Utils {
         alert.show()
         return selectedItem
     }
+
+    fun getProgressValue(total: Double, current: Double): Double {
+        var value = 0.0
+        try {
+            value = current / total
+            value *= 100
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return value
+    }
 }
