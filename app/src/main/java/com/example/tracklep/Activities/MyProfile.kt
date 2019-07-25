@@ -2,6 +2,7 @@ package com.example.tracklep.Activities
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -49,12 +50,20 @@ class MyProfile : BaseActivity() {
                 finish()
             }
             imgCABadd.setOnClickListener {
-                openDialogList()
+                startActivity(Intent(this, AddAccountActivity::class.java))
             }
             rytCommunicationAddress.setOnClickListener {
                 openDialogList()
             }
-            getSecurityQues(false, txtQues1)
+
+            r_lyt_ques1.setOnClickListener {
+                openDialog(txtQues1Value)
+            }
+
+            r_lyt_ques2.setOnClickListener {
+                openDialog(txtQues2Value)
+            }
+            getSecurityQues(false, txtQues1Value)
 
             //getSecurityQues(false, txtQuestion1)
 
@@ -152,12 +161,12 @@ class MyProfile : BaseActivity() {
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getUpdateAccountRequestModel(
                         editEmail.text.toString(),
-                        editHomeNum.text.toString(),
-                        editMobileNo.text.toString(),
+                        editHomePhoneNumberValue.text.toString(),
+                        editMobileNumberValue.text.toString(),
                         "",
                         AppPrefences.getLoginUserInfo(this).AccountNumber,
-                        editAnswer1.text.toString(),
-                        editAnswer2.text.toString(),
+                        editAns1Value.text.toString(),
+                        editAns2Value.text.toString(),
                         "",
                         ""
                     )
@@ -197,13 +206,14 @@ class MyProfile : BaseActivity() {
     fun updateViews(data: ResponseModelClasses.MyProfile) {
         txtUserName.text = data.FullName
         editEmail.setText(data.EmailId)
-        editHomeNum.setText(data.HomePhone)
-        editMobileNo.setText(data.MobilePhone)
-        editAnswer1.setText(data.HintsAns)
-        editAnswer2.setText(data.HintsAns2)
-        txtQuestion1.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
-        txtQuestion2.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
+        editHomePhoneNumberValue.setText(data.HomePhone)
+        editMobileNumberValue.setText(data.MobilePhone)
+        editAns1Value.setText(data.HintsAns)
+        editAns2Value.setText(data.HintsAns2)
+        txtQues1Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
+        txtQues2Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
         txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
+        txtCommunicationAddressValue.text = data.CommunicationAddress
     }
 
     private fun openDialog(textView: TextView) {

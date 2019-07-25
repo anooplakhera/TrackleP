@@ -49,7 +49,7 @@
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
                 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/dp_4"
@@ -77,11 +77,11 @@
                         
                         <com.github.lzyzsd.circleprogress.ArcProgress
                             android:id="@+id/arc_progress"
-                            android:layout_width="180dp"
+                            android:layout_width="140dp"
                             android:fontFamily="@font/roboto"
-                            android:layout_height="180dp"
+                            android:layout_height="140dp"
                             custom:arc_text_color="@android:color/transparent"
-                            custom:arc_stroke_width="@dimen/dp_14"
+                            custom:arc_stroke_width="@dimen/dp_10"
                             android:layout_gravity="center"
                             custom:arc_finished_color="@color/colorProgress"
                             custom:arc_unfinished_color="@color/colorWhiteGray3" />
@@ -93,16 +93,14 @@
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorPrimaryDark"
                             android:layout_gravity="center"
-                            android:textSize="@dimen/sp_19"
+                            android:textSize="@dimen/sp_15"
                             android:textStyle="bold"
                             android:fontFamily="@font/roboto" />
                     </FrameLayout>
                     
-                    
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
                         android:orientation="vertical">
                         
                         <android.support.v7.widget.AppCompatTextView
@@ -112,8 +110,9 @@
                             android:layout_marginTop="@dimen/dp_60"
                             android:textColor="@color/colorWhite"
                             android:gravity="center"
+                            android:textStyle="bold"
                             android:fontFamily="@font/roboto"
-                            android:textSize="@dimen/sp_17"
+                            android:textSize="@dimen/sp_14"
                             android:text="You have consumed 36704.36 Gallons water so far this calendar month" />
                         
                         <ImageView
@@ -140,8 +139,8 @@
                                 android:orientation="vertical">
                                 
                                 <ImageView
-                                    android:layout_width="@dimen/dp_60"
-                                    android:layout_height="@dimen/dp_60"
+                                    android:layout_width="@dimen/dp_50"
+                                    android:layout_height="@dimen/dp_50"
                                     android:layout_gravity="top|center"
                                     android:src="@drawable/dash_account" />
                                 
@@ -166,8 +165,8 @@
                                 android:orientation="vertical">
                                 
                                 <ImageView
-                                    android:layout_width="@dimen/dp_60"
-                                    android:layout_height="@dimen/dp_60"
+                                    android:layout_width="@dimen/dp_50"
+                                    android:layout_height="@dimen/dp_50"
                                     android:layout_gravity="top|center"
                                     android:src="@drawable/dash_billing" />
                                 
@@ -192,8 +191,8 @@
                                 android:orientation="vertical">
                                 
                                 <ImageView
-                                    android:layout_width="@dimen/dp_60"
-                                    android:layout_height="@dimen/dp_60"
+                                    android:layout_width="@dimen/dp_50"
+                                    android:layout_height="@dimen/dp_50"
                                     android:layout_gravity="top|center"
                                     android:src="@drawable/dash_connect" />
                                 
@@ -225,8 +224,8 @@
                                 android:orientation="vertical">
                                 
                                 <ImageView
-                                    android:layout_width="@dimen/dp_60"
-                                    android:layout_height="@dimen/dp_60"
+                                    android:layout_width="@dimen/dp_50"
+                                    android:layout_height="@dimen/dp_50"
                                     android:layout_gravity="top|center"
                                     android:src="@drawable/dash_usage" />
                                 
@@ -251,8 +250,8 @@
                                 android:orientation="vertical">
                                 
                                 <ImageView
-                                    android:layout_width="@dimen/dp_60"
-                                    android:layout_height="@dimen/dp_60"
+                                    android:layout_width="@dimen/dp_50"
+                                    android:layout_height="@dimen/dp_50"
                                     android:layout_gravity="top|center"
                                     android:src="@drawable/dash_comapre" />
                                 
@@ -277,8 +276,8 @@
                                 android:orientation="vertical">
                                 
                                 <ImageView
-                                    android:layout_width="@dimen/dp_60"
-                                    android:layout_height="@dimen/dp_60"
+                                    android:layout_width="@dimen/dp_50"
+                                    android:layout_height="@dimen/dp_50"
                                     android:layout_gravity="top|center"
                                     android:src="@drawable/dash_conservation" />
                                 
@@ -294,7 +293,7 @@
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                </RelativeLayout>
+                </LinearLayout>
             
             
             </LinearLayout>
