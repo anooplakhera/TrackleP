@@ -53,15 +53,13 @@ class MyProfile : BaseActivity() {
             imgCABback.setOnClickListener {
                 finish()
             }
-            imgCABadd.setOnClickListener {
-                startActivity(Intent(this, AddAccountActivity::class.java))
-            }
-            rytCommunicationAddress.setOnClickListener {
-                openDialogList()
-            }
 
 
-            getSecurityQues(false, txtQues1Value)
+            if (SecurityQuestionData.getCount() > 0) {
+                getUserProfile()
+            } else {
+                getSecurityQues(false, txtQues1Value)
+            }
 
             clickPerform()
 
@@ -71,16 +69,23 @@ class MyProfile : BaseActivity() {
     }
 
     private fun clickPerform() {
+
+        imgCABadd.setOnClickListener {
+            startActivity(Intent(this, AddAccountActivity::class.java))
+        }
+        rytCommunicationAddress.setOnClickListener {
+            openDialogList()
+        }
+
         r_lyt_quesP1.setOnClickListener {
             if (SecurityQuestionData.getCount() > 0) {
                 openDialog(txtQues1Value)
             } else {
                 getSecurityQues(true, txtQues1Value)
-
             }
         }
 
-        r_lyt_quesP2.setOnClickListener {
+        r_lyt_ques2.setOnClickListener {
             if (SecurityQuestionData.getCount() > 0) {
                 openDialog(txtQues2Value)
             } else {
@@ -110,6 +115,8 @@ class MyProfile : BaseActivity() {
                     if (response.body() != null) {
                         SecurityQuestionData.clearArrayList()
                         SecurityQuestionData.addArrayList(response.body()!!)
+                        SecurityQuestionData.saveItemInHashMap()
+
                         if (dialogOpen) {
                             openDialog(txtview)
                         }
@@ -137,7 +144,7 @@ class MyProfile : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getAccount(
                 getHeader(),
-                AppPrefences.getLoginUserInfo(this)!!.AccountNumber,
+                AppPrefences.getLoginUserInfo(this).AccountNumber,
                 ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap())
             )
             call.enqueue(object : Callback<List<ResponseModelClasses.MyProfile>> {
@@ -149,7 +156,7 @@ class MyProfile : BaseActivity() {
                         dismissDialog()
                         if (response.body() != null) {
                             updateViews(response.body()!!.get(0))
-                            AppLog.printLog("UserProfileResponse: " + Gson().toJson(response.body()));
+                            AppLog.printLog("UserProfileResponse: " + Gson().toJson(response.body()))
                         }
                     } catch (e: Exception) {
                         dismissDialog()
@@ -202,7 +209,7 @@ class MyProfile : BaseActivity() {
                         if (response.body() != null) {
                             showToast(response.body()!!.Message)
                             getUserProfile()
-                            AppLog.printLog("UserUpdateProfileResponse: " + Gson().toJson(response.body()));
+                            AppLog.printLog("UserUpdateProfileResponse: " + Gson().toJson(response.body()))
                         }
                     } catch (e: Exception) {
                         dismissDialog()
@@ -255,7 +262,7 @@ class MyProfile : BaseActivity() {
 
             val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
             dialog.dialogRecycleView.layoutManager = layoutManager
-            val mAdapter = QuestionListAdapter() { position ->
+            val mAdapter = QuestionListAdapter { position ->
                 val data = SecurityQuestionData.getArrayItem(position)
                 textView.text = data.Question
                 when (textView) {

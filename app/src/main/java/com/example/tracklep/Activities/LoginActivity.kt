@@ -68,7 +68,7 @@ class LoginActivity : BaseActivity() {
             if (UtilitiesData.getCount() > 0) {
                 openDialog("Select Utility", textUtilities)
             } else {
-                getUtilityList(true, txtQuestion1)
+                getUtilityList(true, textUtilities)
             }
         }
         txtForgotPassword.setOnClickListener {

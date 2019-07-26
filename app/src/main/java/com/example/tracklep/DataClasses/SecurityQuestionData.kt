@@ -7,6 +7,8 @@ import kotlin.collections.ArrayList
 object SecurityQuestionData {
     var questArrayList: ArrayList<ResponseModelClasses.SecurityQuestionResponse>? = null
 
+    var hashMapSelected = HashMap<Int, Boolean>()
+
     init {
         if (questArrayList == null)
             questArrayList = ArrayList<ResponseModelClasses.SecurityQuestionResponse>()
@@ -44,6 +46,7 @@ object SecurityQuestionData {
         questArrayList!!.removeAll(questArrayList!!)
     }
 
+
     @Synchronized
     fun getQuestionName(id: String): String {
         var ques = ""
@@ -53,6 +56,22 @@ object SecurityQuestionData {
             }
         }
         return ques
+    }
+
+    @Synchronized
+    fun saveItemInHashMap() {
+        for (i in 0 until getCount()) {
+            hashMapSelected[i] = false
+        }
+    }
+
+    @Synchronized
+    fun getSelectedItemIndex(position: Int) {
+        hashMapSelected[position] = true
+        for (i in 0 until hashMapSelected.size) {
+            if (i != position)
+                hashMapSelected[i] = false
+        }
     }
 
     @Synchronized

@@ -5,7 +5,8 @@ object ResponseModelClasses {
         val Parameters: String,
         val Question: String,
         val SecurityQuestionId: String,
-        val SqlQuery: String
+        val SqlQuery: String,
+        var isSelected: Boolean=false
     )
 
     data class ResetPassStep1Response(

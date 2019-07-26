@@ -8,6 +8,7 @@ import com.example.tracklep.DataClasses.SecurityQuestionData
 import com.example.tracklep.R
 import kotlinx.android.synthetic.main.question_list_layout.view.*
 
+
 class QuestionListAdapter(val itemClick: (Int) -> Unit) : RecyclerView.Adapter<QuestionListAdapter.MyHolder>() {
 
 
@@ -28,9 +29,19 @@ class QuestionListAdapter(val itemClick: (Int) -> Unit) : RecyclerView.Adapter<Q
 
         fun bindData(int: Int) {
             val data = SecurityQuestionData.getArrayItem(int)
+            if (SecurityQuestionData.hashMapSelected[int]!!) {
+                itemView.visibility = View.GONE
+                itemView.layoutParams = RecyclerView.LayoutParams(0, 0);
+            } else {
+                itemView.visibility = View.VISIBLE
+                itemView.layoutParams =
+                    RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            }
             itemView.txtQuestion.text = data.Question
             itemView.txtQuestion.setOnClickListener {
                 itemClick(adapterPosition)
+                SecurityQuestionData.getSelectedItemIndex(adapterPosition)
+                notifyDataSetChanged()
             }
         }
     }

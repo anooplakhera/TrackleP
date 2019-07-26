@@ -217,6 +217,8 @@ class SignupActivity : BaseActivity() {
                     if (response.body() != null) {
                         SecurityQuestionData.clearArrayList()
                         SecurityQuestionData.addArrayList(response.body()!!)
+                        SecurityQuestionData.saveItemInHashMap()
+
                         if (dialogOpen) {
                             openDialog(txtview)
                         }
