@@ -19,6 +19,7 @@
     <string name="step2">Step 2</string>
     <string name="validate_email">Please validate your Email</string>
     <string name="submit">Submit</string>
+    <string name="update">Update</string>
     <string name="security_answer">Security Answer</string>
     <string name="question_eg">What was the name of your elementary / primary school?</string>
     <string name="answer_security_ques">Please answer security questions tro verify your identity.</string>

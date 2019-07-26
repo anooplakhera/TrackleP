@@ -229,6 +229,16 @@ object ResponseModelClasses {
         )
     }
 
+    //My Profile
+    data class UpdateProfile(
+        val Status: String,
+        val Message: String,
+        val CustomerId: String,
+        val IsMailSucceed: Boolean,
+        val SqlQuery: Any,
+        val Parameters: Any
+    )
+
 }
 
 

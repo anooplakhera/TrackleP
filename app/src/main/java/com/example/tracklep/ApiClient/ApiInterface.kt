@@ -2,6 +2,8 @@ package com.example.tracklep.ApiClient
 
 import com.example.tracklep.DataModels.ResponseModelClasses
 import okhttp3.RequestBody
+import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -37,7 +39,7 @@ interface ApiInterface {
     fun getUtilityList(/*@Header(ApiUrls.Authorization) Auth: String*/): Call<ResponseModelClasses.UtilityListResponseModel>
 
     @POST(ApiUrls.UpdateAccount)
-    fun getUpdateAccount(@Header(ApiUrls.Authorization) Auth: String,  @Body bodyMap: RequestBody): Call<String>
+    fun getUpdateAccount(@Header(ApiUrls.Authorization) Auth: String,  @Body bodyMap: RequestBody): Call<ResponseModelClasses.UpdateProfile>
 
     @POST(ApiUrls.MeterDetails + "/{AccountNumber}")
     fun getMeterDetails(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path("AccountNumber") value: String): Call<ResponseModelClasses.MeterDetails>

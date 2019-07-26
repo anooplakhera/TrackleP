@@ -79,7 +79,6 @@
                     android:layout_height="wrap_content"
                     android:text="98654987"
                     android:textColor="@color/colorBlack"
-                    android:enabled="false"
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:background="@android:color/transparent"
@@ -118,7 +117,6 @@
                     android:textColor="@color/colorBlack"
                     android:text="4567898234"
                     android:textSize="@dimen/sp_16"
-                    android:enabled="false"
                     android:fontFamily="@font/roboto"
                     android:background="@android:color/transparent"
                     android:padding="@dimen/dp_2" />
@@ -195,7 +193,7 @@
                     android:layout_alignParentRight="true" />
                 
                 <TextView
-                    android:id="@+id/editServiceZipCode"
+                    android:id="@+id/txtCommunicationAdd"
                     android:layout_below="@id/txtSerciveZip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -217,7 +215,7 @@
                 android:background="@color/colorLightGray100" />
             
             <RelativeLayout
-                android:id="@+id/r_lyt_ques1"
+                android:id="@+id/r_lyt_quesP1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_2">
@@ -261,6 +259,7 @@
                 android:background="@color/colorLightGray100" />
             
             <RelativeLayout
+                android:id="@+id/r_lyt_quesP2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_2">
@@ -382,11 +381,11 @@
     
     
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnSubmitRegister"
+        android:id="@+id/btnSaveProfile"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:layout_alignParentBottom="true"
-        android:text="@string/submit"
+        android:text="@string/update"
         android:textColor="@color/colorWhite"
         android:fontFamily="@font/roboto"
         android:textSize="@dimen/sp_18"

@@ -23,6 +23,7 @@ import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.dialog_layout.*
@@ -104,6 +105,7 @@ class LoginActivity : BaseActivity() {
                         var loginResponseModel: ResponseModelClasses.LoginResponseModel? = response.body()
                         AppPrefences.setLoginUserInfo(this@LoginActivity, loginResponseModel)
 
+                        AppLog.printLog("loginApiResponse: " + Gson().toJson(response.body()));
                         AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@LoginActivity)!!.Name))
                         AppPrefences.setLogin(this@LoginActivity, true)
 

@@ -52,6 +52,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.MyProfile"
+            android:windowSoftInputMode="adjustResize|stateVisible"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar" />
         

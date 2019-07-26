@@ -23,11 +23,12 @@
     
     <ImageView
         android:id="@+id/imgCABadd"
-        android:layout_width="@dimen/sp_30"
+        android:layout_width="@dimen/dp_50"
         android:layout_height="match_parent"
+        android:padding="@dimen/dp_10"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_back_icon"
+        android:src="@drawable/ic_add"
         android:visibility="gone" />
 
 </RelativeLayout>

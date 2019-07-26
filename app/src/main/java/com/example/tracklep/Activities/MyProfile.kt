@@ -38,6 +38,10 @@ import retrofit2.Response
 
 class MyProfile : BaseActivity() {
 
+    private var custID = ""
+    private var sQuesID1 = ""
+    private var sQuesID2 = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_profile)
@@ -56,10 +60,33 @@ class MyProfile : BaseActivity() {
             }
             getSecurityQues(false, txtQues1)
 
-            //getSecurityQues(false, txtQuestion1)
+            clickPerform()
 
         } catch (e: Exception) {
             e.printStackTrace()
+        }
+    }
+
+    fun clickPerform() {
+        r_lyt_quesP1.setOnClickListener {
+            if (SecurityQuestionData.getCount() > 0) {
+                openDialog(txtQuestion1)
+            } else {
+                getSecurityQues(true, txtQuestion1)
+
+            }
+        }
+
+        r_lyt_quesP2.setOnClickListener {
+            if (SecurityQuestionData.getCount() > 0) {
+                openDialog(txtQuestion2)
+            } else {
+                getSecurityQues(true, txtQuestion2)
+            }
+        }
+
+        btnSaveProfile.setOnClickListener {
+            validationField()
         }
     }
 
@@ -142,7 +169,6 @@ class MyProfile : BaseActivity() {
         showToast(getString(R.string.internet))
     }
 
-
     private fun getUpdateUserProfile() = if (Utils.isConnected(this)) {
         showDialog()
         try {
@@ -154,24 +180,26 @@ class MyProfile : BaseActivity() {
                         editEmail.text.toString(),
                         editHomeNum.text.toString(),
                         editMobileNo.text.toString(),
-                        "",
+                        custID,
                         AppPrefences.getLoginUserInfo(this).AccountNumber,
                         editAnswer1.text.toString(),
                         editAnswer2.text.toString(),
-                        "",
-                        ""
+                        sQuesID1,
+                        sQuesID2
                     )
                 )
             )
-            call.enqueue(object : Callback<String> {
+            call.enqueue(object : Callback<ResponseModelClasses.UpdateProfile> {
                 override fun onResponse(
-                    call: Call<String>,
-                    response: Response<String>
+                    call: Call<ResponseModelClasses.UpdateProfile>,
+                    response: Response<ResponseModelClasses.UpdateProfile>
                 ) {
                     try {
                         dismissDialog()
                         if (response.body() != null) {
-                            AppLog.printLog("UserProfileResponse: " + Gson().toJson(response.body()));
+                            showToast(response.body()!!.Message)
+                            getUserProfile()
+                            AppLog.printLog("UserUpdateProfileResponse: " + Gson().toJson(response.body()));
                         }
                     } catch (e: Exception) {
                         dismissDialog()
@@ -180,7 +208,7 @@ class MyProfile : BaseActivity() {
                 }
 
                 override fun onFailure(
-                    call: Call<String>,
+                    call: Call<ResponseModelClasses.UpdateProfile>,
                     t: Throwable
                 ) {
                     dismissDialog()
@@ -195,12 +223,17 @@ class MyProfile : BaseActivity() {
     }
 
     fun updateViews(data: ResponseModelClasses.MyProfile) {
+        custID = data.CustomerId.toString()
+        sQuesID1 = data.SecurityQuestionId.toString()
+        sQuesID2 = data.SecurityQuestionId2.toString()
         txtUserName.text = data.FullName
         editEmail.setText(data.EmailId)
         editHomeNum.setText(data.HomePhone)
         editMobileNo.setText(data.MobilePhone)
         editAnswer1.setText(data.HintsAns)
         editAnswer2.setText(data.HintsAns2)
+        txtCommunicationAdd.text = data.CommunicationAddress
+        txtCommunicationAdd.setTextColor(resources.getColor(R.color.colorBlack))
         txtQuestion1.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
         txtQuestion2.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
         txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
@@ -222,6 +255,10 @@ class MyProfile : BaseActivity() {
             val mAdapter = QuestionListAdapter() { position ->
                 val data = SecurityQuestionData.getArrayItem(position)
                 textView.text = data.Question
+                when (textView) {
+                    txtQuestion1 -> sQuesID1 = data.SecurityQuestionId
+                    txtQuestion2 -> sQuesID2 = data.SecurityQuestionId
+                }
                 textView.setTextColor(resources.getColor(R.color.colorBlack))
                 dialog.dismiss()
             }
@@ -280,5 +317,48 @@ class MyProfile : BaseActivity() {
             e.printStackTrace()
         }
 
+    }
+
+    private fun validationField() {
+        try {
+            var allValid = true
+            if (editEmail.text!!.isEmpty()) {
+                showToast("Please Enter Email")
+                !allValid
+                return
+            } else if (editHomeNum.text!!.isEmpty()) {
+                showToast("Please Enter Home Phone Number")
+                !allValid
+                return
+            } else if (editMobileNo.text!!.isEmpty()) {
+                showToast("Please Enter Mobile Number")
+                !allValid
+                return
+            } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
+                showToast("Please Enter Valid Email")
+                !allValid
+                return
+            } else if (editAnswer1.text!!.isEmpty()) {
+                showToast("Please Enter Security Answer")
+                !allValid
+                return
+            } else if (txtQuestion1.text.toString() == getString(R.string.mandatory)) {
+                showToast("Please Select Security Question")
+                !allValid
+                return
+            } else if (txtQuestion2.text.toString() == getString(R.string.mandatory)) {
+                showToast("Please Select Security Question")
+                !allValid
+                return
+            } else if (editAnswer2.text!!.isEmpty()) {
+                showToast("Please Enter Security Answer")
+                !allValid
+                return
+            } else if (allValid) {
+                getUpdateUserProfile()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
