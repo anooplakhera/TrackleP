@@ -33,9 +33,8 @@ class MainActivity : BaseActivity() {
         try {
             getMeterDetailsAMI()
 
-            if (AppPrefences.getMeterUsageData(this) != null) {
-                setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
-            }
+            setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
+
             imgNavIcon.setOnClickListener {
                 if (!drawer_layout.isDrawerOpen(GravityCompat.START)) drawer_layout.openDrawer(Gravity.RIGHT);
                 else drawer_layout.closeDrawer(Gravity.END);

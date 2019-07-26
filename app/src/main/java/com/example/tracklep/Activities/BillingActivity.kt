@@ -6,6 +6,7 @@ import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataClasses.SecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
@@ -13,6 +14,7 @@ import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -54,6 +56,7 @@ class BillingActivity : BaseActivity() {
                     dismissDialog()
                     if (response.body() != null) {
                         AppLog.printLog("getBillingDetails: " + Gson().toJson(response.body()));
+                        //updateViews(response.body()!!.Results.Table.)
                     }
                 }
 
@@ -70,6 +73,5 @@ class BillingActivity : BaseActivity() {
         //dismissDialog()
         showToast(getString(R.string.internet))
     }
-
 
 }

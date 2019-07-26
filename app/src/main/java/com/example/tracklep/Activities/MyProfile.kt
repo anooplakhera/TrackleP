@@ -2,6 +2,7 @@ package com.example.tracklep.Activities
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -53,12 +54,14 @@ class MyProfile : BaseActivity() {
                 finish()
             }
             imgCABadd.setOnClickListener {
-                openDialogList()
+                startActivity(Intent(this, AddAccountActivity::class.java))
             }
             rytCommunicationAddress.setOnClickListener {
                 openDialogList()
             }
-            getSecurityQues(false, txtQues1)
+
+
+            getSecurityQues(false, txtQues1Value)
 
             clickPerform()
 
@@ -67,21 +70,21 @@ class MyProfile : BaseActivity() {
         }
     }
 
-    fun clickPerform() {
+    private fun clickPerform() {
         r_lyt_quesP1.setOnClickListener {
             if (SecurityQuestionData.getCount() > 0) {
-                openDialog(txtQuestion1)
+                openDialog(txtQues1Value)
             } else {
-                getSecurityQues(true, txtQuestion1)
+                getSecurityQues(true, txtQues1Value)
 
             }
         }
 
         r_lyt_quesP2.setOnClickListener {
             if (SecurityQuestionData.getCount() > 0) {
-                openDialog(txtQuestion2)
+                openDialog(txtQues2Value)
             } else {
-                getSecurityQues(true, txtQuestion2)
+                getSecurityQues(true, txtQues2Value)
             }
         }
 
@@ -178,12 +181,12 @@ class MyProfile : BaseActivity() {
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getUpdateAccountRequestModel(
                         editEmail.text.toString(),
-                        editHomeNum.text.toString(),
-                        editMobileNo.text.toString(),
+                        editHomePhoneNumberValue.text.toString(),
+                        editMobileNumberValue.text.toString(),
                         custID,
                         AppPrefences.getLoginUserInfo(this).AccountNumber,
-                        editAnswer1.text.toString(),
-                        editAnswer2.text.toString(),
+                        editAns1Value.text.toString(),
+                        editAns2Value.text.toString(),
                         sQuesID1,
                         sQuesID2
                     )
@@ -228,15 +231,15 @@ class MyProfile : BaseActivity() {
         sQuesID2 = data.SecurityQuestionId2.toString()
         txtUserName.text = data.FullName
         editEmail.setText(data.EmailId)
-        editHomeNum.setText(data.HomePhone)
-        editMobileNo.setText(data.MobilePhone)
-        editAnswer1.setText(data.HintsAns)
-        editAnswer2.setText(data.HintsAns2)
-        txtCommunicationAdd.text = data.CommunicationAddress
-        txtCommunicationAdd.setTextColor(resources.getColor(R.color.colorBlack))
-        txtQuestion1.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
-        txtQuestion2.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
+        editHomePhoneNumberValue.setText(data.HomePhone)
+        editMobileNumberValue.setText(data.MobilePhone)
+        editAns1Value.setText(data.HintsAns)
+        editAns2Value.setText(data.HintsAns2)
+        txtQues1Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
+        txtQues2Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
         txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
+        txtCommunicationAddressValue.text = data.CommunicationAddress
+        txtCommunicationAddressValue.setTextColor(resources.getColor(R.color.colorBlack))
     }
 
     private fun openDialog(textView: TextView) {
@@ -256,8 +259,8 @@ class MyProfile : BaseActivity() {
                 val data = SecurityQuestionData.getArrayItem(position)
                 textView.text = data.Question
                 when (textView) {
-                    txtQuestion1 -> sQuesID1 = data.SecurityQuestionId
-                    txtQuestion2 -> sQuesID2 = data.SecurityQuestionId
+                    txtQues1Value -> sQuesID1 = data.SecurityQuestionId
+                    txtQues2Value -> sQuesID2 = data.SecurityQuestionId
                 }
                 textView.setTextColor(resources.getColor(R.color.colorBlack))
                 dialog.dismiss()
@@ -326,11 +329,11 @@ class MyProfile : BaseActivity() {
                 showToast("Please Enter Email")
                 !allValid
                 return
-            } else if (editHomeNum.text!!.isEmpty()) {
+            } else if (editHomePhoneNumberValue.text!!.isEmpty()) {
                 showToast("Please Enter Home Phone Number")
                 !allValid
                 return
-            } else if (editMobileNo.text!!.isEmpty()) {
+            } else if (editMobileNumberValue.text!!.isEmpty()) {
                 showToast("Please Enter Mobile Number")
                 !allValid
                 return
@@ -338,19 +341,19 @@ class MyProfile : BaseActivity() {
                 showToast("Please Enter Valid Email")
                 !allValid
                 return
-            } else if (editAnswer1.text!!.isEmpty()) {
+            } else if (editAns1Value.text!!.isEmpty()) {
                 showToast("Please Enter Security Answer")
                 !allValid
                 return
-            } else if (txtQuestion1.text.toString() == getString(R.string.mandatory)) {
+            } else if (txtQues1Value.text.toString() == getString(R.string.mandatory)) {
                 showToast("Please Select Security Question")
                 !allValid
                 return
-            } else if (txtQuestion2.text.toString() == getString(R.string.mandatory)) {
+            } else if (txtQues2Value.text.toString() == getString(R.string.mandatory)) {
                 showToast("Please Select Security Question")
                 !allValid
                 return
-            } else if (editAnswer2.text!!.isEmpty()) {
+            } else if (editAns2Value.text!!.isEmpty()) {
                 showToast("Please Enter Security Answer")
                 !allValid
                 return

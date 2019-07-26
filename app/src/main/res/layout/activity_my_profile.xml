@@ -15,13 +15,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btnSubmitRegister"
+        android:layout_above="@id/btnSaveProfile"
         android:overScrollMode="never"
         android:layout_below="@id/lytAction">
         
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/dp_10"
             android:gravity="center_horizontal">
@@ -30,10 +30,11 @@
                 android:id="@+id/txtUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Des jardins Robert"
+                android:text=""
+                android:textStyle="bold"
                 android:textAllCaps="true"
                 android:gravity="center"
-                android:textSize="@dimen/sp_19"
+                android:textSize="@dimen/sp_18"
                 android:fontFamily="@font/roboto"
                 android:padding="@dimen/dp_5"
                 android:textColor="@color/colorBlack" />
@@ -42,9 +43,9 @@
                 android:id="@+id/txtAccNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Account Number : 034566543"
+                android:text=""
                 android:gravity="center"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_15"
                 android:fontFamily="@font/roboto"
                 android:padding="@dimen/dp_5"
                 android:textColor="@color/colorLightBlack" />
@@ -58,26 +59,28 @@
                 android:layout_marginRight="@dimen/dp_6"
                 android:background="@color/colorLightGray100" />
             
+            <!--Home Phone Number-->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_2">
                 
                 <TextView
-                    android:id="@+id/txtAcc"
+                    android:id="@+id/txtHomePhoneNumberLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_2"
+                    android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/home_phone_number" />
                 
                 <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/editHomeNum"
-                    android:layout_below="@id/txtAcc"
+                    android:id="@+id/editHomePhoneNumberValue"
+                    android:layout_below="@id/txtHomePhoneNumberLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="98654987"
+                    android:text=""
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
@@ -101,21 +104,22 @@
                 android:layout_margin="@dimen/dp_2">
                 
                 <TextView
-                    android:id="@+id/txtMeter"
+                    android:id="@+id/txtMobileNumberLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_2"
+                    android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/mobile_number" />
                 
                 <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/editMobileNo"
-                    android:layout_below="@id/txtMeter"
+                    android:id="@+id/editMobileNumberValue"
+                    android:layout_below="@id/txtMobileNumberLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorBlack"
-                    android:text="4567898234"
+                    android:text=""
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:background="@android:color/transparent"
@@ -142,6 +146,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_2"
+                    android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/email" />
@@ -152,7 +157,7 @@
                     android:layout_below="@id/txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="example@gmail.com"
+                    android:text=""
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:background="@android:color/transparent"
@@ -177,11 +182,12 @@
                 android:layout_margin="@dimen/dp_2">
                 
                 <TextView
-                    android:id="@+id/txtSerciveZip"
+                    android:id="@+id/txtCommunicationAddressLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_2"
                     android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/address" />
                 
@@ -190,14 +196,16 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_right_arrow"
                     android:layout_centerVertical="true"
+                    android:padding="@dimen/dp_5"
                     android:layout_alignParentRight="true" />
                 
                 <TextView
-                    android:id="@+id/txtCommunicationAdd"
-                    android:layout_below="@id/txtSerciveZip"
+                    android:id="@+id/txtCommunicationAddressValue"
+                    android:layout_below="@id/txtCommunicationAddressLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Communication Address"
+                    android:text=""
+                    android:textColor="@color/colorBlack"
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:background="@android:color/transparent"
@@ -221,11 +229,12 @@
                 android:layout_margin="@dimen/dp_2">
                 
                 <TextView
-                    android:id="@+id/txtQues1"
+                    android:id="@+id/txtQues1Label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_2"
                     android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/security_ques1" />
                 
@@ -234,11 +243,12 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_right_arrow"
                     android:layout_centerVertical="true"
+                    android:padding="@dimen/dp_5"
                     android:layout_alignParentRight="true" />
                 
                 <TextView
-                    android:id="@+id/txtQuestion1"
-                    android:layout_below="@id/txtQues1"
+                    android:id="@+id/txtQues1Value"
+                    android:layout_below="@id/txtQues1Label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
@@ -265,17 +275,18 @@
                 android:layout_margin="@dimen/dp_2">
                 
                 <TextView
-                    android:id="@+id/txtAns1"
+                    android:id="@+id/txtAns1Label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_2"
                     android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/security_ans1" />
                 
                 <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/editAnswer1"
-                    android:layout_below="@id/txtAns1"
+                    android:id="@+id/editAns1Value"
+                    android:layout_below="@id/txtAns1Label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="********"
@@ -302,11 +313,12 @@
                 android:layout_margin="@dimen/dp_2">
                 
                 <TextView
-                    android:id="@+id/txtQues2"
+                    android:id="@+id/txtQues2Label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_2"
                     android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_16"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/security_ques2" />
                 
@@ -315,11 +327,12 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_right_arrow"
                     android:layout_centerVertical="true"
+                    android:padding="@dimen/dp_5"
                     android:layout_alignParentRight="true" />
                 
                 <TextView
-                    android:id="@+id/txtQuestion2"
-                    android:layout_below="@id/txtQues2"
+                    android:id="@+id/txtQues2Value"
+                    android:layout_below="@id/txtQues2Label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_16"
@@ -345,21 +358,22 @@
                 android:layout_margin="@dimen/dp_2">
                 
                 <TextView
-                    android:id="@+id/txtAns2"
+                    android:id="@+id/txtAns2Label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_2"
+                    android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/security_ans2" />
                 
                 
                 <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/editAnswer2"
-                    android:layout_below="@id/txtAns2"
+                    android:id="@+id/editAns2Value"
+                    android:layout_below="@id/txtAns2Label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="***************"
+                    android:text=""
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
                     android:background="@android:color/transparent"
@@ -378,7 +392,6 @@
         </LinearLayout>
     
     </ScrollView>
-    
     
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnSaveProfile"

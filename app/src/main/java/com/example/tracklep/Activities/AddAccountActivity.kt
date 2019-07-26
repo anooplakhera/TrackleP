@@ -2,6 +2,7 @@ package com.example.tracklep.Activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -13,6 +14,7 @@ import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_add_account.*
+import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,7 +24,11 @@ class AddAccountActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_account)
-
+        txtCABtitle.text = getString(R.string.my_account)
+        imgCABadd.visibility = View.GONE
+        imgCABback.setOnClickListener {
+            finish()
+        }
         clickPerform()
 
     }
