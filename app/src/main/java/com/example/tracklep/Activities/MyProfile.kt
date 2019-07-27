@@ -336,16 +336,24 @@ class MyProfile : BaseActivity() {
                 showToast("Please Enter Email")
                 !allValid
                 return
+            } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
+                showToast("Please Enter Valid Email")
+                !allValid
+                return
             } else if (editHomePhoneNumberValue.text!!.isEmpty()) {
                 showToast("Please Enter Home Phone Number")
+                !allValid
+                return
+            } else if (!editHomePhoneNumberValue.text!!.isEmpty() && editHomePhoneNumberValue.text!!.length < 10) {
+                showToast("Please Enter 10 Digits Home Phone Number")
                 !allValid
                 return
             } else if (editMobileNumberValue.text!!.isEmpty()) {
                 showToast("Please Enter Mobile Number")
                 !allValid
                 return
-            } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
-                showToast("Please Enter Valid Email")
+            } else if (!editMobileNumberValue.text!!.isEmpty() && editMobileNumberValue.text!!.length < 10) {
+                showToast("Please Enter 10 Digits Mobile Number")
                 !allValid
                 return
             } else if (editAns1Value.text!!.isEmpty()) {

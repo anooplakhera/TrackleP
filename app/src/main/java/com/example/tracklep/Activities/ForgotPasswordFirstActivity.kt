@@ -9,8 +9,10 @@ import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.ResetPassSecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_forgot_password_first.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
@@ -32,7 +34,7 @@ class ForgotPasswordFirstActivity : BaseActivity() {
             if (editEmailF1.text!!.isNotEmpty() && Utils.isValidEmail(editEmailF1.text.toString()))
                 getUserEmail()
             else
-                showSnackBar(this.currentFocus, "Please enter valid email")
+                showToast("Please enter valid email")
         }
 
     }
@@ -52,6 +54,7 @@ class ForgotPasswordFirstActivity : BaseActivity() {
                         if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
                             showToast(response.body()!!.Table[0].Message)
                         } else {
+                            AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
                             ResetPassSecurityQuestionData.clearArrayList()
                             ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
                             val intent =

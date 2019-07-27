@@ -30,10 +30,12 @@
                 android:id="@+id/lytUsageTabs"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:padding="@dimen/dp_1"
                 android:background="@drawable/layout_border"
                 android:weightSum="3">
                 
                 <TextView
+                    android:id="@+id/txtCCF"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -49,24 +51,24 @@
                     android:background="@color/colorPrimaryDark" />
                 
                 <TextView
+                    android:id="@+id/txtGallon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginLeft="@dimen/dp_2"
                     android:padding="@dimen/dp_4"
                     android:gravity="center"
                     android:text="@string/view_gallon" />
                 
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimaryDark" />
                 
                 <TextView
+                    android:id="@+id/txtDollar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginLeft="@dimen/dp_2"
                     android:padding="@dimen/dp_4"
                     android:gravity="center"
                     android:text="@string/view_dollar" />
@@ -88,11 +90,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp">
                 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
                 
-                </LinearLayout>
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/chart"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                
+                </com.github.mikephil.charting.charts.BarChart>
+            
             </FrameLayout>
             
             <!--Compare Me, Compare Zip, Compare Utility & Compare All-->

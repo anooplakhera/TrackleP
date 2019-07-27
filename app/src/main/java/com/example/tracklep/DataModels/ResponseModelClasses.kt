@@ -240,6 +240,14 @@ object ResponseModelClasses {
         val Parameters: Any
     )
 
+
+    //My Profile
+    data class BarChart(
+        val count: Int,
+        val range: Float
+    )
+
+
 }
 
 

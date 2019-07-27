@@ -11,6 +11,7 @@ import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_forgot_password_second.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
@@ -67,7 +68,7 @@ class ForgotPasswordSecondActivity : BaseActivity() {
                 ) {
                     dismissDialog()
                     if (response.body() != null) {
-                        Log.d("ResponseBodyIs", response.body()!!.toString())
+                        Log.d("ResponseBodyIs", Gson().toJson(response.body()!!))
                     }
                 }
 
