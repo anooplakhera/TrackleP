@@ -49,6 +49,33 @@ object RequestClass {
         return map;
     }
 
+    fun getBillingDetailsRequestModel(AccountNumber: String): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
+
+        AppLog.printLog("getBillingDetailsRequestModel: " + Gson().toJson(map))
+
+        return map;
+    }
+
+    //Connect With Utility
+    fun getConnectWithUtilityRequestModel(): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        //map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
+
+        AppLog.printLog("getConnectWithUtilityRequestModel: " + Gson().toJson(map))
+
+        return map;
+    }
+
     fun getSignupRequestModel(
         email: String,
         password: String,

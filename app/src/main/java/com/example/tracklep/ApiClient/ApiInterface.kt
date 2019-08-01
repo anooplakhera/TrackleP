@@ -23,6 +23,9 @@ interface ApiInterface {
     @POST(ApiUrls.BILLING_DETAILS)
     fun getBillingDashboard(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.BillingDashboardResponse>
 
+    @POST(ApiUrls.CONNECT_UTILITY + "/{AccountNumber}")
+    fun getConnectWithUtility(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String,  @Body bodyMap: RequestBody): Call<ResponseModelClasses.ConnectWithUtilityResponse>
+
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)
     fun getResetUserPass1(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.ResetPassStep1Response>

@@ -71,12 +71,19 @@ class LoginActivity : BaseActivity() {
                 getUtilityList(true, textUtilities)
             }
         }
+
         txtForgotPassword.setOnClickListener {
             startActivity(Intent(this@LoginActivity, ForgotPasswordFirstActivity::class.java))
         }
+
         lytRegisterUser.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
         }
+
+        lytConnectWithAgency.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, ConnectWithUtilityActivity::class.java))
+        }
+
         editUserName.setText("utkarsh3441@gmail.com")
         editUserPass.setText("Trackle@999")
 
