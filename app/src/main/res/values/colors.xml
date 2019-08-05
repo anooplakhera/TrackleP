@@ -21,6 +21,9 @@
     <color name="colorConservation1">#FFBF80</color>
     <color name="colorConservation2">#7DAC93</color>
     <color name="colorConservation3">#6767FF</color>
+    
+    <color name="colorCompareThisYear">#7DAC93</color>
+    <color name="colorComparePreviousYear">#C56F6F</color>
 
 
 </resources>

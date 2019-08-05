@@ -41,6 +41,7 @@
     <!--Dashboard-->
     <string name="welcome_text">Welcome DES JARDINS ROBERT</string>
     <string name="my_account">My Account</string>
+    <string name="compare_spending">Compare Spending</string>
     <string name="billing">Billing Information</string>
     <string name="track_usage">Track Usage</string>
     <string name="compare">Compare</string>

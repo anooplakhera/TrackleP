@@ -243,7 +243,7 @@ object ResponseModelClasses {
 
     //My Profile
     data class BarChart(
-        val count: Int,
+        val count: Float,
         val range: Float
     )
 

@@ -87,16 +87,15 @@
             
             <!--Graph Layout-->
             <FrameLayout
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="400dp">
                 
                 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/chart"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
-                
-                </com.github.mikephil.charting.charts.BarChart>
+                    android:layout_height="fill_parent" />
+            
             
             </FrameLayout>
             
@@ -104,137 +103,111 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
+                android:layout_marginTop="@dimen/dp_15"
                 android:layout_margin="@dimen/dp_10"
-                android:weightSum="4">
+                android:orientation="horizontal">
                 
-                <!--Compare Me-->
                 <LinearLayout
                     android:id="@+id/lytCompareMe"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dp_10"
-                    android:weightSum="3">
+                    android:padding="@dimen/dp_5"
+                    android:background="@drawable/ripple_background"
+                    android:orientation="vertical">
                     
                     <ImageView
-                        android:id="@+id/imgCompareMe"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:padding="@dimen/dp_4"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/colorWhite" />
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/ic_compare_me" />
                     
                     <TextView
-                        android:id="@+id/txtCompareMe"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_4"
-                        android:textSize="@dimen/sp_14"
                         android:gravity="center"
-                        android:text="@string/compare_me" />
-                
+                        android:text="@string/compare_me"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:textSize="@dimen/sp_13"
+                        android:fontFamily="@font/roboto" />
                 </LinearLayout>
                 
-                <!--Compare Zip-->
                 <LinearLayout
                     android:id="@+id/lytCompareZip"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dp_10"
-                    android:weightSum="3">
+                    android:padding="@dimen/dp_5"
+                    android:background="@drawable/ripple_background"
+                    android:orientation="vertical">
                     
                     <ImageView
-                        android:id="@+id/imgCompareZip"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:padding="@dimen/dp_4"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/colorWhite" />
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/ic_compare_zip" />
                     
                     <TextView
-                        android:id="@+id/txtCompareZip"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_4"
                         android:gravity="center"
-                        android:textSize="@dimen/sp_14"
-                        android:text="@string/compare_zip" />
-                
+                        android:text="@string/compare_zip"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:textSize="@dimen/sp_13"
+                        android:fontFamily="@font/roboto" />
                 </LinearLayout>
                 
-                <!--Compare Utility-->
                 <LinearLayout
                     android:id="@+id/lytCompareUtility"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dp_10"
-                    android:weightSum="3">
+                    android:background="@drawable/ripple_background"
+                    android:padding="@dimen/dp_5"
+                    android:orientation="vertical">
                     
                     <ImageView
-                        android:id="@+id/imgCompareUtility"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:padding="@dimen/dp_4"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/colorWhite" />
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/ic_comapre_utility" />
                     
                     <TextView
-                        android:id="@+id/txtCompareUtility"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_4"
                         android:gravity="center"
-                        android:textSize="@dimen/sp_14"
-                        android:text="@string/compare_utility" />
-                
+                        android:text="@string/compare_utility"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:textSize="@dimen/sp_13"
+                        android:fontFamily="@font/roboto" />
                 </LinearLayout>
                 
-                <!--Compare All-->
                 <LinearLayout
                     android:id="@+id/lytCompareAll"
-                    android:layout_width="0dp"
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dp_10"
-                    android:weightSum="3">
+                    android:background="@drawable/ripple_background"
+                    android:padding="@dimen/dp_5"
+                    android:orientation="vertical">
                     
                     <ImageView
-                        android:id="@+id/imgCompareAll"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:padding="@dimen/dp_4"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:background="@color/colorPrimary"
-                        android:textColor="@color/colorWhite" />
+                        android:layout_width="@dimen/dp_50"
+                        android:layout_height="@dimen/dp_50"
+                        android:layout_gravity="top|center"
+                        android:src="@drawable/ic_compare_all" />
                     
                     <TextView
-                        android:id="@+id/txtCompareAll"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_4"
                         android:gravity="center"
-                        android:textSize="@dimen/sp_14"
-                        android:text="@string/compare_all" />
-                
+                        android:text="@string/compare_all"
+                        android:layout_marginTop="@dimen/dp_7"
+                        android:textSize="@dimen/sp_13"
+                        android:fontFamily="@font/roboto" />
                 </LinearLayout>
-            
             </LinearLayout>
+            
             
             <!--Usage Disclaimer-->
             <TextView
