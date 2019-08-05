@@ -27,6 +27,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     val bar1 = ArrayList<ResponseModelClasses.BarChart>()
     val bar2 = ArrayList<ResponseModelClasses.BarChart>()
     val xVals = ArrayList<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compare)
@@ -134,6 +135,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         chart.setScaleEnabled(false);
         chart.setDrawBarShadow(false);
         chart.setDrawGridBackground(false);
+        chart.animateXY(500, 500);
 
 
         val yVals1 = ArrayList<BarEntry>()

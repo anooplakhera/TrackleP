@@ -4,15 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import com.example.hp.togelresultapp.Preferences.AppPrefences
-import com.example.tracklep.ApiClient.ApiClient
-import com.example.tracklep.ApiClient.ApiInterface
-import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
-import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
-import com.example.tracklep.Utils.AppLog
-import com.example.tracklep.Utils.Utils
 import com.example.tracklep.custom.MyMarkerView
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.Legend
@@ -22,9 +15,6 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import kotlinx.android.synthetic.main.custom_action_bar.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UsageActivity : BaseActivity(), OnChartValueSelectedListener {
     override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -114,6 +104,45 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener {
             e.printStackTrace()
         }
     }
+
+    /*  private fun clickPerform() {
+          txtCCF.setOnClickListener {
+              txtCCF.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+              txtCCF.setTextColor(resources.getColor(R.color.colorWhite))
+              txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
+              txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
+              txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
+              txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
+
+              bar1.shuffle()
+              bar2.shuffle()
+              setChartData(bar1, bar2, xVals)
+          }
+          txtGallon.setOnClickListener {
+              txtGallon.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+              txtGallon.setTextColor(resources.getColor(R.color.colorWhite))
+              txtCCF.setBackgroundColor(resources.getColor(R.color.colorWhite))
+              txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
+              txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
+              txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
+
+              bar1.shuffle()
+              bar2.shuffle()
+              setChartData(bar1, bar2, xVals)
+          }
+          txtDollar.setOnClickListener {
+              txtDollar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+              txtDollar.setTextColor(resources.getColor(R.color.colorWhite))
+              txtCCF.setBackgroundColor(resources.getColor(R.color.colorWhite))
+              txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
+              txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
+              txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
+
+              bar1.shuffle()
+              bar2.shuffle()
+              setChartData(bar1, bar2, xVals)
+          }
+      }*/
 
 
 }
