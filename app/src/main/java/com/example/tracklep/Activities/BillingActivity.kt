@@ -106,6 +106,11 @@ class BillingActivity : BaseActivity() {
             if (attr.equals("Due Date"))
                 txtPaymentDueDateMain.text = data[i].Value.toString()
 
+            /*if (attr.equals("Previous Meter Reading"))
+                if()
+                txtPreviousMeterReadingValue.text = data[i].Value.toString()*/
+
+
         }
 
     }

@@ -5,7 +5,7 @@
     android:id="@+id/ryl_conservationParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@color/colorLightGray"
     tools:context=".Activities.UsageActivity"
     android:orientation="vertical">
     
@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:background="@color/colorWhite"
             android:padding="@dimen/dp_10"
             android:gravity="center_horizontal">
             
@@ -80,7 +81,6 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_margin="@dimen/dp_10"
                 android:weightSum="4">
                 
                 <!--Hourly-->
@@ -197,6 +197,11 @@
             
             </LinearLayout>
             
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_5"
+                android:background="@color/colorLightGray100" />
+            
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -209,9 +214,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_4"
                     android:layout_weight="5"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:layout_marginBottom="@dimen/dp_5"
-                    android:gravity="start"
+                    android:gravity="start|center"
                     android:textColor="@color/colorBlack"
                     android:text="Jun 2018 - May 2019" />
                 
@@ -219,7 +222,6 @@
                     android:id="@+id/r_lyt_utilities"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_5"
                     android:gravity="center_vertical"
                     android:layout_weight="5"
                     android:background="@drawable/white_border_gradient">
@@ -236,14 +238,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
-                        android:textSize="@dimen/sp_16"
-                        android:padding="@dimen/dp_2"
+                        android:textSize="@dimen/sp_12"
+                        android:padding="@dimen/dp_5"
                         android:textColor="@color/colorDarkGray"
                         android:text="@string/select_utility" />
                 
                 </RelativeLayout>
             
             </LinearLayout>
+            
             <!--Graph Layout-->
             <FrameLayout
                 android:layout_width="match_parent"

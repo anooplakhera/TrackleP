@@ -22,593 +22,602 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/colorLightGray100"
-            android:layout_margin="@dimen/dp_10"
+            android:background="@color/colorWhite"
+            android:layout_margin="@dimen/dp_5"
             android:gravity="center_horizontal">
             
-            <TextView
-                android:id="@+id/txtTotalbillTitle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:text="@string/total_water_bill_this_period"
-                android:gravity="center"
-                android:textSize="@dimen/sp_14"
-                android:fontFamily="@font/roboto"
-                android:padding="@dimen/dp_5"
-                android:textColor="@color/colorBlack" />
-            
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorLightGray100">
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentLeft="true">
-                    
-                    <TextView
-                        android:id="@+id/txtTotalDueMain"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textAllCaps="true"
-                        android:gravity="left"
-                        android:textSize="@dimen/sp_26"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_5"
-                        android:textColor="@color/colorBlack" />
-                    
-                    <TextView
-                        android:id="@+id/txtPaymentDueDateMain"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:gravity="left"
-                        android:textSize="@dimen/sp_14"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_5"
-                        android:textColor="@color/colorLightBlack" />
-                </LinearLayout>
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentRight="true">
-                    
-                    <ImageView
-                        android:id="@+id/txtTotalamountdueTracker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="$9.06"
-                        android:textAllCaps="true"
-                        android:gravity="left"
-                        android:textSize="@dimen/sp_26"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_5"
-                        android:textColor="@color/colorPrimaryDark" />
-                </LinearLayout>
-            </RelativeLayout>
-            
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_1"
-                android:layout_marginBottom="@dimen/dp_1"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:background="@color/colorLightGray100" />
-            
-            <TextView
-                android:id="@+id/txtAccountInformationHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/account_information"
-                android:gravity="left"
-                android:layout_marginTop="@dimen/dp_3"
-                android:background="@color/colorWhite"
-                android:textSize="@dimen/sp_14"
-                android:fontFamily="@font/roboto"
-                android:padding="@dimen/dp_4"
-                android:textStyle="bold"
-                android:textColor="@color/design_default_color_primary" />
-            
-            <!--Meter Number & Account Balance-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite">
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentLeft="true">
-                    
-                    <TextView
-                        android:id="@+id/txtMeterNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/meter_number"
-                        android:gravity="start"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorBlack" />
-                    
-                    <TextView
-                        android:id="@+id/txtMeterNumberValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/n_a"
-                        android:gravity="start"
-                        android:textSize="@dimen/sp_14"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorLightBlack" />
-                </LinearLayout>
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentRight="true">
-                    
-                    <TextView
-                        android:id="@+id/txtAccountBalance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/account_balance"
-                        android:textSize="@dimen/sp_14"
-                        android:gravity="start"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorBlack" />
-                    
-                    <TextView
-                        android:id="@+id/txtAccountBalanceValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:gravity="start"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorLightBlack" />
-                
-                </LinearLayout>
-            </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_1"
-                android:layout_marginBottom="@dimen/dp_1"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:background="@color/colorLightGray100"
-                android:visibility="gone" />
-            
-            <!--Billing Period From To-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/dp_6"
-                android:background="@color/colorWhite">
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentLeft="true">
-                    
-                    <TextView
-                        android:id="@+id/txtBillingPeriodFrom"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/billing_period"
-                        android:gravity="start"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorBlack" />
-                    
-                    <TextView
-                        android:id="@+id/txtBillingPeriodFromValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:gravity="start"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorLightBlack" />
-                </LinearLayout>
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentRight="true"
-                    android:visibility="gone">
-                    
-                    <TextView
-                        android:id="@+id/txtBillingPeriodTo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/billing_period_to"
-                        android:textSize="@dimen/sp_14"
-                        android:gravity="start"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorBlack" />
-                    
-                    <TextView
-                        android:id="@+id/txtBillingPeriodToValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:gravity="start"
-                        android:textSize="@dimen/sp_14"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorLightBlack" />
-                
-                </LinearLayout>
-            </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_1"
-                android:layout_marginBottom="@dimen/dp_1"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:background="@color/colorLightGray100"
-                android:visibility="gone" />
-            
-            <!--Previous & Current Meter Reading-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/dp_6"
-                android:background="@color/colorWhite">
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentLeft="true">
-                    
-                    <TextView
-                        android:id="@+id/txtPreviousMeterReading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/previous_meter_reading"
-                        android:gravity="start"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorBlack" />
-                    
-                    <TextView
-                        android:id="@+id/txtPreviousMeterReadingValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:gravity="start"
-                        android:textSize="@dimen/sp_14"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorLightBlack" />
-                </LinearLayout>
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentRight="true">
-                    
-                    <TextView
-                        android:id="@+id/txtCurrentMeterReading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/current_meter_reading"
-                        android:textSize="@dimen/sp_14"
-                        android:gravity="start"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorBlack" />
-                    
-                    <TextView
-                        android:id="@+id/txtCurrentMeterReadingValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:gravity="start"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:textStyle="bold"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorLightBlack" />
-                
-                </LinearLayout>
-            </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_1"
-                android:layout_marginBottom="@dimen/dp_1"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:background="@color/colorLightGray100"
-                android:visibility="gone" />
-            
-            <!--Total Water Usage-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_6"
-                android:background="@color/colorWhite">
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentLeft="true">
-                    
-                    <TextView
-                        android:id="@+id/txtTotalWaterUsage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/total_water_usage"
-                        android:gravity="start"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorBlack" />
-                    
-                    <TextView
-                        android:id="@+id/txtTotalWaterUsageValue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:gravity="start"
-                        android:textSize="@dimen/sp_14"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_4"
-                        android:textColor="@color/colorLightBlack" />
-                </LinearLayout>
-            
-            </RelativeLayout>
-            
-            
-            <TextView
-                android:id="@+id/txtPaymentDetailsHeader"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/payment_details"
-                android:gravity="left"
-                android:textSize="@dimen/sp_14"
-                android:background="@color/colorWhite"
-                android:layout_marginTop="@dimen/dp_5"
-                android:fontFamily="@font/roboto"
-                android:padding="@dimen/dp_4"
-                android:textStyle="bold"
-                android:textColor="@color/design_default_color_primary" />
-            
-            <!--Consumption Charge-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:paddingTop="@dimen/dp_6">
+                android:orientation="vertical"
+                android:layout_margin="@dimen/dp_5"
+                android:gravity="center_horizontal">
                 
                 <TextView
-                    android:id="@+id/txtConsumptionCharges"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/txtTotalbillTitle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/consumption_charge"
-                    android:layout_alignParentLeft="true"
+                    android:background="@color/colorWhite"
+                    android:text="@string/total_water_bill_this_period"
+                    android:gravity="center"
                     android:textSize="@dimen/sp_14"
                     android:fontFamily="@font/roboto"
-                    android:padding="@dimen/dp_4"
+                    android:padding="@dimen/dp_5"
                     android:textColor="@color/colorBlack" />
                 
-                <TextView
-                    android:id="@+id/txtConsumptionChargesValue"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text=""
+                    android:background="@color/colorLightGray100">
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentLeft="true">
+                        
+                        <TextView
+                            android:id="@+id/txtTotalDueMain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textAllCaps="true"
+                            android:gravity="left"
+                            android:textSize="@dimen/sp_26"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_5"
+                            android:textColor="@color/colorBlack" />
+                        
+                        <TextView
+                            android:id="@+id/txtPaymentDueDateMain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:gravity="left"
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_5"
+                            android:textColor="@color/colorLightBlack" />
+                    </LinearLayout>
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentRight="true">
+                        
+                        <ImageView
+                            android:id="@+id/txtTotalamountdueTracker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$9.06"
+                            android:textAllCaps="true"
+                            android:gravity="left"
+                            android:textSize="@dimen/sp_26"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_5"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </LinearLayout>
+                </RelativeLayout>
+                
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_marginBottom="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:background="@color/colorLightGray100" />
+                
+                <TextView
+                    android:id="@+id/txtAccountInformationHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account_information"
                     android:gravity="left"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:background="@color/colorWhite"
                     android:textSize="@dimen/sp_14"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/roboto"
-                    android:padding="@dimen/dp_4"
-                    android:textColor="@color/colorLightBlack" />
-            
-            </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_1"
-                android:layout_marginBottom="@dimen/dp_1"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:background="@color/colorLightGray100"
-                android:visibility="gone" />
-            
-            <!--Meter Service Charge-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:paddingTop="@dimen/dp_6">
-                
-                <TextView
-                    android:id="@+id/txtMeterServiceCharg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/meter_service_charge"
-                    android:layout_alignParentLeft="true"
-                    android:textSize="@dimen/sp_14"
-                    android:fontFamily="@font/roboto"
-                    android:padding="@dimen/dp_4"
-                    android:textColor="@color/colorBlack" />
-                
-                <TextView
-                    android:id="@+id/txtMeterServiceChargValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:gravity="start"
-                    android:textSize="@dimen/sp_14"
-                    android:fontFamily="@font/roboto"
-                    android:padding="@dimen/dp_4"
-                    android:textColor="@color/colorLightBlack" />
-            
-            </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_1"
-                android:layout_marginBottom="@dimen/dp_1"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:background="@color/colorLightGray100"
-                android:visibility="gone" />
-            
-            <!--Capital Project Charge-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:paddingTop="@dimen/dp_6">
-                
-                <TextView
-                    android:id="@+id/txtCapitalProjectCharge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/capital_project_charge"
-                    android:layout_alignParentLeft="true"
-                    android:textSize="@dimen/sp_14"
-                    android:fontFamily="@font/roboto"
-                    android:padding="@dimen/dp_4"
-                    android:textColor="@color/colorBlack" />
-                
-                <TextView
-                    android:id="@+id/txtCapitalProjectChargeValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:gravity="left"
-                    android:textSize="@dimen/sp_14"
-                    android:fontFamily="@font/roboto"
-                    android:padding="@dimen/dp_4"
-                    android:textColor="@color/colorLightBlack" />
-            
-            </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_1"
-                android:layout_marginBottom="@dimen/dp_1"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:background="@color/colorLightGray100"
-                android:visibility="gone" />
-            
-            <!--Account Total-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
-                android:paddingTop="@dimen/dp_6">
-                
-                <TextView
-                    android:id="@+id/txtAccountTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/total_payable_amount"
-                    android:layout_alignParentLeft="true"
-                    android:textSize="@dimen/sp_14"
-                    android:gravity="start"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/dp_4"
                     android:textStyle="bold"
                     android:textColor="@color/design_default_color_primary" />
                 
+                <!--Meter Number & Account Balance-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite">
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentLeft="true">
+                        
+                        <TextView
+                            android:id="@+id/txtMeterNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/meter_number"
+                            android:gravity="start"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorBlack" />
+                        
+                        <TextView
+                            android:id="@+id/txtMeterNumberValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/n_a"
+                            android:gravity="start"
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorLightBlack" />
+                    </LinearLayout>
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentRight="true">
+                        
+                        <TextView
+                            android:id="@+id/txtAccountBalance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/account_balance"
+                            android:textSize="@dimen/sp_14"
+                            android:gravity="start"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorBlack" />
+                        
+                        <TextView
+                            android:id="@+id/txtAccountBalanceValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:gravity="start"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorLightBlack" />
+                    
+                    </LinearLayout>
+                </RelativeLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_marginBottom="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:background="@color/colorLightGray100"
+                    android:visibility="gone" />
+                
+                <!--Billing Period From To-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_6"
+                    android:background="@color/colorWhite">
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentLeft="true">
+                        
+                        <TextView
+                            android:id="@+id/txtBillingPeriodFrom"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/billing_period"
+                            android:gravity="start"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorBlack" />
+                        
+                        <TextView
+                            android:id="@+id/txtBillingPeriodFromValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:gravity="start"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorLightBlack" />
+                    </LinearLayout>
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentRight="true"
+                        android:visibility="gone">
+                        
+                        <TextView
+                            android:id="@+id/txtBillingPeriodTo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/billing_period_to"
+                            android:textSize="@dimen/sp_14"
+                            android:gravity="start"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorBlack" />
+                        
+                        <TextView
+                            android:id="@+id/txtBillingPeriodToValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:gravity="start"
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorLightBlack" />
+                    
+                    </LinearLayout>
+                </RelativeLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_marginBottom="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:background="@color/colorLightGray100"
+                    android:visibility="gone" />
+                
+                <!--Previous & Current Meter Reading-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_6"
+                    android:background="@color/colorWhite">
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentLeft="true">
+                        
+                        <TextView
+                            android:id="@+id/txtPreviousMeterReading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/previous_meter_reading"
+                            android:gravity="start"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorBlack" />
+                        
+                        <TextView
+                            android:id="@+id/txtPreviousMeterReadingValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="N/A"
+                            android:gravity="start"
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorLightBlack" />
+                    </LinearLayout>
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentRight="true">
+                        
+                        <TextView
+                            android:id="@+id/txtCurrentMeterReading"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/current_meter_reading"
+                            android:textSize="@dimen/sp_14"
+                            android:gravity="start"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorBlack" />
+                        
+                        <TextView
+                            android:id="@+id/txtCurrentMeterReadingValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:gravity="start"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:textStyle="bold"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorLightBlack" />
+                    
+                    </LinearLayout>
+                </RelativeLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_marginBottom="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:background="@color/colorLightGray100"
+                    android:visibility="gone" />
+                
+                <!--Total Water Usage-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_6"
+                    android:background="@color/colorWhite">
+                    
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentLeft="true">
+                        
+                        <TextView
+                            android:id="@+id/txtTotalWaterUsage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/total_water_usage"
+                            android:gravity="start"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorBlack" />
+                        
+                        <TextView
+                            android:id="@+id/txtTotalWaterUsageValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:gravity="start"
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_4"
+                            android:textColor="@color/colorLightBlack" />
+                    </LinearLayout>
+                
+                </RelativeLayout>
+                
+                
                 <TextView
-                    android:id="@+id/txtAccountTotalValue"
+                    android:id="@+id/txtPaymentDetailsHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment_details"
+                    android:gravity="left"
+                    android:textSize="@dimen/sp_14"
+                    android:background="@color/colorWhite"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:fontFamily="@font/roboto"
+                    android:padding="@dimen/dp_4"
+                    android:textStyle="bold"
+                    android:textColor="@color/design_default_color_primary" />
+                
+                <!--Consumption Charge-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:paddingTop="@dimen/dp_6">
+                    
+                    <TextView
+                        android:id="@+id/txtConsumptionCharges"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/consumption_charge"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="@dimen/sp_14"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_4"
+                        android:textColor="@color/colorBlack" />
+                    
+                    <TextView
+                        android:id="@+id/txtConsumptionChargesValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text=""
+                        android:gravity="left"
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_4"
+                        android:textColor="@color/colorLightBlack" />
+                
+                </RelativeLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_marginBottom="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:background="@color/colorLightGray100"
+                    android:visibility="gone" />
+                
+                <!--Meter Service Charge-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:paddingTop="@dimen/dp_6">
+                    
+                    <TextView
+                        android:id="@+id/txtMeterServiceCharg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/meter_service_charge"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="@dimen/sp_14"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_4"
+                        android:textColor="@color/colorBlack" />
+                    
+                    <TextView
+                        android:id="@+id/txtMeterServiceChargValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:gravity="start"
+                        android:textSize="@dimen/sp_14"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_4"
+                        android:textColor="@color/colorLightBlack" />
+                
+                </RelativeLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_marginBottom="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:background="@color/colorLightGray100"
+                    android:visibility="gone" />
+                
+                <!--Capital Project Charge-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:paddingTop="@dimen/dp_6">
+                    
+                    <TextView
+                        android:id="@+id/txtCapitalProjectCharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/capital_project_charge"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="@dimen/sp_14"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_4"
+                        android:textColor="@color/colorBlack" />
+                    
+                    <TextView
+                        android:id="@+id/txtCapitalProjectChargeValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text=""
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:textSize="@dimen/sp_14"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_4"
+                        android:textColor="@color/colorLightBlack" />
+                
+                </RelativeLayout>
+                
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:layout_marginBottom="@dimen/dp_1"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:background="@color/colorLightGray100"
+                    android:visibility="gone" />
+                
+                <!--Account Total-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:paddingTop="@dimen/dp_6">
+                    
+                    <TextView
+                        android:id="@+id/txtAccountTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/total_payable_amount"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="@dimen/sp_14"
+                        android:gravity="start"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_4"
+                        android:textStyle="bold"
+                        android:textColor="@color/design_default_color_primary" />
+                    
+                    <TextView
+                        android:id="@+id/txtAccountTotalValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text=""
+                        android:gravity="start"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/sp_14"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_4"
+                        android:textColor="@color/colorLightBlack" />
+                
+                </RelativeLayout>
+                
+                <TextView
+                    android:id="@+id/txtBillingDisclaimer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text=""
-                    android:gravity="start"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/sp_14"
+                    android:text="@string/billing_disclaimer"
+                    android:background="@color/colorWhite"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textSize="@dimen/sp_12"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/dp_4"
                     android:textColor="@color/colorLightBlack" />
-            
-            </RelativeLayout>
-            
-            <TextView
-                android:id="@+id/txtBillingDisclaimer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/billing_disclaimer"
-                android:background="@color/colorWhite"
-                android:layout_marginTop="@dimen/dp_10"
-                android:textSize="@dimen/sp_12"
-                android:fontFamily="@font/roboto"
-                android:padding="@dimen/dp_4"
-                android:textColor="@color/colorLightBlack" />
-            
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btnPayNow"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50"
-                android:text="@string/pay_now"
-                android:layout_marginTop="@dimen/dp_10"
-                android:textColor="@color/colorWhite"
-                android:fontFamily="@font/roboto"
-                android:textSize="@dimen/sp_14"
-                android:background="@color/colorPrimaryDark" />
-            
-            
-            <TextView
-                android:id="@+id/txtLinkBillingHistory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/billing_history_link"
-                android:background="@color/colorWhite"
-                android:layout_marginTop="@dimen/dp_10"
-                android:textSize="@dimen/sp_12"
-                android:textStyle="bold|italic"
-                android:fontFamily="@font/roboto"
-                android:padding="@dimen/dp_4"
-                android:textColor="@color/colorBlack" />
+                
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnPayNow"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:text="@string/pay_now"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:textColor="@color/colorWhite"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/sp_14"
+                    android:background="@color/colorPrimaryDark" />
+                
+                
+                <TextView
+                    android:id="@+id/txtLinkBillingHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/billing_history_link"
+                    android:background="@color/colorWhite"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_50"
+                    android:textSize="@dimen/sp_12"
+                    android:textStyle="bold|italic"
+                    android:fontFamily="@font/roboto"
+                    android:padding="@dimen/dp_4"
+                    android:textColor="@color/colorBlack" />
+            </LinearLayout>
         </LinearLayout>
     
     </ScrollView>
