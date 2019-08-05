@@ -6,7 +6,7 @@ object ResponseModelClasses {
         val Question: String,
         val SecurityQuestionId: String,
         val SqlQuery: String,
-        var isSelected: Boolean=false
+        var isSelected: Boolean = false
     )
 
     data class ResetPassStep1Response(
@@ -89,7 +89,6 @@ object ResponseModelClasses {
     }
 
 
-
     data class MyProfileResponse(
         val Parameters: String,
         val Question: String,
@@ -134,7 +133,8 @@ object ResponseModelClasses {
         data class Results1(
             val Table: List<TableOne>
 
-        ) { data class TableOne(
+        ) {
+            data class TableOne(
                 val Month: Int,
                 val Year: String,
                 val TotalValue: String,
@@ -191,8 +191,46 @@ object ResponseModelClasses {
 
 
     //Billing Dashboard
-
     data class BillingDashboardResponse(
+        val Query: Query1,
+        val Results: Results1
+    ) {
+        data class Results1(
+            val Table: List<TableOne>,
+            val Table1: List<TableTwo>
+        ) {
+            data class TableTwo(
+                val CustomerId: String,
+                val UtilityAccountNumber: String,
+                val AccountBalance: String,
+                val HeaderName: String
+            )
+
+            data class TableOne(
+                val HeadId: Int,
+                val Section: String,
+                val HeaderName: String,
+                val SortOrder: Int,
+                val HeaderType: Int,
+                val ColorCode: String,
+                val Value: Any,
+                val ImagePath: Any,
+                val ImageToolTipTextKey: Any,
+                val ImageLinkPath: Any,
+                val IsShow: Int,
+                val BillingId: Any,
+                val LastRechargeAmount: Int
+            )
+        }
+
+        data class Query1(
+            val Parameters: Any,
+            val SqlQuery: Any
+        )
+    }
+
+    //Connect With Utility
+    data class ConnectWithUtilityResponse(
         val Query: Query1,
         val Results: Results1
     ) {

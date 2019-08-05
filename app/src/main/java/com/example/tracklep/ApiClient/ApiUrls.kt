@@ -23,7 +23,7 @@ object ApiUrls {
     const val SECURITY_QUESTION = "security-questions"
     const val BILLING_DETAILS = "Billing-Details"
     const val Authorization = "authorization"
-    const val ContentType = "Content-Type"
+    const val CONNECT_UTILITY = "getcontactus"
     const val Account = "account"
     const val UpdateAccount = "update-account"
     const val MeterDetails = "meter-details"
@@ -71,7 +71,6 @@ object ApiUrls {
     const val Database_value = "AQUATRAXDEV"
     const val DBUserName_value = "aquatrax@aquatraxserver"
     const val DBPassword_value = "newaqt@123"
-
 
 
     fun getBasePathUrl(): String {

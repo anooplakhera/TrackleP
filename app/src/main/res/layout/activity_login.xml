@@ -147,6 +147,7 @@
                         android:id="@+id/txtForgotPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_40"
                         android:text="@string/forgot_password"
                         android:layout_margin="@dimen/dp_10"
                         android:textColor="@color/colorLightBlack"
@@ -185,6 +186,7 @@
                         </LinearLayout>
                         
                         <LinearLayout
+                            android:id="@+id/lytPayBill"
                             android:layout_width="0sp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -209,6 +211,7 @@
                         </LinearLayout>
                         
                         <LinearLayout
+                            android:id="@+id/lytConnectWithAgency"
                             android:layout_width="0sp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -245,13 +248,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/dp_3"
+                            android:textSize="@dimen/sp_10"
                             android:fontFamily="@font/roboto"
                             android:textColor="@color/colorDarkGray"
                             android:text="@string/powered_by" />
                         
                         <ImageView
-                            android:layout_width="@dimen/dp_150"
-                            android:layout_height="@dimen/dp_40"
+                            android:layout_width="@dimen/dp_100"
+                            android:layout_height="@dimen/dp_30"
                             android:src="@drawable/logo1" />
                     </LinearLayout>
                 </LinearLayout>

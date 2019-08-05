@@ -24,7 +24,7 @@ class AddAccountActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_account)
-        txtCABtitle.text = getString(R.string.my_account)
+        txtCABtitle.text = getString(R.string.add_account)
         imgCABadd.visibility = View.GONE
         imgCABback.setOnClickListener {
             finish()

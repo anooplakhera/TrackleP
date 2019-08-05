@@ -52,6 +52,7 @@
     <string name="home_phone_number">Home Phone Number</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="address">Communication Address</string>
+    <string name="add_account">Add Account</string>
     
     
     <!--Navigation Menu-->
@@ -74,7 +75,6 @@
     <string name="budget_my_bill_detail">Configure your utility bill…</string>
     <string name="amount_paid_this_period">Amount Paid this Period</string>
     <string name="previous_balance">Previous Balance</string>
-    <string name="billing_period">Billing Period</string>
     <string name="current_charges">Current Charges</string>
     <string name="total_due">Total Due</string>
     <string name="penalty_charges_adjustments">Penalty Charges/Adjustments</string>
@@ -93,6 +93,7 @@
     <string name="total_water_bill_this_period">Total water bill this period</string>
     <string name="meter_number">Meter Number</string>
     <string name="account_balance">Account Balance</string>
+    <string name="billing_period">Billing Period</string>
     <string name="billing_period_from">Billing Period From</string>
     <string name="billing_period_to">Billing Period To</string>
     <string name="account_information">Account Information</string>

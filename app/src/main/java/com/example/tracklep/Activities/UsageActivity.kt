@@ -52,8 +52,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener {
         setContentView(R.layout.activity_usage)
 
         try {
-            txtCABtitle.text = getString(R.string.my_account)
-            imgCABadd.visibility = View.VISIBLE
+            txtCABtitle.text = getString(R.string.track_usage)
+            imgCABadd.visibility = View.GONE
             imgCABback.setOnClickListener {
                 finish()
             }
@@ -103,7 +103,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener {
             }
 
             val leftAxis = mulitBarChart!!.getAxisLeft()
-           // leftAxis.typeface = tfLight
+            // leftAxis.typeface = tfLight
             leftAxis.valueFormatter = LargeValueFormatter()
             leftAxis.setDrawGridLines(false)
             leftAxis.spaceTop = 35f
@@ -114,8 +114,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener {
             e.printStackTrace()
         }
     }
-
-
 
 
 }
