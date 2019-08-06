@@ -1,5 +1,6 @@
 package com.example.tracklep.Activities
 
+import android.content.Intent
 import android.graphics.RectF
 import android.os.Bundle
 import android.util.Log
@@ -34,9 +35,13 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener {
 
         try {
             txtCABtitle.text = getString(R.string.track_usage)
-            imgCABadd.visibility = View.GONE
+            imgCABadd.visibility = View.VISIBLE
+
             imgCABback.setOnClickListener {
                 finish()
+            }
+            imgCABadd.setOnClickListener {
+                startActivity(Intent(this, UsageNotificationActivity::class.java))
             }
 
             initDummyValue()

@@ -24,7 +24,10 @@ interface ApiInterface {
     fun getBillingDashboard(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.BillingDashboardResponse>
 
     @POST(ApiUrls.CONNECT_UTILITY + "/{AccountNumber}")
-    fun getConnectWithUtility(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String,  @Body bodyMap: RequestBody): Call<ResponseModelClasses.ConnectWithUtilityResponse>
+    fun getConnectWithUtility(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.ConnectWithUtilityResponse>
+
+    @POST(ApiUrls.UsageNotification + "/{AccountNumber}")
+    fun getUsageNotification(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.GetUsageNotificationResponse>
 
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)
@@ -42,7 +45,7 @@ interface ApiInterface {
     fun getUtilityList(/*@Header(ApiUrls.Authorization) Auth: String*/): Call<ResponseModelClasses.UtilityListResponseModel>
 
     @POST(ApiUrls.UpdateAccount)
-    fun getUpdateAccount(@Header(ApiUrls.Authorization) Auth: String,  @Body bodyMap: RequestBody): Call<ResponseModelClasses.UpdateProfile>
+    fun getUpdateAccount(@Header(ApiUrls.Authorization) Auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.UpdateProfile>
 
     @POST(ApiUrls.MeterDetails + "/{AccountNumber}")
     fun getMeterDetails(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path("AccountNumber") value: String): Call<ResponseModelClasses.MeterDetails>

@@ -268,6 +268,55 @@ object ResponseModelClasses {
         )
     }
 
+    //Get Usage Notification
+    data class GetUsageNotificationResponse(
+        val Query: Query1,
+        val Results: Results1
+    ) {
+        data class Results1(
+            val Table: List<TableOne>,
+            val Table1: List<TableTwo>
+        ) {
+            data class TableTwo(
+                val CustomerId: String,
+                val UtilityAccountNumber: String,
+                val AccountBalance: String,
+                val HeaderName: String
+            )
+
+            data class TableOne(
+                val HeadId: Int,
+                val Section: String,
+                val HeaderName: String,
+                val SortOrder: Int,
+                val HeaderType: Int,
+                val ColorCode: String,
+                val Value: Any,
+                val ImagePath: Any,
+                val ImageToolTipTextKey: Any,
+                val ImageLinkPath: Any,
+                val IsShow: Int,
+                val BillingId: Any,
+                val LastRechargeAmount: Int
+            )
+        }
+
+        data class Query1(
+            val Parameters: Any,
+            val SqlQuery: Any
+        )
+    }
+
+    //SET Usage Notification
+    data class UpdateUsageNotification(
+        val Status: String,
+        val Message: String,
+        val CustomerId: String,
+        val IsMailSucceed: Boolean,
+        val SqlQuery: Any,
+        val Parameters: Any
+    )
+
     //My Profile
     data class UpdateProfile(
         val Status: String,

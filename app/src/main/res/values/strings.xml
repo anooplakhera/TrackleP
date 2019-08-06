@@ -13,6 +13,7 @@
     <string name="pay_bill">Pay Bill</string>
     <string name="connect_with_utility">Connect with Agency</string>
     <string name="powered_by">Powered by</string>
+    <string name="usage_notification">Usage Notification</string>
     
     <!--Forgot Password-->
     <string name="step1">Step 1</string>
@@ -80,6 +81,8 @@
     <string name="penalty_charges_adjustments">Penalty Charges/Adjustments</string>
     <string name="pay_now">Pay Now</string>
     <string name="contactus_description">If you need assistance please use the below contact information to reach our customer service staff.   </string>
+    <string name="usagenotification_description">You will be notified if you exceed your Daily/Monthly threshold limit. </string>
+    <string name="usagenotification_description2">We recommend to set 50% of water budget as your threshold limit.</string>
     
     <string name="contactus_email">Email : <u>admin@eocwd.com</u></string>
     <string name="contactus_phone">Phone : <u>714-538-815</u></string>
@@ -125,6 +128,8 @@
     <string name="monthly">Monthly</string>
     <string name="daily">Daily</string>
     <string name="hourly">Hourly</string>
+    <string name="daily_limit">Daily Limit</string>
+    <string name="monthly_limit">Monthly Limit</string>
     <string name="topic">Topic</string>
     <string name="subject">Subject</string>
     <string name="billing_history_link">Billing History >></string>

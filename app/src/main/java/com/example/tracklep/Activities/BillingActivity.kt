@@ -86,7 +86,7 @@ class BillingActivity : BaseActivity() {
                 txtMeterServiceChargValue.text = "$" + data[i].Value.toString()
 
             if (attr.equals("Total Water Usage"))
-                txtTotalWaterUsageValue.text = data[i].Value.toString() + " CCF"
+                txtTotalWaterUsageValue.text = data[i].Value.toString()
 
             if (attr.equals("Consumption Charge"))
                 txtConsumptionChargesValue.text = "$" + data[i].Value.toString()
@@ -104,7 +104,7 @@ class BillingActivity : BaseActivity() {
                 txtTotalDueMain.text = "$" + data[i].Value.toString()
 
             if (attr.equals("Due Date"))
-                txtPaymentDueDateMain.text = data[i].Value.toString()
+                txtPaymentDueDateMain.text = "Due Date: " + data[i].Value.toString()
 
             /*if (attr.equals("Previous Meter Reading"))
                 if()

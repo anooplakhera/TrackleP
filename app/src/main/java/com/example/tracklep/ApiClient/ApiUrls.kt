@@ -24,6 +24,7 @@ object ApiUrls {
     const val BILLING_DETAILS = "Billing-Details"
     const val Authorization = "authorization"
     const val CONNECT_UTILITY = "getcontactus"
+    const val UsageNotification = "leak-water-notification"
     const val Account = "account"
     const val UpdateAccount = "update-account"
     const val MeterDetails = "meter-details"
