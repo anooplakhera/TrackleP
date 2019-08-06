@@ -237,6 +237,37 @@ object Utils {
         }
     }
 
+    fun getNameOfMonth(no: String): String {
+        var name = ""
+        if (no.equals("1"))
+            name = "Jan"
+        if (no.equals("2"))
+            name = "Feb"
+        if (no.equals("3"))
+            name = "Mar"
+        if (no.equals("4"))
+            name = "Apr"
+        if (no.equals("5"))
+            name = "May"
+        if (no.equals("6"))
+            name = "Jun"
+        if (no.equals("7"))
+            name = "Jul"
+        if (no.equals("8"))
+            name = "Aug"
+        if (no.equals("9"))
+            name = "Sep"
+        if (no.equals("10"))
+            name = "Oct"
+        if (no.equals("11"))
+            name = "Nov"
+        if (no.equals("12"))
+            name = "Dec"
+
+        return name
+
+    }
+
 
     fun watchYoutubeVideo(activity: Activity, youTubeUrl: String) {
         //        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(youTubeUrl)));

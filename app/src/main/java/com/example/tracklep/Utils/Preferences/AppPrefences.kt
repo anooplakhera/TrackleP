@@ -5,7 +5,6 @@ import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.DataModels.ResponseModelClasses.LoginResponseModel
 import com.google.gson.Gson
 
-
 object AppPrefences {
 
     private val PREFS_FILE_NAME = "Trackle"
@@ -197,7 +196,10 @@ object AppPrefences {
         val prefs = ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
         val gson = Gson()
         val json = prefs.getString(MeterUsage, "")
-        val obj = gson.fromJson<ResponseModelClasses.WaterUsages.Results1.TableOne>(json, ResponseModelClasses.WaterUsages.Results1.TableOne::class.java)
+        val obj = gson.fromJson<ResponseModelClasses.WaterUsages.Results1.TableOne>(
+            json,
+            ResponseModelClasses.WaterUsages.Results1.TableOne::class.java
+        )
         return obj
 //        return getData(ctx, LoginData, LoginResponseModel::class.java) as LoginResponseModel
     }

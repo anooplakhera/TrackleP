@@ -3,9 +3,17 @@ package com.example.tracklep.Activities
 import android.graphics.RectF
 import android.os.Bundle
 import android.util.Log
+import com.example.hp.togelresultapp.Preferences.AppPrefences
+import com.example.tracklep.ApiClient.ApiClient
+import com.example.tracklep.ApiClient.ApiInterface
+import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataClasses.CompareSpendingData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppLog
+import com.example.tracklep.Utils.RequestClass
+import com.example.tracklep.Utils.Utils
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis.AxisDependency
@@ -15,22 +23,26 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.LargeValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_compare.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
-    val bar1 = ArrayList<ResponseModelClasses.BarChart>()
-    val bar2 = ArrayList<ResponseModelClasses.BarChart>()
-    val xVals = ArrayList<String>()
+    var unitName = "K"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compare)
+
 
         try {
             txtCABtitle.text = getString(R.string.compare_spending)
@@ -38,46 +50,16 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 finish()
             }
 
-            initDummyValue()
+            getCompareDetails()
 
             clickPerform()
 
-            setChartData(bar1, bar2, xVals)
 
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-
-    private fun initDummyValue() {
-        bar1.add(ResponseModelClasses.BarChart(1f, 989.21f))
-        bar1.add(ResponseModelClasses.BarChart(2f, 420.22f))
-        bar1.add(ResponseModelClasses.BarChart(3f, 758f))
-        bar1.add(ResponseModelClasses.BarChart(4f, 3078.97f))
-        bar1.add(ResponseModelClasses.BarChart(5f, 4200.96f))
-        bar1.add(ResponseModelClasses.BarChart(6f, 400.4f))
-        bar1.add(ResponseModelClasses.BarChart(7f, 5888.58f))
-        bar1.add(ResponseModelClasses.BarChart(8f, 5888.58f))
-
-        bar2.add(ResponseModelClasses.BarChart(1f, 950f))
-        bar2.add(ResponseModelClasses.BarChart(2f, 791f))
-        bar2.add(ResponseModelClasses.BarChart(3f, 630f))
-        bar2.add(ResponseModelClasses.BarChart(4f, 782f))
-        bar2.add(ResponseModelClasses.BarChart(5f, 2714.54f))
-        bar2.add(ResponseModelClasses.BarChart(6f, 500f))
-        bar2.add(ResponseModelClasses.BarChart(7f, 2173.36f))
-        bar2.add(ResponseModelClasses.BarChart(8f, 2173.36f))
-
-        xVals.add("Jan")
-        xVals.add("Feb")
-        xVals.add("Mar")
-        xVals.add("Apr")
-        xVals.add("May")
-        xVals.add("Jun")
-        xVals.add("July")
-        xVals.add("Aug")
-    }
 
     private fun clickPerform() {
         txtCCF.setOnClickListener {
@@ -88,9 +70,9 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
 
-            bar1.shuffle()
-            bar2.shuffle()
-            setChartData(bar1, bar2, xVals)
+            unitName = "K"
+            getCompareDetails()
+            txtChartDesc.setText(R.string.compare_ccf)
         }
         txtGallon.setOnClickListener {
             txtGallon.setBackgroundColor(resources.getColor(R.color.colorPrimary))
@@ -100,35 +82,119 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
 
-            bar1.shuffle()
-            bar2.shuffle()
-            setChartData(bar1, bar2, xVals)
+            unitName = "G"
+            getCompareDetails()
+            txtChartDesc.setText(R.string.compare_gallon)
         }
-        txtDollar.setOnClickListener {
-            txtDollar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            txtDollar.setTextColor(resources.getColor(R.color.colorWhite))
-            txtCCF.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
-            txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
 
-            bar1.shuffle()
-            bar2.shuffle()
-            setChartData(bar1, bar2, xVals)
+        lytCompareMe.setOnClickListener {
+            setChartData(
+                CompareSpendingData.getCurrentBar(),
+                CompareSpendingData.getPreviousBar(),
+                CompareSpendingData.getYearBar(),
+                getString(R.string.c_this_year),
+                getString(R.string.c_previous_year)
+            )
+            txt_date_from_to.text = CompareSpendingData.getCompareMeTitle()
         }
+
+        lytCompareZip.setOnClickListener {
+            setChartData(
+                CompareSpendingData.getCurrentBar(),
+                CompareSpendingData.getZipBar(),
+                CompareSpendingData.getYearBar(),
+                getString(R.string.c_this_year),
+                getString(R.string.c_zip)
+            )
+            txt_date_from_to.text = CompareSpendingData.getZipTitle()
+        }
+
+        lytCompareUtility.setOnClickListener {
+            setChartData(
+                CompareSpendingData.getCurrentBar(),
+                CompareSpendingData.getUtilityBar(),
+                CompareSpendingData.getYearBar(),
+                getString(R.string.c_this_year),
+                getString(R.string.c_utility)
+            )
+            txt_date_from_to.text = CompareSpendingData.getUtilityTitle()
+        }
+
+        lytCompareAll.setOnClickListener {
+            setChartData(
+                CompareSpendingData.getCurrentBar(),
+                CompareSpendingData.getPreviousBar(),
+                CompareSpendingData.getUtilityBar(),
+                CompareSpendingData.getZipBar(),
+                CompareSpendingData.getYearBar()
+            )
+        }
+    }
+
+
+    //    Table1C- Current
+//    Table2C- Previous
+//    Table3C- Utility
+//    Table4C- Zip
+//    Table5C- Baseline
+    private fun getCompareDetails() = if (Utils.isConnected(this)) {
+        showDialog()
+        try {
+            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call: Call<ResponseModelClasses.CompareDataResponse> = apiService.getCompareSpendingDetails(
+                getHeader(), unitName,
+                ApiUrls.getJSONRequestBody(RequestClass.getMeterDetailsRequestModel(AppPrefences.getLoginUserInfo(this).AccountNumber)),
+                AppPrefences.getLoginUserInfo(this).AccountNumber
+            )
+            call.enqueue(object : Callback<ResponseModelClasses.CompareDataResponse> {
+                override fun onResponse(
+                    call: Call<ResponseModelClasses.CompareDataResponse>,
+                    response: Response<ResponseModelClasses.CompareDataResponse>
+                ) {
+                    dismissDialog()
+                    if (response.body() != null) {
+                        CompareSpendingData.addArrayList1(response.body()!!.Results.Table)
+                        CompareSpendingData.addArrayList2(response.body()!!.Results.Table1)
+                        CompareSpendingData.addArrayList3(response.body()!!.Results.Table2)
+                        CompareSpendingData.addArrayList4(response.body()!!.Results.Table3)
+                        CompareSpendingData.addArrayList5(response.body()!!.Results.Table4)
+                        AppLog.printLog("getCompareDetails: " + Gson().toJson(response.body()));
+
+                        setChartData(
+                            CompareSpendingData.getCurrentBar(),
+                            CompareSpendingData.getPreviousBar(),
+                            CompareSpendingData.getYearBar(),
+                            getString(R.string.c_this_year),
+                            getString(R.string.c_previous_year)
+                        )
+                        txt_date_from_to.text = CompareSpendingData.getCompareMeTitle()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseModelClasses.CompareDataResponse>, t: Throwable) {
+                    AppLog.printLog("Failure()- ", t.message.toString())
+                    dismissDialog()
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dismissDialog()
+        }
+    } else {
+        showToast(getString(R.string.internet))
     }
 
 
     private fun setChartData(
         bar1: ArrayList<ResponseModelClasses.BarChart>,
         bar2: ArrayList<ResponseModelClasses.BarChart>,
-        year: ArrayList<String>
+        year: ArrayList<String>,
+        label1: String, label2: String
     ) {
 
         val barWidth: Float = 0.3f
         val barSpace: Float = 0f
         val groupSpace: Float = 0.4f
-
 
         chart.description = null;
         chart.setPinchZoom(false);
@@ -137,29 +203,30 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         chart.setDrawGridBackground(false);
         chart.animateXY(500, 500);
 
-
         val yVals1 = ArrayList<BarEntry>()
         val yVals2 = ArrayList<BarEntry>()
 
         for (i in 0 until bar1.size) {
-            yVals1.add(BarEntry(bar1.get(i).count, bar1.get(i).range))
+            yVals1.add(BarEntry(bar1.get(i).range, bar1.get(i).count))
         }
 
         for (i in 0 until bar2.size) {
-            yVals2.add(BarEntry(bar2.get(i).count, bar2.get(i).range))
+            yVals2.add(BarEntry(bar2.get(i).range, bar2.get(i).count))
         }
 
-
-        val set1 = BarDataSet(yVals1, "This year")
+        val set1 = BarDataSet(yVals1, label1)
         set1.color = resources.getColor(R.color.colorCompareThisYear)
-        val set2 = BarDataSet(yVals2, "Previous year")
+        val set2 = BarDataSet(yVals2, label2)
         set2.color = resources.getColor(R.color.colorComparePreviousYear)
         val data = BarData(set1, set2)
-        data.setValueFormatter(LargeValueFormatter())
+        data.setValueFormatter(LargeValueFormatter() as ValueFormatter?)
         chart.data = data
         chart.barData.barWidth = barWidth
         chart.xAxis.axisMinimum = 0F
         chart.xAxis.axisMaximum = 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
+
+        chart.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
+        chart.moveViewToX(10F);
 
         chart.groupBars(0F, groupSpace, barSpace)
         chart.data.isHighlightEnabled = false
@@ -173,7 +240,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         l.yOffset = 20f
         l.xOffset = 0f
         l.yEntrySpace = 0f
-        l.textSize = 8f
+        l.textSize = 10f
 
         //X-axis
         val xAxis = chart.xAxis
@@ -181,7 +248,101 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         xAxis.isGranularityEnabled = true
         xAxis.setCenterAxisLabels(true)
         xAxis.setDrawGridLines(false)
-        xAxis.axisMaximum = 6f
+//        xAxis.axisMaximum = 6f
+        xAxis.labelCount = year.size
+        xAxis.axisMaximum = year.size.toFloat()
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.valueFormatter = IndexAxisValueFormatter(year)
+
+        //Y-axis
+        chart.axisRight.isEnabled = false
+        val leftAxis = chart.axisLeft
+        leftAxis.valueFormatter = LargeValueFormatter()
+        leftAxis.setDrawGridLines(false)
+        leftAxis.spaceTop = 35f
+        leftAxis.axisMinimum = 0f
+    }
+
+    private fun setChartData(
+        bar1: ArrayList<ResponseModelClasses.BarChart>,
+        bar2: ArrayList<ResponseModelClasses.BarChart>,
+        bar3: ArrayList<ResponseModelClasses.BarChart>,
+        bar4: ArrayList<ResponseModelClasses.BarChart>,
+        year: ArrayList<String>
+    ) {
+
+        val barWidth: Float = 0.3f
+        val barSpace: Float = 0f
+        val groupSpace: Float = 0.4f
+        val groupCount: Int = 4
+
+        chart.description = null;
+        chart.setPinchZoom(false);
+        chart.setScaleEnabled(false);
+        chart.setDrawBarShadow(false);
+        chart.setDrawGridBackground(false);
+        chart.animateXY(500, 500);
+
+        val yVals1 = ArrayList<BarEntry>()
+        val yVals2 = ArrayList<BarEntry>()
+        val yVals3 = ArrayList<BarEntry>()
+        val yVals4 = ArrayList<BarEntry>()
+
+        for (i in 0 until bar1.size) {
+            yVals1.add(BarEntry(bar1.get(i).range, bar1.get(i).count))
+        }
+        for (i in 0 until bar2.size) {
+            yVals2.add(BarEntry(bar2.get(i).range, bar2.get(i).count))
+        }
+        for (i in 0 until bar2.size) {
+            yVals3.add(BarEntry(bar3.get(i).range, bar3.get(i).count))
+        }
+        for (i in 0 until bar2.size) {
+            yVals4.add(BarEntry(bar4.get(i).range, bar3.get(i).count))
+        }
+
+
+        val set1 = BarDataSet(yVals1, "This year")
+        set1.color = resources.getColor(R.color.colorCompareThisYear)
+        val set2 = BarDataSet(yVals2, "Previous year")
+        set2.color = resources.getColor(R.color.colorComparePreviousYear)
+        val set3 = BarDataSet(yVals3, "Utility")
+        set3.color = resources.getColor(R.color.colorConservation3)
+        val set4 = BarDataSet(yVals4, "Zip")
+        set4.color = resources.getColor(R.color.colorConservation1)
+        val data = BarData(set1, set2, set3, set4)
+        data.setValueFormatter(LargeValueFormatter())
+        chart.data = data
+        chart.barData.barWidth = barWidth
+        chart.xAxis.axisMinimum = 0F
+        chart.xAxis.axisMaximum = 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * groupCount
+
+        chart.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
+        chart.moveViewToX(10F);
+
+        chart.groupBars(0F, groupSpace, barSpace)
+        chart.data.isHighlightEnabled = false
+        chart.invalidate()
+
+        val l = chart.legend
+        l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+        l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        l.orientation = Legend.LegendOrientation.HORIZONTAL
+        l.setDrawInside(true)
+        l.yOffset = 20f
+        l.xOffset = 0f
+        l.yEntrySpace = 0f
+        l.textSize = 10f
+
+        //X-axis
+        val xAxis = chart.xAxis
+        xAxis.granularity = 1f
+        xAxis.isGranularityEnabled = true
+        xAxis.setCenterAxisLabels(true)
+        xAxis.setDrawGridLines(false)
+//        xAxis.axisMaximum = 6f
+        xAxis.labelCount = year.size
+        xAxis.axisMaximum = year.size.toFloat()
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.valueFormatter = IndexAxisValueFormatter(year)
 

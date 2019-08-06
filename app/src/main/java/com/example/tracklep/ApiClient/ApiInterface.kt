@@ -2,8 +2,6 @@ package com.example.tracklep.ApiClient
 
 import com.example.tracklep.DataModels.ResponseModelClasses
 import okhttp3.RequestBody
-import okhttp3.Response
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -24,7 +22,7 @@ interface ApiInterface {
     fun getBillingDashboard(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.BillingDashboardResponse>
 
     @POST(ApiUrls.CONNECT_UTILITY + "/{AccountNumber}")
-    fun getConnectWithUtility(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String,  @Body bodyMap: RequestBody): Call<ResponseModelClasses.ConnectWithUtilityResponse>
+    fun getConnectWithUtility(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.ConnectWithUtilityResponse>
 
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)
@@ -42,13 +40,20 @@ interface ApiInterface {
     fun getUtilityList(/*@Header(ApiUrls.Authorization) Auth: String*/): Call<ResponseModelClasses.UtilityListResponseModel>
 
     @POST(ApiUrls.UpdateAccount)
-    fun getUpdateAccount(@Header(ApiUrls.Authorization) Auth: String,  @Body bodyMap: RequestBody): Call<ResponseModelClasses.UpdateProfile>
+    fun getUpdateAccount(@Header(ApiUrls.Authorization) Auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.UpdateProfile>
 
     @POST(ApiUrls.MeterDetails + "/{AccountNumber}")
     fun getMeterDetails(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path("AccountNumber") value: String): Call<ResponseModelClasses.MeterDetails>
 
     @POST(ApiUrls.WaterUsages)
     fun getWaterUsages(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.WaterUsages>
+
+    @POST(ApiUrls.CompareSpending + "/{AccountNumber}" + "/{unit}")
+    fun getCompareSpendingDetails(
+        @Header(ApiUrls.Authorization) auth: String, @Header("unit") unit: String, @Body bodyMap: RequestBody, @Path(
+            "AccountNumber"
+        ) value: String
+    ): Call<ResponseModelClasses.CompareDataResponse>
 
 
 }

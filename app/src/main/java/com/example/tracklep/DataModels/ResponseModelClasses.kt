@@ -41,7 +41,6 @@ object ResponseModelClasses {
     )
 
     //Login Response
-
     data class LoginResponseModel(
         val expires: String,
         val issued: String,
@@ -286,6 +285,61 @@ object ResponseModelClasses {
     )
 
 
+    //CompareData Response
+    data class CompareDataResponse(
+        val Query: Query1C,
+        val Results: Results1C
+    ) {
+
+        data class Results1C(
+            val Table: ArrayList<Table1C>,
+            val Table1: ArrayList<Table2C>,
+            val Table2: ArrayList<Table3C>,
+            val Table3: ArrayList<Table4C>,
+            val Table4: ArrayList<Table5C>
+        ) {
+            data class Table1C(
+                val MOD: String,
+                val YOD: String,
+                val Consumed: String,
+                val Type: String,
+                val AllocationValue: String
+            )
+
+            data class Table2C(
+                val MOD: String,
+                val YOD: String,
+                val Consumed: String,
+                val Type: String,
+                val AllocationValue: String
+            )
+
+            data class Table3C(
+                val MOD: String,
+                val YOD: String,
+                val Consumed: String,
+                val Type: String,
+                val AllocationValue: String
+            )
+
+            data class Table4C(
+                val MOD: String,
+                val YOD: String,
+                val Consumed: String,
+                val Type: String,
+                val AllocationValue: String
+            )
+
+            data class Table5C(
+                val Baseline: String
+            )
+        }
+
+        data class Query1C(
+            val Parameters: Any,
+            val SqlQuery: Any
+        )
+    }
 }
 
 

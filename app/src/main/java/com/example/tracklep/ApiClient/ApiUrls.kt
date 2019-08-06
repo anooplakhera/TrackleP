@@ -6,9 +6,10 @@ import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONException
 import org.json.JSONObject
-import java.util.HashMap
+import java.util.*
 
 object ApiUrls {
+
 
     /*-----------------Api+Urls----------------*/
     const val BASE_URL: String = "https://aquatraxapi-dev.azurewebsites.net/"
@@ -28,6 +29,7 @@ object ApiUrls {
     const val UpdateAccount = "update-account"
     const val MeterDetails = "meter-details"
     const val WaterUsages = "water-usages"
+    const val CompareSpending = "water-compare-spending"
     const val AuthKey =
         "Bearer KQut6fhk1BLmO8eVIaMteTcljOes4CfuB2QiuqDvp4Gmoy9Yk_k-umomjcq_IndzuyyMTFm5gVLAcWClmJrdks3Uvhwqg-SYNH74AzVpjYMcgdY4WDIdo-EGHktAYrF70KjUzxeWXLVxeQVs2prmeNWZKlYm73DI16ls4dwoAMBVij4hISTcqCnWat9Ou3-8jRt_TWLCQAG7K6Iq_0yAoVaa1AF6sOgBf-wBB8OMx6MtnAdgzIUY4iLnA2iy4EvGdVmmL4LpHmpL92GxJi2BAL8vn3wAzUhhxu1mPRsk6PacOT5oJQq3eWhM-ZyYGLv3V_xnkfBBnkM1cM2RLFeJ6kYY7Jh1sb1mQ0F-3UurErsA9Y95HvEGDJo7kg_o2ZzivnQhbIiZqX8gbmsiWI_d-DjSnWPHO_RtlpIAcM55r_XCHjlKMcAR-TaI_9nhpKmAWi0DyF6ySBK0RT9_OA8J-w";
 
