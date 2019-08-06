@@ -24,6 +24,9 @@ interface ApiInterface {
     @POST(ApiUrls.CONNECT_UTILITY + "/{AccountNumber}")
     fun getConnectWithUtility(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.ConnectWithUtilityResponse>
 
+    @POST(ApiUrls.UsageNotification + "/{AccountNumber}")
+    fun getUsageNotification(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.GetUsageNotificationResponse>
+
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)
     fun getResetUserPass1(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.ResetPassStep1Response>

@@ -24,6 +24,9 @@
     
     <color name="colorCompareThisYear">#7DAC93</color>
     <color name="colorComparePreviousYear">#C56F6F</color>
+    
+    <color name="commonBackgroundGradient1">#0075A9</color>
+    <color name="commonBackgroundGradient2">#27CFDA</color>
 
 
 </resources>
