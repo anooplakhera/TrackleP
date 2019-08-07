@@ -12,6 +12,7 @@ import com.example.tracklep.DataClasses.CompareSpendingData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
+import com.example.tracklep.Utils.MyValueFormatter
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import com.github.mikephil.charting.components.Legend
@@ -207,11 +208,11 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         val yVals2 = ArrayList<BarEntry>()
 
         for (i in 0 until bar1.size) {
-            yVals1.add(BarEntry(bar1.get(i).range, bar1.get(i).count))
+            yVals1.add(BarEntry(bar1[i].range, bar1[i].count))
         }
 
         for (i in 0 until bar2.size) {
-            yVals2.add(BarEntry(bar2.get(i).range, bar2.get(i).count))
+            yVals2.add(BarEntry(bar2[i].range, bar2[i].count))
         }
 
         val set1 = BarDataSet(yVals1, label1)
@@ -219,7 +220,9 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         val set2 = BarDataSet(yVals2, label2)
         set2.color = resources.getColor(R.color.colorComparePreviousYear)
         val data = BarData(set1, set2)
-        data.setValueFormatter(LargeValueFormatter() as ValueFormatter?)
+//        data.setValueFormatter(LargeValueFormatter() as ValueFormatter?)
+        data.setValueFormatter(MyValueFormatter() as ValueFormatter?)
+
         chart.data = data
         chart.barData.barWidth = barWidth
         chart.xAxis.axisMinimum = 0F
@@ -311,7 +314,8 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         val set4 = BarDataSet(yVals4, "Zip")
         set4.color = resources.getColor(R.color.colorConservation1)
         val data = BarData(set1, set2, set3, set4)
-        data.setValueFormatter(LargeValueFormatter())
+//        data.setValueFormatter(LargeValueFormatter())
+        data.setValueFormatter(MyValueFormatter() as ValueFormatter?)
         chart.data = data
         chart.barData.barWidth = barWidth
         chart.xAxis.axisMinimum = 0F
