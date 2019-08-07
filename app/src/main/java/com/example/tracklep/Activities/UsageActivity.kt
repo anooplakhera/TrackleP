@@ -33,6 +33,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_usage)
 
+
         try {
             txtCABtitle.text = getString(R.string.track_usage)
             imgCABadd.visibility = View.VISIBLE

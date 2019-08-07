@@ -2,8 +2,6 @@ package com.example.tracklep.ApiClient
 
 import com.example.tracklep.DataModels.ResponseModelClasses
 import okhttp3.RequestBody
-import okhttp3.Response
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -52,6 +50,13 @@ interface ApiInterface {
 
     @POST(ApiUrls.WaterUsages)
     fun getWaterUsages(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.WaterUsages>
+
+    @POST(ApiUrls.CompareSpending + "/{AccountNumber}" + "/{unit}")
+    fun getCompareSpendingDetails(
+        @Header(ApiUrls.Authorization) auth: String, @Header("unit") unit: String, @Body bodyMap: RequestBody, @Path(
+            "AccountNumber"
+        ) value: String
+    ): Call<ResponseModelClasses.CompareDataResponse>
 
 
 }

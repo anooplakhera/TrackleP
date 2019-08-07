@@ -30,8 +30,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="@dimen/dp_1"
-                android:background="@drawable/layout_border"
-                android:weightSum="3">
+                android:background="@drawable/layout_border">
                 
                 <TextView
                     android:id="@+id/txtCCF"
@@ -59,11 +58,13 @@
                     android:text="@string/view_gallon" />
                 
                 <View
+                    android:visibility="gone"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimaryDark" />
                 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/txtDollar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -81,17 +82,29 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginBottom="@dimen/dp_5"
                 android:gravity="left"
-                android:textColor="@color/colorBlack"
-                android:text="Jun 2018 - May 2019" />
+                android:textColor="@color/colorBlack" />
             
             <!--Graph Layout-->
             <FrameLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="400dp">
+                
+                <com.example.tracklep.Widgets.VerticalTextView
+                    android:id="@+id/txtChartDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/compare_ccf"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="@dimen/dp_12" />
                 
                 
                 <com.github.mikephil.charting.charts.BarChart
+                    android:visibility="visible"
                     android:id="@+id/chart"
+                    android:layout_marginLeft="@dimen/dp_20"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent" />
             

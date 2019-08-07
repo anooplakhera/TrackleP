@@ -28,8 +28,6 @@ object RequestClass {
         map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
         map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
         AppLog.printLog("getMeterDetailsRequestModel: " + Gson().toJson(map))
-
-
         return map;
     }
 
