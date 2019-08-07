@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/drawable_background_gradient"
     android:focusableInTouchMode="true"
     tools:context=".Activities.ConnectWithUtilityActivity"
     android:orientation="vertical">
@@ -22,6 +22,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/dp_10"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@drawable/drawable_round_corner"
             android:gravity="center_horizontal">
             
             <!--connect_with_utility Header-->
@@ -50,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="@dimen/dp_14">
+                android:background="@drawable/drawable_round_corner">
                 
                 <TextView
                     android:id="@+id/txtContactUsDetails"

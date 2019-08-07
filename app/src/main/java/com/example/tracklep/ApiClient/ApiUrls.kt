@@ -51,6 +51,7 @@ object ApiUrls {
     const val PostalCode = "PostalCode"
     const val UserId = "UserId"
     const val MeterNumber = "MeterNumber"
+    const val ServiceZipCode = "ServiceZipCode"
     const val SecurityQuestionId = "SecurityQuestionId"
     const val SecurityQuestionId2 = "SecurityQuestionId2"
     const val HintsAns = "HintsAns"

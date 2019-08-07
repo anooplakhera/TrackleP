@@ -1,5 +1,6 @@
 package com.example.tracklep.Activities
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -25,7 +26,6 @@ import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_signup.*
 import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,7 +66,7 @@ class LoginActivity : BaseActivity() {
     private fun clickPerform() {
         textUtilities.setOnClickListener {
             if (UtilitiesData.getCount() > 0) {
-                openDialog("Select Utility", textUtilities)
+                openDialog("Select Utility Name", textUtilities)
             } else {
                 getUtilityList(true, textUtilities)
             }
@@ -77,11 +77,26 @@ class LoginActivity : BaseActivity() {
         }
 
         lytRegisterUser.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, SignupActivity::class.java))
+            startActivity(Intent(this@LoginActivity, SignupStepOneActivity::class.java))
         }
 
         lytConnectWithAgency.setOnClickListener {
             startActivity(Intent(this@LoginActivity, ConnectWithUtilityActivity::class.java))
+        }
+
+        lytPayBill.setOnClickListener {
+            var alertDialog = AlertDialog.Builder(this)
+            alertDialog.setTitle(getString(R.string.app_name))
+            alertDialog.setMessage("You will be redirected to EOCWD online payment system. Click Proceed to continue.")
+            alertDialog.setNeutralButton("Cancel") { _, _ ->
+            }
+
+            alertDialog.setPositiveButton("Proceed") { dialog, which ->
+                dialog.dismiss()
+                startWebActivity("Pay Bill", "https://eocwd.epayub.com")
+            }
+
+            alertDialog.show()
         }
 
         editUserName.setText("utkarsh3441@gmail.com")
@@ -89,6 +104,17 @@ class LoginActivity : BaseActivity() {
 
         btnLogin.setOnClickListener {
             validationFields()
+        }
+    }
+
+    private fun startWebActivity(title: String, url: String) {
+        try {
+            intent = Intent(this@LoginActivity, WebViewActivity::class.java)
+            intent.putExtra("contentTitle", title)
+            intent.putExtra("contentUrl", "https://eocwd.epayub.com")
+            startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -153,7 +179,7 @@ class LoginActivity : BaseActivity() {
                             UtilitiesData.clearArrayList()
                         UtilitiesData.addArrayList(response.body()!!.Results.Table)
                         if (dialogOpen) {
-                            openDialog("Select Utilities", textView)
+                            openDialog("Select Utility Name", textView)
                         }
                         AppLog.printLog("UtilityList Response- ", response.body().toString())
 

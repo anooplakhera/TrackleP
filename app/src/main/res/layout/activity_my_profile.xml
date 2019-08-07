@@ -78,48 +78,59 @@
                 android:padding="@dimen/dp_10"
                 android:background="@drawable/drawable_round_corner">
                 
-                <!--Home Phone Number-->
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/txtAccountInformationLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_2">
-                    
-                    <TextView
-                        android:id="@+id/txtAccountInformationLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
-                        android:textSize="@dimen/sp_16"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text="@string/account_information" />
-                    
-                    <TextView
-                        android:id="@+id/txtHomePhoneNumberLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/txtAccountInformationLabel"
-                        android:padding="@dimen/dp_2"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
-                        android:text="@string/home_phone_number" />
-                    
-                    <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/editHomePhoneNumberValue"
-                        android:layout_below="@id/txtHomePhoneNumberLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxLength="10"
-                        android:textColor="@color/colorBlack"
-                        android:inputType="number"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
+                    android:padding="@dimen/dp_2"
+                    android:textSize="@dimen/sp_16"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/account_information" />
                 
-                </RelativeLayout>
+                <!--Home Phone Number-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    
+                    <ImageView
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_home_phone_"
+                        android:padding="@dimen/dp_5" />
+                    
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_2">
+                        
+                        <TextView
+                            android:id="@+id/txtHomePhoneNumberLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_2"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorDarkGray"
+                            android:text="@string/home_phone_number" />
+                        
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/editHomePhoneNumberValue"
+                            android:layout_below="@id/txtHomePhoneNumberLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="10"
+                            android:textColor="@color/colorBlack"
+                            android:inputType="number"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:background="@android:color/transparent"
+                            android:padding="@dimen/dp_2" />
+                    
+                    </RelativeLayout>
+                </LinearLayout>
                 
                 <View
                     android:layout_width="match_parent"
@@ -131,36 +142,48 @@
                     android:background="@color/colorLightGray100" />
                 
                 <!--Mobile Number-->
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_2">
+                    android:orientation="horizontal">
                     
-                    <TextView
-                        android:id="@+id/txtMobileNumberLabel"
+                    <ImageView
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_call_"
+                        android:padding="@dimen/dp_5" />
+                    
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
-                        android:text="@string/mobile_number" />
+                        android:layout_margin="@dimen/dp_2">
+                        
+                        <TextView
+                            android:id="@+id/txtMobileNumberLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_2"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorDarkGray"
+                            android:text="@string/mobile_number" />
+                        
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/editMobileNumberValue"
+                            android:layout_below="@id/txtMobileNumberLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorBlack"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:background="@android:color/transparent"
+                            android:padding="@dimen/dp_2" />
                     
-                    <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/editMobileNumberValue"
-                        android:layout_below="@id/txtMobileNumberLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorBlack"
-                        android:inputType="number"
-                        android:maxLength="10"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
-                
-                </RelativeLayout>
+                    </RelativeLayout>
+                </LinearLayout>
                 
                 <View
                     android:layout_width="match_parent"
@@ -172,37 +195,49 @@
                     android:background="@color/colorLightGray100" />
                 
                 <!--Email-->
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_2">
+                    android:orientation="horizontal">
                     
-                    <TextView
-                        android:id="@+id/txtEmail"
+                    <ImageView
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_email_"
+                        android:padding="@dimen/dp_5" />
+                    
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
-                        android:text="@string/email" />
+                        android:layout_margin="@dimen/dp_2">
+                        
+                        <TextView
+                            android:id="@+id/txtEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_2"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorDarkGray"
+                            android:text="@string/email" />
+                        
+                        
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/editEmail"
+                            android:layout_below="@id/txtEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:inputType="textEmailAddress"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:background="@android:color/transparent"
+                            android:padding="@dimen/dp_2" />
                     
                     
-                    <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/editEmail"
-                        android:layout_below="@id/txtEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:inputType="textEmailAddress"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
-                
-                
-                </RelativeLayout>
+                    </RelativeLayout>
+                </LinearLayout>
                 
                 <View
                     android:layout_width="match_parent"
@@ -214,44 +249,58 @@
                     android:background="@color/colorLightGray100" />
                 
                 <!--Communication Address-->
-                <RelativeLayout
-                    android:id="@+id/rytCommunicationAddress"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_2">
-                    
-                    <TextView
-                        android:id="@+id/txtCommunicationAddressLabel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
-                        android:fontFamily="@font/roboto"
-                        android:textSize="@dimen/sp_14"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
-                        android:text="@string/address" />
+                    android:orientation="horizontal"
+                    android:weightSum="5">
                     
                     <ImageView
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_centerVertical="true"
-                        android:padding="@dimen/dp_5"
-                        android:layout_alignParentRight="true" />
+                        android:src="@drawable/ic_address_"
+                        android:padding="@dimen/dp_5" />
                     
-                    <TextView
-                        android:id="@+id/txtCommunicationAddressValue"
-                        android:layout_below="@id/txtCommunicationAddressLabel"
+                    <RelativeLayout
+                        android:id="@+id/rytCommunicationAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
-                
-                </RelativeLayout>
+                        android:layout_margin="@dimen/dp_2">
+                        
+                        <TextView
+                            android:id="@+id/txtCommunicationAddressLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_2"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorDarkGray"
+                            android:text="@string/address" />
+                        
+                        <ImageView
+                            android:layout_width="@dimen/dp_30"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_right_arrow"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/dp_5"
+                            android:layout_alignParentRight="true"
+                            android:visibility="gone" />
+                        
+                        <TextView
+                            android:id="@+id/txtCommunicationAddressValue"
+                            android:layout_below="@id/txtCommunicationAddressLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:background="@android:color/transparent"
+                            android:padding="@dimen/dp_2" />
+                    
+                    </RelativeLayout>
+                </LinearLayout>
             
             </LinearLayout>
             
@@ -287,6 +336,7 @@
                         android:src="@drawable/ic_right_arrow"
                         android:layout_centerVertical="true"
                         android:padding="@dimen/dp_5"
+                        android:visibility="gone"
                         android:layout_alignParentRight="true" />
                     
                     <TextView
@@ -311,34 +361,47 @@
                     android:layout_marginRight="@dimen/dp_6"
                     android:background="@color/colorLightGray100" />
                 
-                <RelativeLayout
-                    android:id="@+id/r_lyt_quesP2"
+                <!--Answer 1-->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_2">
+                    android:orientation="horizontal">
                     
-                    <TextView
-                        android:id="@+id/txtAns1Label"
+                    <ImageView
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_password_"
+                        android:padding="@dimen/dp_5" />
+                    
+                    <RelativeLayout
+                        android:id="@+id/r_lyt_quesP2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
-                        android:fontFamily="@font/roboto"
-                        android:textSize="@dimen/sp_14"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
-                        android:text="@string/security_ans1" />
+                        android:layout_margin="@dimen/dp_2">
+                        
+                        <TextView
+                            android:id="@+id/txtAns1Label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_2"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorDarkGray"
+                            android:text="@string/security_ans1" />
+                        
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/editAns1Value"
+                            android:layout_below="@id/txtAns1Label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:background="@android:color/transparent"
+                            android:padding="@dimen/dp_2" />
                     
-                    <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/editAns1Value"
-                        android:layout_below="@id/txtAns1Label"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
-                
-                </RelativeLayout>
+                    </RelativeLayout>
+                </LinearLayout>
                 
                 <View
                     android:layout_width="match_parent"
@@ -372,6 +435,7 @@
                         android:src="@drawable/ic_right_arrow"
                         android:layout_centerVertical="true"
                         android:padding="@dimen/dp_5"
+                        android:visibility="gone"
                         android:layout_alignParentRight="true" />
                     
                     <TextView
@@ -396,36 +460,47 @@
                     android:layout_marginRight="@dimen/dp_6"
                     android:background="@color/colorLightGray100" />
                 
-                <RelativeLayout
+                <!--Answer 2-->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_2">
+                    android:orientation="horizontal">
                     
-                    <TextView
-                        android:id="@+id/txtAns2Label"
+                    <ImageView
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_password_"
+                        android:padding="@dimen/dp_5" />
+                    
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
-                        android:text="@string/security_ans2" />
+                        android:layout_margin="@dimen/dp_2">
+                        
+                        <TextView
+                            android:id="@+id/txtAns2Label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dp_2"
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorDarkGray"
+                            android:text="@string/security_ans2" />
+                        
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/editAns2Value"
+                            android:layout_below="@id/txtAns2Label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="@dimen/sp_14"
+                            android:fontFamily="@font/roboto"
+                            android:background="@android:color/transparent"
+                            android:padding="@dimen/dp_2" />
                     
-                    
-                    <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/editAns2Value"
-                        android:layout_below="@id/txtAns2Label"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
-                
-                </RelativeLayout>
-            
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     
