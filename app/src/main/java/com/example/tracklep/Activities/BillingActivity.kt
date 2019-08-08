@@ -43,7 +43,8 @@ class BillingActivity : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.BillingDashboardResponse> = apiService.getBillingDashboard(
                 getHeader(),
-                ApiUrls.getJSONRequestBody(RequestClass.getBillingDetailsRequestModel(AppPrefences.getLoginUserInfo(this).AccountNumber))
+                ApiUrls.getJSONRequestBody(RequestClass.getBillingDetailsRequestModel(
+                    AppPrefences.getAccountNumber(this)))
             )
             call.enqueue(object : Callback<ResponseModelClasses.BillingDashboardResponse> {
                 override fun onResponse(

@@ -59,9 +59,11 @@ class UsageNotificationActivity : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ArrayList<ResponseModelClasses.GetUsageNotificationResponse>> =
                 apiService.getUsageNotification(
-                    getHeader(), AppPrefences.getLoginUserInfo(this).AccountNumber,
+                    getHeader(),
+                    AppPrefences.getAccountNumber(this),
                     ApiUrls.getJSONRequestBody(
-                        RequestClass.getUsageNotificationRequestModel(AppPrefences.getLoginUserInfo(this).AccountNumber)
+                        RequestClass.getUsageNotificationRequestModel(
+                            AppPrefences.getAccountNumber(this))
                     )
                 )
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.GetUsageNotificationResponse>> {
@@ -104,7 +106,8 @@ class UsageNotificationActivity : BaseActivity() {
                         editMonthlyLimit.text.toString(),
                         editDailyLimit.text.toString(),
                         editMeterNumber.text.toString(),
-                        AppPrefences.getLoginUserInfo(this).AccountNumber,
+
+                        AppPrefences.getAccountNumber(this),
                         unit
                     )
                 )
