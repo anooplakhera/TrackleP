@@ -41,7 +41,8 @@ class ConnectWithUtilityActivity : BaseActivity() {
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.ConnectWithUtilityResponse> = apiService.getConnectWithUtility(
-                getHeader(), AppPrefences.getLoginUserInfo(this).AccountNumber,
+                getHeader(),
+                AppPrefences.getAccountNumber(this),
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getConnectWithUtilityRequestModel()
                 )

@@ -129,7 +129,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             )
             lytCompareZip.alpha = 1.0f
             lytCompareMe.alpha = 1.0f
-            lytCompareUtility.alpha =selectedAlpha
+            lytCompareUtility.alpha = selectedAlpha
             lytCompareAll.alpha = 1.0f
             txt_date_from_to.text = CompareSpendingData.getUtilityTitle()
         }
@@ -162,8 +162,12 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.CompareDataResponse> = apiService.getCompareSpendingDetails(
                 getHeader(), unitName,
-                ApiUrls.getJSONRequestBody(RequestClass.getMeterDetailsRequestModel(AppPrefences.getLoginUserInfo(this).AccountNumber)),
-                AppPrefences.getLoginUserInfo(this).AccountNumber
+                ApiUrls.getJSONRequestBody(
+                    RequestClass.getMeterDetailsRequestModel(
+                        AppPrefences.getAccountNumber(this)
+                    )
+                ),
+                AppPrefences.getAccountNumber(this)
             )
             call.enqueue(object : Callback<ResponseModelClasses.CompareDataResponse> {
                 override fun onResponse(

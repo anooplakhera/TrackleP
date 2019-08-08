@@ -172,8 +172,9 @@ class MainActivity : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.MeterDetails> = apiService.getMeterDetails(
                 getHeader(),
-                ApiUrls.getJSONRequestBody(RequestClass.getMeterDetailsRequestModel(AppPrefences.getLoginUserInfo(this).AccountNumber)),
-                AppPrefences.getLoginUserInfo(this).AccountNumber
+                ApiUrls.getJSONRequestBody(RequestClass.getMeterDetailsRequestModel(
+                    AppPrefences.getAccountNumber(this))),
+                AppPrefences.getAccountNumber(this)
             )
             call.enqueue(object : Callback<ResponseModelClasses.MeterDetails> {
                 override fun onResponse(
@@ -211,7 +212,8 @@ class MainActivity : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.WaterUsages> = apiService.getWaterUsages(
                 getHeader(),
-                ApiUrls.getJSONRequestBody(RequestClass.getWaterUsageRequestModel(AppPrefences.getLoginUserInfo(this).AccountNumber))
+                ApiUrls.getJSONRequestBody(RequestClass.getWaterUsageRequestModel(
+                    AppPrefences.getAccountNumber(this)))
             )
             call.enqueue(object : Callback<ResponseModelClasses.WaterUsages> {
                 override fun onResponse(

@@ -22,6 +22,7 @@ import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataClasses.ProfileListData
 import com.example.tracklep.DataClasses.SecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
@@ -144,23 +145,28 @@ class MyProfile : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getAccount(
                 getHeader(),
-                AppPrefences.getLoginUserInfo(this).AccountNumber,
+                AppPrefences.getAccountNumber(this),
                 ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap())
             )
-            call.enqueue(object : Callback<List<ResponseModelClasses.MyProfile>> {
+            call.enqueue(object : Callback<ArrayList<ResponseModelClasses.MyProfile>> {
                 override fun onResponse(
-                    call: Call<List<ResponseModelClasses.MyProfile>>,
-                    response: Response<List<ResponseModelClasses.MyProfile>>
+                    call: Call<ArrayList<ResponseModelClasses.MyProfile>>,
+                    response: Response<ArrayList<ResponseModelClasses.MyProfile>>
                 ) {
                     try {
                         dismissDialog()
                         if (response.body() != null) {
-                            for (i in 0 until response.body()!!.size) {
-                                if (response.body()!!.get(i).DefaultAddressId != 0) {
-                                    updateViews(response.body()!!.get(i))
-                                    AppPrefences.setProfileInfo(this@MyProfile, response.body()!![i])
-                                }
-                            }
+                            ProfileListData.clearArrayList()
+                            ProfileListData.addArrayList(response.body()!!)
+                            updateViews(ProfileListData.getArrayItem(ProfileListData.getPositionDefault()))
+                            AppPrefences.setProfileInfo(
+                                this@MyProfile,
+                                ProfileListData.getArrayItem(ProfileListData.getPositionDefault())
+                            )
+                            AppPrefences.setAccountNumber(
+                                this@MyProfile,
+                                ProfileListData.getArrayItem(ProfileListData.getPositionDefault()).AccountNumber.toString()
+                            )
 
                             AppLog.printLog("UserProfileResponse: " + Gson().toJson(response.body()))
                         }
@@ -171,7 +177,7 @@ class MyProfile : BaseActivity() {
                 }
 
                 override fun onFailure(
-                    call: Call<List<ResponseModelClasses.MyProfile>>,
+                    call: Call<ArrayList<ResponseModelClasses.MyProfile>>,
                     t: Throwable
                 ) {
                     dismissDialog()
@@ -197,7 +203,7 @@ class MyProfile : BaseActivity() {
                         editHomePhoneNumberValue.text.toString(),
                         editMobileNumberValue.text.toString(),
                         custID,
-                        AppPrefences.getLoginUserInfo(this).AccountNumber,
+                        AppPrefences.getAccountNumber(this),
                         editAns1Value.text.toString(),
                         editAns2Value.text.toString(),
                         sQuesID1,
@@ -294,8 +300,15 @@ class MyProfile : BaseActivity() {
             dialog.setCancelable(true)
             dialog.show()
             dialog.txtTitleTop.text = title
+            dialog.txtTitleTop.textSize = 13f
 
-            val mSwipeItemAdapter = SwipeItemAdapter((1..5).map { "Item: $it" }.toMutableList()) { position ->
+            val mSwipeItemAdapter = SwipeItemAdapter(ProfileListData.getArrayAddress()) { position ->
+                updateViews(ProfileListData.getArrayItem(position))
+                AppPrefences.setProfileInfo(this@MyProfile, ProfileListData.getArrayItem(position))
+                AppPrefences.setAccountNumber(
+                    this@MyProfile,
+                    ProfileListData.getArrayItem(position).AccountNumber.toString()
+                )
                 dialog.dismiss()
             }
 
@@ -304,21 +317,21 @@ class MyProfile : BaseActivity() {
             dialog.dialogRecycleView.layoutManager = LinearLayoutManager(this)
             dialog.dialogRecycleView.adapter = mSwipeItemAdapter
 
-            val swipeHandler = object : SwipeToDeleteCallback(this) {
+            var swipeHandler = object : SwipeToDeleteCallback(this) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
                     var alertDialog = AlertDialog.Builder(this@MyProfile)
                     alertDialog.setTitle(getString(R.string.app_name))
                     alertDialog.setMessage("Are you sure you want to delete communication address?")
                     alertDialog.setNeutralButton("Cancel") { _, _ ->
-
+                        if (mSwipeItemAdapter != null) {
+                            mSwipeItemAdapter.notifyDataSetChanged()
+                        }
                     }
 
                     alertDialog.setPositiveButton("Yes") { dialog, which ->
-                        dialog.dismiss()
-                        val adapter = dialogRecycleView.adapter as SwipeItemAdapter
-                        adapter.removeAt(viewHolder.adapterPosition)
-                        if (adapter.isEmpty()) {
+                        mSwipeItemAdapter.removeAt(viewHolder.adapterPosition)
+                        if (mSwipeItemAdapter.isEmpty()) {
                             dialog.dismiss()
                         }
                     }

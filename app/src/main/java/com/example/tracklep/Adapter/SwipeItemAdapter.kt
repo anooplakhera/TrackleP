@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.example.tracklep.R
 import kotlinx.android.synthetic.main.row_item.view.*
 
-class SwipeItemAdapter(private val items: MutableList<String>, private val itemClick: (Int) -> Unit) :
+class SwipeItemAdapter(private val items: ArrayList<String>, private val itemClick: (Int) -> Unit) :
     RecyclerView.Adapter<SwipeItemAdapter.VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
@@ -31,7 +31,7 @@ class SwipeItemAdapter(private val items: MutableList<String>, private val itemC
 
     fun isEmpty(): Boolean {
         var isEmpty = false
-        if (items.isNullOrEmpty()) {
+        if (items != null && items.size < 0) {
             isEmpty = true
         }
         return isEmpty
