@@ -198,4 +198,44 @@ object RequestClass {
         AppLog.printLog("getAddAccountRequestModel: " + Gson().toJson(map))
         return map;
     }
+
+
+    /*["AccountNumber": "3", "DataSource": "aquatraxserver.database.windows.net", "Database": "AQUATRAXDEV", "DBPassword": "newaqt@123", "DBUserName": "aquatrax"]*/
+    //Get Usage Notification
+    fun getUsageNotificationRequestModel(AccountNumber: String): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+
+        AppLog.printLog("getUsageNotificationRequestModel: " + Gson().toJson(map))
+
+        return map;
+    }
+
+
+    /* ["DBUserName": "aquatrax", "DBPassword": "newaqt@123", "MonthlyThreshold": "123",
+     "DailyThreshold": "23", "MeterNumber": "09526591", "AccountNumber": "3", "Unit": "CCF",
+      "Database": "AQUATRAXDEV", "DataSource": "aquatraxserver.database.windows.net"]*/
+    //Set Usage Notification
+    fun setUsageNotificationRequestModel(MonthlyThreshold:String,DailyThreshold:String,MeterNumber:String,AccountNumber:String,Unit:String): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        //map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+
+        map.put("MonthlyThreshold", MonthlyThreshold)
+        map.put("DailyThreshold", DailyThreshold)
+        map.put("MeterNumber", MeterNumber)
+        map.put("AccountNumber", AccountNumber)
+        map.put("Unit", Unit)
+
+        AppLog.printLog("setUsageNotificationRequestModel: " + Gson().toJson(map))
+
+        return map;
+    }
 }

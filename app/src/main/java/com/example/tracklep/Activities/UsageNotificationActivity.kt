@@ -12,7 +12,6 @@ import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.activity_usage_notification.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
@@ -20,6 +19,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class UsageNotificationActivity : BaseActivity() {
+
+    private var unit = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,16 @@ class UsageNotificationActivity : BaseActivity() {
             btnUsageNotificationSubmit.setOnClickListener {
                 validationField()
             }
+            rbn_gallon.setOnClickListener {
+                unit = "Gallon"
+                rbn_ccf.isChecked = false
+                rbn_gallon.isChecked = true
+            }
+            rbn_ccf.setOnClickListener {
+                unit = "CCF"
+                rbn_ccf.isChecked = true
+                rbn_gallon.isChecked = false
+            }
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -46,25 +57,29 @@ class UsageNotificationActivity : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call: Call<ResponseModelClasses.GetUsageNotificationResponse> = apiService.getUsageNotification(
-                getHeader(), AppPrefences.getLoginUserInfo(this).AccountNumber,
-                ApiUrls.getJSONRequestBody(
-                    RequestClass.getConnectWithUtilityRequestModel()
+            val call: Call<ArrayList<ResponseModelClasses.GetUsageNotificationResponse>> =
+                apiService.getUsageNotification(
+                    getHeader(), AppPrefences.getLoginUserInfo(this).AccountNumber,
+                    ApiUrls.getJSONRequestBody(
+                        RequestClass.getUsageNotificationRequestModel(AppPrefences.getLoginUserInfo(this).AccountNumber)
+                    )
                 )
-            )
-            call.enqueue(object : Callback<ResponseModelClasses.GetUsageNotificationResponse> {
+            call.enqueue(object : Callback<ArrayList<ResponseModelClasses.GetUsageNotificationResponse>> {
                 override fun onResponse(
-                    call: Call<ResponseModelClasses.GetUsageNotificationResponse>,
-                    response: Response<ResponseModelClasses.GetUsageNotificationResponse>
+                    call: Call<ArrayList<ResponseModelClasses.GetUsageNotificationResponse>>,
+                    response: Response<ArrayList<ResponseModelClasses.GetUsageNotificationResponse>>
                 ) {
                     dismissDialog()
                     if (response.body() != null) {
                         AppLog.printLog("getUsageNotificationDetails: " + Gson().toJson(response.body()));
-                        updateViews(response.body()!!.Results.Table1)
+                        updateViews(response.body()!!.get(0))
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseModelClasses.GetUsageNotificationResponse>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<ArrayList<ResponseModelClasses.GetUsageNotificationResponse>>,
+                    t: Throwable
+                ) {
                     AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }
@@ -82,25 +97,31 @@ class UsageNotificationActivity : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call: Call<ResponseModelClasses.GetUsageNotificationResponse> = apiService.getUsageNotification(
-                getHeader(), AppPrefences.getLoginUserInfo(this).AccountNumber,
+            val call: Call<ResponseModelClasses.UpdateUsageNotification> = apiService.setUsageNotification(
+                getHeader(),
                 ApiUrls.getJSONRequestBody(
-                    RequestClass.getConnectWithUtilityRequestModel()
+                    RequestClass.setUsageNotificationRequestModel(
+                        editMonthlyLimit.text.toString(),
+                        editDailyLimit.text.toString(),
+                        editMeterNumber.text.toString(),
+                        AppPrefences.getLoginUserInfo(this).AccountNumber,
+                        unit
+                    )
                 )
             )
-            call.enqueue(object : Callback<ResponseModelClasses.GetUsageNotificationResponse> {
+            call.enqueue(object : Callback<ResponseModelClasses.UpdateUsageNotification> {
                 override fun onResponse(
-                    call: Call<ResponseModelClasses.GetUsageNotificationResponse>,
-                    response: Response<ResponseModelClasses.GetUsageNotificationResponse>
+                    call: Call<ResponseModelClasses.UpdateUsageNotification>,
+                    response: Response<ResponseModelClasses.UpdateUsageNotification>
                 ) {
                     dismissDialog()
                     if (response.body() != null) {
                         AppLog.printLog("setUsageNotificationDetails: " + Gson().toJson(response.body()));
-                        updateViews(response.body()!!.Results.Table1)
+                        showSuccessPopup(response.body()!!.Message)
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseModelClasses.GetUsageNotificationResponse>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseModelClasses.UpdateUsageNotification>, t: Throwable) {
                     AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }
@@ -114,21 +135,18 @@ class UsageNotificationActivity : BaseActivity() {
         showToast(getString(R.string.internet))
     }
 
-    fun updateViews(data: List<ResponseModelClasses.GetUsageNotificationResponse.Results1.TableTwo>) {
-        /*custID = data.CustomerId.toString()
-        sQuesID1 = data.SecurityQuestionId.toString()
-        sQuesID2 = data.SecurityQuestionId2.toString()
-        txtUserName.text = data.FullName
-        editEmail.setText(data.EmailId)
-        editHomePhoneNumberValue.setText(data.HomePhone)
-        editMobileNumberValue.setText(data.MobilePhone)
-        editAns1Value.setText(data.HintsAns)
-        editAns2Value.setText(data.HintsAns2)
-        txtQues1Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
-        txtQues2Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
-        txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
-        txtCommunicationAddressValue.text = data.CommunicationAddress
-        txtCommunicationAddressValue.setTextColor(resources.getColor(R.color.colorBlack))*/
+    fun updateViews(data: ResponseModelClasses.GetUsageNotificationResponse) {
+
+        editMeterNumber.setText(data.MeterNumber)
+        editDailyLimit.setText(data.DailyThreshold)
+        editMonthlyLimit.setText(data.MonthlyThreshold)
+        if (data.Unit == "CCF") {
+            rbn_ccf.isChecked = true
+            rbn_gallon.isChecked = false
+        } else {
+            rbn_ccf.isChecked = false
+            rbn_gallon.isChecked = true
+        }
     }
 
     private fun validationField() {
@@ -138,11 +156,11 @@ class UsageNotificationActivity : BaseActivity() {
                 showToast("Please Enter Meter Number")
                 !allValid
                 return
-            } else if (!editDailyLimit.text!!.isEmpty()) {
+            } else if (editDailyLimit.text!!.isEmpty()) {
                 showToast("Please Enter Daily Limit")
                 !allValid
                 return
-            } else if (!editMonthlyLimit.text!!.isEmpty()) {
+            } else if (editMonthlyLimit.text!!.isEmpty()) {
                 showToast("Please Enter Monthly Limit")
                 !allValid
                 return
