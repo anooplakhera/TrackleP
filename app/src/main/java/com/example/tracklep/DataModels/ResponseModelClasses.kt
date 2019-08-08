@@ -102,8 +102,8 @@ object ResponseModelClasses {
         val Results: Results1
     ) {
         data class Results1(
-            val Table: List<TableOne>,
-            val Table1: List<TableTwo>
+            val Table: ArrayList<TableOne>,
+            val Table1: ArrayList<TableTwo>
         ) {
             data class TableTwo(
                 val IsNonAMI: Boolean,

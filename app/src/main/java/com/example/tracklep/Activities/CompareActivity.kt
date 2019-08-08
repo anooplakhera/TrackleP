@@ -39,11 +39,11 @@ import retrofit2.Response
 class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
     var unitName = "K"
+    var selectedAlpha = 0.5f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_compare)
-
 
         try {
             txtCABtitle.text = getString(R.string.compare_spending)
@@ -55,6 +55,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
             clickPerform()
 
+            resetAlpha()
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -74,6 +75,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             unitName = "K"
             getCompareDetails()
             txtChartDesc.setText(R.string.compare_ccf)
+            resetAlpha()
         }
         txtGallon.setOnClickListener {
             txtGallon.setBackgroundColor(resources.getColor(R.color.colorPrimary))
@@ -86,6 +88,8 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             unitName = "G"
             getCompareDetails()
             txtChartDesc.setText(R.string.compare_gallon)
+            resetAlpha()
+
         }
 
         lytCompareMe.setOnClickListener {
@@ -96,6 +100,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 getString(R.string.c_this_year),
                 getString(R.string.c_previous_year)
             )
+            resetAlpha()
             txt_date_from_to.text = CompareSpendingData.getCompareMeTitle()
         }
 
@@ -107,6 +112,10 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 getString(R.string.c_this_year),
                 getString(R.string.c_zip)
             )
+            lytCompareZip.alpha = selectedAlpha
+            lytCompareMe.alpha = 1.0f
+            lytCompareUtility.alpha = 1.0f
+            lytCompareAll.alpha = 1.0f
             txt_date_from_to.text = CompareSpendingData.getZipTitle()
         }
 
@@ -118,6 +127,10 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 getString(R.string.c_this_year),
                 getString(R.string.c_utility)
             )
+            lytCompareZip.alpha = 1.0f
+            lytCompareMe.alpha = 1.0f
+            lytCompareUtility.alpha =selectedAlpha
+            lytCompareAll.alpha = 1.0f
             txt_date_from_to.text = CompareSpendingData.getUtilityTitle()
         }
 
@@ -129,15 +142,20 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 CompareSpendingData.getZipBar(),
                 CompareSpendingData.getYearBar()
             )
+            lytCompareZip.alpha = 1.0f
+            lytCompareMe.alpha = 1.0f
+            lytCompareUtility.alpha = 1.0f
+            lytCompareAll.alpha = selectedAlpha
         }
     }
 
+    private fun resetAlpha() {
+        lytCompareMe.alpha = selectedAlpha
+        lytCompareZip.alpha = 1.0f
+        lytCompareUtility.alpha = 1.0f
+        lytCompareAll.alpha = 1.0f
+    }
 
-    //    Table1C- Current
-//    Table2C- Previous
-//    Table3C- Utility
-//    Table4C- Zip
-//    Table5C- Baseline
     private fun getCompareDetails() = if (Utils.isConnected(this)) {
         showDialog()
         try {
@@ -184,7 +202,6 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     } else {
         showToast(getString(R.string.internet))
     }
-
 
     private fun setChartData(
         bar1: ArrayList<ResponseModelClasses.BarChart>,
@@ -310,9 +327,9 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         val set2 = BarDataSet(yVals2, "Previous year")
         set2.color = resources.getColor(R.color.colorComparePreviousYear)
         val set3 = BarDataSet(yVals3, "Utility")
-        set3.color = resources.getColor(R.color.colorConservation3)
+        set3.color = resources.getColor(R.color.colorCompareUtility)
         val set4 = BarDataSet(yVals4, "Zip")
-        set4.color = resources.getColor(R.color.colorConservation1)
+        set4.color = resources.getColor(R.color.colorCompareZip)
         val data = BarData(set1, set2, set3, set4)
 //        data.setValueFormatter(LargeValueFormatter())
         data.setValueFormatter(MyValueFormatter() as ValueFormatter?)
@@ -390,6 +407,5 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             e.printStackTrace()
         }
     }
-
 
 }

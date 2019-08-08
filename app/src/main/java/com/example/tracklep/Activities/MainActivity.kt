@@ -11,6 +11,8 @@ import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataClasses.UserMeterListData
+import com.example.tracklep.DataClasses.WaterUsageData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
@@ -180,6 +182,8 @@ class MainActivity : BaseActivity() {
                 ) {
                     dismissDialog()
                     if (response.body() != null) {
+                        UserMeterListData.clearArrayList()
+                        UserMeterListData.addArrayList(response.body()!!.Results.Table)
                         getWaterUsage()
                         AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
                     }
@@ -219,6 +223,8 @@ class MainActivity : BaseActivity() {
                         var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
                         data.addAll(response.body()!!.Results.Table)
                         data.reverse()
+                        WaterUsageData.clearArrayList()
+                        WaterUsageData.addArrayList(data)
 
                         AppPrefences.setMeterUsageData(this@MainActivity, data[0])
 
