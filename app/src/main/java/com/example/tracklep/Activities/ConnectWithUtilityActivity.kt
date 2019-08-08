@@ -14,6 +14,7 @@ import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
+import kotlinx.android.synthetic.main.activity_contact_us.*
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -51,10 +52,14 @@ class ConnectWithUtilityActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.ConnectWithUtilityResponse>,
                     response: Response<ResponseModelClasses.ConnectWithUtilityResponse>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        AppLog.printLog("getConnectMeDetails: " + Gson().toJson(response.body()));
-                        updateViews(response.body()!!.Results.Table1)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            AppLog.printLog("getConnectMeDetails: " + Gson().toJson(response.body()));
+                            updateViews(response.body()!!.Results.Table3)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -66,27 +71,20 @@ class ConnectWithUtilityActivity : BaseActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
             dismissDialog()
+            //AppPrefences.getLoginUserInfo(this).AccountNumber
         }
     } else {
         //dismissDialog()
         showToast(getString(R.string.internet))
     }
 
-    fun updateViews(data: List<ResponseModelClasses.ConnectWithUtilityResponse.Results1.TableTwo>) {
-        /*custID = data.CustomerId.toString()
-        sQuesID1 = data.SecurityQuestionId.toString()
-        sQuesID2 = data.SecurityQuestionId2.toString()
-        txtUserName.text = data.FullName
-        editEmail.setText(data.EmailId)
-        editHomePhoneNumberValue.setText(data.HomePhone)
-        editMobileNumberValue.setText(data.MobilePhone)
-        editAns1Value.setText(data.HintsAns)
-        editAns2Value.setText(data.HintsAns2)
-        txtQues1Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
-        txtQues2Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
-        txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
-        txtCommunicationAddressValue.text = data.CommunicationAddress
-        txtCommunicationAddressValue.setTextColor(resources.getColor(R.color.colorBlack))*/
+    fun updateViews(data: List<ResponseModelClasses.ConnectWithUtilityResponse.Results1.TableThree>) {
+
+        txtContactUsEmail.text = "Email: " + data.get(0).CustomerServiceEmail
+        txtContactUsPhone.text = "Phone: " + data.get(0).PrimaryPhone
+        txtContactUsAddress.text = "Address: " + data.get(0).utilityAddress
+        txtContactUsOpenTime.text = "Email: " + data.get(0).UtilityTime
+
     }
 
 }
