@@ -12,7 +12,6 @@ import com.example.tracklep.DataClasses.UserMeterListData
 import com.example.tracklep.DataClasses.WaterUsageData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
-import com.example.tracklep.Utils.MyBarDataSet
 import com.example.tracklep.Utils.MyValueFormatter
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
@@ -147,27 +146,16 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             yVals3.add(BarEntry(bar3[i].range, bar3[i].count))
         }
 
-        val set1 = MyBarDataSet(yVals1, label1)
-//        val set1 = BarDataSet(yVals1, label1)
-        var list = arrayListOf<Int>(R.color.colorLightGray, R.color.colorAppGray)
-        set1.colors = list;
+//        val set1 = MyBarDataSet(yVals1, label1)
+//        var list = arrayListOf<Int>(R.color.colorLightGray, R.color.colorAppGray)
+//        set1.colors = list;
 
-//        for (i in 0 until bar1.size) {
-//            if (bar1[i].range < bar1[i].count) {
-//                set1.getColor(resources.getColor(R.color.colorUsageWithin))
-//            } else {
-//                set1.getColor(resources.getColor(R.color.colorUsageOver))
-////                set1.color = resources.getColor(R.color.colorUsageOver)
-//            }
-//        }
+        val set1 = BarDataSet(yVals1, label1)
+        set1.getColor(resources.getColor(R.color.colorUsageWithin))
         val set2 = BarDataSet(yVals2, label2)
         set2.color = resources.getColor(R.color.colorUsageAllocation)
-        /* val set3 = BarDataSet(yVals2, label3)
-         set3.color = resources.getColor(R.color.colorUsageOver)*/
         val data = BarData(set1, set2)
 
-
-//        data.setValueFormatter(LargeValueFormatter() as ValueFormatter?)
         data.setValueFormatter(MyValueFormatter() as ValueFormatter?)
 
         chartUsage.data = data
