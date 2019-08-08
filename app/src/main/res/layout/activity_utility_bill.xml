@@ -619,7 +619,7 @@
                     android:textColor="@color/colorWhite"
                     android:fontFamily="@font/roboto"
                     android:textSize="@dimen/sp_14"
-                    android:background="@color/colorPrimaryDark" />
+                    android:background="@drawable/rounded_corner_blue" />
                 
                 <TextView
                     android:id="@+id/txtLinkBillingHistory"

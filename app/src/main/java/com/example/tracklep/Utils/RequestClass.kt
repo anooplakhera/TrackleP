@@ -1,7 +1,9 @@
 package com.example.tracklep.Utils
 
+import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.DataClasses.ResetPassSecurityQuestionData
+import com.example.tracklep.TrackleApp
 import com.google.gson.Gson
 
 object RequestClass {
@@ -160,6 +162,80 @@ object RequestClass {
         map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
         map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
         AppLog.printLog("getForgetRequestStepTwo: " + Gson().toJson(map))
+        return map;
+    }
+
+
+    /*["Database": "AQUATRAXDEV", "MobileNumber":"1234567843", "DataSource":
+"aquatraxserver.database.windows.net",
+"PostalCode": "21414", "CustomerId": "7",
+"UtilityAccountNumber": "3424231", "MeterNumber":
+"421142142", "EmailId": "u.agarwal8@gmail.com",
+"UtilityId": "0", "DBUserName": "aquatrax",
+"DBPassword": "newaqt@123"]*/
+    fun getAddAccountRequestModel(
+        UtilityAccountNumber: String,
+        PostalCode: String,
+        MeterNumber: String
+    ): Map<String, String> {
+        var map = HashMap<String, String>()
+
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(
+            "MobileNumber",
+            TrackleApp.appContext?.let { AppPrefences.getProfileInfo(it).MobilePhone }.toString()
+        )
+        map.put("PostalCode", PostalCode)
+        map.put("CustomerId", TrackleApp.appContext?.let { AppPrefences.getProfileInfo(it).CustomerId }.toString())
+        map.put("EmailId", TrackleApp.appContext?.let { AppPrefences.getProfileInfo(it).EmailId }.toString())
+        map.put(ApiUrls.UtilityAccountNumber, UtilityAccountNumber)
+        map.put("UtilityId", "0")
+        map.put(ApiUrls.MeterNumber, MeterNumber)
+
+        AppLog.printLog("getAddAccountRequestModel: " + Gson().toJson(map))
+        return map;
+    }
+
+
+    /*["AccountNumber": "3", "DataSource": "aquatraxserver.database.windows.net", "Database": "AQUATRAXDEV", "DBPassword": "newaqt@123", "DBUserName": "aquatrax"]*/
+    //Get Usage Notification
+    fun getUsageNotificationRequestModel(AccountNumber: String): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+
+        AppLog.printLog("getUsageNotificationRequestModel: " + Gson().toJson(map))
+
+        return map;
+    }
+
+
+    /* ["DBUserName": "aquatrax", "DBPassword": "newaqt@123", "MonthlyThreshold": "123",
+     "DailyThreshold": "23", "MeterNumber": "09526591", "AccountNumber": "3", "Unit": "CCF",
+      "Database": "AQUATRAXDEV", "DataSource": "aquatraxserver.database.windows.net"]*/
+    //Set Usage Notification
+    fun setUsageNotificationRequestModel(MonthlyThreshold:String,DailyThreshold:String,MeterNumber:String,AccountNumber:String,Unit:String): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        //map.put(ApiUrls.AccountNumber, AccountNumber)
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+
+        map.put("MonthlyThreshold", MonthlyThreshold)
+        map.put("DailyThreshold", DailyThreshold)
+        map.put("MeterNumber", MeterNumber)
+        map.put("AccountNumber", AccountNumber)
+        map.put("Unit", Unit)
+
+        AppLog.printLog("setUsageNotificationRequestModel: " + Gson().toJson(map))
+
         return map;
     }
 }

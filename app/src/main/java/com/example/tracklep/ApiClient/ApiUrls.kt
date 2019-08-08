@@ -53,6 +53,7 @@ object ApiUrls {
     const val PostalCode = "PostalCode"
     const val UserId = "UserId"
     const val MeterNumber = "MeterNumber"
+    const val ServiceZipCode = "ServiceZipCode"
     const val SecurityQuestionId = "SecurityQuestionId"
     const val SecurityQuestionId2 = "SecurityQuestionId2"
     const val HintsAns = "HintsAns"
@@ -75,6 +76,7 @@ object ApiUrls {
     const val DBUserName_value = "aquatrax@aquatraxserver"
     const val DBPassword_value = "newaqt@123"
 
+    const val AccountAdd = "account/add";
 
     fun getBasePathUrl(): String {
         return BASE_URL + BASE_PATH

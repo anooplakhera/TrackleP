@@ -6,6 +6,7 @@
     <string name="login_title">Hey There, Welcome to</string>
     <string name="remember_me">Remember Me</string>
     <string name="login">Login</string>
+    <string name="email_address">Email Address</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot Password ?</string>
@@ -27,8 +28,9 @@
     
     <!--Register User-->
     <string name="registration_title">Registration</string>
+    <string name="registration_title_new">Create your Account</string>
     <string name="utility">Utility Name</string>
-    <string name="select_utility">Select Utility</string>
+    <string name="select_utility">Select Utility Name</string>
     <string name="mandatory">Mandatory</string>
     <string name="acc_no">Account Number</string>
     <string name="meter_no">Meter Number</string>
@@ -41,11 +43,11 @@
     
     <!--Dashboard-->
     <string name="welcome_text">Welcome DES JARDINS ROBERT</string>
-    <string name="my_account">My Account</string>
+    <string name="my_account">Account Details</string>
     <string name="compare_spending">Compare Spending</string>
     <string name="billing">Billing Information</string>
     <string name="track_usage">Track Usage</string>
-    <string name="compare">Compare</string>
+    <string name="compare">Compare Water Use</string>
     <string name="water_conversation">Water Conversation</string>
     
     
@@ -134,8 +136,11 @@
     <string name="subject">Subject</string>
     <string name="billing_history_link">Billing History >></string>
     <string name="billing_disclaimer">The billing information on this page is informational only and may not display total of all charges currently due. To pay your bill please log into EOCWD online bill payment system or visit our payment location.</string>
-    
-    
+
+    <string name="next">Next</string>
+    <string name="step_1_account_information">Step 1: Account Information</string>
+    <string name="step_2_security_questions">Step 2: Security Questions</string>
+
     <string name="compare_ccf">Water Units Consumed (CCF)</string>
     <string name="compare_gallon">Water Units Consumed (Gallon)</string>
     <string name="c_this_year">This year</string>

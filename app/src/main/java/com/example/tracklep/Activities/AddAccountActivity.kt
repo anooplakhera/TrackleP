@@ -56,32 +56,41 @@ class AddAccountActivity : BaseActivity() {
         showDialog()
 
         try {
-            val apiService = ApiClient.getClient(ApiUrls.BASE_URL).create(ApiInterface::class.java)
-            val call: Call<ResponseModelClasses.LoginResponseModel> = apiService.getLogin(
-                RequestClass.getLoginRequestModel(
-                    "",
-                    ""
+            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call: Call<ResponseModelClasses.AddAccount> = apiService.setAddAccount(
+                getHeader(),
+                RequestClass.getAddAccountRequestModel(
+                    editUtilAccountNo.text.toString(),
+                    editPostalCode.text.toString(),
+                    editMeterNumberValue.text.toString()
                 )
             )
-            call.enqueue(object : Callback<ResponseModelClasses.LoginResponseModel> {
+            call.enqueue(object : Callback<ResponseModelClasses.AddAccount> {
                 override fun onResponse(
-                    call: Call<ResponseModelClasses.LoginResponseModel>,
-                    response: Response<ResponseModelClasses.LoginResponseModel>
+                    call: Call<ResponseModelClasses.AddAccount>,
+                    response: Response<ResponseModelClasses.AddAccount>
                 ) {
                     dismissDialog()
                     if (response.body() != null) {
-                        val loginResponseModel: ResponseModelClasses.LoginResponseModel? = response.body()
-                        AppPrefences.setLoginUserInfo(this@AddAccountActivity, loginResponseModel)
+
+                        /*val loginResponseModel: ResponseModelClasses.AddAccount? = response.body()
+                        AppPrefences.setProfileInfo(this@AddAccountActivity, loginResponseModel)
 
                         AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@AddAccountActivity).Name))
                         AppPrefences.setLogin(this@AddAccountActivity, true)
 
                         startActivity(Intent(this@AddAccountActivity, MainActivity::class.java))
-                        finish()
+                        finish()*/
+                        editUtilAccountNo.text?.clear()
+                        editPostalCode.text?.clear()
+                        editMeterNumberValue.text?.clear()
+
+                        showSuccessPopup(response.body()!!.Message)
+
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseModelClasses.LoginResponseModel>, t: Throwable) {
+                override fun onFailure(call: Call<ResponseModelClasses.AddAccount>, t: Throwable) {
                     AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }

@@ -25,7 +25,7 @@ interface ApiInterface {
     fun getConnectWithUtility(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.ConnectWithUtilityResponse>
 
     @POST(ApiUrls.UsageNotification + "/{AccountNumber}")
-    fun getUsageNotification(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.GetUsageNotificationResponse>
+    fun getUsageNotification(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<ArrayList<ResponseModelClasses.GetUsageNotificationResponse>>
 
     @FormUrlEncoded
     @POST(ApiUrls.FORGET + ApiUrls.STEP_ONE)
@@ -57,6 +57,15 @@ interface ApiInterface {
             "AccountNumber"
         ) value: String
     ): Call<ResponseModelClasses.CompareDataResponse>
+
+
+    @FormUrlEncoded
+    @POST(ApiUrls.AccountAdd)
+    fun setAddAccount(@Header(ApiUrls.Authorization) auth: String, @FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.AddAccount>
+
+
+    @POST(ApiUrls.UsageNotification)
+    fun setUsageNotification(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.UpdateUsageNotification>
 
 
 }
