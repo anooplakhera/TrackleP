@@ -15,7 +15,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btnSaveProfile"
         android:overScrollMode="never"
         android:layout_below="@id/lytAction">
         
@@ -58,15 +57,6 @@
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/dp_5"
                     android:textColor="@color/colorLightBlack" />
-                
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:layout_marginBottom="@dimen/dp_3"
-                    android:layout_marginLeft="@dimen/dp_6"
-                    android:layout_marginRight="@dimen/dp_6"
-                    android:background="@color/colorLightGray100" />
             
             </LinearLayout>
             
@@ -113,7 +103,7 @@
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:textStyle="bold"
-                            android:textColor="@color/colorDarkGray"
+                            android:textColor="@color/commonLabelTextColor"
                             android:text="@string/home_phone_number" />
                         
                         <android.support.v7.widget.AppCompatEditText
@@ -166,7 +156,7 @@
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:textStyle="bold"
-                            android:textColor="@color/colorDarkGray"
+                            android:textColor="@color/commonLabelTextColor"
                             android:text="@string/mobile_number" />
                         
                         <android.support.v7.widget.AppCompatEditText
@@ -219,8 +209,8 @@
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:textStyle="bold"
-                            android:textColor="@color/colorDarkGray"
-                            android:text="@string/email" />
+                            android:textColor="@color/commonLabelTextColor"
+                            android:text="@string/email_address" />
                         
                         
                         <android.support.v7.widget.AppCompatEditText
@@ -275,7 +265,7 @@
                             android:fontFamily="@font/roboto"
                             android:textSize="@dimen/sp_14"
                             android:textStyle="bold"
-                            android:textColor="@color/colorDarkGray"
+                            android:textColor="@color/commonLabelTextColor"
                             android:text="@string/address" />
                         
                         <ImageView
@@ -327,7 +317,7 @@
                         android:fontFamily="@font/roboto"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
+                        android:textColor="@color/commonLabelTextColor"
                         android:text="@string/security_ques1" />
                     
                     <ImageView
@@ -387,7 +377,7 @@
                             android:fontFamily="@font/roboto"
                             android:textSize="@dimen/sp_14"
                             android:textStyle="bold"
-                            android:textColor="@color/colorDarkGray"
+                            android:textColor="@color/commonLabelTextColor"
                             android:text="@string/security_ans1" />
                         
                         <android.support.v7.widget.AppCompatEditText
@@ -396,6 +386,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sp_14"
+                            android:inputType="textPassword"
                             android:fontFamily="@font/roboto"
                             android:background="@android:color/transparent"
                             android:padding="@dimen/dp_2" />
@@ -426,7 +417,7 @@
                         android:fontFamily="@font/roboto"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
-                        android:textColor="@color/colorDarkGray"
+                        android:textColor="@color/commonLabelTextColor"
                         android:text="@string/security_ques2" />
                     
                     <ImageView
@@ -485,7 +476,7 @@
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:textStyle="bold"
-                            android:textColor="@color/colorDarkGray"
+                            android:textColor="@color/commonLabelTextColor"
                             android:text="@string/security_ans2" />
                         
                         <android.support.v7.widget.AppCompatEditText
@@ -495,6 +486,7 @@
                             android:layout_height="wrap_content"
                             android:text=""
                             android:textSize="@dimen/sp_14"
+                            android:inputType="textPassword"
                             android:fontFamily="@font/roboto"
                             android:background="@android:color/transparent"
                             android:padding="@dimen/dp_2" />
@@ -502,19 +494,24 @@
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
+            
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnSaveProfile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:text="@string/submit"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_50"
+                android:layout_marginRight="@dimen/dp_50"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/sp_18"
+                android:background="@drawable/rounded_corner_blue" />
         </LinearLayout>
     
     </ScrollView>
-    
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnSaveProfile"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_alignParentBottom="true"
-        android:text="@string/submit"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/roboto"
-        android:textSize="@dimen/sp_18"
-        android:background="@color/colorPrimaryDark" />
+
+
 </RelativeLayout>

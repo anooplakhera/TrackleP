@@ -155,7 +155,13 @@ class MyProfile : BaseActivity() {
                     try {
                         dismissDialog()
                         if (response.body() != null) {
-                            updateViews(response.body()!!.get(0))
+                            for (i in 0 until response.body()!!.size) {
+                                if (response.body()!!.get(i).DefaultAddressId != 0) {
+                                    updateViews(response.body()!!.get(i))
+                                    AppPrefences.setProfileInfo(this@MyProfile, response.body()!![i])
+                                }
+                            }
+
                             AppLog.printLog("UserProfileResponse: " + Gson().toJson(response.body()))
                         }
                     } catch (e: Exception) {

@@ -389,6 +389,16 @@ object ResponseModelClasses {
             val SqlQuery: Any
         )
     }
+
+    //Add Account
+    data class AddAccount(
+        val Status: String,
+        val Message: String,
+        val CustomerId: String,
+        val IsMailSucceed: Boolean,
+        val SqlQuery: Any,
+        val Parameters: Any
+    )
 }
 
 

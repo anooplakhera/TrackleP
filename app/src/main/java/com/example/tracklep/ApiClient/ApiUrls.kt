@@ -76,6 +76,7 @@ object ApiUrls {
     const val DBUserName_value = "aquatrax@aquatraxserver"
     const val DBPassword_value = "newaqt@123"
 
+    const val AccountAdd = "account/add";
 
     fun getBasePathUrl(): String {
         return BASE_URL + BASE_PATH

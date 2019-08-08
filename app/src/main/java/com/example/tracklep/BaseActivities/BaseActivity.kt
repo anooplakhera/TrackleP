@@ -1,5 +1,6 @@
 package com.example.tracklep.BaseActivities
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import com.example.hp.togelresultapp.Preferences.AppPrefences
+import com.example.tracklep.R
 import com.example.tracklep.Utils.Utils
 
 public abstract class BaseActivity : AppCompatActivity(), BaseFragment.Callback {
@@ -61,6 +63,18 @@ public abstract class BaseActivity : AppCompatActivity(), BaseFragment.Callback 
         if (message != null)
             hideKeyboard()
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showSuccessPopup(message: String) {
+        var alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle(getString(R.string.app_name))
+        alertDialog.setMessage(message)
+
+        alertDialog.setPositiveButton("OK") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 
     fun hideSystemUI() {

@@ -19,6 +19,7 @@ object AppPrefences {
     private val Login = "login"
     private val LoginData = "logindata"
     private val MeterUsage = "MeterUsage"
+    private val MyProfileDetails = "MyProfileDetails"
 
     fun clearAll(ctx: Context) {
         val prefs = ctx.getSharedPreferences(
@@ -181,7 +182,24 @@ object AppPrefences {
         val json = prefs.getString(LoginData, "")
         val obj = gson.fromJson<LoginResponseModel>(json, LoginResponseModel::class.java)
         return obj
-//        return getData(ctx, LoginData, LoginResponseModel::class.java) as LoginResponseModel
+
+    }
+
+    //Profile UserData Model
+    fun setProfileInfo(c: Context, mResponseModel: ResponseModelClasses.MyProfile?) {
+        if (mResponseModel != null) {
+            saveJsonData(c, MyProfileDetails, mResponseModel)
+        }
+    }
+
+    @Throws(InstantiationException::class)
+    fun getProfileInfo(ctx: Context): ResponseModelClasses.MyProfile {
+        val prefs = ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = prefs.getString(MyProfileDetails, "")
+        val obj = gson.fromJson<ResponseModelClasses.MyProfile>(json, ResponseModelClasses.MyProfile::class.java)
+        return obj
+
     }
 
     //Registrations UserData Model

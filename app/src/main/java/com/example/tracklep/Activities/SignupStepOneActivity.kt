@@ -1,5 +1,6 @@
 package com.example.tracklep.Activities
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -54,14 +55,6 @@ class SignupStepOneActivity : BaseActivity() {
 
     private fun clickPerform() {
         try {
-            /*r_lyt_ques1.setOnClickListener {
-                if (SecurityQuestionData.getCount() > 0) {
-                    openDialog(txtQuestion1)
-                } else {
-                    getSecurityQues(true, txtQuestion1)
-
-                }
-            }*/
             r_lyt_utility.setOnClickListener {
                 if (UtilitiesData.getCount() > 0) {
                     openDialog("Select Utility Name", txtUtilityName)
@@ -70,13 +63,23 @@ class SignupStepOneActivity : BaseActivity() {
 
                 }
             }
-            /*r_lyt_ques2.setOnClickListener {
-                if (SecurityQuestionData.getCount() > 0) {
-                    openDialog(txtQuestion2)
-                } else {
-                    getSecurityQues(true, txtQuestion2)
-                }
+
+            /*imgUtility.setOnClickListener {
+                showInfoMessage("Your Account Number is located next to the ACCOUNT NUMBER label, at the top right ACCOUNT INFORMATION section of the EOCWD Bill.")
             }*/
+            imgAcc.setOnClickListener {
+                showInfoMessage("Your Account Number is located next to the ACCOUNT NUMBER label, at the top right ACCOUNT INFORMATION section of the EOCWD Bill.")
+            }
+            imgMeter.setOnClickListener {
+                showInfoMessage("Your Meter Number is located next to the METER NUMBER label, at the top right ACCOUNT INFORMATION section of the EOCWD Bill.")
+            }
+            imgSerciveZip.setOnClickListener {
+                showInfoMessage("Service Zip Code is the zip code of the premise.")
+            }
+            /*imgEmail.setOnClickListener {
+                showInfoMessage("Your Account Number is located next to the ACCOUNT NUMBER label, at the top right ACCOUNT INFORMATION section of the EOCWD Bill.")
+            }*/
+
 
             btnSubmitRegister.setOnClickListener {
                 validationField()
@@ -84,6 +87,18 @@ class SignupStepOneActivity : BaseActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun showInfoMessage(infoMessage: String) {
+        var alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle(getString(R.string.app_name))
+        alertDialog.setMessage(infoMessage)
+
+        alertDialog.setPositiveButton("OK") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        alertDialog.show()
     }
 
     private fun validationField() {

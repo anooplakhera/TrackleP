@@ -59,4 +59,8 @@ interface ApiInterface {
     ): Call<ResponseModelClasses.CompareDataResponse>
 
 
+    @FormUrlEncoded
+    @POST(ApiUrls.AccountAdd)
+    fun setAddAccount(@Header(ApiUrls.Authorization) auth: String, @FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.AddAccount>
+
 }
