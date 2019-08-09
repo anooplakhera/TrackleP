@@ -55,7 +55,6 @@ class MyProfile : BaseActivity() {
                 finish()
             }
 
-
             if (SecurityQuestionData.getCount() > 0) {
                 getUserProfile()
             } else {

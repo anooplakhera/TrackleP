@@ -1,7 +1,18 @@
 package com.example.tracklep.Activities
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
+import android.view.ViewGroup
+import android.view.Window
 import com.example.hp.togelresultapp.Preferences.AppPrefences
+import com.example.tracklep.Adapter.SwipeItemAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
@@ -10,11 +21,14 @@ import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
+import com.example.tracklep.Utils.SwipeToDeleteCallback
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
 import kotlinx.android.synthetic.main.activity_contact_us.*
+import kotlinx.android.synthetic.main.activity_my_profile.*
+import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -31,11 +45,14 @@ class ConnectWithUtilityActivity : BaseActivity() {
             }
 
             getConnectMeDetails()
+
+            btnConnectMeSubmit.setOnClickListener {
+                validationField()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
-
 
     private fun getConnectMeDetails() = if (Utils.isConnected(this)) {
         showDialog()
@@ -85,6 +102,38 @@ class ConnectWithUtilityActivity : BaseActivity() {
         txtContactUsPhone.text = "Phone: " + data.get(0).PrimaryPhone
         txtContactUsAddress.text = "Address: " + data.get(0).utilityAddress
         txtContactUsOpenTime.text = "Email: " + data.get(0).UtilityTime
+
+    }
+
+    private fun validationField() {
+        try {
+            var allValid = true
+            if (editTopic.text!!.isEmpty()) {
+                showToast("Please Enter Email")
+                !allValid
+                return
+            } else if (editSubjectValue.text!!.isEmpty()) {
+                showToast("Please Enter Valid Email")
+                !allValid
+                return
+            } else if (editPostalCode.text!!.isEmpty()) {
+                showToast("Please Enter Home Phone Number")
+                !allValid
+                return
+            } else if (allValid) {
+                //getUpdateUserProfile()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun openDialogList(data: ArrayList<ResponseModelClasses.ConnectWithUtilityResponse.Results1.TableTwo>) {
+        try {
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
     }
 
