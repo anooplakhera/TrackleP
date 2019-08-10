@@ -235,29 +235,40 @@ object ResponseModelClasses {
     ) {
         data class Results1(
             val Table: List<TableOne>,
-            val Table1: List<TableTwo>
+            val Table1: List<TableTwo>,
+            val Table3: List<TableThree>
         ) {
-            data class TableTwo(
-                val CustomerId: String,
-                val UtilityAccountNumber: String,
-                val AccountBalance: String,
-                val HeaderName: String
+            data class TableOne(
+                val customername: String,
+                val emailid: String,
+                val utilityaccountnumber: String,
+                val address1: String,
+                val AccountNumber: String
             )
 
-            data class TableOne(
-                val HeadId: Int,
-                val Section: String,
-                val HeaderName: String,
-                val SortOrder: Int,
-                val HeaderType: Int,
-                val ColorCode: String,
-                val Value: Any,
-                val ImagePath: Any,
-                val ImageToolTipTextKey: Any,
-                val ImageLinkPath: Any,
-                val IsShow: Int,
-                val BillingId: Any,
-                val LastRechargeAmount: Int
+            data class TableThree(
+                val utilityAddress: String,
+                val UtilityTime: String,
+                val Lattitude: String,
+                val Longitude: String,
+                val CustomerServiceEmail: String,
+                val PrimaryPhone: String,
+                val EmergencyPhone: String
+            )
+
+            data class TableTwo(
+                val TopicID: Int,
+                val TopicName: String,
+                val IsActive: String,
+                val ImageUrl: Int,
+                val ServiceType: Int,
+                val PlaceHolderId: String,
+                val MLControlId: Any,
+                val IsReadOnly: Any,
+                val EmailStatus: Any,
+                val EMailId: Any,
+                val TopicNameSpanish: Int,
+                val IsPreLogin: Any
             )
         }
 
