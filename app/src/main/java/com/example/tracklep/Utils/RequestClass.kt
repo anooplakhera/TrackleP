@@ -222,7 +222,6 @@ object RequestClass {
     //Set Usage Notification
     fun setUsageNotificationRequestModel(MonthlyThreshold:String,DailyThreshold:String,MeterNumber:String,AccountNumber:String,Unit:String): HashMap<String, String> {
         var map = HashMap<String, String>()
-        //map.put(ApiUrls.AccountNumber, AccountNumber)
         map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
         map.put(ApiUrls.Database, ApiUrls.Database_value)
         map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
