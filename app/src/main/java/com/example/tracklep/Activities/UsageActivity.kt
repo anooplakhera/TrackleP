@@ -31,6 +31,7 @@ import kotlinx.android.synthetic.main.custom_action_bar.*
 
 class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.OnItemSelectedListener {
 
+    var selectedAlpha = 0.5f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +62,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                 getString(R.string.c_previous_year)
             )
 
+            resetAlpha()
             setupSpinner()
 
         } catch (e: Exception) {
@@ -77,9 +79,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
             txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
-
+            resetAlpha()
 
         }
+
         txtGallon.setOnClickListener {
             txtGallon.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             txtGallon.setTextColor(resources.getColor(R.color.colorWhite))
@@ -87,9 +90,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
             txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
-
+            resetAlpha()
 
         }
+
         txtDollar.setOnClickListener {
             txtDollar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             txtDollar.setTextColor(resources.getColor(R.color.colorWhite))
@@ -97,10 +101,33 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
             txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
-
-
+            resetAlpha()
         }
 
+        lytHourly.setOnClickListener {
+            resetAlpha()
+        }
+
+        lytDaily.setOnClickListener {
+            lytDaily.alpha = selectedAlpha
+            lytHourly.alpha = 1.0f
+            lytMonthly.alpha = 1.0f
+            lytBiMonthly.alpha = 1.0f
+        }
+
+        lytMonthly.setOnClickListener {
+            lytMonthly.alpha = selectedAlpha
+            lytHourly.alpha = 1.0f
+            lytDaily.alpha = 1.0f
+            lytBiMonthly.alpha = 1.0f
+        }
+
+        lytBiMonthly.setOnClickListener {
+            lytBiMonthly.alpha = selectedAlpha
+            lytHourly.alpha = 1.0f
+            lytMonthly.alpha = 1.0f
+            lytDaily.alpha = 1.0f
+        }
 
     }
 
@@ -110,7 +137,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerMeter!!.setAdapter(aa)
     }
-
 
     private fun setChartData(
         bar1: ArrayList<ResponseModelClasses.BarChart>,
@@ -201,6 +227,13 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         leftAxis.axisMinimum = 0f
     }
 
+    private fun resetAlpha() {
+        lytHourly.alpha = selectedAlpha
+        lytDaily.alpha = 1.0f
+        lytMonthly.alpha = 1.0f
+        lytBiMonthly.alpha = 1.0f
+    }
+
     override fun onNothingSelected() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -234,12 +267,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
     }
 
     override fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
-
     }
 
     override fun onNothingSelected(arg0: AdapterView<*>) {
-
     }
-
 
 }
