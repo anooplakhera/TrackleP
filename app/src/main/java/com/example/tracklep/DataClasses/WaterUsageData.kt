@@ -1,6 +1,7 @@
 package com.example.tracklep.DataClasses
 
 import com.example.tracklep.DataModels.ResponseModelClasses
+import com.example.tracklep.Utils.Utils
 
 object WaterUsageData {
     var mArrayList: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>? = null
@@ -49,6 +50,7 @@ object WaterUsageData {
         var array = ArrayList<String>()
         try {
             for (i in 0 until getCount()) {
+//                array.add(Utils.parseDateToddMMyyyy(mArrayList?.get(i)!!.UsageDate))
                 array.add(mArrayList?.get(i)!!.UsageDate)
             }
         } catch (e: Exception) {

@@ -273,6 +273,8 @@ class MyProfile : BaseActivity() {
 
             val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
             dialog.dialogRecycleView.layoutManager = layoutManager
+            val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+            dialog.dialogRecycleView.addItemDecoration(itemDecor)
             val mAdapter = QuestionListAdapter { position ->
                 val data = SecurityQuestionData.getArrayItem(position)
                 textView.text = data.Question

@@ -25,6 +25,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
 import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created
@@ -223,6 +224,32 @@ object Utils {
         }
 
         return ""
+    }
+
+
+    fun parseDateToddMMyyyy(time: String): String {
+
+
+        var originalFormat = SimpleDateFormat("MM dd yyyy", Locale.ENGLISH);
+        var targetFormat = SimpleDateFormat("dd-MMM-yyyy");
+        var date = originalFormat.parse(time);
+        var formattedDate = targetFormat.format(date);  // 20120821
+
+//        var inputPattern = "dd-MM-yyyy "
+//        var outputPattern = "dd-MMM-yyyy"
+//        var inputFormat = SimpleDateFormat(inputPattern)
+//        var outputFormat = SimpleDateFormat(outputPattern)
+//
+//        var date: Date? = null
+//        var str: String = ""
+//
+//        try {
+//            date = inputFormat.parse(time);
+//            str = outputFormat.format(date);
+//        } catch (e: ParseException) {
+//            e.printStackTrace();
+//        }
+        return formattedDate.toString();
     }
 
     fun getDayNumberSuffix(day: Int): String {

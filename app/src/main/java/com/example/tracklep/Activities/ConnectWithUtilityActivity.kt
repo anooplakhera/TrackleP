@@ -1,6 +1,5 @@
 package com.example.tracklep.Activities
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,27 +7,27 @@ import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.LinearLayout
+import android.widget.TextView
 import com.example.hp.togelresultapp.Preferences.AppPrefences
-import com.example.tracklep.Adapter.SwipeItemAdapter
+import com.example.tracklep.Adapter.ConnectMeListAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataClasses.ConnectMeData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
-import com.example.tracklep.Utils.SwipeToDeleteCallback
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.custom_action_bar.*
-import retrofit2.Call
 import kotlinx.android.synthetic.main.activity_contact_us.*
-import kotlinx.android.synthetic.main.activity_my_profile.*
+import kotlinx.android.synthetic.main.custom_action_bar.*
 import kotlinx.android.synthetic.main.dialog_layout.*
+import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -44,7 +43,15 @@ class ConnectWithUtilityActivity : BaseActivity() {
                 finish()
             }
 
-            getConnectMeDetails()
+            getConnectMeDetails(false, txtTopicName)
+
+            txtTopicName.setOnClickListener {
+                if (ConnectMeData.getCount() > 0) {
+                    openListDialog("Select Topic Name", txtTopicName)
+                } else {
+                    getConnectMeDetails(true, txtTopicName)
+                }
+            }
 
             btnConnectMeSubmit.setOnClickListener {
                 validationField()
@@ -54,7 +61,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
         }
     }
 
-    private fun getConnectMeDetails() = if (Utils.isConnected(this)) {
+    private fun getConnectMeDetails(dialogOpen: Boolean = false, textView: TextView) = if (Utils.isConnected(this)) {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
@@ -73,8 +80,13 @@ class ConnectWithUtilityActivity : BaseActivity() {
                     try {
                         dismissDialog()
                         if (response.body() != null) {
+                            ConnectMeData.clearArrayList()
+                            ConnectMeData.addArrayList(response.body()!!.Results.Table1)
                             AppLog.printLog("getConnectMeDetails: " + Gson().toJson(response.body()));
                             updateViews(response.body()!!.Results.Table3)
+                            if (dialogOpen) {
+                                openListDialog("Select Topic Name", textView)
+                            }
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -89,10 +101,8 @@ class ConnectWithUtilityActivity : BaseActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
             dismissDialog()
-            //AppPrefences.getLoginUserInfo(this).AccountNumber
         }
     } else {
-        //dismissDialog()
         showToast(getString(R.string.internet))
     }
 
@@ -108,16 +118,16 @@ class ConnectWithUtilityActivity : BaseActivity() {
     private fun validationField() {
         try {
             var allValid = true
-            if (editTopic.text!!.isEmpty()) {
-                showToast("Please Enter Email")
+            if (txtTopicName.text.toString() == getString(R.string.select_topic)) {
+                showToast("Please Select Topic")
                 !allValid
                 return
             } else if (editSubjectValue.text!!.isEmpty()) {
-                showToast("Please Enter Valid Email")
+                showToast("Please Enter Subject")
                 !allValid
                 return
             } else if (editPostalCode.text!!.isEmpty()) {
-                showToast("Please Enter Home Phone Number")
+                showToast("Please Enter Postal Code")
                 !allValid
                 return
             } else if (allValid) {
@@ -128,13 +138,28 @@ class ConnectWithUtilityActivity : BaseActivity() {
         }
     }
 
-    private fun openDialogList(data: ArrayList<ResponseModelClasses.ConnectWithUtilityResponse.Results1.TableTwo>) {
-        try {
+    private fun openListDialog(title: String, textView: TextView) = try {
+        val dialog = Dialog(this@ConnectWithUtilityActivity)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_layout)
+        dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(true)
+        dialog.show()
+        dialog.txtTitleTop.text = title
 
-        } catch (e: Exception) {
-            e.printStackTrace()
+        val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        dialog.dialogRecycleView.layoutManager = layoutManager as RecyclerView.LayoutManager?
+        val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        dialog.dialogRecycleView.addItemDecoration(itemDecor)
+        val mAdapter = ConnectMeListAdapter() { position ->
+            val data = ConnectMeData.getArrayItem(position)
+            textView.text = data.TopicName
+            textView.setTextColor(resources.getColor(R.color.colorBlack))
+            dialog.dismiss()
         }
-
+        dialog.dialogRecycleView.adapter = mAdapter
+    } catch (e: Exception) {
+        e.printStackTrace()
     }
-
 }

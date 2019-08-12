@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.view.GravityCompat
 import android.view.Gravity
+import android.view.View
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -98,9 +99,13 @@ class MainActivity : BaseActivity() {
     }
 
     private fun clickPerform() {
-        lytAccount.setOnClickListener {
+        lytAccount.setOnClickListener(View.OnClickListener {
+
             startActivity(Intent(this, MyProfile::class.java))
-        }
+        })
+//        lytAccount.setOnClickListener {
+//            startActivity(Intent(this, MyProfile::class.java))
+//        }
         lytBilling.setOnClickListener {
             startActivity(Intent(this, BillingActivity::class.java))
         }

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.ViewGroup
@@ -218,6 +219,8 @@ class SignupStepOneActivity : BaseActivity() {
 
             val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
             dialog.dialogRecycleView.layoutManager = layoutManager
+            val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+            dialog.dialogRecycleView.addItemDecoration(itemDecor)
             val mAdapter = UtilitiesListAdapter() { position ->
                 val data = UtilitiesData.getArrayItem(position)
                 utilityID = data.UtilityId.toString()

@@ -234,9 +234,9 @@ object ResponseModelClasses {
         val Results: Results1
     ) {
         data class Results1(
-            val Table: List<TableOne>,
-            val Table1: List<TableTwo>,
-            val Table3: List<TableThree>
+            val Table: ArrayList<TableOne>,
+            val Table1: ArrayList<TableTwo>,
+            val Table3: ArrayList<TableThree>
         ) {
             data class TableOne(
                 val customername: String,
