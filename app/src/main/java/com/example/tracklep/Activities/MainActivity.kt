@@ -251,11 +251,15 @@ class MainActivity : BaseActivity() {
     }
 
     fun setMeterData(data: ResponseModelClasses.WaterUsages.Results1.TableOne) {
-        txtUsagesMessage.text =
-            "You have consumed " + data.AVERAGE + " Gallons water so far this calendar month"
-        txtMeterValue.text = data.AVERAGE + " \n Gallons"
-        arc_progress.progress =
-            Utils.getProgressValue(data.AllocationValue.toDouble(), data.AVERAGE.toDouble())
-                .roundToInt()
+        try {
+            txtUsagesMessage.text =
+                "You have consumed " + data.AVERAGE + " Gallons water so far this calendar month"
+            txtMeterValue.text = data.AVERAGE + " \n Gallons"
+            arc_progress.progress =
+                Utils.getProgressValue(data.AllocationValue.toDouble(), data.AVERAGE.toDouble())
+                    .roundToInt()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
