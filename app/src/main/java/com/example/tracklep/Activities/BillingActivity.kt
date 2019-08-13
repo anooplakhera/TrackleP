@@ -12,11 +12,15 @@ import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_utility_bill.*
+import kotlinx.android.synthetic.main.activity_utility_bill.arc_progress
+import kotlinx.android.synthetic.main.activity_utility_bill.txtMeterValue
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.math.roundToInt
 
 class BillingActivity : BaseActivity() {
 
@@ -43,8 +47,11 @@ class BillingActivity : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.BillingDashboardResponse> = apiService.getBillingDashboard(
                 getHeader(),
-                ApiUrls.getJSONRequestBody(RequestClass.getBillingDetailsRequestModel(
-                    AppPrefences.getAccountNumber(this)))
+                ApiUrls.getJSONRequestBody(
+                    RequestClass.getBillingDetailsRequestModel(
+                        AppPrefences.getAccountNumber(this)
+                    )
+                )
             )
             call.enqueue(object : Callback<ResponseModelClasses.BillingDashboardResponse> {
                 override fun onResponse(
@@ -55,6 +62,11 @@ class BillingActivity : BaseActivity() {
                     if (response.body() != null) {
                         AppLog.printLog("getBillingDetails: " + Gson().toJson(response.body()));
                         updateViews(response.body()!!.Results.Table)
+
+                        txtMeterValue.text = "12 days left"
+                        arc_progress.progress =
+                            Utils.getProgressValue(30.0, 12.0)
+                                .roundToInt()
                     }
                 }
 

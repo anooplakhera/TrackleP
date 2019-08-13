@@ -13,7 +13,6 @@
         android:background="@color/colorWhite"
         android:focusableInTouchMode="true">
         
-        
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -137,6 +136,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dp_5"
+                                android:clickable="true"
                                 android:background="@drawable/ripple_background"
                                 android:orientation="vertical">
                                 
@@ -163,6 +163,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dp_5"
+                                android:clickable="true"
                                 android:background="@drawable/ripple_background"
                                 android:orientation="vertical">
                                 
@@ -188,6 +189,7 @@
                                 android:layout_width="0sp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:clickable="true"
                                 android:background="@drawable/ripple_background"
                                 android:padding="@dimen/dp_5"
                                 android:orientation="vertical">
@@ -221,6 +223,7 @@
                                 android:layout_width="0sp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
+                                android:clickable="true"
                                 android:padding="@dimen/dp_5"
                                 android:background="@drawable/ripple_background"
                                 android:orientation="vertical">
@@ -249,6 +252,7 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/ripple_background"
                                 android:padding="@dimen/dp_5"
+                                android:clickable="true"
                                 android:orientation="vertical">
                                 
                                 <ImageView
@@ -274,6 +278,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:padding="@dimen/dp_5"
+                                android:clickable="true"
                                 android:background="@drawable/ripple_background"
                                 android:orientation="vertical">
                                 
