@@ -10,6 +10,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.telephony.PhoneNumberUtils
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -61,6 +62,7 @@ class MyProfile : BaseActivity() {
                 getSecurityQues(false, txtQues1Value)
             }
 
+            PhoneNumberUtils.formatNumber(editHomePhoneNumberValue, int defaultFormattingType);
             clickPerform()
 
         } catch (e: Exception) {
