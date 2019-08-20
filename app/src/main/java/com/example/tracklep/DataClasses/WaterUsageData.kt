@@ -1,7 +1,6 @@
 package com.example.tracklep.DataClasses
 
 import com.example.tracklep.DataModels.ResponseModelClasses
-import com.example.tracklep.Utils.Utils
 
 object WaterUsageData {
     var mArrayList: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>? = null
@@ -62,13 +61,17 @@ object WaterUsageData {
     @Synchronized
     fun getUsageBar(): ArrayList<ResponseModelClasses.BarChart> {
         val array = ArrayList<ResponseModelClasses.BarChart>()
-        for (i in 0 until getCount()) {
-            array.add(
-                ResponseModelClasses.BarChart(
-                    mArrayList!!.get(i).AllocationValue.toFloat(),
-                    mArrayList!!.get(i).HIGHEST.toFloat()
+        try {
+            for (i in 0 until getCount()) {
+                array.add(
+                    ResponseModelClasses.BarChart(
+                        mArrayList!!.get(i).AllocationValue.toFloat(),
+                        mArrayList!!.get(i).HIGHEST.toFloat()
+                    )
                 )
-            )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         return array
     }
@@ -76,13 +79,17 @@ object WaterUsageData {
     @Synchronized
     fun getUsageConsumedBar(): ArrayList<ResponseModelClasses.BarChart> {
         val array = ArrayList<ResponseModelClasses.BarChart>()
-        for (i in 0 until getCount()) {
-            array.add(
-                ResponseModelClasses.BarChart(
-                    mArrayList!!.get(i).TotalValue.toFloat(),
-                    mArrayList!!.get(i).HIGHEST.toFloat()
+        try {
+            for (i in 0 until getCount()) {
+                array.add(
+                    ResponseModelClasses.BarChart(
+                        mArrayList!!.get(i).TotalValue.toFloat(),
+                        mArrayList!!.get(i).HIGHEST.toFloat()
+                    )
                 )
-            )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         return array
     }
@@ -90,13 +97,17 @@ object WaterUsageData {
     @Synchronized
     fun getUsageEmptyBar(): ArrayList<ResponseModelClasses.BarChart> {
         val array = ArrayList<ResponseModelClasses.BarChart>()
-        for (i in 0 until getCount()) {
-            array.add(
-                ResponseModelClasses.BarChart(
-                    0.0f,
-                    0.0f
+        try {
+            for (i in 0 until getCount()) {
+                array.add(
+                    ResponseModelClasses.BarChart(
+                        0.0f,
+                        0.0f
+                    )
                 )
-            )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         return array
     }

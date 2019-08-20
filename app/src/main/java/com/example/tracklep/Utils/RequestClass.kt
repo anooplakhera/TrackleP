@@ -10,10 +10,10 @@ object RequestClass {
 
     fun getLoginRequestModel(username: String, password: String): Map<String, String> {
         var map = HashMap<String, String>()
-        map.put(ApiUrls.UserName, username);
-        map.put(ApiUrls.Password, password);
-        map.put(ApiUrls.GrantType, ApiUrls.Password.toLowerCase());
-        map.put(ApiUrls.TanentId, "1");
+        map.put(ApiUrls.UserName, username)
+        map.put(ApiUrls.Password, password)
+        map.put(ApiUrls.GrantType, ApiUrls.Password.toLowerCase())
+        map.put(ApiUrls.TanentId, "1")
         map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
         map.put(ApiUrls.Database, ApiUrls.Database_value)
         map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
@@ -24,26 +24,26 @@ object RequestClass {
 
     fun getMeterDetailsRequestModel(AccountNumber: String): HashMap<String, String> {
         var map = HashMap<String, String>()
-        map.put(ApiUrls.AccountNumber, AccountNumber)
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
+        map[ApiUrls.AccountNumber] = AccountNumber
+        map[ApiUrls.DataSource] = ApiUrls.DataSource_value
+        map[ApiUrls.Database] = ApiUrls.Database_value
+        map[ApiUrls.DBUserName] = "aquatrax"//ApiUrls.DBUserName_value)
+        map[ApiUrls.DBPassword] = "newaqt@123"//ApiUrls.DBPassword_value)
         AppLog.printLog("getMeterDetailsRequestModel: " + Gson().toJson(map))
         return map;
     }
 
-    fun getWaterUsageRequestModel(AccountNumber: String): HashMap<String, String> {
+    fun getWaterUsageRequestModel(AccountNumber: String, type: String, mode: String): HashMap<String, String> {
         var map = HashMap<String, String>()
-        map.put(ApiUrls.AccountNumber, AccountNumber)
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
-        map.put("Type", "G")//ApiUrls.DBPassword_value)
-        map.put("HourlyType", "H")//ApiUrls.DBPassword_value)
-        map.put("Mode", "B")//ApiUrls.DBPassword_value)
-        map.put("Year", "0")//ApiUrls.DBPassword_value)
+        map[ApiUrls.AccountNumber] = AccountNumber
+        map[ApiUrls.DataSource] = ApiUrls.DataSource_value
+        map[ApiUrls.Database] = ApiUrls.Database_value
+        map[ApiUrls.DBUserName] = "aquatrax"
+        map[ApiUrls.DBPassword] = "newaqt@123"
+        map["Type"] = type
+        map["HourlyType"] = "H"
+        map["Mode"] = mode
+        map["Year"] = "0"
         AppLog.printLog("getWaterUsageRequestModel: " + Gson().toJson(map))
 
         return map;
@@ -65,7 +65,6 @@ object RequestClass {
     //Connect With Utility
     fun getConnectWithUtilityRequestModel(): HashMap<String, String> {
         var map = HashMap<String, String>()
-        //map.put(ApiUrls.AccountNumber, AccountNumber)
         map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
         map.put(ApiUrls.Database, ApiUrls.Database_value)
         map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
@@ -220,7 +219,13 @@ object RequestClass {
      "DailyThreshold": "23", "MeterNumber": "09526591", "AccountNumber": "3", "Unit": "CCF",
       "Database": "AQUATRAXDEV", "DataSource": "aquatraxserver.database.windows.net"]*/
     //Set Usage Notification
-    fun setUsageNotificationRequestModel(MonthlyThreshold:String,DailyThreshold:String,MeterNumber:String,AccountNumber:String,Unit:String): HashMap<String, String> {
+    fun setUsageNotificationRequestModel(
+        MonthlyThreshold: String,
+        DailyThreshold: String,
+        MeterNumber: String,
+        AccountNumber: String,
+        Unit: String
+    ): HashMap<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
         map.put(ApiUrls.Database, ApiUrls.Database_value)
