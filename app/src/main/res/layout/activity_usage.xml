@@ -233,13 +233,13 @@
             
             <!--Graph Layout-->
             <FrameLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="350dp">
                 
                 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/chartUsage"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="fill_parent" />
             
             

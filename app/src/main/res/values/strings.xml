@@ -54,6 +54,7 @@
     
     <!--Profile-->
     <string name="home_phone_number">Home Phone Number</string>
+    <string name="phone_number">Phone Number</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="address">Communication Address</string>
     <string name="add_account">Add Account</string>
@@ -87,11 +88,11 @@
     <string name="usagenotification_description">You will be notified if you exceed your Daily/Monthly threshold limit. </string>
     <string name="usagenotification_description2">We recommend to set 50% of water budget as your threshold limit.</string>
     
-    <string name="contactus_email">Email : <u>admin@eocwd.com</u></string>
-    <string name="contactus_phone">Phone : <u>714-538-815</u></string>
+    <string name="contactus_email">Email</string>
+    <string name="contactus_phone">Phone</string>
     <string name="contactus_online">Online : Please visit us at <u>www.eocwd.com/contact</u></string>
-    <string name="contactus_address">Address : 185 N McPherson Rd, Orange, CA 92869, USA</string>
-    <string name="contactus_opentime">Open Time : 8:00 AM to 5:00 PM</string>
+    <string name="contactus_address">Address</string>
+    <string name="contactus_opentime">Open Time</string>
     <string name="conservation_tip1">THINK. You can\'t do anything wiouth water. Save it. Every Drop Counts !</string>
     <string name="conservation_tip2">Water Conservation is our Nature, Habit, Groove, Sty;e, Thing, Save our water Be Water Wise !</string>
     <string name="conservation_tip3">Water is Life. Don\'t Waste it. Save Water Save Life !</string>
@@ -124,9 +125,9 @@
     <string name="compare_zip">Compare Neighbours</string>
     <string name="compare_utility">Compare with Everyone</string>
     <string name="compare_all">Composite View</string>
-    <string name="view_ccf">View CCF</string>
-    <string name="view_dollar">View Dollar</string>
-    <string name="view_gallon">View Gallon</string>
+    <string name="view_ccf">CCF</string>
+    <string name="view_dollar">Dollar</string>
+    <string name="view_gallon">Gallon</string>
     <string name="bi_monthly">Bi Monthly</string>
     <string name="monthly">Monthly</string>
     <string name="daily">Daily</string>
@@ -137,16 +138,19 @@
     <string name="subject">Subject</string>
     <string name="billing_history_link">Billing History >></string>
     <string name="billing_disclaimer">The billing information on this page is informational only and may not display total of all charges currently due. To pay your bill please log into EOCWD online bill payment system or visit our payment location.</string>
-
+    
     <string name="next">Next</string>
     <string name="step_1_account_information">Step 1: Account Information</string>
     <string name="step_2_security_questions">Step 2: Security Questions</string>
-
+    
     <string name="compare_ccf">Water Units Consumed (CCF)</string>
     <string name="compare_gallon">Water Units Consumed (Gallon)</string>
     <string name="c_this_year">This year</string>
     <string name="c_previous_year">Previous year</string>
     <string name="c_zip">Zip</string>
     <string name="c_utility">Utility</string>
-    
+    <string name="customer_service_hour">Customer Service Hours</string>
+    <string name="emergency_number">Emergency Number</string>
+    <string name="connect_address">Address</string>
+
 </resources>

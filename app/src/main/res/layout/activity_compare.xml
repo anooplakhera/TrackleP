@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="@dimen/dp_1"
-                android:background="@drawable/layout_border">
+                android:background="@drawable/rounded_corner_blue">
                 
                 <TextView
                     android:id="@+id/txtCCF"
@@ -38,39 +38,46 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="@dimen/dp_4"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/tab_rounded_corner_selected"
                     android:textColor="@color/colorWhite"
                     android:text="@string/view_ccf" />
                 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimaryDark" />
+                    android:background="@color/colorPrimaryDark"
+                    android:visibility="gone" />
                 
                 <TextView
                     android:id="@+id/txtGallon"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:padding="@dimen/dp_4"
+                    android:background="@drawable/rounded_corner_blue"
                     android:gravity="center"
+                    android:textColor="@color/colorWhite"
                     android:text="@string/view_gallon" />
                 
                 <View
-                    android:visibility="gone"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimaryDark" />
+                    android:background="@color/colorPrimaryDark"
+                    android:visibility="gone" />
                 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/txtDollar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="@dimen/dp_4"
+                    android:background="@drawable/rounded_corner_blue"
                     android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
                     android:text="@string/view_dollar" />
             </LinearLayout>
             
@@ -93,8 +100,6 @@
                     android:id="@+id/txtChartDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
                     android:layout_gravity="center_vertical"
                     android:text="@string/compare_ccf"
                     android:textColor="@color/cardview_dark_background"
@@ -105,8 +110,8 @@
                     android:visibility="visible"
                     android:id="@+id/chart"
                     android:layout_marginLeft="@dimen/dp_20"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
             
             
             </FrameLayout>
@@ -225,6 +230,7 @@
             <TextView
                 android:id="@+id/txtusage_disclaimer"
                 android:layout_width="wrap_content"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:text="@string/usage_disclaimer" />
         </LinearLayout>

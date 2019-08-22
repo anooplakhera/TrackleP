@@ -108,10 +108,10 @@ class ConnectWithUtilityActivity : BaseActivity() {
 
     fun updateViews(data: List<ResponseModelClasses.ConnectWithUtilityResponse.Results1.TableThree>) {
 
-        txtContactUsEmail.text = "Email: " + data.get(0).CustomerServiceEmail
-        txtContactUsPhone.text = "Phone: " + data.get(0).PrimaryPhone
-        txtContactUsAddress.text = "Address: " + data.get(0).utilityAddress
-        txtContactUsOpenTime.text = "Email: " + data.get(0).UtilityTime
+        txtContactUsEmailValue.setText(data.get(0).CustomerServiceEmail)
+        txtContactUsPhoneValue.setText(data.get(0).PrimaryPhone)
+        txtAddressValue.setText(data.get(0).utilityAddress)
+        txtCustomerServiceHourValue.setText(data.get(0).UtilityTime)
 
     }
 
@@ -162,4 +162,57 @@ class ConnectWithUtilityActivity : BaseActivity() {
     } catch (e: Exception) {
         e.printStackTrace()
     }
+
+   /* private fun getUpdateUserProfile() = if (Utils.isConnected(this)) {
+        showDialog()
+        try {
+            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call = apiService.getUpdateAccount(
+                getHeader(),
+                ApiUrls.getJSONRequestBody(
+                    RequestClass.getUpdateAccountRequestModel(
+                        editEmail.text.toString(),
+                        editHomePhoneNumberValue.text.toString(),
+                        editMobileNumberValue.text.toString(),
+                        custID,
+                        AppPrefences.getAccountNumber(this),
+                        editAns1Value.text.toString(),
+                        editAns2Value.text.toString(),
+                        sQuesID1,
+                        sQuesID2
+                    )
+                )
+            )
+            call.enqueue(object : Callback<ResponseModelClasses.UpdateProfile> {
+                override fun onResponse(
+                    call: Call<ResponseModelClasses.UpdateProfile>,
+                    response: Response<ResponseModelClasses.UpdateProfile>
+                ) {
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            showToast(response.body()!!.Message)
+                            getUserProfile()
+                            AppLog.printLog("UserUpdateProfileResponse: " + Gson().toJson(response.body()))
+                        }
+                    } catch (e: Exception) {
+                        dismissDialog()
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.UpdateProfile>,
+                    t: Throwable
+                ) {
+                    dismissDialog()
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dismissDialog()
+        }
+    } else {
+        showToast(getString(R.string.internet))
+    }*/
 }

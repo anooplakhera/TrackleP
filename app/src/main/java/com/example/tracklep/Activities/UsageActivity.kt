@@ -155,6 +155,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         chartUsage.setScaleEnabled(false);
         chartUsage.setDrawBarShadow(false);
         chartUsage.setDrawGridBackground(false);
+        chartUsage.setVisibleXRangeMaximum(5f)
+        chartUsage.isHorizontalScrollBarEnabled = true
+        chartUsage.canScrollHorizontally(1)
         chartUsage.animateXY(500, 500);
 
         val yVals1 = ArrayList<BarEntry>()

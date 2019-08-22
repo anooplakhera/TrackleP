@@ -65,12 +65,9 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
     private fun clickPerform() {
         txtCCF.setOnClickListener {
-            txtCCF.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            txtCCF.setTextColor(resources.getColor(R.color.colorWhite))
-            txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
-            txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
+            txtGallon.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+            txtCCF.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_selected))
+            txtDollar.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
 
             unitName = "K"
             getCompareDetails()
@@ -78,12 +75,21 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             resetAlpha()
         }
         txtGallon.setOnClickListener {
-            txtGallon.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            txtGallon.setTextColor(resources.getColor(R.color.colorWhite))
-            txtCCF.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
-            txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
+            txtGallon.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_selected))
+            txtCCF.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+            txtDollar.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+
+            unitName = "G"
+            getCompareDetails()
+            txtChartDesc.setText(R.string.compare_gallon)
+            resetAlpha()
+
+        }
+
+        txtDollar.setOnClickListener {
+            txtGallon.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+            txtCCF.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+            txtDollar.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_selected))
 
             unitName = "G"
             getCompareDetails()
@@ -214,14 +220,15 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         label1: String, label2: String
     ) {
 
-        val barWidth: Float = 0.3f
+        val barWidth: Float = 0.9f
         val barSpace: Float = 0f
         val groupSpace: Float = 0.4f
 
         chart.description = null;
         chart.setPinchZoom(false);
-        chart.setScaleEnabled(false);
+        chart.setScaleEnabled(true);
         chart.setDrawBarShadow(false);
+        chart.isHorizontalScrollBarEnabled = true
         chart.setDrawGridBackground(false);
         chart.animateXY(500, 500);
 
@@ -295,7 +302,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         year: ArrayList<String>
     ) {
 
-        val barWidth: Float = 0.3f
+        val barWidth: Float = 0.9f
         val barSpace: Float = 0f
         val groupSpace: Float = 0.4f
         val groupCount: Int = 4
@@ -305,6 +312,9 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         chart.setScaleEnabled(false);
         chart.setDrawBarShadow(false);
         chart.setDrawGridBackground(false);
+        chart.setVisibleXRangeMaximum(5f)
+        chart.isHorizontalScrollBarEnabled = true
+        chart.canScrollHorizontally(1)
         chart.animateXY(500, 500);
 
         val yVals1 = ArrayList<BarEntry>()
@@ -340,7 +350,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         chart.data = data
         chart.barData.barWidth = barWidth
         chart.xAxis.axisMinimum = 0F
-        chart.xAxis.axisMaximum = 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * groupCount
+        chart.xAxis.axisMaximum = 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
         chart.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
         chart.moveViewToX(10F);

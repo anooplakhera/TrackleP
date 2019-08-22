@@ -62,7 +62,7 @@ class MyProfile : BaseActivity() {
                 getSecurityQues(false, txtQues1Value)
             }
 
-            PhoneNumberUtils.formatNumber(editHomePhoneNumberValue, int defaultFormattingType);
+            //PhoneNumberUtils.formatNumber(editHomePhoneNumberValue, int defaultFormattingType);
             clickPerform()
 
         } catch (e: Exception) {
