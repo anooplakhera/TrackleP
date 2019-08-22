@@ -29,6 +29,9 @@ import kotlin.math.roundToInt
 
 class MainActivity : BaseActivity() {
 
+    private var mType = "G"
+    private var mMode = "D"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -177,8 +180,11 @@ class MainActivity : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.MeterDetails> = apiService.getMeterDetails(
                 getHeader(),
-                ApiUrls.getJSONRequestBody(RequestClass.getMeterDetailsRequestModel(
-                    AppPrefences.getAccountNumber(this))),
+                ApiUrls.getJSONRequestBody(
+                    RequestClass.getMeterDetailsRequestModel(
+                        AppPrefences.getAccountNumber(this)
+                    )
+                ),
                 AppPrefences.getAccountNumber(this)
             )
             call.enqueue(object : Callback<ResponseModelClasses.MeterDetails> {
@@ -192,6 +198,7 @@ class MainActivity : BaseActivity() {
                         UserMeterListData.addArrayList(response.body()!!.Results.Table)
                         getWaterUsage()
                         AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
+                        AppPrefences.setIsAMI(this@MainActivity, response.body()!!.Results.Table.get(0).IsAMI)
                     }
                 }
 
@@ -217,8 +224,11 @@ class MainActivity : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.WaterUsages> = apiService.getWaterUsages(
                 getHeader(),
-                ApiUrls.getJSONRequestBody(RequestClass.getWaterUsageRequestModel(
-                    AppPrefences.getAccountNumber(this)))
+                ApiUrls.getJSONRequestBody(
+                    RequestClass.getWaterUsageRequestModel(
+                        AppPrefences.getAccountNumber(this), mType, mMode
+                    )
+                )
             )
             call.enqueue(object : Callback<ResponseModelClasses.WaterUsages> {
                 override fun onResponse(

@@ -19,6 +19,7 @@ object AppPrefences {
     private val Login = "login"
     private val LoginData = "logindata"
     private val AccountNumber = "AccountNumber"
+    private val IsAMI = "IsAMI"
     private val MeterUsage = "MeterUsage"
     private val MyProfileDetails = "MyProfileDetails"
 
@@ -56,6 +57,20 @@ object AppPrefences {
         )
         val editor = prefs.edit()
         editor.putString(USERID, data)
+        editor.commit()
+    }
+
+    fun getIsAMI(ctx: Context): Boolean? {
+        return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+            .getBoolean(IsAMI, false)
+    }
+
+    fun setIsAMI(ctx: Context, data: Boolean) {
+        val prefs = ctx.getSharedPreferences(
+            PREFS_FILE_NAME, Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putBoolean(IsAMI, data)
         editor.commit()
     }
 

@@ -7,12 +7,19 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.example.hp.togelresultapp.Preferences.AppPrefences
+import com.example.tracklep.ApiClient.ApiClient
+import com.example.tracklep.ApiClient.ApiInterface
+import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.UserMeterListData
 import com.example.tracklep.DataClasses.WaterUsageData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.MyValueFormatter
+import com.example.tracklep.Utils.RequestClass
+import com.example.tracklep.Utils.Utils
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -26,12 +33,18 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_usage.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.OnItemSelectedListener {
 
-    var selectedAlpha = 0.5f
+    private var selectedAlpha = 0.5f
+    private var mType = "W"
+    private var mMode = "D"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,21 +61,13 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                 startActivity(Intent(this, UsageNotificationActivity::class.java))
             }
 
-
+            checkIsAMI()
 
             clickPerform()
 
-            setChartData(
-                WaterUsageData.getUsageConsumedBar(),
-                WaterUsageData.getUsageBar(),
-                WaterUsageData.getUsageEmptyBar(),
-                WaterUsageData.getMonthList(),
-                getString(R.string.c_this_year),
-                getString(R.string.c_previous_year),
-                getString(R.string.c_previous_year)
-            )
 
-            resetAlpha()
+            getWaterUsage()
+
             setupSpinner()
 
         } catch (e: Exception) {
@@ -70,6 +75,20 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         }
     }
 
+    fun checkIsAMI() {
+        if (AppPrefences.getIsAMI(this) == true) {
+            lytBiMonthly.alpha = selectedAlpha
+            lytHourly.visibility = View.GONE
+            lytDaily.visibility = View.GONE
+            lytMonthly.visibility = View.GONE
+            mMode = "B"
+        } else {
+            lytHourly.visibility = View.VISIBLE
+            lytDaily.visibility = View.VISIBLE
+            lytMonthly.visibility = View.VISIBLE
+            resetAlpha()
+        }
+    }
 
     private fun clickPerform() {
         txtCCF.setOnClickListener {
@@ -79,7 +98,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
             txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
-            resetAlpha()
+            mType = "W"
+            checkIsAMI()
+            getWaterUsage()
 
         }
 
@@ -90,7 +111,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
             txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
-            resetAlpha()
+            mType = "G"
+            checkIsAMI()
+            getWaterUsage()
 
         }
 
@@ -101,7 +124,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
             txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
-            resetAlpha()
+            mType = "D"
+            checkIsAMI()
+            getWaterUsage()
         }
 
         lytHourly.setOnClickListener {
@@ -228,6 +253,63 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         leftAxis.setDrawGridLines(false)
         leftAxis.spaceTop = 35f
         leftAxis.axisMinimum = 0f
+    }
+
+    private fun getWaterUsage() = if (Utils.isConnected(this)) {
+        showDialog()
+        try {
+            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call: Call<ResponseModelClasses.WaterUsages> = apiService.getWaterUsages(
+                getHeader(),
+                ApiUrls.getJSONRequestBody(
+                    RequestClass.getWaterUsageRequestModel(
+                        AppPrefences.getAccountNumber(this), mType, mMode
+                    )
+                )
+            )
+            call.enqueue(object : Callback<ResponseModelClasses.WaterUsages> {
+                override fun onResponse(
+                    call: Call<ResponseModelClasses.WaterUsages>,
+                    response: Response<ResponseModelClasses.WaterUsages>
+                ) {
+                    dismissDialog()
+                    if (response.body() != null) {
+                        var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
+                        data.addAll(response.body()!!.Results.Table)
+                        data.reverse()
+                        WaterUsageData.clearArrayList()
+                        WaterUsageData.addArrayList(data)
+
+
+                        setChartData(
+                            WaterUsageData.getUsageConsumedBar(),
+                            WaterUsageData.getUsageBar(),
+                            WaterUsageData.getUsageEmptyBar(),
+                            WaterUsageData.getMonthList(),
+                            getString(R.string.c_this_year),
+                            getString(R.string.c_previous_year),
+                            getString(R.string.c_previous_year)
+                        )
+//                        AppPrefences.setMeterUsageData(this@UsageActivity, data[0])
+
+//                        setMeterData(AppPrefences.getMeterUsageData(this@UsageActivity))
+
+                        AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseModelClasses.WaterUsages>, t: Throwable) {
+                    AppLog.printLog("Failure()- ", t.message.toString())
+                    dismissDialog()
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dismissDialog()
+        }
+    } else {
+        //dismissDialog()
+        showToast(getString(R.string.internet))
     }
 
     private fun resetAlpha() {
