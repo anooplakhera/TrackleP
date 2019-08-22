@@ -1,6 +1,8 @@
 package com.example.tracklep.DataClasses
 
+import com.example.tracklep.DataClasses.CompareSpendingData.mArrayList2
 import com.example.tracklep.DataModels.ResponseModelClasses
+import com.example.tracklep.Utils.Utils
 
 object WaterUsageData {
     var mArrayList: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>? = null
@@ -56,6 +58,16 @@ object WaterUsageData {
             e.printStackTrace()
         }
         return array
+    }
+
+    @Synchronized
+    fun getUsagePeriod(): String {
+        var title = ""
+        title += Utils.getNameOfMonth(mArrayList!![getCount() - 1].Month) + " " + mArrayList!![getCount() - 1].Year + " to " + Utils.getNameOfMonth(
+            mArrayList!![0].Month
+        ) + " " + mArrayList!![0].Year
+
+        return title
     }
 
     @Synchronized
