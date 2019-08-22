@@ -6,6 +6,7 @@
     android:background="@drawable/drawable_background_gradient"
     android:orientation="vertical"
     android:focusableInTouchMode="true"
+    android:fitsSystemWindows="true"
     tools:context=".Activities.SignupStepOneActivity">
     
     <include

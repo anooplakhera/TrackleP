@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/drawable_background_gradient"
     android:focusableInTouchMode="true"
+    android:fitsSystemWindows="true"
     tools:context=".Activities.ConnectWithUtilityActivity"
     android:orientation="vertical">
     

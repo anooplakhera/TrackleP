@@ -4,7 +4,6 @@
 
     <gradient
         android:angle="45"
-        android:centerColor="@color/commonBackgroundGradient1"
         android:endColor="@color/commonBackgroundGradient1"
         android:startColor="@color/commonBackgroundGradient2"
         android:type="linear"

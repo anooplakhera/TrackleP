@@ -111,7 +111,7 @@
     <string name="consumption_charge">Consumption Charge</string>
     <string name="meter_service_charge">Meter Service Charge</string>
     <string name="capital_project_charge">Capital Project Charge</string>
-    <string name="total_payable_amount">Total Payable Amount</string>
+    <string name="total_payable_amount">Account Total</string>
     <string name="lowest_this_period">Lowest Usage</string>
     <string name="highest_this_period">Highest Usage</string>
     <string name="utility_account_number">Utility Account Number</string>
@@ -145,6 +145,10 @@
     
     <string name="compare_ccf">Water Units Consumed (CCF)</string>
     <string name="compare_gallon">Water Units Consumed (Gallon)</string>
+    <string name="compare_dollar">Water Consumed (Dollar)</string>
+    <string name="usage_ccf">Usage (CCF)</string>
+    <string name="usage_gallon">Usage (Gallon)</string>
+    <string name="usage_dollar">Usage (Dollar)</string>
     <string name="c_this_year">This year</string>
     <string name="c_previous_year">Previous year</string>
     <string name="c_zip">Zip</string>

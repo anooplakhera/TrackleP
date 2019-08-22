@@ -34,7 +34,11 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.MPPointF
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_compare.*
 import kotlinx.android.synthetic.main.activity_usage.*
+import kotlinx.android.synthetic.main.activity_usage.txtCCF
+import kotlinx.android.synthetic.main.activity_usage.txtDollar
+import kotlinx.android.synthetic.main.activity_usage.txtGallon
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -92,41 +96,58 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
 
     private fun clickPerform() {
         txtCCF.setOnClickListener {
-            txtCCF.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            /*txtCCF.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             txtCCF.setTextColor(resources.getColor(R.color.colorWhite))
             txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
             txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
+            txtDollar.setTextColor(resources.getColor(R.color.colorBlack))*/
+
+            txtGallon.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+            txtCCF.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_selected))
+            txtDollar.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+
             mType = "W"
             checkIsAMI()
             getWaterUsage()
+            txtUsageChartDesc.setText(R.string.usage_ccf)
 
         }
 
         txtGallon.setOnClickListener {
-            txtGallon.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            txtGallon.setTextColor(resources.getColor(R.color.colorWhite))
-            txtCCF.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
-            txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtDollar.setTextColor(resources.getColor(R.color.colorBlack))
+            /* txtGallon.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+             txtGallon.setTextColor(resources.getColor(R.color.colorWhite))
+             txtCCF.setBackgroundColor(resources.getColor(R.color.colorWhite))
+             txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
+             txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
+             txtDollar.setTextColor(resources.getColor(R.color.colorBlack))*/
+            txtGallon.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_selected))
+            txtCCF.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+            txtDollar.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+
             mType = "G"
             checkIsAMI()
             getWaterUsage()
+            txtUsageChartDesc.setText(R.string.usage_gallon)
 
         }
 
         txtDollar.setOnClickListener {
-            txtDollar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            /*txtDollar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             txtDollar.setTextColor(resources.getColor(R.color.colorWhite))
             txtCCF.setBackgroundColor(resources.getColor(R.color.colorWhite))
             txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
             txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
+            txtGallon.setTextColor(resources.getColor(R.color.colorBlack))*/
+
+            txtGallon.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+            txtCCF.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
+            txtDollar.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_selected))
+
             mType = "D"
             checkIsAMI()
             getWaterUsage()
+            txtUsageChartDesc.setText(R.string.usage_dollar)
         }
 
         lytHourly.setOnClickListener {
@@ -159,7 +180,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
     private fun setupSpinner() {
         spinnerMeter!!.onItemSelectedListener = this
         val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, UserMeterListData.getMeterNumberList())
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        aa.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         spinnerMeter!!.setAdapter(aa)
     }
 
@@ -174,6 +195,13 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         val barWidth: Float = 0.3f
         val barSpace: Float = 0f
         val groupSpace: Float = 0.4f
+
+        txtHighestThisPeriodValue.setText(WaterUsageData.mArrayList?.get(0)?.HIGHEST)
+        txtLowestThisPeriodValue.setText(WaterUsageData.mArrayList?.get(0)?.LOWEST)
+        txtSoFartThisMonthValue.setText(WaterUsageData.mArrayList?.get(0)?.TotalValue)
+        txtProjectedUsageValue.setText(WaterUsageData.mArrayList?.get(0)?.HIGHEST)//TO BE UPDATED
+
+        txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod()
 
         chartUsage.description = null;
         chartUsage.setPinchZoom(false);

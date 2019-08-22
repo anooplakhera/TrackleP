@@ -134,7 +134,7 @@ object ResponseModelClasses {
 
         ) {
             data class TableOne(
-                val Month: Int,
+                val Month: String,
                 val Year: String,
                 val TotalValue: String,
                 val ZipCode: String,

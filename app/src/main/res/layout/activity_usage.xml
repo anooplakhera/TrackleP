@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ryl_conservationParent"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:focusableInTouchMode="true"
     android:layout_height="match_parent"
+    android:background="@drawable/drawable_background_gradient"
     tools:context=".Activities.UsageActivity"
     android:orientation="vertical">
     
@@ -29,18 +31,18 @@
                 android:id="@+id/lytUsageTabs"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="@dimen/dp_1"
-                android:background="@drawable/layout_border"
+                android:background="@drawable/rounded_corner_blue"
                 android:weightSum="3">
                 
                 <TextView
                     android:id="@+id/txtCCF"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_35"
                     android:layout_weight="1"
                     android:padding="@dimen/dp_4"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/tab_rounded_corner_selected"
                     android:textColor="@color/colorWhite"
                     android:text="@string/view_ccf" />
                 
@@ -52,10 +54,13 @@
                 <TextView
                     android:id="@+id/txtGallon"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_35"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:padding="@dimen/dp_4"
+                    android:background="@drawable/rounded_corner_blue"
                     android:gravity="center"
+                    android:textColor="@color/colorWhite"
                     android:text="@string/view_gallon" />
                 
                 <View
@@ -66,10 +71,13 @@
                 <TextView
                     android:id="@+id/txtDollar"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_35"
                     android:layout_weight="1"
                     android:padding="@dimen/dp_4"
+                    android:background="@drawable/rounded_corner_blue"
                     android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorWhite"
                     android:text="@string/view_dollar" />
             </LinearLayout>
             
@@ -79,7 +87,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_15"
-                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/drawable_round_corner"
+                android:layout_margin="@dimen/dp_5"
                 android:orientation="horizontal">
                 
                 <LinearLayout
@@ -183,211 +192,211 @@
                 </LinearLayout>
             </LinearLayout>
             
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_5"
-                android:background="@color/colorLightGray100" />
-            
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="10">
-                
-                <TextView
-                    android:id="@+id/txt_date_from_to"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_4"
-                    android:layout_weight="5"
-                    android:gravity="start|center"
-                    android:textColor="@color/colorBlack"
-                    android:text="Jun 2018 - May 2019" />
-                
-                <RelativeLayout
-                    android:id="@+id/r_lyt_utilities"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_weight="5"
-                    android:background="@drawable/white_border_gradient">
-                    
-                    <ImageView
-                        android:layout_width="@dimen/dp_30"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_right_arrow"
-                        android:gravity="center"
-                        android:layout_alignParentRight="true" />
-                    
-                    <Spinner
-                        android:id="@+id/spinnerMeter"
-                        android:visibility="visible"
-                        android:background="@android:color/transparent"
-                        android:spinnerMode="dropdown"
-                        android:layout_margin="@dimen/dp_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"></Spinner>
-                </RelativeLayout>
-            
-            </LinearLayout>
-            
-            <!--Graph Layout-->
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="350dp">
-                
-                
-                <com.github.mikephil.charting.charts.BarChart
-                    android:id="@+id/chartUsage"
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent" />
-            
-            
-            </FrameLayout>
-            
-            <!--Highest & Lowest This Period-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_5"
-                android:weightSum="4"
-                android:background="@color/colorWhite">
+                android:background="@drawable/drawable_round_corner"
+                android:orientation="vertical">
                 
-                <!--Highest This Period-->
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dp_4"
+                    android:weightSum="10">
+                    
+                    <TextView
+                        android:id="@+id/txt_date_from_to_usage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_4"
+                        android:layout_weight="5"
+                        android:gravity="start|center"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/sp_14" />
+                    
+                    <RelativeLayout
+                        android:id="@+id/r_lyt_utilities"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:layout_weight="5"
+                        android:background="@drawable/white_border_gradient">
+                        
+                        <ImageView
+                            android:layout_width="@dimen/dp_30"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_right_arrow"
+                            android:gravity="center"
+                            android:layout_alignParentRight="true" />
+                        
+                        <Spinner
+                            android:id="@+id/spinnerMeter"
+                            android:visibility="visible"
+                            android:background="@android:color/transparent"
+                            android:spinnerMode="dropdown"
+                            android:layout_margin="@dimen/dp_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"></Spinner>
+                    </RelativeLayout>
+                
+                </LinearLayout>
+                
+                <!--Graph Layout-->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:paddingBottom="@dimen/dp_10">
+                    
+                    <com.example.tracklep.Widgets.VerticalTextView
+                        android:id="@+id/txtUsageChartDesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="@dimen/dp_12" />
+                    
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/chartUsage"
+                        android:layout_marginLeft="@dimen/dp_22"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent" />
+                
+                </FrameLayout>
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/dp_5"
+                android:background="@drawable/drawable_round_corner">
+                
+                <!--Highest & Lowest This Period Labels-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="4">
                     
                     <TextView
                         android:id="@+id/txtHighestThisPeriod"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/highest_this_period"
-                        android:textSize="@dimen/sp_14"
-                        android:gravity="center"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_2"
-                        android:textColor="@color/colorAccent" />
-                    
-                    <TextView
-                        android:id="@+id/txtHighestThisPeriodValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/n_a"
                         android:textSize="@dimen/sp_12"
                         android:gravity="center"
-                        android:textStyle="bold"
                         android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_2"
-                        android:textColor="@color/colorLightBlack" />
-                </LinearLayout>
-                
-                <!--Lowest This Period-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                        android:padding="@dimen/dp_4"
+                        android:textColor="@color/colorBlack" />
                     
                     <TextView
                         android:id="@+id/txtLowestThisPeriod"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:text="@string/lowest_this_period"
                         android:gravity="center"
-                        android:textSize="@dimen/sp_14"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_2"
-                        android:textColor="@color/colorAccent" />
-                    
-                    <TextView
-                        android:id="@+id/txtLowestThisPeriodValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="9 CCF"
-                        android:gravity="center"
-                        android:textStyle="bold"
+                        android:layout_weight="1"
                         android:textSize="@dimen/sp_12"
                         android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_2"
-                        android:textColor="@color/colorLightBlack" />
-                
-                </LinearLayout>
-                
-                <!--So far this month-->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                        android:padding="@dimen/dp_4"
+                        android:textColor="@color/colorBlack" />
                     
                     <TextView
                         android:id="@+id/txtSoFartThisMonth"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="@string/current_usage"
-                        android:textSize="@dimen/sp_14"
-                        android:gravity="center"
-                        android:fontFamily="@font/roboto"
-                        android:padding="@dimen/dp_2"
-                        android:textColor="@color/colorAccent" />
-                    
-                    <TextView
-                        android:id="@+id/txtSoFartThisMonthValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@string/n_a"
                         android:textSize="@dimen/sp_12"
                         android:gravity="center"
-                        android:textStyle="bold"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
-                        android:textColor="@color/colorLightBlack" />
+                        android:textColor="@color/colorBlack" />
+                    
+                    <TextView
+                        android:id="@+id/txtProjectedUsage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/usage_forecast"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_12"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_2"
+                        android:textColor="@color/colorBlack" />
+                
                 </LinearLayout>
                 
                 <!--Projected Usage-->
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
+                    android:layout_margin="@dimen/dp_5"
+                    android:weightSum="4"
+                    android:orientation="horizontal">
                     
                     <TextView
-                        android:id="@+id/txtProjectedUsage"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/txtHighestThisPeriodValue"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/usage_forecast"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/sp_12"
                         android:gravity="center"
-                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
-                        android:textColor="@color/colorAccent" />
+                        android:textColor="@color/commonBackgroundGradient1" />
                     
                     <TextView
-                        android:id="@+id/txtProjectedUsageValue"
-                        android:layout_width="match_parent"
+                        android:id="@+id/txtLowestThisPeriodValue"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="9 CCF"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:textStyle="bold"
                         android:textSize="@dimen/sp_12"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
-                        android:textColor="@color/colorLightBlack" />
+                        android:textColor="@color/commonBackgroundGradient1" />
+                    
+                    <TextView
+                        android:id="@+id/txtSoFartThisMonthValue"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/sp_12"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_2"
+                        android:textColor="@color/commonBackgroundGradient1" />
+                    
+                    <TextView
+                        android:id="@+id/txtProjectedUsageValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/sp_12"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_2"
+                        android:textColor="@color/commonBackgroundGradient1" />
                 
                 </LinearLayout>
             
             </LinearLayout>
-            
             <!--Usage Disclaimer-->
             <TextView
                 android:id="@+id/txtusage_disclaimer"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_margin="@dimen/dp_5"
+                android:padding="@dimen/dp_4"
+                android:textSize="@dimen/dp_10"
+                android:background="@drawable/drawable_round_corner"
                 android:layout_height="wrap_content"
                 android:text="@string/usage_disclaimer" />
         </LinearLayout>

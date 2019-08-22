@@ -46,7 +46,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         setContentView(R.layout.activity_compare)
 
         try {
-            txtCABtitle.text = getString(R.string.compare_spending)
+            txtCABtitle.text = getString(R.string.compare)
             imgCABback.setOnClickListener {
                 finish()
             }
@@ -91,9 +91,9 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             txtCCF.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_unselected))
             txtDollar.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_selected))
 
-            unitName = "G"
+            unitName = "D"
             getCompareDetails()
-            txtChartDesc.setText(R.string.compare_gallon)
+            txtChartDesc.setText(R.string.compare_dollar)
             resetAlpha()
 
         }
@@ -220,7 +220,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         label1: String, label2: String
     ) {
 
-        val barWidth: Float = 0.9f
+        val barWidth: Float = 0.6f
         val barSpace: Float = 0f
         val groupSpace: Float = 0.4f
 
@@ -302,8 +302,8 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         year: ArrayList<String>
     ) {
 
-        val barWidth: Float = 0.9f
-        val barSpace: Float = 0f
+        val barWidth: Float = 0.6f
+        val barSpace: Float = 0.2f
         val groupSpace: Float = 0.4f
         val groupCount: Int = 4
 

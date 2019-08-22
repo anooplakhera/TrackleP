@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:background="@drawable/drawable_background_gradient"
     android:focusableInTouchMode="true"
     tools:context=".Activities.BillingActivity">
@@ -148,85 +149,7 @@
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_4"
                         android:textStyle="bold"
-                        android:textColor="@color/design_default_color_primary" />
-                    
-                    <!--Meter Number & Account Balance-->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorWhite">
-                        
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_alignParentLeft="true">
-                            
-                            <TextView
-                                android:id="@+id/txtMeterNumber"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/meter_number"
-                                android:gravity="start"
-                                android:textSize="@dimen/sp_14"
-                                android:fontFamily="@font/roboto"
-                                android:padding="@dimen/dp_4"
-                                android:textColor="@color/commonLabelTextColor" />
-                            
-                            <TextView
-                                android:id="@+id/txtMeterNumberValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/n_a"
-                                android:gravity="start"
-                                android:textSize="@dimen/sp_14"
-                                android:textStyle="bold"
-                                android:fontFamily="@font/roboto"
-                                android:padding="@dimen/dp_4"
-                                android:textColor="@color/colorLightBlack" />
-                        </LinearLayout>
-                        
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_alignParentRight="true">
-                            
-                            <TextView
-                                android:id="@+id/txtAccountBalance"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/account_balance"
-                                android:textSize="@dimen/sp_14"
-                                android:gravity="start"
-                                android:fontFamily="@font/roboto"
-                                android:padding="@dimen/dp_4"
-                                android:textColor="@color/commonLabelTextColor" />
-                            
-                            <TextView
-                                android:id="@+id/txtAccountBalanceValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text=""
-                                android:gravity="start"
-                                android:textStyle="bold"
-                                android:textSize="@dimen/sp_14"
-                                android:fontFamily="@font/roboto"
-                                android:padding="@dimen/dp_4"
-                                android:textColor="@color/colorLightBlack" />
-                        
-                        </LinearLayout>
-                    </RelativeLayout>
-                    
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.8dp"
-                        android:layout_marginTop="@dimen/dp_1"
-                        android:layout_marginBottom="@dimen/dp_1"
-                        android:layout_marginLeft="@dimen/dp_6"
-                        android:layout_marginRight="@dimen/dp_6"
-                        android:background="@color/colorLightGray100"
-                        android:visibility="gone" />
+                        android:textColor="@color/commonBackgroundGradient1" />
                     
                     <!--Billing Period From To-->
                     <RelativeLayout
@@ -250,7 +173,7 @@
                                 android:textSize="@dimen/sp_14"
                                 android:fontFamily="@font/roboto"
                                 android:padding="@dimen/dp_4"
-                                android:textColor="@color/commonLabelTextColor" />
+                                android:textColor="@color/colorLightBlack" />
                             
                             <TextView
                                 android:id="@+id/txtBillingPeriodFromValue"
@@ -308,6 +231,84 @@
                         android:background="@color/colorLightGray100"
                         android:visibility="gone" />
                     
+                    <!--Meter Number & Account Balance-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite">
+                        
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_alignParentLeft="true">
+                            
+                            <TextView
+                                android:id="@+id/txtMeterNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/meter_number"
+                                android:gravity="start"
+                                android:textSize="@dimen/sp_14"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/dp_4"
+                                android:textColor="@color/colorLightBlack" />
+                            
+                            <TextView
+                                android:id="@+id/txtMeterNumberValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/n_a"
+                                android:gravity="start"
+                                android:textSize="@dimen/sp_14"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/dp_4"
+                                android:textColor="@color/colorLightBlack" />
+                        </LinearLayout>
+                        
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_alignParentRight="true">
+                            
+                            <TextView
+                                android:id="@+id/txtAccountBalance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/account_balance"
+                                android:textSize="@dimen/sp_14"
+                                android:gravity="start"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/dp_4"
+                                android:textColor="@color/colorLightBlack" />
+                            
+                            <TextView
+                                android:id="@+id/txtAccountBalanceValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:gravity="start"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/sp_14"
+                                android:fontFamily="@font/roboto"
+                                android:padding="@dimen/dp_4"
+                                android:textColor="@color/colorLightBlack" />
+                        
+                        </LinearLayout>
+                    </RelativeLayout>
+                    
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginTop="@dimen/dp_1"
+                        android:layout_marginBottom="@dimen/dp_1"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:background="@color/colorLightGray100"
+                        android:visibility="gone" />
+                    
                     <!--Previous & Current Meter Reading-->
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -330,7 +331,7 @@
                                 android:textSize="@dimen/sp_14"
                                 android:fontFamily="@font/roboto"
                                 android:padding="@dimen/dp_4"
-                                android:textColor="@color/commonLabelTextColor" />
+                                android:textColor="@color/colorLightBlack" />
                             
                             <TextView
                                 android:id="@+id/txtPreviousMeterReadingValue"
@@ -360,7 +361,7 @@
                                 android:gravity="start"
                                 android:fontFamily="@font/roboto"
                                 android:padding="@dimen/dp_4"
-                                android:textColor="@color/commonLabelTextColor" />
+                                android:textColor="@color/colorLightBlack" />
                             
                             <TextView
                                 android:id="@+id/txtCurrentMeterReadingValue"
@@ -391,7 +392,6 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_6"
                         android:background="@color/colorWhite">
                         
                         <LinearLayout
@@ -409,7 +409,7 @@
                                 android:textSize="@dimen/sp_14"
                                 android:fontFamily="@font/roboto"
                                 android:padding="@dimen/dp_4"
-                                android:textColor="@color/commonLabelTextColor" />
+                                android:textColor="@color/colorLightBlack" />
                             
                             <TextView
                                 android:id="@+id/txtTotalWaterUsageValue"
@@ -448,7 +448,7 @@
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_4"
                         android:textStyle="bold"
-                        android:textColor="@color/design_default_color_primary" />
+                        android:textColor="@color/commonBackgroundGradient1" />
                     
                     <!--Consumption Charge-->
                     <RelativeLayout
@@ -466,7 +466,7 @@
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/dp_4"
-                            android:textColor="@color/commonLabelTextColor" />
+                            android:textColor="@color/commonBackgroundGradient1" />
                         
                         <TextView
                             android:id="@+id/txtConsumptionChargesValue"
@@ -509,7 +509,7 @@
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/dp_4"
-                            android:textColor="@color/commonLabelTextColor" />
+                            android:textColor="@color/colorLightBlack" />
                         
                         <TextView
                             android:id="@+id/txtMeterServiceChargValue"
@@ -552,7 +552,7 @@
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/dp_4"
-                            android:textColor="@color/commonLabelTextColor" />
+                            android:textColor="@color/colorLightBlack" />
                         
                         <TextView
                             android:id="@+id/txtCapitalProjectChargeValue"
@@ -597,7 +597,7 @@
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/dp_4"
                             android:textStyle="bold"
-                            android:textColor="@color/design_default_color_primary" />
+                            android:textColor="@color/commonBackgroundGradient1" />
                         
                         <TextView
                             android:id="@+id/txtAccountTotalValue"
