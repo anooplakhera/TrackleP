@@ -51,8 +51,8 @@ object WaterUsageData {
         var array = ArrayList<String>()
         try {
             for (i in 0 until getCount()) {
-//                array.add(Utils.parseDateToddMMyyyy(mArrayList?.get(i)!!.UsageDate))
-                array.add(mArrayList?.get(i)!!.UsageDate)
+                array.add(Utils.parseDateToddMMyyyy(mArrayList?.get(i)!!.UsageDate))
+//                array.add(mArrayList?.get(i)!!.UsageDate)
             }
         } catch (e: Exception) {
             e.printStackTrace()

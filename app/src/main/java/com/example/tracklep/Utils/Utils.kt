@@ -16,6 +16,7 @@ import android.os.Build
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.example.tracklep.R
@@ -229,11 +230,13 @@ object Utils {
 
     fun parseDateToddMMyyyy(time: String): String {
 
+        var format = SimpleDateFormat("MMM dd,yyyy");
+        var date = format.format(Date.parse(time));
 
-        var originalFormat = SimpleDateFormat("MM dd yyyy", Locale.ENGLISH);
-        var targetFormat = SimpleDateFormat("dd-MMM-yyyy");
-        var date = originalFormat.parse(time);
-        var formattedDate = targetFormat.format(date);  // 20120821
+        /* var originalFormat = SimpleDateFormat("MM dd yyyy", Locale.ENGLISH);
+         var targetFormat = SimpleDateFormat("dd-MMM-yyyy");
+         var date = originalFormat.parse(time);
+         var formattedDate = targetFormat.format(date);  // 20120821*/
 
 //        var inputPattern = "dd-MM-yyyy "
 //        var outputPattern = "dd-MMM-yyyy"
@@ -249,7 +252,9 @@ object Utils {
 //        } catch (e: ParseException) {
 //            e.printStackTrace();
 //        }
-        return formattedDate.toString();
+//        return formattedDate.toString();
+        Log.d("NewDate", date)
+        return date.toString();
     }
 
     fun getDayNumberSuffix(day: Int): String {

@@ -7,309 +7,317 @@
     android:focusable="false"
     android:fitsSystemWindows="true">
     
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorWhite"
-        android:focusableInTouchMode="true">
+        android:layout_height="wrap_content">
         
-        <FrameLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clickable="true">
+            android:background="@color/colorWhite"
+            android:focusableInTouchMode="true">
             
-            <pl.droidsonroids.gif.GifImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/waterflow"
-                android:scaleType="fitXY" />
-            
-            <!--Rest of your coding-->
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:clickable="true">
                 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    
-                    <ImageView
-                        android:layout_width="@dimen/dp_150"
-                        android:layout_height="@dimen/dp_40"
-                        android:src="@drawable/eocwd_logo"
-                        android:layout_centerHorizontal="true" />
-                    
-                    <ImageView
-                        android:id="@+id/imgNavIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/ic_menu_icon"
-                        android:layout_marginRight="@dimen/dp_10"
-                        android:layout_alignParentRight="true" />
-                </RelativeLayout>
+                <pl.droidsonroids.gif.GifImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/waterflow"
+                    android:scaleType="fitXY" />
                 
+                <!--Rest of your coding-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_4"
-                    android:overScrollMode="never"
-                    android:padding="@dimen/dp_10"
                     android:orientation="vertical">
                     
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/txtDashTitle"
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:gravity="center"
-                        android:fontFamily="@font/roboto"
-                        android:textSize="@dimen/sp_19"
-                        android:textStyle="bold" />
-                    
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/dp_15"
-                        android:layout_below="@id/txtDashTitle">
-                        
-                        <com.github.lzyzsd.circleprogress.ArcProgress
-                            android:id="@+id/arc_progress"
-                            android:layout_width="140dp"
-                            android:fontFamily="@font/roboto"
-                            android:layout_height="140dp"
-                            custom:arc_text_color="@android:color/transparent"
-                            custom:arc_stroke_width="@dimen/dp_10"
-                            android:layout_gravity="center"
-                            custom:arc_finished_color="@color/colorProgress"
-                            custom:arc_unfinished_color="@color/colorWhiteGray3" />
-                        
-                        <android.support.v7.widget.AppCompatTextView
-                            android:visibility="visible"
-                            android:id="@+id/txtMeterValue"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:layout_gravity="center"
-                            android:textSize="@dimen/sp_15"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/roboto" />
-                    </FrameLayout>
-                    
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        
-                        <android.support.v7.widget.AppCompatTextView
-                            android:id="@+id/txtUsagesMessage"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dp_60"
-                            android:textColor="@color/colorWhite"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/roboto"
-                            android:textSize="@dimen/sp_14"
-                            android:text="You have consumed 36704.36 Gallons water so far this calendar month" />
+                        android:layout_marginTop="@dimen/dp_5">
                         
                         <ImageView
                             android:layout_width="@dimen/dp_150"
-                            android:layout_height="@dimen/dp_50"
-                            android:src="@drawable/trackle_logo_white"
-                            android:layout_marginTop="@dimen/dp_10"
-                            android:layout_gravity="center"
+                            android:layout_height="@dimen/dp_40"
+                            android:src="@drawable/eocwd_logo"
                             android:layout_centerHorizontal="true" />
                         
-                        <LinearLayout
+                        <ImageView
+                            android:id="@+id/imgNavIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_menu_icon"
+                            android:layout_marginRight="@dimen/dp_10"
+                            android:layout_alignParentRight="true" />
+                    </RelativeLayout>
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_4"
+                        android:overScrollMode="never"
+                        android:padding="@dimen/dp_10"
+                        android:orientation="vertical">
+                        
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txtDashTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_20"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:gravity="center"
+                            android:fontFamily="@font/roboto"
+                            android:textSize="@dimen/sp_19"
+                            android:textStyle="bold" />
+                        
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
                             android:layout_marginTop="@dimen/dp_15"
-                            android:orientation="horizontal">
+                            android:layout_below="@id/txtDashTitle">
                             
-                            <LinearLayout
-                                android:id="@+id/lytAccount"
-                                android:layout_width="0sp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dp_5"
-                                android:clickable="true"
-                                android:background="@drawable/ripple_background"
-                                android:orientation="vertical">
-                                
-                                <ImageView
-                                    android:layout_width="@dimen/dp_50"
-                                    android:layout_height="@dimen/dp_50"
-                                    android:layout_gravity="top|center"
-                                    android:src="@drawable/dash_account" />
-                                
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/my_account"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:textColor="@color/colorWhite"
-                                    android:textSize="@dimen/sp_13"
-                                    android:fontFamily="@font/roboto" />
-                            </LinearLayout>
+                            <com.github.lzyzsd.circleprogress.ArcProgress
+                                android:id="@+id/arc_progress"
+                                android:layout_width="140dp"
+                                android:fontFamily="@font/roboto"
+                                android:layout_height="140dp"
+                                custom:arc_text_color="@android:color/transparent"
+                                custom:arc_stroke_width="@dimen/dp_10"
+                                android:layout_gravity="center"
+                                custom:arc_finished_color="@color/colorProgress"
+                                custom:arc_unfinished_color="@color/colorWhiteGray3" />
                             
-                            <LinearLayout
-                                android:id="@+id/lytBilling"
-                                android:layout_width="0sp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dp_5"
-                                android:clickable="true"
-                                android:background="@drawable/ripple_background"
-                                android:orientation="vertical">
-                                
-                                <ImageView
-                                    android:layout_width="@dimen/dp_50"
-                                    android:layout_height="@dimen/dp_50"
-                                    android:layout_gravity="top|center"
-                                    android:src="@drawable/dash_billing" />
-                                
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/billing"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:textColor="@color/colorWhite"
-                                    android:textSize="@dimen/sp_13"
-                                    android:fontFamily="@font/roboto" />
-                            </LinearLayout>
-                            
-                            <LinearLayout
-                                android:id="@+id/lytConnectUtility"
-                                android:layout_width="0sp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:clickable="true"
-                                android:background="@drawable/ripple_background"
-                                android:padding="@dimen/dp_5"
-                                android:orientation="vertical">
-                                
-                                <ImageView
-                                    android:layout_width="@dimen/dp_50"
-                                    android:layout_height="@dimen/dp_50"
-                                    android:layout_gravity="top|center"
-                                    android:src="@drawable/dash_connect" />
-                                
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/connect_with_utility"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:textColor="@color/colorWhite"
-                                    android:textSize="@dimen/sp_13"
-                                    android:fontFamily="@font/roboto" />
-                            </LinearLayout>
-                        </LinearLayout>
+                            <android.support.v7.widget.AppCompatTextView
+                                android:visibility="visible"
+                                android:id="@+id/txtMeterValue"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:textSize="@dimen/sp_15"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/roboto" />
+                        </FrameLayout>
                         
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/dp_10"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
+                            
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/txtUsagesMessage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_60"
+                                android:textColor="@color/colorWhite"
+                                android:gravity="center"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/roboto"
+                                android:textSize="@dimen/sp_14"
+                                android:text="You have consumed 36704.36 Gallons water so far this calendar month" />
+                            
+                            <ImageView
+                                android:layout_width="@dimen/dp_150"
+                                android:layout_height="@dimen/dp_50"
+                                android:src="@drawable/trackle_logo_white"
+                                android:layout_marginTop="@dimen/dp_10"
+                                android:layout_gravity="center"
+                                android:layout_centerHorizontal="true" />
                             
                             <LinearLayout
-                                android:id="@+id/lytTrackUsage"
-                                android:layout_width="0sp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:clickable="true"
-                                android:padding="@dimen/dp_5"
-                                android:background="@drawable/ripple_background"
-                                android:orientation="vertical">
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/dp_15"
+                                android:orientation="horizontal">
                                 
-                                <ImageView
-                                    android:layout_width="@dimen/dp_50"
-                                    android:layout_height="@dimen/dp_50"
-                                    android:layout_gravity="top|center"
-                                    android:src="@drawable/dash_usage" />
+                                <LinearLayout
+                                    android:id="@+id/lytAccount"
+                                    android:layout_width="0sp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="@dimen/dp_5"
+                                    android:clickable="true"
+                                    android:background="@drawable/ripple_background"
+                                    android:orientation="vertical">
+                                    
+                                    <ImageView
+                                        android:layout_width="@dimen/dp_50"
+                                        android:layout_height="@dimen/dp_50"
+                                        android:layout_gravity="top|center"
+                                        android:src="@drawable/dash_account" />
+                                    
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="@string/my_account"
+                                        android:layout_marginTop="@dimen/dp_7"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="@dimen/sp_13"
+                                        android:fontFamily="@font/roboto" />
+                                </LinearLayout>
                                 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/track_usage"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:textColor="@color/colorWhite"
-                                    android:textSize="@dimen/sp_13"
-                                    android:fontFamily="@font/roboto" />
+                                <LinearLayout
+                                    android:id="@+id/lytBilling"
+                                    android:layout_width="0sp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="@dimen/dp_5"
+                                    android:clickable="true"
+                                    android:background="@drawable/ripple_background"
+                                    android:orientation="vertical">
+                                    
+                                    <ImageView
+                                        android:layout_width="@dimen/dp_50"
+                                        android:layout_height="@dimen/dp_50"
+                                        android:layout_gravity="top|center"
+                                        android:src="@drawable/dash_billing" />
+                                    
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="@string/billing"
+                                        android:layout_marginTop="@dimen/dp_7"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="@dimen/sp_13"
+                                        android:fontFamily="@font/roboto" />
+                                </LinearLayout>
+                                
+                                <LinearLayout
+                                    android:id="@+id/lytConnectUtility"
+                                    android:layout_width="0sp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:clickable="true"
+                                    android:background="@drawable/ripple_background"
+                                    android:padding="@dimen/dp_5"
+                                    android:orientation="vertical">
+                                    
+                                    <ImageView
+                                        android:layout_width="@dimen/dp_50"
+                                        android:layout_height="@dimen/dp_50"
+                                        android:layout_gravity="top|center"
+                                        android:src="@drawable/dash_connect" />
+                                    
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="@string/connect_with_utility"
+                                        android:layout_marginTop="@dimen/dp_7"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="@dimen/sp_13"
+                                        android:fontFamily="@font/roboto" />
+                                </LinearLayout>
                             </LinearLayout>
                             
                             <LinearLayout
-                                android:id="@+id/lytCompare"
-                                android:layout_width="0sp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:background="@drawable/ripple_background"
-                                android:padding="@dimen/dp_5"
-                                android:clickable="true"
-                                android:orientation="vertical">
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/dp_10"
+                                android:orientation="horizontal">
                                 
-                                <ImageView
-                                    android:layout_width="@dimen/dp_50"
-                                    android:layout_height="@dimen/dp_50"
-                                    android:layout_gravity="top|center"
-                                    android:src="@drawable/dash_comapre" />
+                                <LinearLayout
+                                    android:id="@+id/lytTrackUsage"
+                                    android:layout_width="0sp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:clickable="true"
+                                    android:padding="@dimen/dp_5"
+                                    android:background="@drawable/ripple_background"
+                                    android:orientation="vertical">
+                                    
+                                    <ImageView
+                                        android:layout_width="@dimen/dp_50"
+                                        android:layout_height="@dimen/dp_50"
+                                        android:layout_gravity="top|center"
+                                        android:src="@drawable/dash_usage" />
+                                    
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="@string/track_usage"
+                                        android:layout_marginTop="@dimen/dp_7"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="@dimen/sp_13"
+                                        android:fontFamily="@font/roboto" />
+                                </LinearLayout>
                                 
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/compare"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:textColor="@color/colorWhite"
-                                    android:textSize="@dimen/sp_13"
-                                    android:fontFamily="@font/roboto" />
-                            </LinearLayout>
-                            
-                            <LinearLayout
-                                android:id="@+id/lytWaterConversation"
-                                android:layout_width="0sp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:padding="@dimen/dp_5"
-                                android:clickable="true"
-                                android:background="@drawable/ripple_background"
-                                android:orientation="vertical">
+                                <LinearLayout
+                                    android:id="@+id/lytCompare"
+                                    android:layout_width="0sp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/ripple_background"
+                                    android:padding="@dimen/dp_5"
+                                    android:clickable="true"
+                                    android:orientation="vertical">
+                                    
+                                    <ImageView
+                                        android:layout_width="@dimen/dp_50"
+                                        android:layout_height="@dimen/dp_50"
+                                        android:layout_gravity="top|center"
+                                        android:src="@drawable/dash_comapre" />
+                                    
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="@string/compare"
+                                        android:layout_marginTop="@dimen/dp_7"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="@dimen/sp_13"
+                                        android:fontFamily="@font/roboto" />
+                                </LinearLayout>
                                 
-                                <ImageView
-                                    android:layout_width="@dimen/dp_50"
-                                    android:layout_height="@dimen/dp_50"
-                                    android:layout_gravity="top|center"
-                                    android:src="@drawable/dash_conservation" />
-                                
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/water_conversation"
-                                    android:layout_marginTop="@dimen/dp_7"
-                                    android:textColor="@color/colorWhite"
-                                    android:textSize="@dimen/sp_13"
-                                    android:fontFamily="@font/roboto" />
+                                <LinearLayout
+                                    android:id="@+id/lytWaterConversation"
+                                    android:layout_width="0sp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:padding="@dimen/dp_5"
+                                    android:clickable="true"
+                                    android:background="@drawable/ripple_background"
+                                    android:orientation="vertical">
+                                    
+                                    <ImageView
+                                        android:layout_width="@dimen/dp_50"
+                                        android:layout_height="@dimen/dp_50"
+                                        android:layout_gravity="top|center"
+                                        android:src="@drawable/dash_conservation" />
+                                    
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="@string/water_conversation"
+                                        android:layout_marginTop="@dimen/dp_7"
+                                        android:textColor="@color/colorWhite"
+                                        android:textSize="@dimen/sp_13"
+                                        android:fontFamily="@font/roboto" />
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
+                
+                
                 </LinearLayout>
             
             
-            </LinearLayout>
+            </FrameLayout>
         
         
-        </FrameLayout>
+        </RelativeLayout>
     
-    
-    </RelativeLayout>
+    </ScrollView>
     
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
