@@ -7,27 +7,73 @@
     android:focusable="false"
     android:fitsSystemWindows="true">
     
-    <ScrollView
+    
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@drawable/drawable_background_gradient"
+        android:focusableInTouchMode="true">
         
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/lytTop"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhite"
-            android:focusableInTouchMode="true">
+            android:layout_height="@dimen/dp_60"
+            android:background="@drawable/header_watermark">
             
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true">
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:layout_marginTop="20dp">
                 
-                <pl.droidsonroids.gif.GifImageView
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txtDashTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="start|bottom"
+                    android:layout_toLeftOf="@+id/imgNavIcon"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="@dimen/dp_17"
+                    android:textStyle="bold" />
+                
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_width="@dimen/dp_150"
+                    android:layout_height="@dimen/dp_40"
+                    android:src="@drawable/eocwd_logo"
+                    android:layout_centerHorizontal="true" />
+                
+                <ImageView
+                    android:id="@+id/imgNavIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/waterflow"
-                    android:scaleType="fitXY" />
-                
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_menu_icon"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        
+        </LinearLayout>
+        
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/lytTop"
+            android:layout_margin="@dimen/dp_10"
+            android:clickable="true">
+            
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/waterflow"
+                android:scaleType="fitXY" />
+            
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
                 <!--Rest of your coding-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -35,18 +81,22 @@
                     android:orientation="vertical">
                     
                     <RelativeLayout
+                        android:visibility="visible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5">
+                        android:layout_margin="@dimen/dp_5">
                         
                         <ImageView
                             android:layout_width="@dimen/dp_150"
                             android:layout_height="@dimen/dp_40"
-                            android:src="@drawable/eocwd_logo"
-                            android:layout_centerHorizontal="true" />
+                            android:scaleType="fitStart"
+                            android:layout_marginTop="@dimen/dp_4"
+                            android:layout_marginLeft="@dimen/dp_4"
+                            android:src="@drawable/eocwd_logo" />
                         
                         <ImageView
-                            android:id="@+id/imgNavIcon"
+                            android:visibility="gone"
+                            android:id="@+id/imgNavIcon1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -64,7 +114,8 @@
                         android:orientation="vertical">
                         
                         <android.support.v7.widget.AppCompatTextView
-                            android:id="@+id/txtDashTitle"
+                            android:visibility="gone"
+                            android:id="@+id/txtDashTitle1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dp_20"
@@ -83,26 +134,44 @@
                             
                             <com.github.lzyzsd.circleprogress.ArcProgress
                                 android:id="@+id/arc_progress"
-                                android:layout_width="140dp"
+                                android:layout_width="150dp"
                                 android:fontFamily="@font/roboto"
-                                android:layout_height="140dp"
+                                android:layout_height="150dp"
                                 custom:arc_text_color="@android:color/transparent"
                                 custom:arc_stroke_width="@dimen/dp_10"
                                 android:layout_gravity="center"
                                 custom:arc_finished_color="@color/colorProgress"
                                 custom:arc_unfinished_color="@color/colorWhiteGray3" />
                             
-                            <android.support.v7.widget.AppCompatTextView
-                                android:visibility="visible"
-                                android:id="@+id/txtMeterValue"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:textSize="@dimen/sp_15"
-                                android:textStyle="bold"
-                                android:fontFamily="@font/roboto" />
+                                android:orientation="vertical">
+                                
+                                <ImageView
+                                    android:visibility="gone"
+                                    android:layout_width="@dimen/dp_40"
+                                    android:layout_height="@dimen/dp_40"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@drawable/ic_launcher_round" />
+                                
+                                <android.support.v7.widget.AppCompatTextView
+                                    android:visibility="visible"
+                                    android:id="@+id/txtMeterValue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/dp_2"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/sp_15"
+                                    android:textStyle="bold"
+                                    android:fontFamily="@font/roboto" />
+                            </LinearLayout>
+                        
+                        
                         </FrameLayout>
                         
                         <LinearLayout
@@ -311,13 +380,13 @@
                 
                 </LinearLayout>
             
-            
-            </FrameLayout>
+            </ScrollView>
         
-        
-        </RelativeLayout>
+        </FrameLayout>
     
-    </ScrollView>
+    
+    </RelativeLayout>
+    
     
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

@@ -341,4 +341,6 @@ object Utils {
         }
         return value
     }
+     // Code to darken the color supplied (mostly color of toolbar)
+
 }
