@@ -36,18 +36,19 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        navigationClick()
+        clickPerform()
+        imgNavIcon.setOnClickListener {
+            if (!drawer_layout.isDrawerOpen(GravityCompat.START)) drawer_layout.openDrawer(Gravity.RIGHT);
+            else drawer_layout.closeDrawer(Gravity.END);
+        }
         try {
             getMeterDetailsAMI()
 
             setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
+//
 
-            imgNavIcon.setOnClickListener {
-                if (!drawer_layout.isDrawerOpen(GravityCompat.START)) drawer_layout.openDrawer(Gravity.RIGHT);
-                else drawer_layout.closeDrawer(Gravity.END);
-            }
 
-            navigationClick()
-            clickPerform()
             txtDashTitle.setText("Welcome " + AppPrefences.getLoginUserInfo(this)!!.Name)
 
         } catch (e: Exception) {

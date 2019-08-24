@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
-            android:paddingLeft="@dimen/dp_5"
+            android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_15"
             android:src="@drawable/ic_back_new" />
         
