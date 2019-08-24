@@ -51,6 +51,8 @@ class SignupStepTwoActivity : BaseActivity() {
                 finish()
             }
 
+
+            utilityID = intent.getStringExtra(ApiUrls.CustomerUtilityId)
             EmailID = intent.getStringExtra(ApiUrls.EmailID)
             AccountNumber = intent.getStringExtra(ApiUrls.AccountNumber)
             MeterNumber = intent.getStringExtra(ApiUrls.MeterNumber)
