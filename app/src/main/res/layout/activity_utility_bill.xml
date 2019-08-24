@@ -74,6 +74,7 @@
                                 android:textAllCaps="true"
                                 android:gravity="left"
                                 android:textSize="@dimen/sp_26"
+                                android:textStyle="bold"
                                 android:fontFamily="@font/roboto"
                                 android:padding="@dimen/dp_5"
                                 android:textColor="@color/colorBlack" />

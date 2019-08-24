@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/drawable_background_gradient"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:focusableInTouchMode="true"
@@ -24,6 +24,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/dp_10"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@drawable/drawable_round_corner"
             android:gravity="center_horizontal">
             
             <TextView
@@ -179,7 +181,7 @@
                 android:textColor="@color/colorWhite"
                 android:fontFamily="@font/roboto"
                 android:textSize="@dimen/sp_16"
-                android:background="@color/colorPrimaryDark" />
+                android:background="@drawable/rounded_corner_blue" />
         </LinearLayout>
     
     </ScrollView>
