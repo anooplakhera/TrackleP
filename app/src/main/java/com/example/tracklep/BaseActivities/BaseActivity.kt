@@ -3,26 +3,48 @@ package com.example.tracklep.BaseActivities
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
 
-public abstract class BaseActivity : AppCompatActivity(), BaseFragment.Callback {
+
+abstract class BaseActivity : AppCompatActivity(), BaseFragment.Callback {
 
     private var mProgressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val w = window // in Activity's onCreate() for instance
+            w.setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            )
+        }
+
+        AppLog.printLog("StatusBarHeight", getStatusBarHeight().toString())
+
     }
 
+    private fun getStatusBarHeight(): Int {
+        var result = 0
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            result = resources.getDimensionPixelSize(resourceId)
+        }
+        return result
+    }
 
     override fun onFragmentAttached() {
     }
@@ -31,7 +53,7 @@ public abstract class BaseActivity : AppCompatActivity(), BaseFragment.Callback 
     }
 
 
-    fun hideKeyboard() {
+    private fun hideKeyboard() {
         val view = this.currentFocus
         if (view != null) {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

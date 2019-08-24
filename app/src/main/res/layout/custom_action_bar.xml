@@ -1,51 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_40"
-    android:background="@drawable/header_watermark">
+    android:layout_height="60dp"
+    android:background="@drawable/header_watermark"
+    android:orientation="vertical">
     
-    <LinearLayout
-        android:id="@+id/imgCABback"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp">
+        
+        <LinearLayout
+            android:id="@+id/imgCABback"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            
+            <ImageView
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:paddingLeft="@dimen/dp_10"
+                android:paddingRight="@dimen/dp_15"
+                android:src="@drawable/ic_back_new" />
+            
+            <TextView
+                android:text="Back"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/sp_15"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtCABtitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sp_17" />
         
         <ImageView
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_40"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_15"
-            android:src="@drawable/ic_back_new" />
-        
-        <TextView
-            android:text="Back"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/roboto"
-            android:textSize="@dimen/sp_15"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:id="@+id/imgCABadd"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp_10"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_add"
+            android:visibility="gone" />
     
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/txtCABtitle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:fontFamily="@font/roboto"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/sp_17" />
-    
-    <ImageView
-        android:id="@+id/imgCABadd"
-        android:layout_width="@dimen/dp_50"
-        android:layout_height="match_parent"
-        android:padding="@dimen/dp_10"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/ic_add"
-        android:visibility="gone" />
-
-</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
