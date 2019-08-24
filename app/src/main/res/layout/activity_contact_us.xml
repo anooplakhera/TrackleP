@@ -373,13 +373,13 @@
                         android:padding="@dimen/dp_10" />
                 
                 </RelativeLayout>
-    
-                <!--Customer Name-->
+                
+                <!--Service Account Number-->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_2">
-        
+                    
                     <TextView
                         android:id="@+id/txtServiceAccNum"
                         android:layout_width="wrap_content"
@@ -388,7 +388,7 @@
                         android:fontFamily="@font/roboto"
                         android:textColor="@color/colorBlack"
                         android:text="Service Account Number" />
-        
+                    
                     <android.support.v7.widget.AppCompatEditText
                         android:id="@+id/editServiceAccNum"
                         android:layout_below="@+id/txtServiceAccNum"
@@ -400,7 +400,7 @@
                         android:fontFamily="@font/roboto"
                         android:background="@drawable/edittext_border"
                         android:padding="@dimen/dp_10" />
-    
+                
                 </RelativeLayout>
                 
                 <!--Customer Name-->
@@ -408,19 +408,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_2">
-        
+                    
                     <TextView
-                        android:id="@+id/txtCustomerName"
+                        android:id="@+id/txtCustomerEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
                         android:textColor="@color/colorBlack"
-                        android:text="Customer Name" />
-        
+                        android:text="Customer Email" />
+                    
                     <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/editCustomerName"
-                        android:layout_below="@+id/txtCustomerName"
+                        android:id="@+id/editCustomerEmail"
+                        android:layout_below="@+id/txtCustomerEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/mandatory"
@@ -429,9 +429,9 @@
                         android:fontFamily="@font/roboto"
                         android:background="@drawable/edittext_border"
                         android:padding="@dimen/dp_10" />
-    
+                
                 </RelativeLayout>
-    
+                
                 <TextView
                     android:id="@+id/txtTopic"
                     android:layout_width="match_parent"
