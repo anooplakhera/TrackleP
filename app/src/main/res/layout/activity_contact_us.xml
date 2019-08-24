@@ -64,8 +64,20 @@
                     android:padding="@dimen/dp_2"
                     android:fontFamily="@font/roboto"
                     android:textSize="@dimen/sp_16"
+                    android:visibility="gone"
                     android:textColor="@color/colorBlack"
                     android:text="@string/contactus_description" />
+                
+                <TextView
+                    android:id="@+id/txtContactUsDetailsHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/dp_2"
+                    android:fontFamily="@font/roboto"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp_18"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="Contact Us" />
                 
                 <!--<TextView
                     android:id="@+id/txtContactUsEmail"
@@ -325,15 +337,100 @@
                     android:id="@+id/txtReportAnIssue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/dp_15"
-                    android:paddingBottom="@dimen/dp_15"
-                    android:gravity="center"
+                    android:paddingTop="@dimen/dp_10"
+                    android:paddingBottom="@dimen/dp_10"
                     android:fontFamily="@font/roboto"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/report_an_issue" />
                 
+                <!--Customer Name-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_2">
+                    
+                    <TextView
+                        android:id="@+id/txtCustomerName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_2"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorBlack"
+                        android:text="Customer Name" />
+                    
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/editCustomerName"
+                        android:layout_below="@+id/txtCustomerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/mandatory"
+                        android:textSize="@dimen/sp_14"
+                        android:imeOptions="actionNext|flagNavigateNext"
+                        android:fontFamily="@font/roboto"
+                        android:background="@drawable/edittext_border"
+                        android:padding="@dimen/dp_10" />
+                
+                </RelativeLayout>
+                
+                <!--Service Account Number-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_2">
+                    
+                    <TextView
+                        android:id="@+id/txtServiceAccNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_2"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorBlack"
+                        android:text="Service Account Number" />
+                    
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/editServiceAccNum"
+                        android:layout_below="@+id/txtServiceAccNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/mandatory"
+                        android:textSize="@dimen/sp_14"
+                        android:imeOptions="actionNext|flagNavigateNext"
+                        android:fontFamily="@font/roboto"
+                        android:background="@drawable/edittext_border"
+                        android:padding="@dimen/dp_10" />
+                
+                </RelativeLayout>
+                
+                <!--Customer Name-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_2">
+                    
+                    <TextView
+                        android:id="@+id/txtCustomerEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dp_2"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorBlack"
+                        android:text="Customer Email" />
+                    
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/editCustomerEmail"
+                        android:layout_below="@+id/txtCustomerEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/mandatory"
+                        android:textSize="@dimen/sp_14"
+                        android:imeOptions="actionNext|flagNavigateNext"
+                        android:fontFamily="@font/roboto"
+                        android:background="@drawable/edittext_border"
+                        android:padding="@dimen/dp_10" />
+                
+                </RelativeLayout>
                 
                 <TextView
                     android:id="@+id/txtTopic"

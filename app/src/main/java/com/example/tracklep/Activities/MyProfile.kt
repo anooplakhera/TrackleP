@@ -301,6 +301,7 @@ class MyProfile : BaseActivity() {
             dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(true)
+            dialog.setTitle("Communication Address")
             dialog.show()
             dialog.txtTitleTop.text = title
             dialog.txtTitleTop.textSize = 13f
