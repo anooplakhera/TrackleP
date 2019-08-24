@@ -1,183 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorWhite">
-
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+    
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
         <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nav_menu_1"
-                android:fontFamily="@font/roboto"
-                android:textSize="@dimen/sp_17"
-                android:background="@color/colorLightGray100"
-                android:textColor="@color/colorPrimaryDark"
-                android:padding="@dimen/dp_10"/>
-
-        <LinearLayout
-                android:id="@+id/lytCompanyWebsite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@drawable/menu_button_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-            <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_35"
-                    android:layout_height="@dimen/dp_35"
-                    android:src="@drawable/nav_company_website"/>
-            <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nav_menu_2"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_16"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:textColor="@color/colorPrimaryDark"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/lytPayLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@drawable/menu_button_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-            <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_35"
-                    android:layout_height="@dimen/dp_35"
-                    android:src="@drawable/nav_payment_location"/>
-            <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nav_menu_3"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_16"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:textColor="@color/colorPrimaryDark"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/lytVisitFb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_10"
-                android:background="@drawable/menu_button_background"
-                android:layout_marginTop="@dimen/dp_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-            <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_35"
-                    android:layout_height="@dimen/dp_35"
-                    android:src="@drawable/nav_facebook"/>
-            <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nav_menu_4"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_16"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:textColor="@color/colorPrimaryDark"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/lytVisitTwitter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@drawable/menu_button_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-            <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_35"
-                    android:layout_height="@dimen/dp_35"
-                    android:src="@drawable/nav_twitter"/>
-            <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nav_menu_5"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_16"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:textColor="@color/colorPrimaryDark"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/lytPrivacyPolicy"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@drawable/menu_button_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-            <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_35"
-                    android:layout_height="@dimen/dp_35"
-                    android:src="@drawable/nav_privacy_policy"/>
-            <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nav_menu_6"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_16"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:textColor="@color/colorPrimaryDark"/>
-        </LinearLayout>
-        <LinearLayout
-                android:id="@+id/lytLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@drawable/menu_button_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-            <android.support.v7.widget.AppCompatImageView
-                    android:layout_width="@dimen/dp_35"
-                    android:layout_height="@dimen/dp_35"
-                    android:src="@drawable/nav_logout"/>
-            <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nav_menu_7"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_16"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:textColor="@color/colorPrimaryDark"/>
-        </LinearLayout>
-    </LinearLayout>
-
-
-    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dp_6"
-            android:layout_alignParentBottom="true"
-            android:gravity="bottom"
+            android:text="@string/nav_menu_1"
+            android:fontFamily="@font/roboto"
+            android:textSize="@dimen/sp_17"
+            android:background="@color/colorLightGray100"
+            android:textColor="@color/colorPrimaryDark"
+            android:padding="@dimen/dp_10" />
+        
+        <LinearLayout
+            android:id="@+id/lytCompanyWebsite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/menu_button_background"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
-        <ImageView
-                android:layout_width="@dimen/dp_60"
-                android:layout_height="@dimen/dp_30"
-                android:layout_gravity="bottom"
-                android:src="@drawable/logo1"/>
-        <android.support.v7.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+            
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:src="@drawable/nav_company_website" />
+            
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_5"
+                android:text="@string/nav_menu_2"
                 android:fontFamily="@font/roboto"
-                android:layout_gravity="top"
-                android:gravity="center"
-                android:textSize="@dimen/sp_10"
-                android:textColor="@color/colorDarkGray"
-                android:text="@string/version"/>
-
-
+                android:textSize="@dimen/sp_16"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/lytPayLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/menu_button_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:src="@drawable/nav_payment_location" />
+            
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nav_menu_3"
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/sp_16"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/lytVisitFb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:background="@drawable/menu_button_background"
+            android:layout_marginTop="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:src="@drawable/nav_facebook" />
+            
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nav_menu_4"
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/sp_16"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/lytVisitTwitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/menu_button_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:src="@drawable/nav_twitter" />
+            
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nav_menu_5"
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/sp_16"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/lytPrivacyPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/menu_button_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:src="@drawable/nav_privacy_policy" />
+            
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nav_menu_6"
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/sp_16"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/lytLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/menu_button_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:src="@drawable/nav_logout" />
+            
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nav_menu_7"
+                android:fontFamily="@font/roboto"
+                android:textSize="@dimen/sp_16"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+    </LinearLayout>
+    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_6"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+        
+        <ImageView
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_30"
+            android:layout_gravity="bottom"
+            android:src="@drawable/logo1" />
+        
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:fontFamily="@font/roboto"
+            android:layout_gravity="top"
+            android:gravity="center"
+            android:textSize="@dimen/sp_10"
+            android:textColor="@color/colorDarkGray"
+            android:text="@string/version" />
+    
+    
     </LinearLayout>
 
 </RelativeLayout>

@@ -90,6 +90,7 @@
                 android:name=".Activities.UsageNotificationActivity"
                 android:screenOrientation="sensorPortrait"
                 android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activities.ForgotPasswordThirdActivity" />
     </application>
 
 </manifest>

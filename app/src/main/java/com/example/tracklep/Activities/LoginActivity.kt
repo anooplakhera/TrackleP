@@ -53,7 +53,7 @@ class LoginActivity : BaseActivity() {
             !isValid
             return
         } else if (textUtilities.text.toString() == getString(R.string.select_utility)) {
-            showToast("Please Select Utility")
+            showToast("Please Select Water District/ Agency")
             !isValid
             return
         } else if (!switchBtn.isChecked) {
@@ -68,7 +68,7 @@ class LoginActivity : BaseActivity() {
     private fun clickPerform() {
         textUtilities.setOnClickListener {
             if (UtilitiesData.getCount() > 0) {
-                openDialog("Select Utility Name", textUtilities)
+                openDialog(getString(R.string.select_utility), textUtilities)
             } else {
                 getUtilityList(true, textUtilities)
             }
@@ -182,7 +182,7 @@ class LoginActivity : BaseActivity() {
                             UtilitiesData.clearArrayList()
                         UtilitiesData.addArrayList(response.body()!!.Results.Table)
                         if (dialogOpen) {
-                            openDialog("Select Utility Name", textView)
+                            openDialog(getString(R.string.select_utility), textView)
                         }
                         AppLog.printLog("UtilityList Response- ", response.body().toString())
 

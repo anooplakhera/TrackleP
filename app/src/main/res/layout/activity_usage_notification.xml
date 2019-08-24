@@ -96,20 +96,18 @@
                         android:id="@+id/txtMeterNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
+                        android:padding="@dimen/dp_5"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:textColor="@color/colorPrimaryDark"
                         android:text="@string/meter_no" />
                     
-                    <android.support.v7.widget.AppCompatEditText
+                    <TextView
                         android:id="@+id/editMeterNumber"
                         android:layout_below="@id/txtMeterNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/mandatory"
                         android:textColor="@color/colorBlack"
-                        
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:background="@android:color/transparent"
@@ -136,7 +134,7 @@
                         android:id="@+id/txtDailyLimit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
+                        android:padding="@dimen/dp_5"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:textColor="@color/colorPrimaryDark"
@@ -149,11 +147,10 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/mandatory"
                         android:textColor="@color/colorBlack"
-                        
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
+                        android:background="@drawable/edittext_border"
+                        android:padding="@dimen/dp_10" />
                 
                 </RelativeLayout>
                 
@@ -176,7 +173,7 @@
                         android:id="@+id/txtMonthlyLimit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
+                        android:padding="@dimen/dp_5"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:textColor="@color/colorPrimaryDark"
@@ -189,11 +186,10 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/mandatory"
                         android:textColor="@color/colorBlack"
-                        
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
+                        android:background="@drawable/edittext_border"
+                        android:padding="@dimen/dp_10" />
                 
                 </RelativeLayout>
                 
@@ -216,11 +212,11 @@
                         android:id="@+id/txtSelectUnit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
+                        android:padding="@dimen/dp_5"
                         android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
                         android:textColor="@color/colorPrimaryDark"
-                        android:text="@string/monthly_limit" />
+                        android:text="Select Unit" />
                     
                     <RadioGroup
                         android:layout_width="match_parent"
@@ -255,12 +251,13 @@
                     android:layout_marginBottom="@dimen/dp_3"
                     android:background="@color/colorLightGray100" />
                 
-                <android.support.v7.widget.AppCompatButton
+                <Button
                     android:id="@+id/btnUsageNotificationSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_50"
                     android:layout_marginTop="@dimen/dp_40"
                     android:text="@string/submit"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:fontFamily="@font/roboto"
                     android:textSize="@dimen/sp_18"

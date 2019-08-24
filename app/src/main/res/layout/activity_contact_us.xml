@@ -23,8 +23,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/dp_5"
-            android:layout_margin="@dimen/dp_5"
-            android:background="@color/colorPrimaryDark"
             android:gravity="center_horizontal">
             
             <!--connect_with_utility Header-->
@@ -54,7 +52,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="@dimen/dp_10"
-                android:layout_margin="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
                 android:background="@drawable/drawable_round_corner">
                 
                 <TextView
@@ -75,7 +75,7 @@
                     android:padding="@dimen/dp_2"
                     android:fontFamily="@font/roboto"
                     android:textStyle="bold"
-                    android:textSize="@dimen/sp_18"
+                    android:textSize="@dimen/sp_16"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="Contact Us" />
                 
@@ -112,9 +112,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
-                            android:textStyle="bold"
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/email_address" />
                         
@@ -166,9 +164,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
-                            android:textStyle="bold"
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/phone_number" />
                         
@@ -207,10 +203,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
-                            android:textStyle="bold"
-                            android:textColor="@color/commonLabelTextColor"
+                            android:textColor="@color/colorDarkGray"
                             android:text="@string/emergency_number" />
                         
                         <android.support.v7.widget.AppCompatEditText
@@ -261,9 +255,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
-                            android:textStyle="bold"
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/customer_service_hour" />
                         
@@ -302,9 +294,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
-                            android:textStyle="bold"
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/connect_address" />
                         
@@ -330,7 +320,6 @@
                 android:padding="@dimen/dp_10"
                 android:layout_margin="@dimen/dp_10"
                 android:background="@drawable/drawable_round_corner"
-                android:layout_marginTop="@dimen/dp_10"
                 android:gravity="center_horizontal">
                 
                 <TextView
@@ -340,7 +329,7 @@
                     android:paddingTop="@dimen/dp_10"
                     android:paddingBottom="@dimen/dp_10"
                     android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_18"
+                    android:textSize="@dimen/sp_16"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/report_an_issue" />
@@ -367,6 +356,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/mandatory"
                         android:textSize="@dimen/sp_14"
+                        android:maxLength="30"
                         android:imeOptions="actionNext|flagNavigateNext"
                         android:fontFamily="@font/roboto"
                         android:background="@drawable/edittext_border"
@@ -396,6 +386,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/mandatory"
                         android:textSize="@dimen/sp_14"
+                        android:maxLength="7"
                         android:imeOptions="actionNext|flagNavigateNext"
                         android:fontFamily="@font/roboto"
                         android:background="@drawable/edittext_border"
@@ -416,7 +407,7 @@
                         android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
                         android:textColor="@color/colorBlack"
-                        android:text="Customer Email" />
+                        android:text="Email" />
                     
                     <android.support.v7.widget.AppCompatEditText
                         android:id="@+id/editCustomerEmail"
@@ -425,6 +416,8 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/mandatory"
                         android:textSize="@dimen/sp_14"
+                        android:maxLength="50"
+                        android:inputType="textEmailAddress"
                         android:imeOptions="actionNext|flagNavigateNext"
                         android:fontFamily="@font/roboto"
                         android:background="@drawable/edittext_border"
@@ -432,53 +425,50 @@
                 
                 </RelativeLayout>
                 
-                <TextView
-                    android:id="@+id/txtTopic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_2"
-                    android:textSize="@dimen/sp_16"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text="@string/topic" />
-                
+                <!--Report Type-->
                 <RelativeLayout
-                    android:id="@+id/r_lyt_utilities"
                     android:layout_width="match_parent"
-                    android:padding="@dimen/dp_2"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent">
-                    
-                    
-                    <ImageView
-                        android:layout_width="@dimen/dp_30"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_right_arrow"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true" />
+                    android:layout_margin="@dimen/dp_2">
                     
                     <TextView
-                        android:id="@+id/txtTopicName"
-                        android:layout_width="match_parent"
+                        android:id="@+id/txtTopic"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
-                        android:textSize="@dimen/sp_16"
-                        android:background="@android:color/transparent"
-                        android:textColor="@color/colorDarkGray"
-                        android:text="@string/select_topic" />
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/colorBlack"
+                        android:text="Report Type" />
+                    
+                    <RelativeLayout
+                        android:id="@+id/r_lyt_utilities"
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/dp_2"
+                        android:layout_below="@+id/txtTopic"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_border">
+                        
+                        <ImageView
+                            android:layout_width="@dimen/dp_30"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_right_arrow"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true" />
+                        
+                        <TextView
+                            android:id="@+id/txtTopicName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_2"
+                            android:textSize="@dimen/sp_16"
+                            android:background="@android:color/transparent"
+                            android:textColor="@color/colorDarkGray"
+                            android:text="@string/select_topic" />
+                    
+                    </RelativeLayout>
                 
                 </RelativeLayout>
-                
-                
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:layout_marginLeft="@dimen/dp_6"
-                    android:layout_marginRight="@dimen/dp_6"
-                    android:layout_marginBottom="@dimen/dp_3"
-                    android:background="@color/colorLightGray100" />
                 
                 <!--Subject-->
                 <RelativeLayout
@@ -488,82 +478,67 @@
                     
                     <TextView
                         android:id="@+id/txtSubject"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_2"
-                        android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:textColor="@color/colorBlack"
                         android:text="@string/subject" />
                     
                     <android.support.v7.widget.AppCompatEditText
                         android:id="@+id/editSubjectValue"
-                        android:layout_below="@id/txtSubject"
+                        android:layout_below="@+id/txtSubject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/mandatory"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_16"
+                        android:textSize="@dimen/sp_14"
+                        android:maxLength="100"
+                        android:maxLines="1"
+                        android:imeOptions="actionNext|flagNavigateNext"
                         android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
+                        android:background="@drawable/edittext_border"
+                        android:padding="@dimen/dp_10" />
                 
                 </RelativeLayout>
                 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:layout_marginLeft="@dimen/dp_6"
-                    android:layout_marginRight="@dimen/dp_6"
-                    android:layout_marginBottom="@dimen/dp_3"
-                    android:background="@color/colorLightGray100" />
-                
-                <!--Contact Us Message-->
+                <!--Message-->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dp_2">
                     
                     <TextView
-                        android:id="@+id/txtPostalCode"
-                        android:layout_width="match_parent"
+                        android:id="@+id/txtMessage"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_2"
-                        android:textSize="@dimen/sp_16"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text="@string/postal_code" />
+                        android:textColor="@color/colorBlack"
+                        android:text="Message" />
                     
                     <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/editPostalCode"
-                        android:layout_below="@id/txtPostalCode"
+                        android:id="@+id/editMessageValue"
+                        android:layout_below="@+id/txtMessage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/mandatory"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_16"
+                        android:textSize="@dimen/sp_14"
+                        android:maxLines="4"
+                        android:maxLength="250"
+                        android:imeOptions="actionNext|flagNavigateNext"
                         android:fontFamily="@font/roboto"
-                        android:background="@android:color/transparent"
-                        android:padding="@dimen/dp_2" />
+                        android:background="@drawable/edittext_border"
+                        android:padding="@dimen/dp_10" />
                 
                 </RelativeLayout>
-                
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:layout_marginLeft="@dimen/dp_6"
-                    android:layout_marginRight="@dimen/dp_6"
-                    android:layout_marginBottom="@dimen/dp_3"
-                    android:background="@color/colorLightGray100" />
                 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btnConnectMeSubmit"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_50"
-                    android:layout_marginTop="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginTop="@dimen/dp_30"
                     android:text="@string/submit"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:fontFamily="@font/roboto"
                     android:textSize="@dimen/sp_18"

@@ -39,15 +39,6 @@
                 android:paddingBottom="@dimen/dp_16"
                 android:textColor="@color/colorBlack" />
             
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginBottom="@dimen/dp_3"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:background="@color/colorLightGray100" />
-            
             <!--Utility Account Number-->
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -70,24 +61,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/mandatory"
+                    android:layout_marginTop="@dimen/dp_5"
                     android:maxLength="7"
                     android:textColor="@color/colorBlack"
                     android:inputType="number"
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
-                    android:background="@android:color/transparent"
-                    android:padding="@dimen/dp_2" />
+                    android:background="@drawable/edittext_border"
+                    android:padding="@dimen/dp_10" />
             
             </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:layout_marginBottom="@dimen/dp_3"
-                android:background="@color/colorLightGray100" />
             
             <!--Meter Number-->
             <RelativeLayout
@@ -111,24 +94,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/mandatory"
+                    android:layout_marginTop="@dimen/dp_5"
                     android:maxLength="8"
                     android:textColor="@color/colorBlack"
                     android:inputType="number"
                     android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
-                    android:background="@android:color/transparent"
-                    android:padding="@dimen/dp_2" />
+                    android:background="@drawable/edittext_border"
+                    android:padding="@dimen/dp_10" />
             
             </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:layout_marginBottom="@dimen/dp_3"
-                android:background="@color/colorLightGray100" />
             
             <!--Postal Code-->
             <RelativeLayout
@@ -156,25 +131,17 @@
                     android:inputType="number"
                     android:textSize="@dimen/sp_16"
                     android:maxLength="5"
+                    android:layout_marginTop="@dimen/dp_5"
                     android:fontFamily="@font/roboto"
-                    android:background="@android:color/transparent"
-                    android:padding="@dimen/dp_2" />
+                    android:background="@drawable/edittext_border"
+                    android:padding="@dimen/dp_10" />
             
             </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginRight="@dimen/dp_6"
-                android:layout_marginBottom="@dimen/dp_3"
-                android:background="@color/colorLightGray100" />
             
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnAddAccountSubmit"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50"
+                android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_40"
                 android:text="@string/submit"
                 android:layout_gravity="bottom"
