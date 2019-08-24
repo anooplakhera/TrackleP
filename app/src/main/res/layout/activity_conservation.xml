@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="@drawable/drawable_background_gradient"
+    android:layout_marginBottom="@dimen/dp_40"
     tools:context=".Activities.ConservationActivity">
     
     <include
@@ -17,7 +17,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:background="@drawable/drawable_round_corner"
         android:layout_margin="@dimen/dp_10"
         android:orientation="vertical">
         

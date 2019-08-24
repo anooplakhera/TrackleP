@@ -6,6 +6,7 @@
     android:background="@drawable/drawable_background_gradient"
     android:focusableInTouchMode="true"
     android:fitsSystemWindows="true"
+    android:layout_marginBottom="@dimen/dp_40"
     tools:context=".Activities.ConnectWithUtilityActivity"
     android:orientation="vertical">
     
