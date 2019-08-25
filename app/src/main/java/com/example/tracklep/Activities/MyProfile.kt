@@ -10,7 +10,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
-import android.telephony.PhoneNumberUtils
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -39,6 +39,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class MyProfile : BaseActivity() {
 
     private var custID = ""
@@ -56,13 +57,15 @@ class MyProfile : BaseActivity() {
                 finish()
             }
 
+
+            //PhoneNumberUtils.formatNumber(editHomePhoneNumberValue, int defaultFormattingType);
+
             if (SecurityQuestionData.getCount() > 0) {
                 getUserProfile()
             } else {
                 getSecurityQues(false, txtQues1Value)
             }
 
-            //PhoneNumberUtils.formatNumber(editHomePhoneNumberValue, int defaultFormattingType);
             clickPerform()
 
         } catch (e: Exception) {
@@ -198,6 +201,7 @@ class MyProfile : BaseActivity() {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getUpdateAccount(
                 getHeader(),
+
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getUpdateAccountRequestModel(
                         editEmail.text.toString(),
@@ -253,6 +257,8 @@ class MyProfile : BaseActivity() {
         editEmail.setText(data.EmailId)
         editHomePhoneNumberValue.setText(data.HomePhone)
         editMobileNumberValue.setText(data.MobilePhone)
+        editHomePhoneNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
+        editMobileNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
         editAns1Value.setText(data.HintsAns)
         editAns2Value.setText(data.HintsAns2)
         txtQues1Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
