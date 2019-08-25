@@ -47,7 +47,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
 
             txtTopicName.setOnClickListener {
                 if (ConnectMeData.getCount() > 0) {
-                    openListDialog("Select Topic Name", txtTopicName)
+                    openListDialog("Select Report Type", txtTopicName)
                 } else {
                     getConnectMeDetails(true, txtTopicName)
                 }
@@ -123,11 +123,27 @@ class ConnectWithUtilityActivity : BaseActivity() {
                 !allValid
                 return
             } else if (editSubjectValue.text!!.isEmpty()) {
-                showToast("Please Enter Subject")
+                showToast("Please enter Subject")
                 !allValid
                 return
-            } else if (editPostalCode.text!!.isEmpty()) {
+            } else if (editCustomerName.text!!.isEmpty()) {
+                showToast("Please enter Customer Name")
+                !allValid
+                return
+            } else if (editServiceAccNum.text!!.isEmpty()) {
+                showToast("Please enter Service Account Number")
+                !allValid
+                return
+            } else if (editCustomerEmail.text!!.isEmpty()) {
                 showToast("Please Enter Postal Code")
+                !allValid
+                return
+            } else if (editSubjectValue.text!!.isEmpty()) {
+                showToast("Please select Subject")
+                !allValid
+                return
+            } else if (editMessageValue.text!!.isEmpty()) {
+                showToast("Please enter Message")
                 !allValid
                 return
             } else if (allValid) {
@@ -137,6 +153,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
             e.printStackTrace()
         }
     }
+
 
     private fun openListDialog(title: String, textView: TextView) = try {
         val dialog = Dialog(this@ConnectWithUtilityActivity)
@@ -163,56 +180,56 @@ class ConnectWithUtilityActivity : BaseActivity() {
         e.printStackTrace()
     }
 
-   /* private fun getUpdateUserProfile() = if (Utils.isConnected(this)) {
-        showDialog()
-        try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getUpdateAccount(
-                getHeader(),
-                ApiUrls.getJSONRequestBody(
-                    RequestClass.getUpdateAccountRequestModel(
-                        editEmail.text.toString(),
-                        editHomePhoneNumberValue.text.toString(),
-                        editMobileNumberValue.text.toString(),
-                        custID,
-                        AppPrefences.getAccountNumber(this),
-                        editAns1Value.text.toString(),
-                        editAns2Value.text.toString(),
-                        sQuesID1,
-                        sQuesID2
-                    )
-                )
-            )
-            call.enqueue(object : Callback<ResponseModelClasses.UpdateProfile> {
-                override fun onResponse(
-                    call: Call<ResponseModelClasses.UpdateProfile>,
-                    response: Response<ResponseModelClasses.UpdateProfile>
-                ) {
-                    try {
-                        dismissDialog()
-                        if (response.body() != null) {
-                            showToast(response.body()!!.Message)
-                            getUserProfile()
-                            AppLog.printLog("UserUpdateProfileResponse: " + Gson().toJson(response.body()))
-                        }
-                    } catch (e: Exception) {
-                        dismissDialog()
-                        e.printStackTrace()
-                    }
-                }
+    /* private fun getUpdateUserProfile() = if (Utils.isConnected(this)) {
+         showDialog()
+         try {
+             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+             val call = apiService.getUpdateAccount(
+                 getHeader(),
+                 ApiUrls.getJSONRequestBody(
+                     RequestClass.getUpdateAccountRequestModel(
+                         editEmail.text.toString(),
+                         editHomePhoneNumberValue.text.toString(),
+                         editMobileNumberValue.text.toString(),
+                         custID,
+                         AppPrefences.getAccountNumber(this),
+                         editAns1Value.text.toString(),
+                         editAns2Value.text.toString(),
+                         sQuesID1,
+                         sQuesID2
+                     )
+                 )
+             )
+             call.enqueue(object : Callback<ResponseModelClasses.UpdateProfile> {
+                 override fun onResponse(
+                     call: Call<ResponseModelClasses.UpdateProfile>,
+                     response: Response<ResponseModelClasses.UpdateProfile>
+                 ) {
+                     try {
+                         dismissDialog()
+                         if (response.body() != null) {
+                             showToast(response.body()!!.Message)
+                             getUserProfile()
+                             AppLog.printLog("UserUpdateProfileResponse: " + Gson().toJson(response.body()))
+                         }
+                     } catch (e: Exception) {
+                         dismissDialog()
+                         e.printStackTrace()
+                     }
+                 }
 
-                override fun onFailure(
-                    call: Call<ResponseModelClasses.UpdateProfile>,
-                    t: Throwable
-                ) {
-                    dismissDialog()
-                }
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
-            dismissDialog()
-        }
-    } else {
-        showToast(getString(R.string.internet))
-    }*/
+                 override fun onFailure(
+                     call: Call<ResponseModelClasses.UpdateProfile>,
+                     t: Throwable
+                 ) {
+                     dismissDialog()
+                 }
+             })
+         } catch (e: Exception) {
+             e.printStackTrace()
+             dismissDialog()
+         }
+     } else {
+         showToast(getString(R.string.internet))
+     }*/
 }

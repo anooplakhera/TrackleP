@@ -9,7 +9,7 @@
     <string name="email_address">Email Address</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="forgot_password">Forgot Password ?</string>
+    <string name="forgot_password">Forgot Password?</string>
     <string name="register_now">Register Now</string>
     <string name="pay_bill">Pay Bill</string>
     <string name="connect_with_utility">Connect with Agency</string>
@@ -19,18 +19,20 @@
     <!--Forgot Password-->
     <string name="step1">Step 1</string>
     <string name="step2">Step 2</string>
+    <string name="step3">Step 3</string>
     <string name="validate_email">Please validate your Email</string>
+    <string name="change_password_header">Please enter new password and confirm it.</string>
     <string name="submit">Submit</string>
     <string name="update">Update</string>
     <string name="security_answer">Security Answer</string>
     <string name="question_eg">What was the name of your elementary / primary school?</string>
-    <string name="answer_security_ques">Please answer security questions tro verify your identity.</string>
+    <string name="answer_security_ques">Please answer security questions to verify your identity.</string>
     
     <!--Register User-->
     <string name="registration_title">Registration</string>
     <string name="registration_title_new">Create your Account</string>
     <string name="utility">Utility Name</string>
-    <string name="select_utility">Select Utility Name</string>
+    <string name="select_utility">Select Water District/ Agency</string>
     <string name="select_topic">Select Topic</string>
     <string name="mandatory">Mandatory</string>
     <string name="acc_no">Account Number</string>

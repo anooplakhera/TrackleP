@@ -58,7 +58,7 @@ class SignupStepOneActivity : BaseActivity() {
         try {
             r_lyt_utility.setOnClickListener {
                 if (UtilitiesData.getCount() > 0) {
-                    openDialog("Select Utility Name", txtUtilityName)
+                    openDialog(getString(R.string.select_utility), txtUtilityName)
                 } else {
                     getUtilityList(true, txtUtilityName)
 
@@ -106,35 +106,35 @@ class SignupStepOneActivity : BaseActivity() {
         try {
             var allValid = true
             if (txtUtilityName.text == getString(R.string.mandatory)) {
-                showToast("Please Select Utility name")
+                showToast("Please Select Water District/ Agency")
                 !allValid
                 return
             } else if (editAccountNo.text!!.isEmpty()) {
-                showToast("Please Enter Account Number")
+                showToast("Please enter Account Number")
                 !allValid
                 return
             } else if (editMeterNo.text!!.isEmpty()) {
-                showToast("Please Enter Meter Number")
+                showToast("Please enter Meter Number")
                 !allValid
                 return
             } else if (editServiceZipCode.text!!.isEmpty()) {
-                showToast("Please Enter Zip Code")
+                showToast("Please enter Zip Code")
                 !allValid
                 return
             } else if (editEmail.text!!.isEmpty()) {
-                showToast("Please Enter Email")
+                showToast("Please enter Email")
                 !allValid
                 return
             } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
-                showToast("Please Enter Valid Email")
+                showToast("Please enter Valid Email")
                 !allValid
                 return
             } else if (editPassword.text!!.isEmpty()) {
-                showToast("Please Enter Password")
+                showToast("Please enter Password")
                 !allValid
                 return
             } else if (editCPassword.text!!.isEmpty()) {
-                showToast("Please Enter Confirm Password")
+                showToast("Please enter Confirm Password")
                 !allValid
                 return
             } else if (!editCPassword!!.text!!.isEmpty() && !editPassword!!.text!!.isEmpty() &&
@@ -146,7 +146,7 @@ class SignupStepOneActivity : BaseActivity() {
             } else if (allValid) {
                 val intent =
                     Intent(this@SignupStepOneActivity, SignupStepTwoActivity::class.java)
-                intent.putExtra(ApiUrls.EmailID, txtUtilityName.text.toString())
+                intent.putExtra(ApiUrls.CustomerUtilityId, utilityID)
                 intent.putExtra(ApiUrls.AccountNumber, editAccountNo.text.toString())
                 intent.putExtra(ApiUrls.MeterNumber, editMeterNo.text.toString())
                 intent.putExtra(ApiUrls.ServiceZipCode, editServiceZipCode.text.toString())
@@ -176,7 +176,7 @@ class SignupStepOneActivity : BaseActivity() {
                             UtilitiesData.clearArrayList()
                         UtilitiesData.addArrayList(response.body()!!.Results.Table)
                         if (dialogOpen) {
-                            openDialog("Select Utility Name", textView)
+                            openDialog(getString(R.string.select_utility), textView)
                         }
                         AppLog.printLog("UtilityList Response- ", response.body().toString())
 

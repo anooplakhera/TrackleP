@@ -1,5 +1,7 @@
 package com.example.tracklep.Activities
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
@@ -35,11 +37,36 @@ class BillingActivity : BaseActivity() {
                 finish()
             }
 
+            btnPayNow.setOnClickListener {
+                var alertDialog = AlertDialog.Builder(this)
+                alertDialog.setTitle(getString(R.string.app_name))
+                alertDialog.setMessage("You will be redirected to EOCWD online payment system. Click Proceed to continue.")
+                alertDialog.setNeutralButton("Cancel") { _, _ ->
+                }
+
+                alertDialog.setPositiveButton("Proceed") { dialog, which ->
+                    dialog.dismiss()
+                    startWebActivity("Pay Bill", "https://eocwd.epayub.com")
+                }
+
+                alertDialog.show()
+            }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
+    private fun startWebActivity(title: String, url: String) {
+        try {
+            intent = Intent(this@BillingActivity, WebViewActivity::class.java)
+            intent.putExtra("contentTitle", title)
+            intent.putExtra("contentUrl", "https://eocwd.epayub.com")
+            startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 
     private fun getBillingDetails() = if (Utils.isConnected(this)) {
         showDialog()
