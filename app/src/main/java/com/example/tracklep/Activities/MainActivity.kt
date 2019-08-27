@@ -1,15 +1,12 @@
 package com.example.tracklep.Activities
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.view.Gravity
 import android.view.View
-import android.view.WindowManager
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -24,14 +21,12 @@ import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.StatusBar
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
-import com.jaeger.library.StatusBarUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_menu_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.math.roundToInt
-
 
 
 class MainActivity : BaseActivity() {
@@ -42,7 +37,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        StatusBar.darkenStatusBar(this,R.color.colorBlack)
+        StatusBar.darkenStatusBar(this, R.color.colorBlack)
         navigationClick()
         clickPerform()
         imgNavIcon.setOnClickListener {
@@ -57,7 +52,6 @@ class MainActivity : BaseActivity() {
 
             setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
 //
-
 
 
         } catch (e: Exception) {

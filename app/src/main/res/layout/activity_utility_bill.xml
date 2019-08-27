@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginBottom="@dimen/dp_40"
     android:fitsSystemWindows="true"
     android:background="@drawable/drawable_background_gradient"
     android:focusableInTouchMode="true"
@@ -18,7 +17,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="always"
+        android:scrollbars="none"
+        android:overScrollMode="never"
         android:padding="@dimen/dp_5"
         android:layout_below="@id/lytAction">
         
@@ -106,7 +106,7 @@
                                 
                                 <com.github.lzyzsd.circleprogress.ArcProgress
                                     android:id="@+id/arc_progress"
-                                    android:layout_width="100dp"
+                                    android:layout_width="80dp"
                                     android:fontFamily="@font/roboto"
                                     android:layout_height="80dp"
                                     custom:arc_text_color="@android:color/transparent"
@@ -638,6 +638,7 @@
                     android:textColor="@color/colorWhite"
                     android:fontFamily="@font/roboto"
                     android:textSize="@dimen/sp_14"
+                    android:layout_marginBottom="@dimen/dp_40"
                     android:background="@drawable/rounded_corner_blue" />
                 
                 <TextView
