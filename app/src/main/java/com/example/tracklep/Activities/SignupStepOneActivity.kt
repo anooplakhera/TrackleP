@@ -106,41 +106,41 @@ class SignupStepOneActivity : BaseActivity() {
         try {
             var allValid = true
             if (txtUtilityName.text == getString(R.string.mandatory)) {
-                showToast("Please select Water District/Agency")
+                showSuccessPopup("Please select Water District/Agency")
                 !allValid
                 return
             } else if (editAccountNo.text!!.isEmpty()) {
-                showToast("Please enter Account Number")
+                showSuccessPopup("Please enter Account Number")
                 !allValid
                 return
             } else if (editMeterNo.text!!.isEmpty()) {
-                showToast("Please enter Meter Number")
+                showSuccessPopup("Please enter Meter Number")
                 !allValid
                 return
             } else if (editServiceZipCode.text!!.isEmpty()) {
-                showToast("Please enter Service Zip Code")
+                showSuccessPopup("Please enter Service Zip Code")
                 !allValid
                 return
             } else if (editEmail.text!!.isEmpty()) {
-                showToast("Please enter Email")
+                showSuccessPopup("Please enter Email")
                 !allValid
                 return
             } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
-                showToast("Please enter valid Email")
+                showSuccessPopup("Please enter valid Email")
                 !allValid
                 return
             } else if (editPassword.text!!.isEmpty() || !isPasswordValid(editPassword.text)) {
-                showToast("Password must be atleast 8 characters(1 special letter, 1 number, 1 capital letter).")
+                showSuccessPopup(getString(R.string.password_validation_message))
                 !allValid
                 return
             } else if (editCPassword.text!!.isEmpty() || !isPasswordValid(editCPassword.text)) {
-                showToast("Please enter Confirm Password")
+                showSuccessPopup("Please enter Confirm Password")
                 !allValid
                 return
             } else if (!editCPassword!!.text!!.isEmpty() && !editPassword!!.text!!.isEmpty() &&
                 !editPassword.text.toString().equals(editCPassword.text.toString())
             ) {
-                showToast("Password doesn't match")
+                showSuccessPopup("Password doesn't match")
                 !allValid
                 return
             } else if (allValid) {

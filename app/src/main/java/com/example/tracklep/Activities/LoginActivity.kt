@@ -31,10 +31,6 @@ import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.text.Editable
-import java.util.regex.Matcher
-import java.util.regex.Pattern
-
 
 class LoginActivity : BaseActivity() {
 
@@ -54,7 +50,7 @@ class LoginActivity : BaseActivity() {
             !isValid
             return
         } else if (editUserPass.text!!.isEmpty() || !isPasswordValid(editUserPass.text)) {
-            showSuccessPopup("Password must be atleast 8 characters(1 special letter, 1 number, 1 capital letter.")
+            showSuccessPopup(getString(R.string.password_validation_message))
             !isValid
             return
         } else if (textUtilities.text.toString() == getString(R.string.select_utility)) {

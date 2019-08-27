@@ -224,7 +224,7 @@ class MyProfile : BaseActivity() {
                     try {
                         dismissDialog()
                         if (response.body() != null) {
-                            showToast(response.body()!!.Message)
+                            showSuccessPopup(response.body()!!.Message)
                             getUserProfile()
                             AppLog.printLog("UserUpdateProfileResponse: " + Gson().toJson(response.body()))
                         }
@@ -362,11 +362,11 @@ class MyProfile : BaseActivity() {
         try {
             var allValid = true
             if (editEmail.text!!.isEmpty()) {
-                showToast("Please Enter Email")
+                showSuccessPopup("Please enter Email")
                 !allValid
                 return
             } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
-                showToast("Please Enter Valid Email")
+                showToast("Please enter valid Email")
                 !allValid
                 return
             } else if (editHomePhoneNumberValue.text!!.isEmpty()) {

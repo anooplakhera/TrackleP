@@ -49,7 +49,7 @@ class ForgotPasswordFirstActivity : BaseActivity() {
             if (editEmailF1.text!!.isNotEmpty() && Utils.isValidEmail(editEmailF1.text.toString()))
                 getUserEmail()
             else
-                showToast("Please enter valid Email")
+                showSuccessPopup("Please enter valid Email")
         }
 
         textUtilities.setOnClickListener {
@@ -75,7 +75,7 @@ class ForgotPasswordFirstActivity : BaseActivity() {
                     dismissDialog()
                     if (response.body() != null) {
                         if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
-                            showToast(response.body()!!.Table[0].Message)
+                            showSuccessPopup(response.body()!!.Table[0].Message)
                         } else {
                             AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
                             ResetPassSecurityQuestionData.clearArrayList()

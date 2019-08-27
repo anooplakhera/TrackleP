@@ -97,19 +97,19 @@ class SignupStepTwoActivity : BaseActivity() {
         try {
             var allValid = true
             if (editAnswer1.text!!.isEmpty()) {
-                showToast("Please Enter Security Answer")
+                showSuccessPopup("Please enter Security Answer")
                 !allValid
                 return
             } else if (txtQues1.text.toString() == getString(R.string.security_ques1)) {
-                showToast("Please Select Security Question")
+                showSuccessPopup("Please select Security Question")
                 !allValid
                 return
             } else if (txtQues2.text.toString() == getString(R.string.security_ques2)) {
-                showToast("Please Select Security Question")
+                showSuccessPopup("Please select Security Question")
                 !allValid
                 return
             } else if (editAnswer2.text!!.isEmpty()) {
-                showToast("Please Enter Security Answer")
+                showSuccessPopup("Please enter Security Answer")
                 !allValid
                 return
             } else if (allValid) {
