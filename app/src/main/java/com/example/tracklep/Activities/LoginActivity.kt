@@ -31,6 +31,9 @@ import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.text.Editable
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class LoginActivity : BaseActivity() {
@@ -47,17 +50,19 @@ class LoginActivity : BaseActivity() {
     private fun validationFields() {
         var isValid = true
         if (editUserName.text!!.isEmpty()) {
+            showSuccessPopup("Please enter valid Username")
             !isValid
             return
-        } else if (editUserPass.text!!.isEmpty()) {
+        } else if (editUserPass.text!!.isEmpty() || !isPasswordValid(editUserPass.text)) {
+            showSuccessPopup("Password must be atleast 8 characters(1 special letter, 1 number, 1 capital letter.")
             !isValid
             return
         } else if (textUtilities.text.toString() == getString(R.string.select_utility)) {
-            showToast("Please Select Water District/ Agency")
+            showSuccessPopup("Please select Water District/ Agency")
             !isValid
             return
         } else if (!switchBtn.isChecked) {
-            showToast("Please Enable Remember me")
+            showSuccessPopup("Please enable Remember me")
             !isValid
             return
         } else if (isValid) {

@@ -66,7 +66,18 @@ class MainActivity : BaseActivity() {
                 startWebActivity("Company Website", AppPrefences.getLoginUserInfo(this)!!.CompanyWebsite)
             }
             lytPayLocation.setOnClickListener {
-                closeDrawer()
+                var alertDialog = AlertDialog.Builder(this)
+                alertDialog.setTitle(getString(R.string.app_name))
+                alertDialog.setMessage("You will be redirected to EOCWD online payment system. Click Proceed to continue.")
+                alertDialog.setNeutralButton("Cancel") { _, _ ->
+                }
+
+                alertDialog.setPositiveButton("Proceed") { dialog, which ->
+                    dialog.dismiss()
+                    startWebActivity("Pay Bill", "https://eocwd.epayub.com")
+                }
+
+                alertDialog.show()
             }
             lytVisitFb.setOnClickListener {
                 closeDrawer()

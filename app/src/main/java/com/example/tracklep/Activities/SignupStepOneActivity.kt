@@ -106,7 +106,7 @@ class SignupStepOneActivity : BaseActivity() {
         try {
             var allValid = true
             if (txtUtilityName.text == getString(R.string.mandatory)) {
-                showToast("Please Select Water District/ Agency")
+                showToast("Please select Water District/Agency")
                 !allValid
                 return
             } else if (editAccountNo.text!!.isEmpty()) {
@@ -118,7 +118,7 @@ class SignupStepOneActivity : BaseActivity() {
                 !allValid
                 return
             } else if (editServiceZipCode.text!!.isEmpty()) {
-                showToast("Please enter Zip Code")
+                showToast("Please enter Service Zip Code")
                 !allValid
                 return
             } else if (editEmail.text!!.isEmpty()) {
@@ -126,14 +126,14 @@ class SignupStepOneActivity : BaseActivity() {
                 !allValid
                 return
             } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
-                showToast("Please enter Valid Email")
+                showToast("Please enter valid Email")
                 !allValid
                 return
-            } else if (editPassword.text!!.isEmpty()) {
-                showToast("Please enter Password")
+            } else if (editPassword.text!!.isEmpty() || !isPasswordValid(editPassword.text)) {
+                showToast("Password must be atleast 8 characters(1 special letter, 1 number, 1 capital letter).")
                 !allValid
                 return
-            } else if (editCPassword.text!!.isEmpty()) {
+            } else if (editCPassword.text!!.isEmpty() || !isPasswordValid(editCPassword.text)) {
                 showToast("Please enter Confirm Password")
                 !allValid
                 return
