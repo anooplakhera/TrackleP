@@ -83,9 +83,10 @@ class ConnectWithUtilityActivity : BaseActivity() {
                             ConnectMeData.clearArrayList()
                             ConnectMeData.addArrayList(response.body()!!.Results.Table1)
                             AppLog.printLog("getConnectMeDetails: " + Gson().toJson(response.body()));
-                            updateViews(response.body()!!.Results.Table3)
+                            updateViews(/*response.body()!!.Results.Table3, */response.body()!!.Results.Table)
+
                             if (dialogOpen) {
-                                openListDialog("Select Topic Name", textView)
+                                openListDialog("Select Report Type", textView)
                             }
                         }
                     } catch (e: Exception) {
@@ -106,12 +107,31 @@ class ConnectWithUtilityActivity : BaseActivity() {
         showToast(getString(R.string.internet))
     }
 
-    fun updateViews(data: List<ResponseModelClasses.ConnectWithUtilityResponse.Results1.TableThree>) {
+    fun updateViews(
+        /*data: List<ResponseModelClasses.ConnectWithUtilityResponse.Results1.TableThree>,*/
+        table1: ArrayList<ResponseModelClasses.ConnectWithUtilityResponse.Results1.TableOne>
+    ) {
 
-        txtContactUsEmailValue.setText(data.get(0).CustomerServiceEmail)
-        txtContactUsPhoneValue.setText(data.get(0).PrimaryPhone)
-        txtAddressValue.setText(data.get(0).utilityAddress)
-        txtCustomerServiceHourValue.setText(data.get(0).UtilityTime)
+        try {
+            //if (data.get(0).CustomerServiceEmail == null || data.get(0).CustomerServiceEmail.equals("")) {
+            txtContactUsEmailValue.setText("admin@eocwd.com")
+            txtContactUsPhoneValue.setText("(714) 538-5815")
+            txtEmergencyNumberValue.setText("(714) 538-5815")
+            txtAddressValue.setText("185 N McPherson Rd, Orange, CA 92869, USA")
+            txtCustomerServiceHourValue.setText("8:00 AM to 5:00 PM")
+            /* } else {
+                 txtContactUsEmailValue.setText(data.get(0).CustomerServiceEmail)
+                 txtContactUsPhoneValue.setText(data.get(0).PrimaryPhone)
+                 txtAddressValue.setText(data.get(0).utilityAddress)
+                 txtCustomerServiceHourValue.setText(data.get(0).UtilityTime)
+             }*/
+
+            editCustomerName.setText(table1.get(0).customername)
+            editServiceAccNum.setText(table1.get(0).utilityaccountnumber)
+            editCustomerEmail.setText(table1.get(0).emailid)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
     }
 
@@ -119,7 +139,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
         try {
             var allValid = true
             if (txtTopicName.text.toString() == getString(R.string.select_topic)) {
-                showToast("Please Select Topic")
+                showToast("Please Select Report Type")
                 !allValid
                 return
             } else if (editSubjectValue.text!!.isEmpty()) {

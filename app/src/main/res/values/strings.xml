@@ -33,7 +33,7 @@
     <string name="registration_title_new">Create your Account</string>
     <string name="utility">Utility Name</string>
     <string name="select_utility">Select Water District/ Agency</string>
-    <string name="select_topic">Select Topic</string>
+    <string name="select_topic">Select Report Type</string>
     <string name="mandatory">Mandatory</string>
     <string name="acc_no">Account Number</string>
     <string name="meter_no">Meter Number</string>
@@ -96,7 +96,7 @@
     <string name="contactus_address">Address</string>
     <string name="contactus_opentime">Open Time</string>
     <string name="conservation_tip1">THINK. You can\'t do anything wiouth water. Save it. Every Drop Counts !</string>
-    <string name="conservation_tip2">Water Conservation is our Nature, Habit, Groove, Sty;e, Thing, Save our water Be Water Wise !</string>
+    <string name="conservation_tip2">Water Conservation is our Nature, Habit, Groove, Style, Thing, Save our water Be Water Wise !</string>
     <string name="conservation_tip3">Water is Life. Don\'t Waste it. Save Water Save Life !</string>
     <string name="previous_meter_reading">Previous Meter Reading</string>
     <string name="total_water_bill_this_period">Total water bill this period</string>

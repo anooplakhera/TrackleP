@@ -117,12 +117,12 @@
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/email_address" />
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <TextView
                             android:id="@+id/txtContactUsEmailValue"
                             android:layout_below="@id/txtContactUsEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/commonBackgroundGradient2"
+                            android:textColor="@color/colorUsageAllocation"
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:background="@android:color/transparent"
@@ -169,12 +169,12 @@
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/phone_number" />
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <TextView
                             android:id="@+id/txtContactUsPhoneValue"
                             android:layout_below="@id/txtContactUsPhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/commonBackgroundGradient2"
+                            android:textColor="@color/colorUsageAllocation"
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:background="@android:color/transparent"
@@ -205,15 +205,15 @@
                             android:layout_height="wrap_content"
                             android:padding="@dimen/dp_2"
                             android:fontFamily="@font/roboto"
-                            android:textColor="@color/colorDarkGray"
+                            android:textColor="@color/commonLabelTextColor"
                             android:text="@string/emergency_number" />
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <TextView
                             android:id="@+id/txtEmergencyNumberValue"
                             android:layout_below="@id/txtEmergencyNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/commonBackgroundGradient2"
+                            android:textColor="@color/colorUsageAllocation"
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:background="@android:color/transparent"
@@ -260,12 +260,12 @@
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/customer_service_hour" />
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <TextView
                             android:id="@+id/txtCustomerServiceHourValue"
                             android:layout_below="@id/txtCustomerServiceHour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/commonBackgroundGradient2"
+                            android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:background="@android:color/transparent"
@@ -299,12 +299,12 @@
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/connect_address" />
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <TextView
                             android:id="@+id/txtAddressValue"
                             android:layout_below="@id/txtAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/commonBackgroundGradient2"
+                            android:textColor="@color/colorBlack"
                             android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
                             android:background="@android:color/transparent"
