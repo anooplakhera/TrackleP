@@ -73,7 +73,8 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none">
+                android:scrollbars="none"
+                android:overScrollMode="never">
                 <!--Rest of your coding-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -376,17 +377,13 @@
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                
-                
                 </LinearLayout>
             
             </ScrollView>
         
         </FrameLayout>
     
-    
     </RelativeLayout>
-    
     
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

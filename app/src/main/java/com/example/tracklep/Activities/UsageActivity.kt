@@ -258,6 +258,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.valueFormatter = IndexAxisValueFormatter(year)
             xAxis.textSize = 7f
+            xAxis.setLabelRotationAngle(-45f)
             //Y-axis
             chartUsage.axisRight.isEnabled = false
             val leftAxis = chartUsage.axisLeft

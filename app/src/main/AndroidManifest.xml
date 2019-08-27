@@ -53,7 +53,7 @@
             android:name=".Activities.MyProfile"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateVisible|adjustPan"/>
+            android:windowSoftInputMode="adjustResize|stateVisible|adjustPan" />
         <activity
             android:name=".Activities.BillingActivity"
             android:screenOrientation="sensorPortrait"

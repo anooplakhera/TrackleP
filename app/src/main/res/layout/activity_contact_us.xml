@@ -6,7 +6,6 @@
     android:background="@drawable/drawable_background_gradient"
     android:focusableInTouchMode="true"
     android:fitsSystemWindows="true"
-    android:layout_marginBottom="@dimen/dp_40"
     tools:context=".Activities.ConnectWithUtilityActivity"
     android:orientation="vertical">
     
@@ -17,6 +16,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         android:overScrollMode="never">
         
         <LinearLayout
@@ -539,6 +539,7 @@
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_30"
                     android:text="@string/submit"
+                    android:layout_marginBottom="@dimen/dp_40"
                     android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:fontFamily="@font/roboto"
