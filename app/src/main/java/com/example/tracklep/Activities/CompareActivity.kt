@@ -264,10 +264,10 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         chart.invalidate()
 
         val l = chart.legend
-        l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-        l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+        l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         l.orientation = Legend.LegendOrientation.HORIZONTAL
-        l.setDrawInside(true)
+        l.setDrawInside(false)
         l.yOffset = 20f
         l.xOffset = 0f
         l.yEntrySpace = 0f
@@ -280,6 +280,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         xAxis.setCenterAxisLabels(true)
         xAxis.setDrawGridLines(false)
 //        xAxis.axisMaximum = 6f
+//        xAxis.textSize = 9f
         xAxis.labelCount = year.size
         xAxis.axisMaximum = year.size.toFloat()
         xAxis.position = XAxis.XAxisPosition.BOTTOM
@@ -360,10 +361,10 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         chart.invalidate()
 
         val l = chart.legend
-        l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-        l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+        l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
+        l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
         l.orientation = Legend.LegendOrientation.HORIZONTAL
-        l.setDrawInside(true)
+        l.setDrawInside(false)
         l.yOffset = 20f
         l.xOffset = 0f
         l.yEntrySpace = 0f
@@ -376,6 +377,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         xAxis.setCenterAxisLabels(true)
         xAxis.setDrawGridLines(false)
 //        xAxis.axisMaximum = 6f
+
         xAxis.labelCount = year.size
         xAxis.axisMaximum = year.size.toFloat()
         xAxis.position = XAxis.XAxisPosition.BOTTOM

@@ -64,6 +64,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
 
             clickPerform()
 
+            txtUsageChartDesc.setText(R.string.usage_ccf)
 
             getWaterUsage()
 
@@ -91,13 +92,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
 
     private fun clickPerform() {
         txtCCF.setOnClickListener {
-            /*txtCCF.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            txtCCF.setTextColor(resources.getColor(R.color.colorWhite))
-            txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtGallon.setTextColor(resources.getColor(R.color.colorBlack))
-            txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtDollar.setTextColor(resources.getColor(R.color.colorBlack))*/
-
             txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
             txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
             txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
@@ -110,12 +104,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         }
 
         txtGallon.setOnClickListener {
-            /* txtGallon.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-             txtGallon.setTextColor(resources.getColor(R.color.colorWhite))
-             txtCCF.setBackgroundColor(resources.getColor(R.color.colorWhite))
-             txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
-             txtDollar.setBackgroundColor(resources.getColor(R.color.colorWhite))
-             txtDollar.setTextColor(resources.getColor(R.color.colorBlack))*/
             txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
             txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
             txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
@@ -128,13 +116,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         }
 
         txtDollar.setOnClickListener {
-            /*txtDollar.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            txtDollar.setTextColor(resources.getColor(R.color.colorWhite))
-            txtCCF.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtCCF.setTextColor(resources.getColor(R.color.colorBlack))
-            txtGallon.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            txtGallon.setTextColor(resources.getColor(R.color.colorBlack))*/
-
             txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
             txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
             txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
@@ -225,13 +206,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                 yVals3.add(BarEntry(bar3[i].range, bar3[i].count))
             }
 
-
-//        if (bar2[0].count==null){
-//            val set1 = BarDataSet(yVals1, label1)
-//            set1.getColor(resources.getColor(R.color.colorUsageWithin))
-//        }else{
-
-
             val set1 = MyBarDataSet(yVals1, bar2, label1)
             var list = arrayListOf(
                 ContextCompat.getColor(this, R.color.colorUsageWithin),
@@ -240,11 +214,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             set1.colors = list
             var listLabel = arrayOf("Usage Within", "Usage Over")
             set1.stackLabels = listLabel
-
-//        }
-
-
-//
 
 //Use for label
 
