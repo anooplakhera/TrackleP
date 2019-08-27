@@ -1,6 +1,5 @@
 package com.example.tracklep.DataClasses
 
-import com.example.tracklep.DataClasses.CompareSpendingData.mArrayList2
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.Utils.Utils
 

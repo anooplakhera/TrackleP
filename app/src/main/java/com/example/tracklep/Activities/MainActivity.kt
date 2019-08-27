@@ -23,13 +23,18 @@ import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_menu_layout.*
+import pl.droidsonroids.gif.AnimationListener
+import pl.droidsonroids.gif.GifDrawable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import kotlin.math.roundToInt
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), AnimationListener {
+    override fun onAnimationCompleted(loopNumber: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private var mType = "G"
     private var mMode = "D"
@@ -51,8 +56,12 @@ class MainActivity : BaseActivity() {
             getMeterDetailsAMI()
 
             setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
-//
 
+//            var gifDrawable = GifDrawable(resources, R.drawable.waterflow567)
+//            gifDrawable.stop();
+//            gifDrawable.addAnimationListener(this);
+//            gifViewer.setImageDrawable(gifDrawable)
+//            gifDrawable.start()
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -273,7 +282,7 @@ class MainActivity : BaseActivity() {
         try {
             txtUsagesMessage.text =
                 "You have consumed " + data.AVERAGE + " Gallons water so far this calendar month"
-            txtMeterValue.text = data.AVERAGE + " \n Gallons"
+            txtMeterValue.text = data.AVERAGE + "\nGallons"
             arc_progress.progress =
                 Utils.getProgressValue(data.AllocationValue.toDouble(), data.AVERAGE.toDouble())
                     .roundToInt()
