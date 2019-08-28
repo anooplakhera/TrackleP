@@ -117,51 +117,55 @@ class MainActivity : BaseActivity() {
     }
 
     private fun clickPerform() {
-        lytAccount.setOnClickListener(View.OnClickListener {
+        try {
+            lytAccount.setOnClickListener(View.OnClickListener {
 
-            startActivity(Intent(this, MyProfile::class.java))
-        })
+                startActivity(Intent(this, MyProfile::class.java))
+            })
 //        lytAccount.setOnClickListener {
 //            startActivity(Intent(this, MyProfile::class.java))
 //        }
-        lytBilling.setOnClickListener {
-            startActivity(Intent(this, BillingActivity::class.java))
-        }
-        lytConnectUtility.setOnClickListener {
-
-            startActivity(Intent(this, ConnectWithUtilityActivity::class.java))
-            /*val mDialogView = LayoutInflater.from(this).inflate(R.layout.activity_contact_us, null)
-            //AlertDialogBuilder
-            val mBuilder = AlertDialog.Builder(this)
-                .setView(mDialogView)
-            //show dialog
-            val mAlertDialog = mBuilder.show()
-
-            mDialogView.txtContactUsPhone.setOnClickListener {
-
-                mAlertDialog.dismiss()
+            lytBilling.setOnClickListener {
+                startActivity(Intent(this, BillingActivity::class.java))
             }
-            mDialogView.txtContactUsOnline.setOnClickListener {
+            lytConnectUtility.setOnClickListener {
 
-                try {
-                    intent = Intent(this@MainActivity, WebViewActivity::class.java)
-                    intent.putExtra("contentTitle", "ContactUs")
-                    intent.putExtra("contentUrl", "www.eocwd.com/contact")
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    e.printStackTrace()
+                startActivity(Intent(this, ConnectWithUtilityActivity::class.java))
+                /*val mDialogView = LayoutInflater.from(this).inflate(R.layout.activity_contact_us, null)
+                //AlertDialogBuilder
+                val mBuilder = AlertDialog.Builder(this)
+                    .setView(mDialogView)
+                //show dialog
+                val mAlertDialog = mBuilder.show()
+
+                mDialogView.txtContactUsPhone.setOnClickListener {
+
+                    mAlertDialog.dismiss()
                 }
-            }*/
-        }
+                mDialogView.txtContactUsOnline.setOnClickListener {
 
-        lytTrackUsage.setOnClickListener {
-            startActivity(Intent(this, UsageActivity::class.java))
-        }
-        lytCompare.setOnClickListener {
-            startActivity(Intent(this, CompareActivity::class.java))
-        }
-        lytWaterConversation.setOnClickListener {
-            startActivity(Intent(this, ConservationActivity::class.java))
+                    try {
+                        intent = Intent(this@MainActivity, WebViewActivity::class.java)
+                        intent.putExtra("contentTitle", "ContactUs")
+                        intent.putExtra("contentUrl", "www.eocwd.com/contact")
+                        startActivity(intent)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }*/
+            }
+
+            lytTrackUsage.setOnClickListener {
+                startActivity(Intent(this, UsageActivity::class.java))
+            }
+            lytCompare.setOnClickListener {
+                startActivity(Intent(this, CompareActivity::class.java))
+            }
+            lytWaterConversation.setOnClickListener {
+                startActivity(Intent(this, ConservationActivity::class.java))
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -207,13 +211,17 @@ class MainActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.MeterDetails>,
                     response: Response<ResponseModelClasses.MeterDetails>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        UserMeterListData.clearArrayList()
-                        UserMeterListData.addArrayList(response.body()!!.Results.Table)
-                        getWaterUsage()
-                        AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
-                        AppPrefences.setIsAMI(this@MainActivity, response.body()!!.Results.Table.get(0).IsAMI)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            UserMeterListData.clearArrayList()
+                            UserMeterListData.addArrayList(response.body()!!.Results.Table)
+                            getWaterUsage()
+                            AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
+                            AppPrefences.setIsAMI(this@MainActivity, response.body()!!.Results.Table.get(0).IsAMI)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -250,19 +258,25 @@ class MainActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.WaterUsages>,
                     response: Response<ResponseModelClasses.WaterUsages>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
-                        data.addAll(response.body()!!.Results.Table)
-                        data.reverse()
-                        WaterUsageData.clearArrayList()
-                        WaterUsageData.addArrayList(data)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
+                            if (response.body()!!.Results.Table != null && response.body()!!.Results.Table.size > 0) {
+                                var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
+                                data.addAll(response.body()!!.Results.Table)
+                                data.reverse()
+                                WaterUsageData.clearArrayList()
+                                WaterUsageData.addArrayList(data)
 
-                        AppPrefences.setMeterUsageData(this@MainActivity, data[0])
+                                AppPrefences.setMeterUsageData(this@MainActivity, data[0])
 
-                        setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
+                                setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
+                            }
 
-                        AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 

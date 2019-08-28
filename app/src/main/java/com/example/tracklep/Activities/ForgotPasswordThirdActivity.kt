@@ -46,19 +46,23 @@ class ForgotPasswordThirdActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.ResetPassStep1Response>,
                     response: Response<ResponseModelClasses.ResetPassStep1Response>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
-                            showSuccessPopup(response.body()!!.Table[0].Message)
-                        } else {
-                            AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
-                            ResetPassSecurityQuestionData.clearArrayList()
-                            ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
-                            val intent =
-                                Intent(this@ForgotPasswordThirdActivity, ForgotPasswordSecondActivity::class.java)
-                            intent.putExtra(ApiUrls.EmailID, editPassword.text.toString())
-                            startActivity(intent)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
+                                showSuccessPopup(response.body()!!.Table[0].Message)
+                            } else {
+                                AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
+                                ResetPassSecurityQuestionData.clearArrayList()
+                                ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
+                                val intent =
+                                    Intent(this@ForgotPasswordThirdActivity, ForgotPasswordSecondActivity::class.java)
+                                intent.putExtra(ApiUrls.EmailID, editPassword.text.toString())
+                                startActivity(intent)
+                            }
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 

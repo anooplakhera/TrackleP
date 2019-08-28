@@ -76,79 +76,87 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
     }
 
     private fun checkIsAMI() {
-        if (AppPrefences.getIsAMI(this) == true) {
-            lytBiMonthly.alpha = selectedAlpha
-            lytHourly.visibility = View.GONE
-            lytDaily.visibility = View.GONE
-            lytMonthly.visibility = View.GONE
-            mMode = "B"
-        } else {
-            lytHourly.visibility = View.VISIBLE
-            lytDaily.visibility = View.VISIBLE
-            lytMonthly.visibility = View.VISIBLE
-            resetAlpha()
+        try {
+            if (AppPrefences.getIsAMI(this) == true) {
+                lytBiMonthly.alpha = selectedAlpha
+                lytHourly.visibility = View.GONE
+                lytDaily.visibility = View.GONE
+                lytMonthly.visibility = View.GONE
+                mMode = "B"
+            } else {
+                lytHourly.visibility = View.VISIBLE
+                lytDaily.visibility = View.VISIBLE
+                lytMonthly.visibility = View.VISIBLE
+                resetAlpha()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     private fun clickPerform() {
-        txtCCF.setOnClickListener {
-            txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
-            txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
-            txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+        try {
+            txtCCF.setOnClickListener {
+                txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
+                txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
 
-            mType = "W"
-            checkIsAMI()
-            getWaterUsage()
-            txtUsageChartDesc.setText(R.string.usage_ccf)
+                mType = "W"
+                checkIsAMI()
+                getWaterUsage()
+                txtUsageChartDesc.setText(R.string.usage_ccf)
 
-        }
+            }
 
-        txtGallon.setOnClickListener {
-            txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
-            txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
-            txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+            txtGallon.setOnClickListener {
+                txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
+                txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
 
-            mType = "G"
-            checkIsAMI()
-            getWaterUsage()
-            txtUsageChartDesc.setText(R.string.usage_gallon)
+                mType = "G"
+                checkIsAMI()
+                getWaterUsage()
+                txtUsageChartDesc.setText(R.string.usage_gallon)
 
-        }
+            }
 
-        txtDollar.setOnClickListener {
-            txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
-            txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
-            txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
+            txtDollar.setOnClickListener {
+                txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
 
-            mType = "D"
-            checkIsAMI()
-            getWaterUsage()
-            txtUsageChartDesc.setText(R.string.usage_dollar)
-        }
+                mType = "D"
+                checkIsAMI()
+                getWaterUsage()
+                txtUsageChartDesc.setText(R.string.usage_dollar)
+            }
 
-        lytHourly.setOnClickListener {
-            resetAlpha()
-        }
+            lytHourly.setOnClickListener {
+                resetAlpha()
+            }
 
-        lytDaily.setOnClickListener {
-            lytDaily.alpha = selectedAlpha
-            lytHourly.alpha = 1.0f
-            lytMonthly.alpha = 1.0f
-            lytBiMonthly.alpha = 1.0f
-        }
+            lytDaily.setOnClickListener {
+                lytDaily.alpha = selectedAlpha
+                lytHourly.alpha = 1.0f
+                lytMonthly.alpha = 1.0f
+                lytBiMonthly.alpha = 1.0f
+            }
 
-        lytMonthly.setOnClickListener {
-            lytMonthly.alpha = selectedAlpha
-            lytHourly.alpha = 1.0f
-            lytDaily.alpha = 1.0f
-            lytBiMonthly.alpha = 1.0f
-        }
+            lytMonthly.setOnClickListener {
+                lytMonthly.alpha = selectedAlpha
+                lytHourly.alpha = 1.0f
+                lytDaily.alpha = 1.0f
+                lytBiMonthly.alpha = 1.0f
+            }
 
-        lytBiMonthly.setOnClickListener {
-            lytBiMonthly.alpha = selectedAlpha
-            lytHourly.alpha = 1.0f
-            lytMonthly.alpha = 1.0f
-            lytDaily.alpha = 1.0f
+            lytBiMonthly.setOnClickListener {
+                lytBiMonthly.alpha = selectedAlpha
+                lytHourly.alpha = 1.0f
+                lytMonthly.alpha = 1.0f
+                lytDaily.alpha = 1.0f
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
     }
@@ -409,38 +417,42 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                     call: Call<ResponseModelClasses.WaterUsages>,
                     response: Response<ResponseModelClasses.WaterUsages>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
-                        data.addAll(response.body()!!.Results.Table)
-                        data.reverse()
-                        WaterUsageData.clearArrayList()
-                        WaterUsageData.addArrayList(data)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
+                            data.addAll(response.body()!!.Results.Table)
+                            data.reverse()
+                            WaterUsageData.clearArrayList()
+                            WaterUsageData.addArrayList(data)
 
 
-                        if (mType == "D") {
-                            setChartDataDollar(
-                                WaterUsageData.getUsageConsumedBar(),
-                                WaterUsageData.getUsageBar(),
-                                WaterUsageData.getUsageEmptyBar(),
-                                WaterUsageData.getMonthList(),
-                                getString(R.string.c_this_year),
-                                getString(R.string.c_previous_year)
-                            )
-                        } else {
-                            setChartData(
-                                WaterUsageData.getUsageConsumedBar(),
-                                WaterUsageData.getUsageBar(),
-                                WaterUsageData.getUsageEmptyBar(),
-                                WaterUsageData.getMonthList(),
-                                getString(R.string.c_this_year),
-                                getString(R.string.c_previous_year)
-                            )
+                            if (mType == "D") {
+                                setChartDataDollar(
+                                    WaterUsageData.getUsageConsumedBar(),
+                                    WaterUsageData.getUsageBar(),
+                                    WaterUsageData.getUsageEmptyBar(),
+                                    WaterUsageData.getMonthList(),
+                                    getString(R.string.c_this_year),
+                                    getString(R.string.c_previous_year)
+                                )
+                            } else {
+                                setChartData(
+                                    WaterUsageData.getUsageConsumedBar(),
+                                    WaterUsageData.getUsageBar(),
+                                    WaterUsageData.getUsageEmptyBar(),
+                                    WaterUsageData.getMonthList(),
+                                    getString(R.string.c_this_year),
+                                    getString(R.string.c_previous_year)
+                                )
+                            }
+    //                        AppPrefences.setMeterUsageData(this@UsageActivity, data[0])
+    //                        setMeterData(AppPrefences.getMeterUsageData(this@UsageActivity))
+
+                            AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
                         }
-//                        AppPrefences.setMeterUsageData(this@UsageActivity, data[0])
-//                        setMeterData(AppPrefences.getMeterUsageData(this@UsageActivity))
-
-                        AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 

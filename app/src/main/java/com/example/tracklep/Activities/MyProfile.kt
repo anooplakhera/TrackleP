@@ -75,31 +75,35 @@ class MyProfile : BaseActivity() {
 
     private fun clickPerform() {
 
-        imgCABadd.setOnClickListener {
-            startActivity(Intent(this, AddAccountActivity::class.java))
-        }
-        rytCommunicationAddress.setOnClickListener {
-            openDialogList()
-        }
-
-        r_lyt_quesP1.setOnClickListener {
-            if (SecurityQuestionData.getCount() > 0) {
-                openDialog(txtQues1Value)
-            } else {
-                getSecurityQues(true, txtQues1Value)
+        try {
+            imgCABadd.setOnClickListener {
+                startActivity(Intent(this, AddAccountActivity::class.java))
             }
-        }
-
-        r_lyt_ques2.setOnClickListener {
-            if (SecurityQuestionData.getCount() > 0) {
-                openDialog(txtQues2Value)
-            } else {
-                getSecurityQues(true, txtQues2Value)
+            rytCommunicationAddress.setOnClickListener {
+                openDialogList()
             }
-        }
 
-        btnSaveProfile.setOnClickListener {
-            validationField()
+            r_lyt_quesP1.setOnClickListener {
+                if (SecurityQuestionData.getCount() > 0) {
+                    openDialog(txtQues1Value)
+                } else {
+                    getSecurityQues(true, txtQues1Value)
+                }
+            }
+
+            r_lyt_ques2.setOnClickListener {
+                if (SecurityQuestionData.getCount() > 0) {
+                    openDialog(txtQues2Value)
+                } else {
+                    getSecurityQues(true, txtQues2Value)
+                }
+            }
+
+            btnSaveProfile.setOnClickListener {
+                validationField()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -113,18 +117,22 @@ class MyProfile : BaseActivity() {
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
                     response: Response<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
                 ) {
-                    dismissDialog()
-                    if (response.message() != null)
-                        getUserProfile()
-                    AppLog.printLog("Response- ", response.message().toString())
-                    if (response.body() != null) {
-                        SecurityQuestionData.clearArrayList()
-                        SecurityQuestionData.addArrayList(response.body()!!)
-                        SecurityQuestionData.saveItemInHashMap()
+                    try {
+                        dismissDialog()
+                        if (response.message() != null)
+                            getUserProfile()
+                        AppLog.printLog("Response- ", response.message().toString())
+                        if (response.body() != null) {
+                            SecurityQuestionData.clearArrayList()
+                            SecurityQuestionData.addArrayList(response.body()!!)
+                            SecurityQuestionData.saveItemInHashMap()
 
-                        if (dialogOpen) {
-                            openDialog(txtview)
+                            if (dialogOpen) {
+                                openDialog(txtview)
+                            }
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -250,22 +258,26 @@ class MyProfile : BaseActivity() {
     }
 
     fun updateViews(data: ResponseModelClasses.MyProfile) {
-        custID = data.CustomerId.toString()
-        sQuesID1 = data.SecurityQuestionId.toString()
-        sQuesID2 = data.SecurityQuestionId2.toString()
-        txtUserName.text = data.FullName
-        editEmail.setText(data.EmailId)
-        editHomePhoneNumberValue.setText(data.HomePhone)
-        editMobileNumberValue.setText(data.MobilePhone)
-        editHomePhoneNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
-        editMobileNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
-        editAns1Value.setText(data.HintsAns)
-        editAns2Value.setText(data.HintsAns2)
-        txtQues1Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
-        txtQues2Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
-        txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
-        txtCommunicationAddressValue.text = data.CommunicationAddress
-        txtCommunicationAddressValue.setTextColor(resources.getColor(R.color.colorBlack))
+        try {
+            custID = data.CustomerId.toString()
+            sQuesID1 = data.SecurityQuestionId.toString()
+            sQuesID2 = data.SecurityQuestionId2.toString()
+            txtUserName.text = data.FullName
+            editEmail.setText(data.EmailId)
+            editHomePhoneNumberValue.setText(data.HomePhone)
+            editMobileNumberValue.setText(data.MobilePhone)
+            editHomePhoneNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
+            editMobileNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
+            editAns1Value.setText(data.HintsAns)
+            editAns2Value.setText(data.HintsAns2)
+            txtQues1Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
+            txtQues2Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
+            txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
+            txtCommunicationAddressValue.text = data.CommunicationAddress
+            txtCommunicationAddressValue.setTextColor(resources.getColor(R.color.colorBlack))
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun openDialog(textView: TextView) {
@@ -330,23 +342,29 @@ class MyProfile : BaseActivity() {
             var swipeHandler = object : SwipeToDeleteCallback(this) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
-                    var alertDialog = AlertDialog.Builder(this@MyProfile)
-                    alertDialog.setTitle(getString(R.string.app_name))
-                    alertDialog.setMessage("Are you sure you want to delete communication address?")
-                    alertDialog.setNeutralButton("Cancel") { _, _ ->
-                        if (mSwipeItemAdapter != null) {
+                    try {
+                        var alertDialog = AlertDialog.Builder(this@MyProfile)
+                        alertDialog.setTitle(getString(R.string.app_name))
+                        alertDialog.setMessage("Are you sure you want to delete communication address?")
+                        alertDialog.setNeutralButton("Cancel") { _, _ ->
+                            if (mSwipeItemAdapter != null) {
+                                mSwipeItemAdapter.notifyDataSetChanged()
+                            }
+                        }
+
+                        alertDialog.setPositiveButton("Yes") { dialog, which ->
+                            mSwipeItemAdapter.removeAt(viewHolder.adapterPosition)
                             mSwipeItemAdapter.notifyDataSetChanged()
+                            if (mSwipeItemAdapter.isEmpty()) {
+                                dialog.dismiss()
+                            }
+                            validationField()
                         }
-                    }
 
-                    alertDialog.setPositiveButton("Yes") { dialog, which ->
-                        mSwipeItemAdapter.removeAt(viewHolder.adapterPosition)
-                        if (mSwipeItemAdapter.isEmpty()) {
-                            dialog.dismiss()
-                        }
+                        alertDialog.show()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
-
-                    alertDialog.show()
 
                 }
             }
@@ -366,39 +384,39 @@ class MyProfile : BaseActivity() {
                 !allValid
                 return
             } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
-                showToast("Please enter valid Email")
+                showSuccessPopup("Please enter valid Email")
                 !allValid
                 return
             } else if (editHomePhoneNumberValue.text!!.isEmpty()) {
-                showToast("Please Enter Home Phone Number")
+                showSuccessPopup("Please enter Home Phone Number")
                 !allValid
                 return
             } else if (!editHomePhoneNumberValue.text!!.isEmpty() && editHomePhoneNumberValue.text!!.length < 10) {
-                showToast("Please Enter 10 Digits Home Phone Number")
+                showSuccessPopup("Please enter 10 digits Home Phone Number")
                 !allValid
                 return
             } else if (editMobileNumberValue.text!!.isEmpty()) {
-                showToast("Please Enter Mobile Number")
+                showSuccessPopup("Please enter Mobile Number")
                 !allValid
                 return
             } else if (!editMobileNumberValue.text!!.isEmpty() && editMobileNumberValue.text!!.length < 10) {
-                showToast("Please Enter 10 Digits Mobile Number")
+                showSuccessPopup("Please enter 10 digits Mobile Number")
                 !allValid
                 return
             } else if (editAns1Value.text!!.isEmpty()) {
-                showToast("Please Enter Security Answer")
+                showSuccessPopup("Please enter Security Answer")
                 !allValid
                 return
             } else if (txtQues1Value.text.toString() == getString(R.string.mandatory)) {
-                showToast("Please Select Security Question")
+                showSuccessPopup("Please select Security Question")
                 !allValid
                 return
             } else if (txtQues2Value.text.toString() == getString(R.string.mandatory)) {
-                showToast("Please Select Security Question")
+                showSuccessPopup("Please select Security Question")
                 !allValid
                 return
             } else if (editAns2Value.text!!.isEmpty()) {
-                showToast("Please Enter Security Answer")
+                showSuccessPopup("Please enter Security Answer")
                 !allValid
                 return
             } else if (allValid) {

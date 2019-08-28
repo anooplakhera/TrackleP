@@ -156,15 +156,15 @@ class UsageNotificationActivity : BaseActivity() {
         try {
             var allValid = true
             if (editMeterNumber.text!!.isEmpty()) {
-                showToast("Please Enter Meter Number")
+                showToast("Please enter Meter Number")
                 !allValid
                 return
             } else if (editDailyLimit.text!!.isEmpty()) {
-                showToast("Please Enter Daily Limit")
+                showToast("Please enter Daily Limit")
                 !allValid
                 return
             } else if (editMonthlyLimit.text!!.isEmpty()) {
-                showToast("Please Enter Monthly Limit")
+                showToast("Please enter Monthly Limit")
                 !allValid
                 return
             } else if (allValid) {

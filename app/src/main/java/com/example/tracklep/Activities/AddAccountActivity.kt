@@ -35,9 +35,20 @@ class AddAccountActivity : BaseActivity() {
 
     private fun validationFields(): Boolean {
         var isValid = true
-        if (editUtilAccountNo.text!!.isEmpty()) isValid = false
-        else if (editMeterNumberValue.text!!.isEmpty()) isValid = false
-        else if (editPostalCode.text!!.isEmpty()) isValid = false
+        try {
+            if (editUtilAccountNo.text!!.isEmpty() || editUtilAccountNo.length() < 7) {
+                showSuccessPopup("Please enter Utility Account Number.")
+                isValid = false
+            } else if (editMeterNumberValue.text!!.isEmpty() || editMeterNumberValue.length() < 8) {
+                showSuccessPopup("Please enter valid Meter Number.")
+                isValid = false
+            } else if (editPostalCode.text!!.isEmpty() || editPostalCode.length() < 5) {
+                showSuccessPopup("Please enter valid Postal Code.")
+                isValid = false
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         return isValid
     }
 
@@ -47,7 +58,7 @@ class AddAccountActivity : BaseActivity() {
             if (validationFields())
 
                 addAccountAPI()
-            else showToast("Please enter mandatory details.")
+            else showSuccessPopup("Please enter mandatory details.")
 
         }
     }
@@ -70,23 +81,27 @@ class AddAccountActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.AddAccount>,
                     response: Response<ResponseModelClasses.AddAccount>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
 
-                        /*val loginResponseModel: ResponseModelClasses.AddAccount? = response.body()
-                        AppPrefences.setProfileInfo(this@AddAccountActivity, loginResponseModel)
+                            /*val loginResponseModel: ResponseModelClasses.AddAccount? = response.body()
+                            AppPrefences.setProfileInfo(this@AddAccountActivity, loginResponseModel)
 
-                        AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@AddAccountActivity).Name))
-                        AppPrefences.setLogin(this@AddAccountActivity, true)
+                            AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@AddAccountActivity).Name))
+                            AppPrefences.setLogin(this@AddAccountActivity, true)
 
-                        startActivity(Intent(this@AddAccountActivity, MainActivity::class.java))
-                        finish()*/
-                        editUtilAccountNo.text?.clear()
-                        editPostalCode.text?.clear()
-                        editMeterNumberValue.text?.clear()
+                            startActivity(Intent(this@AddAccountActivity, MainActivity::class.java))
+                            finish()*/
+                            editUtilAccountNo.text?.clear()
+                            editPostalCode.text?.clear()
+                            editMeterNumberValue.text?.clear()
 
-                        showSuccessPopup(response.body()!!.Message)
+                            showSuccessPopup(response.body()!!.Message)
 
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 

@@ -1,5 +1,6 @@
 package com.example.tracklep.Activities
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -22,6 +23,7 @@ import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_signupsteptwo.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import kotlinx.android.synthetic.main.dialog_layout.*
@@ -145,10 +147,32 @@ class SignupStepTwoActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.RegistrationResponse>,
                     response: Response<ResponseModelClasses.RegistrationResponse>
                 ) {
-                    dismissDialog()
-//                    AppLog.printLog("Params " + map.toString() + "\n" + "URL " + apiService.toString() + "\n" + "Response " + response.body().toString())
-                    if (response.body() != null) {
-                        Log.d("send RegID===", response.body()!!.Message)
+                    try {
+                        dismissDialog()
+
+                        if (response.body() != null) {
+                            if (response.body()!!.Status != null && response.body()!!.Status == "0") {
+                                showSuccessPopup(response.body()!!.Message)
+                            } else {
+                                var alertDialog = AlertDialog.Builder(this@SignupStepTwoActivity)
+                                alertDialog.setTitle(getString(R.string.app_name))
+                                alertDialog.setMessage(response.body()!!.Message)
+
+                                alertDialog.setPositiveButton("OK") { dialog, which ->
+                                    dialog.dismiss()
+                                    Utils.isRegisterSuccess = true
+                                    finish()
+                                    finish()
+                                }
+
+                                alertDialog.show()
+
+                                AppLog.printLog("ForgetStep2reponse ", Gson().toJson(response.body()!!))
+
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -176,17 +200,21 @@ class SignupStepTwoActivity : BaseActivity() {
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
                     response: Response<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
                 ) {
-                    dismissDialog()
-                    if (response.message() != null)
-                        AppLog.printLog("Response- ", response.message().toString())
-                    if (response.body() != null) {
-                        SecurityQuestionData.clearArrayList()
-                        SecurityQuestionData.addArrayList(response.body()!!)
-                        SecurityQuestionData.saveItemInHashMap()
+                    try {
+                        dismissDialog()
+                        if (response.message() != null)
+                            AppLog.printLog("Response- ", response.message().toString())
+                        if (response.body() != null) {
+                            SecurityQuestionData.clearArrayList()
+                            SecurityQuestionData.addArrayList(response.body()!!)
+                            SecurityQuestionData.saveItemInHashMap()
 
-                        if (dialogOpen) {
-                            openDialog(txtview)
+                            if (dialogOpen) {
+                                openDialog(txtview)
+                            }
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 

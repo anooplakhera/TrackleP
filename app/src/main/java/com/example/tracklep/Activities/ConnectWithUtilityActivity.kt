@@ -155,7 +155,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
                 !allValid
                 return
             } else if (editCustomerEmail.text!!.isEmpty()) {
-                showSuccessPopup("Please Enter Postal Code")
+                showSuccessPopup("Please enter Postal Code")
                 !allValid
                 return
             } else if (editSubjectValue.text!!.isEmpty()) {

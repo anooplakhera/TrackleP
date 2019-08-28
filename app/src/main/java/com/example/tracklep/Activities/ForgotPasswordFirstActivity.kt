@@ -40,24 +40,31 @@ class ForgotPasswordFirstActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password_first)
 
-        txtCABtitle.text = getString(R.string.forgot_password)
-        imgCABback.setOnClickListener {
-            finish()
-        }
-
-        btnSubmitStep1.setOnClickListener {
-            if (editEmailF1.text!!.isNotEmpty() && Utils.isValidEmail(editEmailF1.text.toString()))
-                getUserEmail()
-            else
-                showSuccessPopup("Please enter valid Email")
-        }
-
-        textUtilities.setOnClickListener {
-            if (UtilitiesData.getCount() > 0) {
-                openDialog(getString(R.string.select_utility), textUtilities)
-            } else {
-                getUtilityList(true, textUtilities)
+        try {
+            txtCABtitle.text = getString(R.string.forgot_password)
+            imgCABback.setOnClickListener {
+                finish()
             }
+
+            btnSubmitStep1.setOnClickListener {
+
+                if (textUtilities.text.toString() == getString(R.string.select_utility)) {
+                    showSuccessPopup("Please select Water District/ Agency")
+                } else if (editEmailF1.text!!.isNotEmpty() && Utils.isValidEmail(editEmailF1.text.toString()))
+                    getUserEmail()
+                else
+                    showSuccessPopup("Please enter valid Email")
+            }
+
+            textUtilities.setOnClickListener {
+                if (UtilitiesData.getCount() > 0) {
+                    openDialog(getString(R.string.select_utility), textUtilities)
+                } else {
+                    getUtilityList(true, textUtilities)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
     }
@@ -72,19 +79,23 @@ class ForgotPasswordFirstActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.ResetPassStep1Response>,
                     response: Response<ResponseModelClasses.ResetPassStep1Response>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
-                            showSuccessPopup(response.body()!!.Table[0].Message)
-                        } else {
-                            AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
-                            ResetPassSecurityQuestionData.clearArrayList()
-                            ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
-                            val intent =
-                                Intent(this@ForgotPasswordFirstActivity, ForgotPasswordSecondActivity::class.java)
-                            intent.putExtra(ApiUrls.EmailID, editEmailF1.text.toString())
-                            startActivity(intent)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
+                                showSuccessPopup(response.body()!!.Table[0].Message)
+                            } else {
+                                AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
+                                ResetPassSecurityQuestionData.clearArrayList()
+                                ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
+                                val intent =
+                                    Intent(this@ForgotPasswordFirstActivity, ForgotPasswordSecondActivity::class.java)
+                                intent.putExtra(ApiUrls.EmailID, editEmailF1.text.toString())
+                                startActivity(intent)
+                            }
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 

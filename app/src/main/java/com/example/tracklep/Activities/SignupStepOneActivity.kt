@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.Adapter.UtilitiesListAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -27,6 +28,7 @@ import com.example.tracklep.Utils.Utils
 import kotlinx.android.synthetic.main.activity_signupstepone.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import kotlinx.android.synthetic.main.dialog_layout.*
+import okhttp3.internal.Util
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,6 +54,12 @@ class SignupStepOneActivity : BaseActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (Utils.isRegisterSuccess)
+            finish()
     }
 
     private fun clickPerform() {
@@ -109,15 +117,15 @@ class SignupStepOneActivity : BaseActivity() {
                 showSuccessPopup("Please select Water District/Agency")
                 !allValid
                 return
-            } else if (editAccountNo.text!!.isEmpty()) {
+            } else if (editAccountNo.text!!.isEmpty() || editAccountNo.length() < 7) {
                 showSuccessPopup("Please enter Account Number")
                 !allValid
                 return
-            } else if (editMeterNo.text!!.isEmpty()) {
+            } else if (editMeterNo.text!!.isEmpty() || editMeterNo.length() < 8) {
                 showSuccessPopup("Please enter Meter Number")
                 !allValid
                 return
-            } else if (editServiceZipCode.text!!.isEmpty()) {
+            } else if (editServiceZipCode.text!!.isEmpty() || editServiceZipCode.length() < 5) {
                 showSuccessPopup("Please enter Service Zip Code")
                 !allValid
                 return
@@ -125,7 +133,7 @@ class SignupStepOneActivity : BaseActivity() {
                 showSuccessPopup("Please enter Email")
                 !allValid
                 return
-            } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
+            } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString().trim())) {
                 showSuccessPopup("Please enter valid Email")
                 !allValid
                 return
