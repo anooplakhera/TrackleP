@@ -40,6 +40,7 @@ object Utils {
     private val PREF_USER_IMAGE = "image"
     private val PREF_QUES_ANSWER_JSON = "question_answer_data"
     private val PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 123
+     var isRegisterSuccess = false
 
 
     /*

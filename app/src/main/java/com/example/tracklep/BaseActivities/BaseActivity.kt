@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
@@ -17,6 +18,8 @@ import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 abstract class BaseActivity : AppCompatActivity(), BaseFragment.Callback {
@@ -97,6 +100,16 @@ abstract class BaseActivity : AppCompatActivity(), BaseFragment.Callback {
         }
 
         alertDialog.show()
+    }
+
+    fun isPasswordValid(password: Editable?): Boolean {
+        val pattern: Pattern
+        val matcher: Matcher
+        val PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%]).{8,16})"
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(password)
+
+        return matcher.matches()
     }
 
     fun hideSystemUI() {

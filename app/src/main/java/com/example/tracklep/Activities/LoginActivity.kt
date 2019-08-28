@@ -32,7 +32,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,68 +44,78 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun validationFields() {
-        var isValid = true
-        if (editUserName.text!!.isEmpty()) {
-            !isValid
-            return
-        } else if (editUserPass.text!!.isEmpty()) {
-            !isValid
-            return
-        } else if (textUtilities.text.toString() == getString(R.string.select_utility)) {
-            showToast("Please Select Water District/ Agency")
-            !isValid
-            return
-        } else if (!switchBtn.isChecked) {
-            showToast("Please Enable Remember me")
-            !isValid
-            return
-        } else if (isValid) {
-            loginApi()
+        try {
+            var isValid = true
+            if (editUserName.text!!.isEmpty()) {
+                showSuccessPopup("Please enter valid Username")
+                !isValid
+                return
+            } else if (editUserPass.text!!.isEmpty() || !isPasswordValid(editUserPass.text)) {
+                showSuccessPopup(getString(R.string.password_validation_message))
+                !isValid
+                return
+            } else if (textUtilities.text.toString() == getString(R.string.select_utility)) {
+                showSuccessPopup("Please select Water District/ Agency")
+                !isValid
+                return
+            } else if (!switchBtn.isChecked) {
+                showSuccessPopup("Please enable Remember me")
+                !isValid
+                return
+            } else if (isValid) {
+                loginApi()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
     private fun clickPerform() {
-        textUtilities.setOnClickListener {
-            if (UtilitiesData.getCount() > 0) {
-                openDialog(getString(R.string.select_utility), textUtilities)
-            } else {
-                getUtilityList(true, textUtilities)
-            }
-        }
-
-        txtForgotPassword.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, ForgotPasswordFirstActivity::class.java))
-        }
-
-        lytRegisterUser.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, SignupStepOneActivity::class.java))
-        }
-
-        lytConnectWithAgency.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, ConnectWithUtilityActivity::class.java))
-        }
-
-        lytPayBill.setOnClickListener {
-            var alertDialog = AlertDialog.Builder(this)
-            alertDialog.setTitle(getString(R.string.app_name))
-            alertDialog.setMessage("You will be redirected to EOCWD online payment system. Click Proceed to continue.")
-            alertDialog.setNeutralButton("Cancel") { _, _ ->
+        try {
+            textUtilities.setOnClickListener {
+                if (UtilitiesData.getCount() > 0) {
+                    openDialog(getString(R.string.select_utility), textUtilities)
+                } else {
+                    getUtilityList(true, textUtilities)
+                }
             }
 
-            alertDialog.setPositiveButton("Proceed") { dialog, which ->
-                dialog.dismiss()
-                startWebActivity("Pay Bill", "https://eocwd.epayub.com")
+            txtForgotPassword.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, ForgotPasswordFirstActivity::class.java))
             }
 
-            alertDialog.show()
-        }
+            lytRegisterUser.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, SignupStepOneActivity::class.java))
+            }
+
+            lytConnectWithAgency.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, ConnectWithUtilityActivity::class.java))
+            }
+
+            lytPayBill.setOnClickListener {
+                var alertDialog = AlertDialog.Builder(this)
+                alertDialog.setTitle(getString(R.string.app_name))
+                alertDialog.setMessage("You will be redirected to EOCWD online payment system. Click Proceed to continue.")
+                alertDialog.setNeutralButton("Cancel") { _, _ ->
+                }
+
+                alertDialog.setPositiveButton("Proceed") { dialog, which ->
+                    dialog.dismiss()
+                    startWebActivity("Pay Bill", "https://eocwd.epayub.com")
+                }
+
+                alertDialog.show()
+            }
 
 //        editUserName.setText("utkarsh3441@gmail.com")
-        editUserName.setText("amitsh@hotmail.com")
-        editUserPass.setText("Trackle@999")
+            editUserName.setText("amitsh@hotmail.com")
+            editUserPass.setText("Trackle@999")
 
-        btnLogin.setOnClickListener {
-            validationFields()
+            btnLogin.setOnClickListener {
+                validationFields()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -136,17 +145,21 @@ class LoginActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.LoginResponseModel>,
                     response: Response<ResponseModelClasses.LoginResponseModel>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        var loginResponseModel: ResponseModelClasses.LoginResponseModel? = response.body()
-                        AppPrefences.setLoginUserInfo(this@LoginActivity, loginResponseModel)
-                        AppPrefences.setAccountNumber(this@LoginActivity, loginResponseModel!!.AccountNumber)
-                        AppLog.printLog("loginApiResponse: " + Gson().toJson(response.body()));
-                        AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@LoginActivity)!!.Name))
-                        AppPrefences.setLogin(this@LoginActivity, true)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            var loginResponseModel: ResponseModelClasses.LoginResponseModel? = response.body()
+                            AppPrefences.setLoginUserInfo(this@LoginActivity, loginResponseModel)
+                            AppPrefences.setAccountNumber(this@LoginActivity, loginResponseModel!!.AccountNumber)
+                            AppLog.printLog("loginApiResponse: " + Gson().toJson(response.body()));
+                            AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@LoginActivity)!!.Name))
+                            AppPrefences.setLogin(this@LoginActivity, true)
 
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                        finish()
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            finish()
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 

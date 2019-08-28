@@ -1,5 +1,6 @@
 package com.example.tracklep.Activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.example.tracklep.ApiClient.ApiClient
@@ -9,6 +10,7 @@ import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.ResetPassSecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
@@ -26,17 +28,21 @@ class ForgotPasswordSecondActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password_second)
 
-        txtCABtitle.text = getString(R.string.forgot_password)
-        imgCABback.setOnClickListener {
-            finish()
+        try {
+            txtCABtitle.text = getString(R.string.forgot_password)
+            imgCABback.setOnClickListener {
+                finish()
+            }
+
+            emailId = intent.getStringExtra(ApiUrls.EmailID)
+
+            txtFirstQuestion.text = ResetPassSecurityQuestionData.getArrayItem(0).Question
+            txtSecondQuestion.text = ResetPassSecurityQuestionData.getArrayItem(1).Question
+
+            clickPerform()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-
-        emailId = intent.getStringExtra(ApiUrls.EmailID)
-
-        txtFirstQuestion.text = ResetPassSecurityQuestionData.getArrayItem(0).Question
-        txtSecondQuestion.text = ResetPassSecurityQuestionData.getArrayItem(1).Question
-
-        clickPerform()
     }
 
     private fun clickPerform() {
@@ -44,7 +50,7 @@ class ForgotPasswordSecondActivity : BaseActivity() {
             if (this.editAnswer1RP.text!!.isNotEmpty() && this.editAnswer2RP.text!!.isNotEmpty()) {
                 getUserReset()
             } else {
-                showToast("Please Enter Correct Answers")
+                showSuccessPopup("Please enter Correct Answers")
             }
         }
 
@@ -66,9 +72,24 @@ class ForgotPasswordSecondActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.ResetPassStep2Response>,
                     response: Response<ResponseModelClasses.ResetPassStep2Response>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        Log.d("ResponseBodyIs", Gson().toJson(response.body()!!))
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            if (response.body()!!.Table[0].STATUS != null && response.body()!!.Table[0].STATUS == "0") {
+                                showSuccessPopup(response.body()!!.Table[0].Message)
+                            } else {
+                                AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
+                                /*ResetPassSecurityQuestionData.clearArrayList()
+                                ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
+                                val intent =
+                                    Intent(this@ForgotPasswordSecondActivity, ForgotPasswordThirdActivity::class.java)
+                                intent.putExtra(ApiUrls.EmailID, editEmailF1.text.toString())
+                                startActivity(intent)*/
+                            }
+                            Log.d("ResponseBodyIs", Gson().toJson(response.body()!!))
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 

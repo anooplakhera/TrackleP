@@ -46,19 +46,23 @@ class ForgotPasswordThirdActivity : BaseActivity() {
                     call: Call<ResponseModelClasses.ResetPassStep1Response>,
                     response: Response<ResponseModelClasses.ResetPassStep1Response>
                 ) {
-                    dismissDialog()
-                    if (response.body() != null) {
-                        if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
-                            showToast(response.body()!!.Table[0].Message)
-                        } else {
-                            AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
-                            ResetPassSecurityQuestionData.clearArrayList()
-                            ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
-                            val intent =
-                                Intent(this@ForgotPasswordThirdActivity, ForgotPasswordSecondActivity::class.java)
-                            intent.putExtra(ApiUrls.EmailID, editPassword.text.toString())
-                            startActivity(intent)
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
+                                showSuccessPopup(response.body()!!.Table[0].Message)
+                            } else {
+                                AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
+                                ResetPassSecurityQuestionData.clearArrayList()
+                                ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
+                                val intent =
+                                    Intent(this@ForgotPasswordThirdActivity, ForgotPasswordSecondActivity::class.java)
+                                intent.putExtra(ApiUrls.EmailID, editPassword.text.toString())
+                                startActivity(intent)
+                            }
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
 
@@ -79,12 +83,12 @@ class ForgotPasswordThirdActivity : BaseActivity() {
     private fun validationField() {
         try {
             var allValid = true
-            if (editPassword.text.toString() == getString(R.string.select_topic)) {
-                showToast("Please enter Password")
+            if (editPassword.text!!.isEmpty() || !isPasswordValid(editPassword.text)) {
+                showSuccessPopup(getString(R.string.password_validation_message))
                 !allValid
                 return
-            } else if (editConfirmPassword.text!!.isEmpty()) {
-                showToast("Please confirm password")
+            } else if (editConfirmPassword.text!!.isEmpty() || !isPasswordValid(editConfirmPassword.text)) {
+                showSuccessPopup("Please confirm password")
                 !allValid
                 return
             } else if (allValid) {

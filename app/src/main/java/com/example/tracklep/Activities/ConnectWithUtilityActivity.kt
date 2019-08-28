@@ -139,31 +139,31 @@ class ConnectWithUtilityActivity : BaseActivity() {
         try {
             var allValid = true
             if (txtTopicName.text.toString() == getString(R.string.select_topic)) {
-                showToast("Please Select Report Type")
+                showSuccessPopup("Please Select Report Type")
                 !allValid
                 return
             } else if (editSubjectValue.text!!.isEmpty()) {
-                showToast("Please enter Subject")
+                showSuccessPopup("Please enter Subject")
                 !allValid
                 return
             } else if (editCustomerName.text!!.isEmpty()) {
-                showToast("Please enter Customer Name")
+                showSuccessPopup("Please enter Customer Name")
                 !allValid
                 return
             } else if (editServiceAccNum.text!!.isEmpty()) {
-                showToast("Please enter Service Account Number")
+                showSuccessPopup("Please enter Service Account Number")
                 !allValid
                 return
             } else if (editCustomerEmail.text!!.isEmpty()) {
-                showToast("Please Enter Postal Code")
+                showSuccessPopup("Please enter Postal Code")
                 !allValid
                 return
             } else if (editSubjectValue.text!!.isEmpty()) {
-                showToast("Please select Subject")
+                showSuccessPopup("Please select Subject")
                 !allValid
                 return
             } else if (editMessageValue.text!!.isEmpty()) {
-                showToast("Please enter Message")
+                showSuccessPopup("Please enter Message")
                 !allValid
                 return
             } else if (allValid) {

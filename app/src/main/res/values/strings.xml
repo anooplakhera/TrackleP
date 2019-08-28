@@ -158,5 +158,6 @@
     <string name="customer_service_hour">Customer Service Hours</string>
     <string name="emergency_number">Emergency Number</string>
     <string name="connect_address">Address</string>
+    <string name="password_validation_message">Password must be atleast 8 characters(1 special letter, 1 number, 1 capital letter.</string>
 
 </resources>
