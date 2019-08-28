@@ -148,7 +148,9 @@ class SignupStepTwoActivity : BaseActivity() {
                     dismissDialog()
 //                    AppLog.printLog("Params " + map.toString() + "\n" + "URL " + apiService.toString() + "\n" + "Response " + response.body().toString())
                     if (response.body() != null) {
+
                         Log.d("send RegID===", response.body()!!.Message)
+                        showSuccessPopup(response.body()!!.Message)
                     }
                 }
 

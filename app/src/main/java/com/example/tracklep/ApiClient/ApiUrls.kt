@@ -56,7 +56,7 @@ object ApiUrls {
     const val ServiceZipCode = "ServiceZipCode"
     const val SecurityQuestionId = "SecurityQuestionId"
     const val SecurityQuestionId2 = "SecurityQuestionId2"
-    const val HintsAns = "HintsAns"
+    const val HintsAns = "HintAns"
     const val HintsAns2 = "HintsAns2"
     const val GrantType = "grant_type"
     const val TanentId = "tanentid"

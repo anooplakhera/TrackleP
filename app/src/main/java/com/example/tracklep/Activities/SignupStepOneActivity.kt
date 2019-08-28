@@ -125,7 +125,7 @@ class SignupStepOneActivity : BaseActivity() {
                 showToast("Please enter Email")
                 !allValid
                 return
-            } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
+            } else if (editEmail.text!!.isNotEmpty() && !Utils.isValidEmail(editEmail.text.toString().trim())) {
                 showToast("Please enter Valid Email")
                 !allValid
                 return
@@ -137,8 +137,8 @@ class SignupStepOneActivity : BaseActivity() {
                 showToast("Please enter Confirm Password")
                 !allValid
                 return
-            } else if (!editCPassword!!.text!!.isEmpty() && !editPassword!!.text!!.isEmpty() &&
-                !editPassword.text.toString().equals(editCPassword.text.toString())
+            } else if (editCPassword!!.text!!.isNotEmpty() && editPassword!!.text!!.isNotEmpty() &&
+                editPassword.text.toString() != editCPassword.text.toString()
             ) {
                 showToast("Password doesn't match")
                 !allValid
