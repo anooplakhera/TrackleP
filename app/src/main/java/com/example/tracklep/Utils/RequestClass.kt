@@ -242,4 +242,42 @@ object RequestClass {
 
         return map;
     }
+
+    //Connect Me Request Model
+    /*"emailid": "utkarsh3441@gmail.com", "TopicID": "3", "Subject": "test", "Body": "Message for  wwwccw",
+     "AccountNumber": "1234567", "Database": "AQUATRAXDEV", "DBPassword": "newaqt@123",
+     "DataSource": "aquatraxserver.database.windows.net", "DBUserName": "aquatrax"]*/
+    fun getConnectMeRequestModel(
+        emailid: String,
+        TopicID: String,
+        Subject: String,
+        Body: String,
+        AccountNumber: String
+    ): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        map.put(ApiUrls.EmailID, emailid)
+        map.put(ApiUrls.TopicID, TopicID)
+        map.put(ApiUrls.Subject, Subject)
+        map.put(ApiUrls.Body, Body)
+        map.put(ApiUrls.AccountNumber, AccountNumber)
+
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        AppLog.printLog("getConnectMeRequestModel: " + Gson().toJson(map))
+        return map;
+    }
+
+    fun getDeleteAccountRequestModel(AccountNumber: String): HashMap<String, String> {
+        var map = HashMap<String, String>()
+
+        map[ApiUrls.DataSource] = ApiUrls.DataSource_value
+        map[ApiUrls.Database] = ApiUrls.Database_value
+        map[ApiUrls.DBUserName] = "aquatrax"//ApiUrls.DBUserName_value)
+        map[ApiUrls.DBPassword] = "newaqt@123"//ApiUrls.DBPassword_value)
+        AppLog.printLog("getDeleteAccountRequestModel: " + Gson().toJson(map))
+        return map;
+    }
+
 }

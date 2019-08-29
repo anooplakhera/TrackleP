@@ -151,6 +151,10 @@ class LoginActivity : BaseActivity() {
                             var loginResponseModel: ResponseModelClasses.LoginResponseModel? = response.body()
                             AppPrefences.setLoginUserInfo(this@LoginActivity, loginResponseModel)
                             AppPrefences.setAccountNumber(this@LoginActivity, loginResponseModel!!.AccountNumber)
+                            AppPrefences.setUtilityAccountNumber(
+                                this@LoginActivity,
+                                loginResponseModel!!.UtilityAccountNumber
+                            )
                             AppLog.printLog("loginApiResponse: " + Gson().toJson(response.body()));
                             AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@LoginActivity)!!.Name))
                             AppPrefences.setLogin(this@LoginActivity, true)

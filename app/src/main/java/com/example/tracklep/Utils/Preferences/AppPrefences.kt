@@ -19,6 +19,7 @@ object AppPrefences {
     private val Login = "login"
     private val LoginData = "logindata"
     private val AccountNumber = "AccountNumber"
+    private val UtilityAccountNumber = "UtilityAccountNumber"
     private val IsAMI = "IsAMI"
     private val MeterUsage = "MeterUsage"
     private val MyProfileDetails = "MyProfileDetails"
@@ -128,6 +129,20 @@ object AppPrefences {
         )
         val editor = prefs.edit()
         editor.putString(AccountNumber, data)
+        editor.commit()
+    }
+
+    fun getUtilityAccountNumber(ctx: Context): String {
+        return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+            .getString(UtilityAccountNumber, "")
+    }
+
+    fun setUtilityAccountNumber(ctx: Context, data: String) {
+        val prefs = ctx.getSharedPreferences(
+            PREFS_FILE_NAME, Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString(UtilityAccountNumber, data)
         editor.commit()
     }
 

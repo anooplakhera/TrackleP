@@ -20,6 +20,7 @@ import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.ConnectMeData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppConstants
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
@@ -30,6 +31,9 @@ import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.content.Intent
+import android.net.Uri
+
 
 class ConnectWithUtilityActivity : BaseActivity() {
 
@@ -41,6 +45,34 @@ class ConnectWithUtilityActivity : BaseActivity() {
             txtCABtitle.text = getString(R.string.connect_with_utility)
             imgCABback.setOnClickListener {
                 finish()
+            }
+            txtContactUsPhoneValue.setOnClickListener {
+                try {
+                    val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtContactUsPhoneValue.text))
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            txtEmergencyNumberValue.setOnClickListener {
+                try {
+                    val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtEmergencyNumberValue.text))
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            txtContactUsEmailValue.setOnClickListener {
+                try {
+                    val intent = Intent(Intent.ACTION_SENDTO)
+                    intent.data = Uri.parse("mailto:") // only email apps should handle this
+                    intent.putExtra(Intent.EXTRA_EMAIL, txtContactUsEmailValue.text)
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "Connect With Agency")
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
             }
 
             getConnectMeDetails(false, txtTopicName)
@@ -167,7 +199,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
                 !allValid
                 return
             } else if (allValid) {
-                //getUpdateUserProfile()
+                setConnectMe()
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -200,56 +232,56 @@ class ConnectWithUtilityActivity : BaseActivity() {
         e.printStackTrace()
     }
 
-    /* private fun getUpdateUserProfile() = if (Utils.isConnected(this)) {
-         showDialog()
-         try {
-             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-             val call = apiService.getUpdateAccount(
-                 getHeader(),
-                 ApiUrls.getJSONRequestBody(
-                     RequestClass.getUpdateAccountRequestModel(
-                         editEmail.text.toString(),
-                         editHomePhoneNumberValue.text.toString(),
-                         editMobileNumberValue.text.toString(),
-                         custID,
-                         AppPrefences.getAccountNumber(this),
-                         editAns1Value.text.toString(),
-                         editAns2Value.text.toString(),
-                         sQuesID1,
-                         sQuesID2
-                     )
-                 )
-             )
-             call.enqueue(object : Callback<ResponseModelClasses.UpdateProfile> {
-                 override fun onResponse(
-                     call: Call<ResponseModelClasses.UpdateProfile>,
-                     response: Response<ResponseModelClasses.UpdateProfile>
-                 ) {
-                     try {
-                         dismissDialog()
-                         if (response.body() != null) {
-                             showToast(response.body()!!.Message)
-                             getUserProfile()
-                             AppLog.printLog("UserUpdateProfileResponse: " + Gson().toJson(response.body()))
-                         }
-                     } catch (e: Exception) {
-                         dismissDialog()
-                         e.printStackTrace()
-                     }
-                 }
+    private fun setConnectMe() = if (Utils.isConnected(this)) {
+        showDialog()
+        try {
+            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call = apiService.setConnectMe(
+                getHeader(),
+                ApiUrls.getJSONRequestBody(
+                    RequestClass.getConnectMeRequestModel(
+                        editCustomerEmail.text.toString(),
+                        AppConstants.SelectedTopicID,
+                        editSubjectValue.text.toString(),
+                        editMessageValue.text.toString(),
+                        AppPrefences.getUtilityAccountNumber(this)
+                    )
+                )
+            )
+            call.enqueue(object : Callback<ResponseModelClasses.SetConnectMeResponseModel> {
+                override fun onResponse(
+                    call: Call<ResponseModelClasses.SetConnectMeResponseModel>,
+                    response: Response<ResponseModelClasses.SetConnectMeResponseModel>
+                ) {
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            AppLog.printLog("SetConnectMeResponse: " + Gson().toJson(response.body()))
+                            showSuccessPopup(response.body()!!.Message)
 
-                 override fun onFailure(
-                     call: Call<ResponseModelClasses.UpdateProfile>,
-                     t: Throwable
-                 ) {
-                     dismissDialog()
-                 }
-             })
-         } catch (e: Exception) {
-             e.printStackTrace()
-             dismissDialog()
-         }
-     } else {
-         showToast(getString(R.string.internet))
-     }*/
+                            editSubjectValue.setText("")
+                            editMessageValue.setText("")
+                        } else
+                            AppLog.printLog("SetConnectMeResponse: null")
+                    } catch (e: Exception) {
+                        dismissDialog()
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.SetConnectMeResponseModel>,
+                    t: Throwable
+                ) {
+                    dismissDialog()
+                    t.printStackTrace()
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dismissDialog()
+        }
+    } else {
+        showToast(getString(R.string.internet))
+    }
 }

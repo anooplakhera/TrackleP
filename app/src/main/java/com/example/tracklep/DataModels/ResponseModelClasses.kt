@@ -392,6 +392,26 @@ object ResponseModelClasses {
         val SqlQuery: Any,
         val Parameters: Any
     )
+
+    //Connect With Utility
+    data class SetConnectMeResponseModel(
+        val Status: String,
+        val Message: String,
+        val CustomerId: String,
+        val IsMailSucceed: Boolean,
+        val SqlQuery: Any,
+        val Parameters: Any
+    )
+
+    //Delete Account
+    data class SetDeleteAccountResponseModel(
+        val Status: String,
+        val Message: String,
+        val CustomerId: String,
+        val IsMailSucceed: Boolean,
+        val SqlQuery: Any,
+        val Parameters: Any
+    )
 }
 
 

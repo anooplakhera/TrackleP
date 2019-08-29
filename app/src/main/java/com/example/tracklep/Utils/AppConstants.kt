@@ -4,6 +4,7 @@ import com.example.tracklep.DataModels.ResponseModelClasses
 
 object AppConstants {
 
-   var loginResponseModel: ResponseModelClasses.LoginResponseModel? = null
+    var loginResponseModel: ResponseModelClasses.LoginResponseModel? = null
+    var SelectedTopicID = ""
 
 }
