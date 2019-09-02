@@ -4,9 +4,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tracklep.Activities.ConnectWithUtilityActivity
 import com.example.tracklep.DataClasses.ConnectMeData
 import com.example.tracklep.DataClasses.UtilitiesData
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppConstants
 import kotlinx.android.synthetic.main.question_list_layout.view.*
 
 class ConnectMeListAdapter(val itemClick: (Int) -> Unit) : RecyclerView.Adapter<ConnectMeListAdapter.MyHolder>() {
@@ -30,6 +32,7 @@ class ConnectMeListAdapter(val itemClick: (Int) -> Unit) : RecyclerView.Adapter<
         fun bindData(int: Int) {
             val data = ConnectMeData.getArrayItem(int)
             itemView.txtQuestion.text = data.TopicName
+            AppConstants.SelectedTopicID = data.TopicID.toString()
             itemView.txtQuestion.setOnClickListener {
                 itemClick(adapterPosition)
             }

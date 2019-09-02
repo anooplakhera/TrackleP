@@ -32,6 +32,7 @@ object ApiUrls {
     const val MeterDetails = "meter-details"
     const val WaterUsages = "water-usages"
     const val CompareSpending = "water-compare-spending"
+    const val AccountDelete = "account/delete"
     const val AuthKey =
         "Bearer KQut6fhk1BLmO8eVIaMteTcljOes4CfuB2QiuqDvp4Gmoy9Yk_k-umomjcq_IndzuyyMTFm5gVLAcWClmJrdks3Uvhwqg-SYNH74AzVpjYMcgdY4WDIdo-EGHktAYrF70KjUzxeWXLVxeQVs2prmeNWZKlYm73DI16ls4dwoAMBVij4hISTcqCnWat9Ou3-8jRt_TWLCQAG7K6Iq_0yAoVaa1AF6sOgBf-wBB8OMx6MtnAdgzIUY4iLnA2iy4EvGdVmmL4LpHmpL92GxJi2BAL8vn3wAzUhhxu1mPRsk6PacOT5oJQq3eWhM-ZyYGLv3V_xnkfBBnkM1cM2RLFeJ6kYY7Jh1sb1mQ0F-3UurErsA9Y95HvEGDJo7kg_o2ZzivnQhbIiZqX8gbmsiWI_d-DjSnWPHO_RtlpIAcM55r_XCHjlKMcAR-TaI_9nhpKmAWi0DyF6ySBK0RT9_OA8J-w";
 
@@ -67,6 +68,11 @@ object ApiUrls {
     const val MobilePhone = "MobilePhone"
     const val Custid = "Custid"
 
+    //Connect Me
+    const val TopicID = "TopicID"
+    const val Subject = "Subject"
+    const val Body = "Body"
+
     const val DataSource = "DataSource"
     const val Database = "Database"
     const val DBUserName = "DBUserName"
@@ -78,6 +84,7 @@ object ApiUrls {
     const val DBPassword_value = "newaqt@123"
 
     const val AccountAdd = "account/add";
+    const val SetConnectMe = "SetContactUS";
 
     fun getBasePathUrl(): String {
         return BASE_URL + BASE_PATH

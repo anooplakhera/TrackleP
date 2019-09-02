@@ -353,12 +353,19 @@ class MyProfile : BaseActivity() {
                         }
 
                         alertDialog.setPositiveButton("Yes") { dialog, which ->
-                            mSwipeItemAdapter.removeAt(viewHolder.adapterPosition)
-                            mSwipeItemAdapter.notifyDataSetChanged()
-                            if (mSwipeItemAdapter.isEmpty()) {
-                                dialog.dismiss()
+                            if (setDeleteAccount()) {
+                                mSwipeItemAdapter.removeAt(viewHolder.adapterPosition)
+                                mSwipeItemAdapter.notifyDataSetChanged()
+                                if (mSwipeItemAdapter.isEmpty()) {
+                                    dialog.dismiss()
+                                }
+                            } else {
+                                mSwipeItemAdapter.notifyDataSetChanged()
+                                if (mSwipeItemAdapter.isEmpty()) {
+                                    dialog.dismiss()
+                                }
                             }
-                            validationField()
+
                         }
 
                         alertDialog.show()
@@ -425,5 +432,58 @@ class MyProfile : BaseActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun setDeleteAccount(): Boolean {
+        var isSuccess = false
+        if (Utils.isConnected(this)) {
+            showDialog()
+            try {
+                val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+                val call: Call<ResponseModelClasses.SetDeleteAccountResponseModel> = apiService.getDeleteAccount(
+                    getHeader(),
+                    ApiUrls.getJSONRequestBody(
+                        RequestClass.getDeleteAccountRequestModel(
+                            AppPrefences.getAccountNumber(this)
+                        )
+                    ),
+                    AppPrefences.getAccountNumber(this)
+                )
+                call.enqueue(object : Callback<ResponseModelClasses.SetDeleteAccountResponseModel> {
+                    override fun onResponse(
+                        call: Call<ResponseModelClasses.SetDeleteAccountResponseModel>,
+                        response: Response<ResponseModelClasses.SetDeleteAccountResponseModel>
+                    ) {
+                        try {
+                            dismissDialog()
+                            if (response.body() != null) {
+
+                                AppLog.printLog("setDeleteAccountResponse: " + Gson().toJson(response.body()));
+                                showSuccessPopup(response.body()!!.Message)
+                                isSuccess = !response.body()!!.Status.equals("0")
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+
+                    override fun onFailure(
+                        call: Call<ResponseModelClasses.SetDeleteAccountResponseModel>,
+                        t: Throwable
+                    ) {
+                        AppLog.printLog("Failure()- ", t.message.toString())
+                        dismissDialog()
+                    }
+                })
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                dismissDialog()
+            }
+        } else {
+            //dismissDialog()
+            showToast(getString(R.string.internet))
+        }
+        return isSuccess
     }
 }
