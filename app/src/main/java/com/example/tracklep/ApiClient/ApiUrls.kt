@@ -21,6 +21,7 @@ object ApiUrls {
     const val FORGET = "reset-password/"
     const val STEP_ONE = "step-one"
     const val STEP_TWO = "step-two"
+    const val STEP_THREE = "step-three"
     const val SECURITY_QUESTION = "security-questions"
     const val BILLING_DETAILS = "Billing-Details"
     const val Authorization = "authorization"

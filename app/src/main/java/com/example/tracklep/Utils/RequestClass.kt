@@ -164,6 +164,18 @@ object RequestClass {
         return map;
     }
 
+    fun getForgetRequestStepThree(username: String, newPass: String, cNewPass: String): Map<String, String> {
+        var map = HashMap<String, String>()
+        map.put(ApiUrls.UserName, username);
+        map.put(ApiUrls.Password, newPass);
+        map.put(ApiUrls.ConfirmPassword, cNewPass);
+        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
+        map.put(ApiUrls.Database, ApiUrls.Database_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        AppLog.printLog("getForgetRequestStepThree: " + Gson().toJson(map))
+        return map;
+    }
 
     /*["Database": "AQUATRAXDEV", "MobileNumber":"1234567843", "DataSource":
 "aquatraxserver.database.windows.net",

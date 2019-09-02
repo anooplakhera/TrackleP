@@ -30,6 +30,16 @@ object ResponseModelClasses {
         )
     }
 
+    data class ResetPassStep3Response(
+        val Table: ArrayList<TableData1>
+    ) {
+        data class TableData1(
+            val STATUS: String,
+            val Message: String,
+            val AttemptLeft: String
+        )
+    }
+
     /*-------Registration-------*/
     data class RegistrationResponse(
         val Status: String,

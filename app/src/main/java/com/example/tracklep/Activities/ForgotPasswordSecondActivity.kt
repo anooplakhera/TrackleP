@@ -14,6 +14,7 @@ import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_forgot_password_first.*
 import kotlinx.android.synthetic.main.activity_forgot_password_second.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
@@ -80,11 +81,11 @@ class ForgotPasswordSecondActivity : BaseActivity() {
                             } else {
                                 AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
                                 /*ResetPassSecurityQuestionData.clearArrayList()
-                                ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
+                                ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)*/
                                 val intent =
                                     Intent(this@ForgotPasswordSecondActivity, ForgotPasswordThirdActivity::class.java)
                                 intent.putExtra(ApiUrls.EmailID, editEmailF1.text.toString())
-                                startActivity(intent)*/
+                                startActivity(intent)
                             }
                             Log.d("ResponseBodyIs", Gson().toJson(response.body()!!))
                         }

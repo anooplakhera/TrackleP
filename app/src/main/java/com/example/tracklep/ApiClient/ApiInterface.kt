@@ -35,6 +35,10 @@ interface ApiInterface {
     @POST(ApiUrls.FORGET + ApiUrls.STEP_TWO)
     fun getResetUserPass2(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.ResetPassStep2Response>
 
+    @FormUrlEncoded
+    @POST(ApiUrls.FORGET + ApiUrls.STEP_THREE)
+    fun getResetUserPass3(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.ResetPassStep3Response>
+
     @POST(ApiUrls.Account + "/{AccountNumber}")
     fun getAccount(@Header(ApiUrls.Authorization) auth: String, @Path("AccountNumber") id: String, @Body bodyMap: RequestBody): Call<ArrayList<ResponseModelClasses.MyProfile>>
 
