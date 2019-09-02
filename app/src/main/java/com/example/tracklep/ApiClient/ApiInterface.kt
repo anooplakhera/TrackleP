@@ -78,7 +78,5 @@ interface ApiInterface {
     @POST(ApiUrls.AccountDelete + "/{AccountNumber}")
     fun getDeleteAccount(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path("AccountNumber") value: String): Call<ResponseModelClasses.SetDeleteAccountResponseModel>
 
-    @FormUrlEncoded
-    @POST(ApiUrls.FORGET + ApiUrls.STEP_THREE)
-    fun getResetUserPass3(@FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.ResetPassStep2Response>
+
 }

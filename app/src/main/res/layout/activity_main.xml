@@ -52,6 +52,7 @@
                     android:id="@+id/imgNavIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="bottom"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_menu_icon"
                     android:layout_alignParentRight="true" />
