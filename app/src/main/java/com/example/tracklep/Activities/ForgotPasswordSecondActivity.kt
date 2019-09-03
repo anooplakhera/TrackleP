@@ -79,12 +79,12 @@ class ForgotPasswordSecondActivity : BaseActivity() {
                             if (response.body()!!.Table[0].STATUS != null && response.body()!!.Table[0].STATUS == "0") {
                                 showSuccessPopup(response.body()!!.Table[0].Message)
                             } else {
-                                AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
+                                AppLog.printLog("ForgetStep2reponse ", Gson().toJson(response.body()!!))
                                 /*ResetPassSecurityQuestionData.clearArrayList()
                                 ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)*/
                                 val intent =
                                     Intent(this@ForgotPasswordSecondActivity, ForgotPasswordThirdActivity::class.java)
-                                intent.putExtra(ApiUrls.EmailID, editEmailF1.text.toString())
+                                intent.putExtra(ApiUrls.EmailID, emailId)
                                 startActivity(intent)
                             }
                             Log.d("ResponseBodyIs", Gson().toJson(response.body()!!))

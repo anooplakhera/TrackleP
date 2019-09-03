@@ -31,14 +31,15 @@ object ResponseModelClasses {
     }
 
     data class ResetPassStep3Response(
-        val Table: ArrayList<TableData1>
-    ) {
-        data class TableData1(
-            val STATUS: String,
-            val Message: String,
-            val AttemptLeft: String
-        )
-    }
+        val Status: String,
+        val Message: String,
+        val AttemptLeft: String,
+        val IsMailSucceed: String,
+        val NewPassword: String,
+        val FullName: String,
+        val SqlQuery: String,
+        val Parameters: String
+    )
 
     /*-------Registration-------*/
     data class RegistrationResponse(
