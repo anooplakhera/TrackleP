@@ -38,7 +38,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.OnItemSelectedListener {
+class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
+    AdapterView.OnItemSelectedListener {
 
     private var selectedAlpha = 0.5f
     private var mType = "W"
@@ -97,9 +98,11 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
     private fun clickPerform() {
         try {
             txtCCF.setOnClickListener {
-                txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtGallon.background =
+                    resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
                 txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
-                txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtDollar.background =
+                    resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
 
                 mType = "W"
                 checkIsAMI()
@@ -111,7 +114,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             txtGallon.setOnClickListener {
                 txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
                 txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
-                txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtDollar.background =
+                    resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
 
                 mType = "G"
                 checkIsAMI()
@@ -121,7 +125,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             }
 
             txtDollar.setOnClickListener {
-                txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtGallon.background =
+                    resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
                 txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
                 txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
 
@@ -163,7 +168,11 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
 
     private fun setupSpinner() {
         spinnerMeter!!.onItemSelectedListener = this
-        val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, UserMeterListData.getMeterNumberList())
+        val aa = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            UserMeterListData.getMeterNumberList()
+        )
         aa.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerMeter!!.adapter = aa
@@ -197,7 +206,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             chartUsage.setVisibleXRangeMaximum(5f)
             chartUsage.isHorizontalScrollBarEnabled = true
             chartUsage.canScrollHorizontally(1)
-            chartUsage.animateXY(500, 500)
+            chartUsage.animateXY(1000, 1000)
 
             val yVals1 = ArrayList<BarEntry>()
             val yVals2 = ArrayList<BarEntry>()
@@ -235,7 +244,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             chartUsage.data = data
             chartUsage.barData.barWidth = barWidth
             chartUsage.xAxis.axisMinimum = 0F
-            chartUsage.xAxis.axisMaximum = 0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
+            chartUsage.xAxis.axisMaximum =
+                0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
             chartUsage.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
             chartUsage.moveViewToX(10F);
@@ -245,10 +255,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             chartUsage.invalidate()
 
             val l = chartUsage.legend
-            l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
             l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
             l.orientation = Legend.LegendOrientation.HORIZONTAL
-            l.setDrawInside(true)
+            l.setDrawInside(false)
             l.yOffset = 20f
             l.xOffset = 0f
             l.yEntrySpace = 0f
@@ -307,7 +317,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             chartUsage.setVisibleXRangeMaximum(5f)
             chartUsage.isHorizontalScrollBarEnabled = true
             chartUsage.canScrollHorizontally(1)
-            chartUsage.animateXY(500, 500);
+            chartUsage.animateXY(1000, 1000);
 
             val yVals1 = ArrayList<BarEntry>()
             val yVals2 = ArrayList<BarEntry>()
@@ -357,7 +367,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             chartUsage.data = data
             chartUsage.barData.barWidth = barWidth
             chartUsage.xAxis.axisMinimum = 0F
-            chartUsage.xAxis.axisMaximum = 0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
+            chartUsage.xAxis.axisMaximum =
+                0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
             chartUsage.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
             chartUsage.moveViewToX(10F);
@@ -367,10 +378,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             chartUsage.invalidate()
 
             val l = chartUsage.legend
-            l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
             l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
             l.orientation = Legend.LegendOrientation.HORIZONTAL
-            l.setDrawInside(true)
+            l.setDrawInside(false)
             l.yOffset = 20f
             l.xOffset = 0f
             l.yEntrySpace = 0f
@@ -388,6 +399,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             xAxis.position = XAxis.XAxisPosition.BOTTOM
             xAxis.valueFormatter = IndexAxisValueFormatter(year)
             xAxis.textSize = 7f
+            xAxis.labelRotationAngle = -45f
             //Y-axis
             chartUsage.axisRight.isEnabled = false
             val leftAxis = chartUsage.axisLeft
@@ -403,7 +415,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
     private fun getWaterUsage() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.WaterUsages> = apiService.getWaterUsages(
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
@@ -420,7 +433,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                     try {
                         dismissDialog()
                         if (response.body() != null) {
-                            var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
+                            var data =
+                                ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
                             data.addAll(response.body()!!.Results.Table)
                             data.reverse()
                             WaterUsageData.clearArrayList()
@@ -434,7 +448,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                                     WaterUsageData.getUsageEmptyBar(),
                                     WaterUsageData.getMonthList(),
                                     getString(R.string.c_this_year),
-                                    getString(R.string.c_previous_year)
+                                    getString(R.string.u_allocation)
                                 )
                             } else {
                                 setChartData(
@@ -442,12 +456,12 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                                     WaterUsageData.getUsageBar(),
                                     WaterUsageData.getUsageEmptyBar(),
                                     WaterUsageData.getMonthList(),
-                                    getString(R.string.c_this_year),
-                                    getString(R.string.c_previous_year)
+                                    getString(R.string.u_usage),
+                                    getString(R.string.u_allocation)
                                 )
                             }
-    //                        AppPrefences.setMeterUsageData(this@UsageActivity, data[0])
-    //                        setMeterData(AppPrefences.getMeterUsageData(this@UsageActivity))
+                            //                        AppPrefences.setMeterUsageData(this@UsageActivity, data[0])
+                            //                        setMeterData(AppPrefences.getMeterUsageData(this@UsageActivity))
 
                             AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
                         }

@@ -34,6 +34,8 @@ class UsageNotificationActivity : BaseActivity() {
 
             getUsageNotificationDetails()
 
+
+
             btnUsageNotificationSubmit.setOnClickListener {
                 validationField()
             }
@@ -106,7 +108,6 @@ class UsageNotificationActivity : BaseActivity() {
                         editMonthlyLimit.text.toString(),
                         editDailyLimit.text.toString(),
                         editMeterNumber.text.toString(),
-
                         AppPrefences.getAccountNumber(this),
                         unit
                     )
@@ -146,9 +147,11 @@ class UsageNotificationActivity : BaseActivity() {
         if (data.Unit == "CCF") {
             rbn_ccf.isChecked = true
             rbn_gallon.isChecked = false
+            unit = "CCF"
         } else {
             rbn_ccf.isChecked = false
             rbn_gallon.isChecked = true
+            unit = "Gallon"
         }
     }
 
