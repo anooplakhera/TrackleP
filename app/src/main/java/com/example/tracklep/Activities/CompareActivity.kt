@@ -35,7 +35,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
     var unitName = "K"
@@ -169,16 +168,18 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     private fun getCompareDetails() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call: Call<ResponseModelClasses.CompareDataResponse> = apiService.getCompareSpendingDetails(
-                getHeader(), unitName,
-                ApiUrls.getJSONRequestBody(
-                    RequestClass.getMeterDetailsRequestModel(
-                        AppPrefences.getAccountNumber(this)
-                    )
-                ),
-                AppPrefences.getAccountNumber(this)
-            )
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call: Call<ResponseModelClasses.CompareDataResponse> =
+                apiService.getCompareSpendingDetails(
+                    getHeader(), unitName,
+                    ApiUrls.getJSONRequestBody(
+                        RequestClass.getMeterDetailsRequestModel(
+                            AppPrefences.getAccountNumber(this)
+                        )
+                    ),
+                    AppPrefences.getAccountNumber(this)
+                )
             call.enqueue(object : Callback<ResponseModelClasses.CompareDataResponse> {
                 override fun onResponse(
                     call: Call<ResponseModelClasses.CompareDataResponse>,
@@ -208,7 +209,10 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseModelClasses.CompareDataResponse>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.CompareDataResponse>,
+                    t: Throwable
+                ) {
                     AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }
@@ -229,9 +233,9 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     ) {
 
         try {
-            val barWidth: Float = 0.6f
-            val barSpace: Float = 0f
-            val groupSpace: Float = 0.4f
+            val barWidth = 0.6f
+            val barSpace = 0f
+            val groupSpace = 0.4f
 
             chart.description = null;
             chart.setPinchZoom(false);
@@ -239,7 +243,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.setDrawBarShadow(false);
             chart.isHorizontalScrollBarEnabled = true
             chart.setDrawGridBackground(false);
-            chart.animateXY(500, 500);
+            chart.animateXY(1000, 1000);
 
             val yVals1 = ArrayList<BarEntry>()
             val yVals2 = ArrayList<BarEntry>()
@@ -263,7 +267,8 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.data = data
             chart.barData.barWidth = barWidth
             chart.xAxis.axisMinimum = 0F
-            chart.xAxis.axisMaximum = 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
+            chart.xAxis.axisMaximum =
+                0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
             chart.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
             chart.moveViewToX(10F);
@@ -318,7 +323,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         try {
             val barWidth: Float = 0.6f
             val barSpace: Float = 0.2f
-            val groupSpace: Float = 0.4f
+            val groupSpace: Float = 0.8f
             val groupCount: Int = 4
 
             chart.description = null;
@@ -329,7 +334,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.setVisibleXRangeMaximum(5f)
             chart.isHorizontalScrollBarEnabled = true
             chart.canScrollHorizontally(1)
-            chart.animateXY(500, 500);
+            chart.animateXY(1000, 1000);
 
             val yVals1 = ArrayList<BarEntry>()
             val yVals2 = ArrayList<BarEntry>()
@@ -364,7 +369,8 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.data = data
             chart.barData.barWidth = barWidth
             chart.xAxis.axisMinimum = 0F
-            chart.xAxis.axisMaximum = 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
+            chart.xAxis.axisMaximum =
+                0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
             chart.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
             chart.moveViewToX(10F);

@@ -1,5 +1,7 @@
 package com.example.tracklep.Activities
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import com.example.tracklep.ApiClient.ApiClient
@@ -42,7 +44,8 @@ class ForgotPasswordThirdActivity : BaseActivity() {
     private fun getChangePassword() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getResetUserPass3(
                 RequestClass.getForgetRequestStepThree(
                     emailId, editPassword.text.toString(),
@@ -57,16 +60,26 @@ class ForgotPasswordThirdActivity : BaseActivity() {
                     try {
                         dismissDialog()
                         if (response.body() != null) {
-                            if (response.body()!!.Table[0].STATUS != null && response.body()!!.Table[0].STATUS == "0") {
-                                showSuccessPopup(response.body()!!.Table[0].Message)
-                            } else {
-                                AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
-                                /*ResetPassSecurityQuestionData.clearArrayList()
-                                ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
-                                val intent =
-                                    Intent(this@ForgotPasswordSecondActivity, ForgotPasswordThirdActivity::class.java)
-                                intent.putExtra(ApiUrls.EmailID, editEmailF1.text.toString())
-                                startActivity(intent)*/
+                            if (response.body()!!.Status != null && response.body()!!.Status == "0") {
+                                showSuccessPopup(response.body()!!.Message)
+                            } else if (response.body()!!.Status != null && response.body()!!.Status == "1") {
+                                var alertDialog =
+                                    AlertDialog.Builder(this@ForgotPasswordThirdActivity)
+                                alertDialog.setTitle(getString(R.string.app_name))
+                                alertDialog.setMessage("Password updated successfully")
+
+                                alertDialog.setPositiveButton("OK") { dialog, which ->
+                                    dialog.dismiss()
+                                    val intent =
+                                        Intent(
+                                            this@ForgotPasswordThirdActivity,
+                                            LoginActivity::class.java
+                                        )
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                    startActivity(intent);
+                                }
+
+                                alertDialog.show()
                             }
                             Log.d("ResponseBodyIs", Gson().toJson(response.body()!!))
                         }
