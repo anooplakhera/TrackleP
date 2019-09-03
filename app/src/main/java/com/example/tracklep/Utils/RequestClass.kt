@@ -27,8 +27,8 @@ object RequestClass {
         map[ApiUrls.AccountNumber] = AccountNumber
         map[ApiUrls.DataSource] = ApiUrls.DataSource_value
         map[ApiUrls.Database] = ApiUrls.Database_value
-        map[ApiUrls.DBUserName] = "aquatrax"//ApiUrls.DBUserName_value)
-        map[ApiUrls.DBPassword] = "newaqt@123"//ApiUrls.DBPassword_value)
+        map[ApiUrls.DBUserName] = ApiUrls.DBUserName_value//ApiUrls.DBUserName_value)
+        map[ApiUrls.DBPassword] = ApiUrls.DBPassword_value//ApiUrls.DBPassword_value)
         AppLog.printLog("getMeterDetailsRequestModel: " + Gson().toJson(map))
         return map;
     }
@@ -38,8 +38,8 @@ object RequestClass {
         map[ApiUrls.AccountNumber] = AccountNumber
         map[ApiUrls.DataSource] = ApiUrls.DataSource_value
         map[ApiUrls.Database] = ApiUrls.Database_value
-        map[ApiUrls.DBUserName] = "aquatrax"
-        map[ApiUrls.DBPassword] = "newaqt@123"
+        map[ApiUrls.DBUserName] = ApiUrls.DBUserName_value
+        map[ApiUrls.DBPassword] = ApiUrls.DBPassword_value
         map["Type"] = type
         map["HourlyType"] = "H"
         map["Mode"] = mode
@@ -54,8 +54,8 @@ object RequestClass {
         map.put(ApiUrls.AccountNumber, AccountNumber)
         map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
         map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)//ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)//ApiUrls.DBPassword_value)
 
         AppLog.printLog("getBillingDetailsRequestModel: " + Gson().toJson(map))
 
@@ -67,8 +67,8 @@ object RequestClass {
         var map = HashMap<String, String>()
         map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
         map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, "aquatrax")//ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, "newaqt@123")//ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)//ApiUrls.DBUserName_value)
+        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)//ApiUrls.DBPassword_value)
 
         AppLog.printLog("getConnectWithUtilityRequestModel: " + Gson().toJson(map))
 
@@ -286,8 +286,8 @@ object RequestClass {
 
         map[ApiUrls.DataSource] = ApiUrls.DataSource_value
         map[ApiUrls.Database] = ApiUrls.Database_value
-        map[ApiUrls.DBUserName] = "aquatrax"//ApiUrls.DBUserName_value)
-        map[ApiUrls.DBPassword] = "newaqt@123"//ApiUrls.DBPassword_value)
+        map[ApiUrls.DBUserName] = ApiUrls.DBUserName_value//ApiUrls.DBUserName_value)
+        map[ApiUrls.DBPassword] = ApiUrls.DBPassword_value//ApiUrls.DBPassword_value)
         AppLog.printLog("getDeleteAccountRequestModel: " + Gson().toJson(map))
         return map;
     }

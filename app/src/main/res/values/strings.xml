@@ -153,10 +153,10 @@
     <string name="usage_dollar">Usage (Dollar)</string>
     <string name="c_this_year">This year</string>
     <string name="c_previous_year">Previous year</string>
-    <string name="u_allocation">Allocation</string>
-    <string name="u_usage">Usage</string>
     <string name="c_zip">Zip</string>
     <string name="c_utility">Utility</string>
+    <string name="u_allocation">Allocation</string>
+    <string name="u_usage">Usage</string>
     <string name="customer_service_hour">Customer Service Hours</string>
     <string name="emergency_number">Emergency Number</string>
     <string name="connect_address">Address</string>

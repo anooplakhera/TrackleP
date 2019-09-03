@@ -172,13 +172,13 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.CompareDataResponse> =
                 apiService.getCompareSpendingDetails(
-                    getHeader(), unitName,
+                    getHeader(),
                     ApiUrls.getJSONRequestBody(
                         RequestClass.getMeterDetailsRequestModel(
                             AppPrefences.getAccountNumber(this)
                         )
                     ),
-                    AppPrefences.getAccountNumber(this)
+                    AppPrefences.getAccountNumber(this), unitName
                 )
             call.enqueue(object : Callback<ResponseModelClasses.CompareDataResponse> {
                 override fun onResponse(

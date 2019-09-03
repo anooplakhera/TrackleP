@@ -61,13 +61,14 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 startActivity(Intent(this, UsageNotificationActivity::class.java))
             }
 
-            checkIsAMI()
 
             clickPerform()
 
-            txtUsageChartDesc.setText(R.string.usage_ccf)
+            checkIsAMI()
 
             getWaterUsage()
+
+            txtUsageChartDesc.setText(R.string.usage_ccf)
 
             setupSpinner()
 
@@ -98,11 +99,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     private fun clickPerform() {
         try {
             txtCCF.setOnClickListener {
-                txtGallon.background =
-                    resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
-                txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
-                txtDollar.background =
-                    resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtGallon.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtCCF.background = getDrawable(R.drawable.tab_rounded_corner_selected)
+                txtDollar.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
 
                 mType = "W"
                 checkIsAMI()
@@ -112,10 +111,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             }
 
             txtGallon.setOnClickListener {
-                txtGallon.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
-                txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
-                txtDollar.background =
-                    resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtGallon.background = getDrawable(R.drawable.tab_rounded_corner_selected)
+                txtCCF.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtDollar.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
 
                 mType = "G"
                 checkIsAMI()
@@ -125,10 +123,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             }
 
             txtDollar.setOnClickListener {
-                txtGallon.background =
-                    resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
-                txtCCF.background = resources.getDrawable(R.drawable.tab_rounded_corner_unselected)
-                txtDollar.background = resources.getDrawable(R.drawable.tab_rounded_corner_selected)
+                txtGallon.background = getDrawable(R.drawable.tab_rounded_corner_unselected);
+                txtCCF.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
+                txtDollar.background = getDrawable(R.drawable.tab_rounded_corner_selected)
 
                 mType = "D"
                 checkIsAMI()
@@ -335,10 +332,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             }
 
 
-//        if (bar2[0].count==null){
             val set1 = BarDataSet(yVals1, label1)
             set1.getColor(resources.getColor(R.color.colorUsageWithin))
-//        }else{
 
 
 //            val set1 = MyBarDataSet(yVals1, bar2, "")
