@@ -72,6 +72,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
             setupSpinner()
 
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -250,6 +251,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             chartUsage.groupBars(0F, groupSpace, barSpace)
             chartUsage.data.isHighlightEnabled = false
             chartUsage.invalidate()
+
 
             val l = chartUsage.legend
             l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
@@ -455,8 +457,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                                     getString(R.string.u_allocation)
                                 )
                             }
-                            //                        AppPrefences.setMeterUsageData(this@UsageActivity, data[0])
-                            //                        setMeterData(AppPrefences.getMeterUsageData(this@UsageActivity))
 
                             AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
                         }

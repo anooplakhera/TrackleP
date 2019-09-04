@@ -56,7 +56,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_35"
                     android:layout_weight="1"
-                    android:background="@drawable/rounded_corner_blue"
+                    android:background="@drawable/tab_rounded_corner_unselected"
                     android:gravity="center"
                     android:padding="@dimen/dp_4"
                     android:text="@string/view_gallon"
@@ -73,7 +73,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_35"
                     android:layout_weight="1"
-                    android:background="@drawable/rounded_corner_blue"
+                    android:background="@drawable/tab_rounded_corner_unselected"
                     android:gravity="center"
                     android:padding="@dimen/dp_4"
                     android:text="@string/view_dollar"
@@ -260,7 +260,7 @@
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/chartUsage"
                         android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/dp_22"
                         android:paddingBottom="@dimen/dp_10"/>
                 
