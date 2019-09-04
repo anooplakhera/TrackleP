@@ -168,58 +168,63 @@ class SignupStepOneActivity : BaseActivity() {
         }
     }
 
-    private fun getUtilityList(dialogOpen: Boolean = false, textView: TextView) = if (Utils.isConnected(this)) {
+    private fun getUtilityList(dialogOpen: Boolean = false, textView: TextView) =
+        if (Utils.isConnected(this)) {
 //        showDialog()
-        try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getUtilityList(/*ApiUrls.AuthKey*/)
-            call.enqueue(object : Callback<ResponseModelClasses.UtilityListResponseModel> {
-                override fun onResponse(
-                    call: Call<ResponseModelClasses.UtilityListResponseModel>,
-                    response: Response<ResponseModelClasses.UtilityListResponseModel>
-                ) {
-                    dismissDialog()
-                    try {
-                        if (response.body() != null)
-                            UtilitiesData.clearArrayList()
-                        UtilitiesData.addArrayList(response.body()!!.Results.Table)
-                        if (dialogOpen) {
-                            openDialog(getString(R.string.select_utility), textView)
-                        }
-                        AppLog.printLog("UtilityList Response- ", response.body().toString())
-
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-
-                override fun onFailure(
-                    call: Call<ResponseModelClasses.UtilityListResponseModel>,
-                    t: Throwable
-                ) {
-                    try {
+            try {
+                val apiService =
+                    ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+                val call = apiService.getUtilityList(/*ApiUrls.AuthKey*/)
+                call.enqueue(object : Callback<ResponseModelClasses.UtilityListResponseModel> {
+                    override fun onResponse(
+                        call: Call<ResponseModelClasses.UtilityListResponseModel>,
+                        response: Response<ResponseModelClasses.UtilityListResponseModel>
+                    ) {
                         dismissDialog()
-                        AppLog.printLog("Failure()- ", t.message.toString())
+                        try {
+                            if (response.body() != null)
+                                UtilitiesData.clearArrayList()
+                            UtilitiesData.addArrayList(response.body()!!.Results.Table)
+                            if (dialogOpen) {
+                                openDialog(getString(R.string.select_utility), textView)
+                            }
+                            AppLog.printLog("UtilityList Response- ", response.body().toString())
 
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
-                }
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
+
+                    override fun onFailure(
+                        call: Call<ResponseModelClasses.UtilityListResponseModel>,
+                        t: Throwable
+                    ) {
+                        try {
+                            dismissDialog()
+                            AppLog.printLog("Failure()- ", t.message.toString())
+
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                })
+            } catch (e: Exception) {
+                e.printStackTrace()
 //            dismissDialog()
+            }
+        } else {
+            showToast(getString(R.string.internet))
         }
-    } else {
-        showToast(getString(R.string.internet))
-    }
 
     private fun openDialog(title: String, textView: TextView) {
         try {
             val dialog = Dialog(this@SignupStepOneActivity)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_layout)
-            dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(true)
             dialog.show()

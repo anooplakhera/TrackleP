@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -35,6 +36,8 @@ class BillingActivity : BaseActivity() {
         getBillingDetails()
         try {
             txtCABtitle.text = getString(R.string.billing)
+            txtCArightTop.visibility = View.VISIBLE
+            txtCArightTop.text = "View Bill"
             imgCABback.setOnClickListener {
                 finish()
             }
@@ -74,15 +77,17 @@ class BillingActivity : BaseActivity() {
     private fun getBillingDetails() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call: Call<ResponseModelClasses.BillingDashboardResponse> = apiService.getBillingDashboard(
-                getHeader(),
-                ApiUrls.getJSONRequestBody(
-                    RequestClass.getBillingDetailsRequestModel(
-                        AppPrefences.getAccountNumber(this)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call: Call<ResponseModelClasses.BillingDashboardResponse> =
+                apiService.getBillingDashboard(
+                    getHeader(),
+                    ApiUrls.getJSONRequestBody(
+                        RequestClass.getBillingDetailsRequestModel(
+                            AppPrefences.getAccountNumber(this)
+                        )
                     )
                 )
-            )
             call.enqueue(object : Callback<ResponseModelClasses.BillingDashboardResponse> {
                 override fun onResponse(
                     call: Call<ResponseModelClasses.BillingDashboardResponse>,
@@ -100,7 +105,10 @@ class BillingActivity : BaseActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseModelClasses.BillingDashboardResponse>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.BillingDashboardResponse>,
+                    t: Throwable
+                ) {
                     AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }
@@ -192,6 +200,11 @@ class BillingActivity : BaseActivity() {
             e.printStackTrace()
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        txtCArightTop.visibility = View.VISIBLE
     }
 
 }

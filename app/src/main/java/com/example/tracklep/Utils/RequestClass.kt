@@ -8,12 +8,16 @@ import com.google.gson.Gson
 
 object RequestClass {
 
-    fun getLoginRequestModel(username: String, password: String): Map<String, String> {
+    fun getLoginRequestModel(
+        username: String,
+        password: String,
+        tanentId: String
+    ): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.UserName, username)
         map.put(ApiUrls.Password, password)
         map.put(ApiUrls.GrantType, ApiUrls.Password.toLowerCase())
-        map.put(ApiUrls.TanentId, "1")
+        map.put(ApiUrls.TanentId, tanentId)
         map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
         map.put(ApiUrls.Database, ApiUrls.Database_value)
         map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
@@ -33,7 +37,11 @@ object RequestClass {
         return map;
     }
 
-    fun getWaterUsageRequestModel(AccountNumber: String, type: String, mode: String): HashMap<String, String> {
+    fun getWaterUsageRequestModel(
+        AccountNumber: String,
+        type: String,
+        mode: String
+    ): HashMap<String, String> {
         var map = HashMap<String, String>()
         map[ApiUrls.AccountNumber] = AccountNumber
         map[ApiUrls.DataSource] = ApiUrls.DataSource_value
@@ -149,11 +157,21 @@ object RequestClass {
         return map;
     }
 
-    fun getForgetRequestStepTwo(username: String, editAnswer1RP: String, editAnswer2RP: String): Map<String, String> {
+    fun getForgetRequestStepTwo(
+        username: String,
+        editAnswer1RP: String,
+        editAnswer2RP: String
+    ): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.UserName, username);
-        map.put(ApiUrls.SecurityQuestion1, ResetPassSecurityQuestionData.getArrayItem(0).SecurityQuestionId);
-        map.put(ApiUrls.SecurityQuestion2, ResetPassSecurityQuestionData.getArrayItem(1).SecurityQuestionId);
+        map.put(
+            ApiUrls.SecurityQuestion1,
+            ResetPassSecurityQuestionData.getArrayItem(0).SecurityQuestionId
+        );
+        map.put(
+            ApiUrls.SecurityQuestion2,
+            ResetPassSecurityQuestionData.getArrayItem(1).SecurityQuestionId
+        );
         map.put(ApiUrls.Answer1, editAnswer1RP)
         map.put(ApiUrls.Answer2, editAnswer2RP)
         map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
@@ -164,7 +182,11 @@ object RequestClass {
         return map;
     }
 
-    fun getForgetRequestStepThree(username: String, newPass: String, cNewPass: String): Map<String, String> {
+    fun getForgetRequestStepThree(
+        username: String,
+        newPass: String,
+        cNewPass: String
+    ): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.UserName, username);
         map.put(ApiUrls.Password, newPass);
@@ -200,8 +222,14 @@ object RequestClass {
             TrackleApp.appContext?.let { AppPrefences.getProfileInfo(it).MobilePhone }.toString()
         )
         map.put("PostalCode", PostalCode)
-        map.put("CustomerId", TrackleApp.appContext?.let { AppPrefences.getProfileInfo(it).CustomerId }.toString())
-        map.put("EmailId", TrackleApp.appContext?.let { AppPrefences.getProfileInfo(it).EmailId }.toString())
+        map.put(
+            "CustomerId",
+            TrackleApp.appContext?.let { AppPrefences.getProfileInfo(it).CustomerId }.toString()
+        )
+        map.put(
+            "EmailId",
+            TrackleApp.appContext?.let { AppPrefences.getProfileInfo(it).EmailId }.toString()
+        )
         map.put(ApiUrls.UtilityAccountNumber, UtilityAccountNumber)
         map.put("UtilityId", "0")
         map.put(ApiUrls.MeterNumber, MeterNumber)

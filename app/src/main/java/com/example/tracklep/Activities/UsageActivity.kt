@@ -107,6 +107,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 checkIsAMI()
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_ccf)
+                txtusage_disclaimer.setText(getString(R.string.usage_disclaimer))
 
             }
 
@@ -119,7 +120,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 checkIsAMI()
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_gallon)
-
+                txtusage_disclaimer.setText(getString(R.string.usage_disclaimer))
             }
 
             txtDollar.setOnClickListener {
@@ -131,6 +132,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 checkIsAMI()
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_dollar)
+                txtusage_disclaimer.setText(getString(R.string.u_dollar_disclaimer))
+
             }
 
             lytHourly.setOnClickListener {
