@@ -22,6 +22,7 @@ import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.UtilitiesData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppConstants
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
@@ -34,6 +35,7 @@ import retrofit2.Response
 
 class LoginActivity : BaseActivity() {
 
+    var tanentId = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -108,8 +110,8 @@ class LoginActivity : BaseActivity() {
             }
 
 //        editUserName.setText("utkarsh3441@gmail.com")
-            editUserName.setText("amitsh@hotmail.com")
-            editUserPass.setText("Trackle@999")
+            /*editUserName.setText("amitsh@hotmail.com")
+            editUserPass.setText("Trackle@999")*/
 
             btnLogin.setOnClickListener {
                 validationFields()
@@ -137,7 +139,8 @@ class LoginActivity : BaseActivity() {
             val call: Call<ResponseModelClasses.LoginResponseModel> = apiService.getLogin(
                 RequestClass.getLoginRequestModel(
                     editUserName.text.toString(),
-                    editUserPass.text.toString()
+                    editUserPass.text.toString(),
+                    tanentId
                 )
             )
             call.enqueue(object : Callback<ResponseModelClasses.LoginResponseModel> {
@@ -148,9 +151,14 @@ class LoginActivity : BaseActivity() {
                     try {
                         dismissDialog()
                         if (response.body() != null) {
-                            var loginResponseModel: ResponseModelClasses.LoginResponseModel? = response.body()
+
+                            var loginResponseModel: ResponseModelClasses.LoginResponseModel? =
+                                response.body()
                             AppPrefences.setLoginUserInfo(this@LoginActivity, loginResponseModel)
-                            AppPrefences.setAccountNumber(this@LoginActivity, loginResponseModel!!.AccountNumber)
+                            AppPrefences.setAccountNumber(
+                                this@LoginActivity,
+                                loginResponseModel!!.AccountNumber
+                            )
                             AppPrefences.setUtilityAccountNumber(
                                 this@LoginActivity,
                                 loginResponseModel!!.UtilityAccountNumber
@@ -167,7 +175,10 @@ class LoginActivity : BaseActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseModelClasses.LoginResponseModel>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.LoginResponseModel>,
+                    t: Throwable
+                ) {
                     AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }
@@ -203,38 +214,42 @@ class LoginActivity : BaseActivity() {
                         }
                         AppLog.printLog("UtilityList Response- ", Gson().toJson(response.body()))
 
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
 
-                override fun onFailure(
-                    call: Call<ResponseModelClasses.UtilityListResponseModel>,
-                    t: Throwable
-                ) {
-                    try {
-                        AppLog.printLog("Failure()- ", t.message.toString())
-                        dismissDialog()
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
-                }
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
+
+                    override fun onFailure(
+                        call: Call<ResponseModelClasses.UtilityListResponseModel>,
+                        t: Throwable
+                    ) {
+                        try {
+                            AppLog.printLog("Failure()- ", t.message.toString())
+                            dismissDialog()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
+                    }
+                })
+            } catch (e: Exception) {
+                e.printStackTrace()
+                dismissDialog()
+            }
+        } else {
             dismissDialog()
+            showToast(getString(R.string.internet))
         }
-    } else {
-        dismissDialog()
-        showToast(getString(R.string.internet))
-    }
 
     private fun openDialog(title: String, textView: TextView) {
         try {
             val dialog = Dialog(this@LoginActivity)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_layout)
-            dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(true)
             dialog.show()
@@ -249,6 +264,7 @@ class LoginActivity : BaseActivity() {
             val mAdapter = UtilitiesListAdapter() { position ->
                 val data = UtilitiesData.getArrayItem(position)
                 textView.text = data.Name
+                tanentId = data.UtilityId.toString()
                 textView.setTextColor(resources.getColor(R.color.colorBlack))
                 dialog.dismiss()
             }

@@ -15,7 +15,7 @@
     
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:overScrollMode="never">
         
         <LinearLayout
@@ -399,7 +399,6 @@
                 android:layout_marginBottom="@dimen/dp_40"
                 android:background="@drawable/drawable_round_corner"
                 android:padding="@dimen/dp_4"
-                android:text="@string/usage_disclaimer"
                 android:textSize="@dimen/dp_10"/>
         </LinearLayout>
     </ScrollView>

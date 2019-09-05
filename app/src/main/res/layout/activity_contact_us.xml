@@ -4,27 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/drawable_background_gradient"
-    android:focusableInTouchMode="true"
     android:fitsSystemWindows="true"
-    tools:context=".Activities.ConnectWithUtilityActivity"
-    android:orientation="vertical">
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".Activities.ConnectWithUtilityActivity">
     
     <include
-        layout="@layout/custom_action_bar"
-        android:id="@+id/lytAction" />
+        android:id="@+id/lytAction"
+        layout="@layout/custom_action_bar" />
     
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:overScrollMode="never">
+        android:overScrollMode="never"
+        android:scrollbars="none">
         
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:padding="@dimen/dp_5"
-            android:gravity="center_horizontal">
+            android:padding="@dimen/dp_5">
             
             <!--connect_with_utility Header-->
             <RelativeLayout
@@ -36,14 +36,14 @@
                     android:id="@+id/txtContactUsHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_2"
-                    android:gravity="center"
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
                     android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_20"
+                    android:gravity="center"
+                    android:padding="@dimen/dp_2"
+                    android:text="@string/connect_with_utility"
                     android:textColor="@color/colorPrimary"
-                    android:text="@string/connect_with_utility" />
+                    android:textSize="@dimen/sp_20" />
             </RelativeLayout>
             
             <!--connect_with_utility description-->
@@ -51,34 +51,60 @@
                 android:id="@+id/relBillingPeriod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginRight="@dimen/dp_10"
-                android:background="@drawable/drawable_round_corner">
+                android:background="@drawable/drawable_round_corner"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
                 
                 <TextView
                     android:id="@+id/txtContactUsDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:padding="@dimen/dp_2"
                     android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_16"
-                    android:visibility="gone"
+                    android:padding="@dimen/dp_2"
+                    android:text="@string/contactus_description"
                     android:textColor="@color/colorBlack"
-                    android:text="@string/contactus_description" />
+                    android:textSize="@dimen/sp_16"
+                    android:visibility="gone" />
+                
+                <!--Trackle Logo Layout-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/common_drop_image" />
+                    
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_60"
+                        android:layout_weight="1"
+                        android:src="@drawable/trackle_logo" />
+                    
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/common_drop_image" />
+                </LinearLayout>
                 
                 <TextView
                     android:id="@+id/txtContactUsDetailsHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:padding="@dimen/dp_2"
                     android:fontFamily="@font/roboto"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/sp_16"
+                    android:padding="@dimen/dp_2"
+                    android:text="Contact Us"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="Contact Us" />
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold" />
                 
                 <!--<TextView
                     android:id="@+id/txtContactUsEmail"
@@ -100,8 +126,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_35"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_email_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_email_" />
                     
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -112,21 +138,21 @@
                             android:id="@+id/txtContactUsEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
                             android:fontFamily="@font/roboto"
-                            android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/email_address" />
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/email_address"
+                            android:textColor="@color/commonLabelTextColor" />
                         
                         <TextView
                             android:id="@+id/txtContactUsEmailValue"
-                            android:layout_below="@id/txtContactUsEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorUsageAllocation"
-                            android:textSize="@dimen/sp_14"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtContactUsEmail"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_2"
+                            android:textColor="@color/colorUsageAllocation"
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
@@ -152,8 +178,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_35"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_home_phone_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_home_phone_" />
                     
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -164,21 +190,21 @@
                             android:id="@+id/txtContactUsPhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
                             android:fontFamily="@font/roboto"
-                            android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/phone_number" />
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/phone_number"
+                            android:textColor="@color/commonLabelTextColor" />
                         
                         <TextView
                             android:id="@+id/txtContactUsPhoneValue"
-                            android:layout_below="@id/txtContactUsPhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorUsageAllocation"
-                            android:textSize="@dimen/sp_14"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtContactUsPhone"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_2"
+                            android:textColor="@color/colorUsageAllocation"
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
@@ -191,8 +217,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_35"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_home_phone_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_home_phone_" />
                     
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -203,21 +229,21 @@
                             android:id="@+id/txtEmergencyNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
                             android:fontFamily="@font/roboto"
-                            android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/emergency_number" />
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/emergency_number"
+                            android:textColor="@color/commonLabelTextColor" />
                         
                         <TextView
                             android:id="@+id/txtEmergencyNumberValue"
-                            android:layout_below="@id/txtEmergencyNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorUsageAllocation"
-                            android:textSize="@dimen/sp_14"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtEmergencyNumber"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_2"
+                            android:textColor="@color/colorUsageAllocation"
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
@@ -243,8 +269,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_35"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_hourly"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_hourly" />
                     
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -255,21 +281,21 @@
                             android:id="@+id/txtCustomerServiceHour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
                             android:fontFamily="@font/roboto"
-                            android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/customer_service_hour" />
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/customer_service_hour"
+                            android:textColor="@color/commonLabelTextColor" />
                         
                         <TextView
                             android:id="@+id/txtCustomerServiceHourValue"
-                            android:layout_below="@id/txtCustomerServiceHour"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_14"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtCustomerServiceHour"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_2"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
@@ -282,8 +308,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_35"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_address_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_address_" />
                     
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -294,21 +320,21 @@
                             android:id="@+id/txtAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
                             android:fontFamily="@font/roboto"
-                            android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/connect_address" />
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/connect_address"
+                            android:textColor="@color/commonLabelTextColor" />
                         
                         <TextView
                             android:id="@+id/txtAddressValue"
-                            android:layout_below="@id/txtAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_14"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtAddress"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_2"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
@@ -317,23 +343,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/dp_10"
                 android:layout_margin="@dimen/dp_10"
                 android:background="@drawable/drawable_round_corner"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
                 
                 <TextView
                     android:id="@+id/txtReportAnIssue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
                     android:paddingTop="@dimen/dp_10"
                     android:paddingBottom="@dimen/dp_10"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_16"
-                    android:textStyle="bold"
+                    android:text="@string/report_an_issue"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="@string/report_an_issue" />
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold" />
                 
                 <!--Customer Name-->
                 <RelativeLayout
@@ -345,23 +371,23 @@
                         android:id="@+id/txtCustomerName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorBlack"
-                        android:text="Customer Name" />
+                        android:padding="@dimen/dp_2"
+                        android:text="Customer Name"
+                        android:textColor="@color/colorBlack" />
                     
                     <android.support.v7.widget.AppCompatEditText
                         android:id="@+id/editCustomerName"
-                        android:layout_below="@+id/txtCustomerName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/mandatory"
-                        android:textSize="@dimen/sp_14"
-                        android:maxLength="30"
-                        android:imeOptions="actionNext|flagNavigateNext"
-                        android:fontFamily="@font/roboto"
+                        android:layout_below="@+id/txtCustomerName"
                         android:background="@drawable/edittext_border"
-                        android:padding="@dimen/dp_10" />
+                        android:fontFamily="@font/roboto"
+                        android:hint="@string/mandatory"
+                        android:imeOptions="actionNext|flagNavigateNext"
+                        android:maxLength="30"
+                        android:padding="@dimen/dp_10"
+                        android:textSize="@dimen/sp_14" />
                 
                 </RelativeLayout>
                 
@@ -375,23 +401,23 @@
                         android:id="@+id/txtServiceAccNum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorBlack"
-                        android:text="Service Account Number" />
+                        android:padding="@dimen/dp_2"
+                        android:text="Service Account Number"
+                        android:textColor="@color/colorBlack" />
                     
                     <android.support.v7.widget.AppCompatEditText
                         android:id="@+id/editServiceAccNum"
-                        android:layout_below="@+id/txtServiceAccNum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/mandatory"
-                        android:textSize="@dimen/sp_14"
-                        android:maxLength="7"
-                        android:imeOptions="actionNext|flagNavigateNext"
-                        android:fontFamily="@font/roboto"
+                        android:layout_below="@+id/txtServiceAccNum"
                         android:background="@drawable/edittext_border"
-                        android:padding="@dimen/dp_10" />
+                        android:fontFamily="@font/roboto"
+                        android:hint="@string/mandatory"
+                        android:imeOptions="actionNext|flagNavigateNext"
+                        android:maxLength="7"
+                        android:padding="@dimen/dp_10"
+                        android:textSize="@dimen/sp_14" />
                 
                 </RelativeLayout>
                 
@@ -405,24 +431,24 @@
                         android:id="@+id/txtCustomerEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorBlack"
-                        android:text="Email" />
+                        android:padding="@dimen/dp_2"
+                        android:text="Email"
+                        android:textColor="@color/colorBlack" />
                     
                     <android.support.v7.widget.AppCompatEditText
                         android:id="@+id/editCustomerEmail"
-                        android:layout_below="@+id/txtCustomerEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/mandatory"
-                        android:textSize="@dimen/sp_14"
-                        android:maxLength="50"
-                        android:inputType="textEmailAddress"
-                        android:imeOptions="actionNext|flagNavigateNext"
-                        android:fontFamily="@font/roboto"
+                        android:layout_below="@+id/txtCustomerEmail"
                         android:background="@drawable/edittext_border"
-                        android:padding="@dimen/dp_10" />
+                        android:fontFamily="@font/roboto"
+                        android:hint="@string/mandatory"
+                        android:imeOptions="actionNext|flagNavigateNext"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="50"
+                        android:padding="@dimen/dp_10"
+                        android:textSize="@dimen/sp_14" />
                 
                 </RelativeLayout>
                 
@@ -436,36 +462,36 @@
                         android:id="@+id/txtTopic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorBlack"
-                        android:text="Report Type" />
+                        android:padding="@dimen/dp_2"
+                        android:text="Report Type"
+                        android:textColor="@color/colorBlack" />
                     
                     <RelativeLayout
                         android:id="@+id/r_lyt_utilities"
                         android:layout_width="match_parent"
-                        android:padding="@dimen/dp_2"
-                        android:layout_below="@+id/txtTopic"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/edittext_border">
+                        android:layout_below="@+id/txtTopic"
+                        android:background="@drawable/edittext_border"
+                        android:padding="@dimen/dp_2">
                         
                         <ImageView
                             android:layout_width="@dimen/dp_30"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_right_arrow"
+                            android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_alignParentRight="true" />
+                            android:src="@drawable/ic_right_arrow" />
                         
                         <TextView
                             android:id="@+id/txtTopicName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
                             android:fontFamily="@font/roboto"
                             android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_16"
-                            android:background="@android:color/transparent"
+                            android:text="@string/select_topic"
                             android:textColor="@color/colorDarkGray"
-                            android:text="@string/select_topic" />
+                            android:textSize="@dimen/sp_16" />
                     
                     </RelativeLayout>
                 
@@ -481,24 +507,24 @@
                         android:id="@+id/txtSubject"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorBlack"
-                        android:text="@string/subject" />
+                        android:padding="@dimen/dp_2"
+                        android:text="@string/subject"
+                        android:textColor="@color/colorBlack" />
                     
                     <android.support.v7.widget.AppCompatEditText
                         android:id="@+id/editSubjectValue"
-                        android:layout_below="@+id/txtSubject"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtSubject"
+                        android:background="@drawable/edittext_border"
+                        android:fontFamily="@font/roboto"
                         android:hint="@string/mandatory"
-                        android:textSize="@dimen/sp_14"
+                        android:imeOptions="actionNext|flagNavigateNext"
                         android:maxLength="100"
                         android:maxLines="1"
-                        android:imeOptions="actionNext|flagNavigateNext"
-                        android:fontFamily="@font/roboto"
-                        android:background="@drawable/edittext_border"
-                        android:padding="@dimen/dp_10" />
+                        android:padding="@dimen/dp_10"
+                        android:textSize="@dimen/sp_14" />
                 
                 </RelativeLayout>
                 
@@ -512,24 +538,24 @@
                         android:id="@+id/txtMessage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorBlack"
-                        android:text="Message" />
+                        android:padding="@dimen/dp_2"
+                        android:text="Message"
+                        android:textColor="@color/colorBlack" />
                     
                     <android.support.v7.widget.AppCompatEditText
                         android:id="@+id/editMessageValue"
-                        android:layout_below="@+id/txtMessage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/mandatory"
-                        android:textSize="@dimen/sp_14"
-                        android:maxLines="4"
-                        android:maxLength="250"
-                        android:imeOptions="actionNext|flagNavigateNext"
-                        android:fontFamily="@font/roboto"
+                        android:layout_below="@+id/txtMessage"
                         android:background="@drawable/edittext_border"
-                        android:padding="@dimen/dp_10" />
+                        android:fontFamily="@font/roboto"
+                        android:hint="@string/mandatory"
+                        android:imeOptions="actionNext|flagNavigateNext"
+                        android:maxLength="250"
+                        android:maxLines="4"
+                        android:padding="@dimen/dp_10"
+                        android:textSize="@dimen/sp_14" />
                 
                 </RelativeLayout>
                 
@@ -538,13 +564,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginTop="@dimen/dp_30"
-                    android:text="@string/submit"
                     android:layout_marginBottom="@dimen/dp_40"
+                    android:background="@drawable/rounded_corner_blue"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/submit"
                     android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
-                    android:fontFamily="@font/roboto"
-                    android:textSize="@dimen/sp_18"
-                    android:background="@drawable/rounded_corner_blue" />
+                    android:textSize="@dimen/sp_18" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

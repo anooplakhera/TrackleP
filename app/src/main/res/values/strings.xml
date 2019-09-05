@@ -157,6 +157,7 @@
     <string name="c_utility">Utility</string>
     <string name="u_allocation">Allocation</string>
     <string name="u_usage">Usage</string>
+    <string name="u_dollar_disclaimer">Disclaimer : The billing information on this page includes only water usage/consumption charges and not the total of all other charges currently due such as water service charges, capital project charges, penalty or late fees.</string>
     <string name="customer_service_hour">Customer Service Hours</string>
     <string name="emergency_number">Emergency Number</string>
     <string name="connect_address">Address</string>

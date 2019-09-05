@@ -14,8 +14,8 @@
             android:id="@+id/imgCABback"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
             
             <ImageView
                 android:layout_width="@dimen/dp_40"
@@ -25,21 +25,21 @@
                 android:src="@drawable/ic_back_new" />
             
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
                 android:text="Back"
                 android:textColor="@color/colorWhite"
-                android:fontFamily="@font/roboto"
                 android:textSize="@dimen/sp_15"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:visibility="gone" />
         </LinearLayout>
         
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/txtCABtitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:fontFamily="@font/roboto"
+            android:gravity="center"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/sp_17" />
         
@@ -47,10 +47,24 @@
             android:id="@+id/imgCABadd"
             android:layout_width="@dimen/dp_50"
             android:layout_height="match_parent"
-            android:padding="@dimen/dp_10"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dp_10"
             android:src="@drawable/ic_add"
+            android:visibility="gone" />
+        
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtCArightTop"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:paddingRight="@dimen/dp_10"
+            android:text="View Bill"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sp_10"
             android:visibility="gone" />
     
     </RelativeLayout>
