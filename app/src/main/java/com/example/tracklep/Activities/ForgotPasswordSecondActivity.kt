@@ -3,6 +3,7 @@ package com.example.tracklep.Activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
@@ -65,7 +66,7 @@ class ForgotPasswordSecondActivity : BaseActivity() {
                 RequestClass.getForgetRequestStepTwo(
                     emailId,
                     editAnswer1RP!!.text.toString(),
-                    editAnswer2RP!!.text.toString()
+                    editAnswer2RP!!.text.toString(), AppPrefences.getDataBaseInfo(this)!!
                 )
             )
             call.enqueue(object : Callback<ResponseModelClasses.ResetPassStep2Response> {

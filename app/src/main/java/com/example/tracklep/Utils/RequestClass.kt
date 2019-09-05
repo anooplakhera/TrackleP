@@ -3,36 +3,38 @@ package com.example.tracklep.Utils
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.DataClasses.ResetPassSecurityQuestionData
+import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.TrackleApp
 import com.google.gson.Gson
 
 object RequestClass {
 
+
     fun getLoginRequestModel(
         username: String,
         password: String,
-        tanentId: String
-    ): Map<String, String> {
+        tanentId: String,
+        data: ResponseModelClasses.DataBaseUtils): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.UserName, username)
         map.put(ApiUrls.Password, password)
         map.put(ApiUrls.GrantType, ApiUrls.Password.toLowerCase())
         map.put(ApiUrls.TanentId, tanentId)
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         AppLog.printLog("getLoginRequestModel: " + Gson().toJson(map))
         return map;
     }
 
-    fun getMeterDetailsRequestModel(AccountNumber: String): HashMap<String, String> {
+    fun getMeterDetailsRequestModel(AccountNumber: String, data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
         var map = HashMap<String, String>()
         map[ApiUrls.AccountNumber] = AccountNumber
-        map[ApiUrls.DataSource] = ApiUrls.DataSource_value
-        map[ApiUrls.Database] = ApiUrls.Database_value
-        map[ApiUrls.DBUserName] = ApiUrls.DBUserName_value//ApiUrls.DBUserName_value)
-        map[ApiUrls.DBPassword] = ApiUrls.DBPassword_value//ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         AppLog.printLog("getMeterDetailsRequestModel: " + Gson().toJson(map))
         return map;
     }
@@ -40,14 +42,14 @@ object RequestClass {
     fun getWaterUsageRequestModel(
         AccountNumber: String,
         type: String,
-        mode: String
+        mode: String, data: ResponseModelClasses.DataBaseUtils
     ): HashMap<String, String> {
         var map = HashMap<String, String>()
         map[ApiUrls.AccountNumber] = AccountNumber
-        map[ApiUrls.DataSource] = ApiUrls.DataSource_value
-        map[ApiUrls.Database] = ApiUrls.Database_value
-        map[ApiUrls.DBUserName] = ApiUrls.DBUserName_value
-        map[ApiUrls.DBPassword] = ApiUrls.DBPassword_value
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         map["Type"] = type
         map["HourlyType"] = "H"
         map["Mode"] = mode
@@ -57,13 +59,13 @@ object RequestClass {
         return map;
     }
 
-    fun getBillingDetailsRequestModel(AccountNumber: String): HashMap<String, String> {
+    fun getBillingDetailsRequestModel(AccountNumber: String, data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.AccountNumber, AccountNumber)
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)//ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)//ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
 
         AppLog.printLog("getBillingDetailsRequestModel: " + Gson().toJson(map))
 
@@ -71,12 +73,12 @@ object RequestClass {
     }
 
     //Connect With Utility
-    fun getConnectWithUtilityRequestModel(): HashMap<String, String> {
+    fun getConnectWithUtilityRequestModel(data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
         var map = HashMap<String, String>()
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)//ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)//ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
 
         AppLog.printLog("getConnectWithUtilityRequestModel: " + Gson().toJson(map))
 
@@ -94,7 +96,7 @@ object RequestClass {
         editAnswer2: String,
         sQuesID1: String,
         sQuesID2: String,
-        cPassword: String
+        cPassword: String, data: ResponseModelClasses.DataBaseUtils
     ): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.EmailID, email)
@@ -109,10 +111,10 @@ object RequestClass {
         map.put(ApiUrls.SecurityQuestionId2, sQuesID2)
         map.put(ApiUrls.HintsAns, editAnswer1)
         map.put(ApiUrls.HintsAns2, editAnswer2)
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         AppLog.printLog("getSignupRequestModel: " + Gson().toJson(map))
         return map;
     }
@@ -126,7 +128,7 @@ object RequestClass {
         editAnswer1: String,
         editAnswer2: String,
         sQuesID1: String,
-        sQuesID2: String
+        sQuesID2: String, data: ResponseModelClasses.DataBaseUtils
     ): HashMap<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.EmailID, email)
@@ -138,21 +140,21 @@ object RequestClass {
         map.put(ApiUrls.SecurityQuestionId2, sQuesID2)
         map.put(ApiUrls.HintsAns, editAnswer1)
         map.put(ApiUrls.HintsAns2, editAnswer2)
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         AppLog.printLog("getUpdateAccountRequestModel: " + Gson().toJson(map))
         return map;
     }
 
-    fun getForgetRequestStepOne(username: String): Map<String, String> {
+    fun getForgetRequestStepOne(username: String, data: ResponseModelClasses.DataBaseUtils): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.UserName, username);
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         AppLog.printLog("getForgetRequestStepOne: " + Gson().toJson(map))
         return map;
     }
@@ -160,7 +162,7 @@ object RequestClass {
     fun getForgetRequestStepTwo(
         username: String,
         editAnswer1RP: String,
-        editAnswer2RP: String
+        editAnswer2RP: String, data: ResponseModelClasses.DataBaseUtils
     ): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.UserName, username);
@@ -174,10 +176,10 @@ object RequestClass {
         );
         map.put(ApiUrls.Answer1, editAnswer1RP)
         map.put(ApiUrls.Answer2, editAnswer2RP)
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         AppLog.printLog("getForgetRequestStepTwo: " + Gson().toJson(map))
         return map;
     }
@@ -185,16 +187,16 @@ object RequestClass {
     fun getForgetRequestStepThree(
         username: String,
         newPass: String,
-        cNewPass: String
+        cNewPass: String, data: ResponseModelClasses.DataBaseUtils
     ): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.UserName, username);
         map.put(ApiUrls.Password, newPass);
-        map.put(ApiUrls.ConfirmPassword, cNewPass);
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.ConfirmPassword, cNewPass)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         AppLog.printLog("getForgetRequestStepThree: " + Gson().toJson(map))
         return map;
     }
@@ -209,14 +211,14 @@ object RequestClass {
     fun getAddAccountRequestModel(
         UtilityAccountNumber: String,
         PostalCode: String,
-        MeterNumber: String
+        MeterNumber: String, data: ResponseModelClasses.DataBaseUtils
     ): Map<String, String> {
         var map = HashMap<String, String>()
 
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         map.put(
             "MobileNumber",
             TrackleApp.appContext?.let { AppPrefences.getProfileInfo(it).MobilePhone }.toString()
@@ -241,13 +243,13 @@ object RequestClass {
 
     /*["AccountNumber": "3", "DataSource": "aquatraxserver.database.windows.net", "Database": "AQUATRAXDEV", "DBPassword": "newaqt@123", "DBUserName": "aquatrax"]*/
     //Get Usage Notification
-    fun getUsageNotificationRequestModel(AccountNumber: String): HashMap<String, String> {
+    fun getUsageNotificationRequestModel(AccountNumber: String, data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.AccountNumber, AccountNumber)
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
 
         AppLog.printLog("getUsageNotificationRequestModel: " + Gson().toJson(map))
 
@@ -264,13 +266,13 @@ object RequestClass {
         DailyThreshold: String,
         MeterNumber: String,
         AccountNumber: String,
-        Unit: String
+        Unit: String, data: ResponseModelClasses.DataBaseUtils
     ): HashMap<String, String> {
         var map = HashMap<String, String>()
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
 
         map.put("MonthlyThreshold", MonthlyThreshold)
         map.put("DailyThreshold", DailyThreshold)
@@ -292,7 +294,7 @@ object RequestClass {
         TopicID: String,
         Subject: String,
         Body: String,
-        AccountNumber: String
+        AccountNumber: String, data: ResponseModelClasses.DataBaseUtils
     ): HashMap<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.EmailID, emailid)
@@ -301,21 +303,21 @@ object RequestClass {
         map.put(ApiUrls.Body, Body)
         map.put(ApiUrls.AccountNumber, AccountNumber)
 
-        map.put(ApiUrls.DataSource, ApiUrls.DataSource_value)
-        map.put(ApiUrls.Database, ApiUrls.Database_value)
-        map.put(ApiUrls.DBUserName, ApiUrls.DBUserName_value)
-        map.put(ApiUrls.DBPassword, ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         AppLog.printLog("getConnectMeRequestModel: " + Gson().toJson(map))
         return map;
     }
 
-    fun getDeleteAccountRequestModel(AccountNumber: String): HashMap<String, String> {
+    fun getDeleteAccountRequestModel(AccountNumber: String, data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
         var map = HashMap<String, String>()
 
-        map[ApiUrls.DataSource] = ApiUrls.DataSource_value
-        map[ApiUrls.Database] = ApiUrls.Database_value
-        map[ApiUrls.DBUserName] = ApiUrls.DBUserName_value//ApiUrls.DBUserName_value)
-        map[ApiUrls.DBPassword] = ApiUrls.DBPassword_value//ApiUrls.DBPassword_value)
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
         AppLog.printLog("getDeleteAccountRequestModel: " + Gson().toJson(map))
         return map;
     }

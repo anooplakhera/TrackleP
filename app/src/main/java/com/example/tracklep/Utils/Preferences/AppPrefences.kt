@@ -18,10 +18,12 @@ object AppPrefences {
     private val TokenID = "tokenId"
     private val Login = "login"
     private val LoginData = "logindata"
+    private val DataBaseData = "DataBaseData"
     private val AccountNumber = "AccountNumber"
     private val UtilityAccountNumber = "UtilityAccountNumber"
     private val IsAMI = "IsAMI"
     private val MeterUsage = "MeterUsage"
+    private val RememberMe = "RememberMe"
     private val MyProfileDetails = "MyProfileDetails"
 
     fun clearAll(ctx: Context) {
@@ -72,6 +74,20 @@ object AppPrefences {
         )
         val editor = prefs.edit()
         editor.putBoolean(IsAMI, data)
+        editor.commit()
+    }
+
+    fun getRememberMe(ctx: Context): Boolean? {
+        return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+            .getBoolean(RememberMe, false)
+    }
+
+    fun setRememberMe(ctx: Context, data: Boolean) {
+        val prefs = ctx.getSharedPreferences(
+            PREFS_FILE_NAME, Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putBoolean(RememberMe, data)
         editor.commit()
     }
 
@@ -226,6 +242,24 @@ object AppPrefences {
         val gson = Gson()
         val json = prefs.getString(LoginData, "")
         val obj = gson.fromJson<LoginResponseModel>(json, LoginResponseModel::class.java)
+        return obj
+
+    }
+
+    //UserDatabase Model
+    fun setDataBaseInfo(c: Context, model: ResponseModelClasses.DataBaseUtils?) {
+        if (model != null) {
+            saveJsonData(c, DataBaseData, model)
+        }
+    }
+
+    @Throws(InstantiationException::class)
+    fun getDataBaseInfo(ctx: Context): ResponseModelClasses.DataBaseUtils? {
+        val prefs = ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = prefs.getString(DataBaseData, "")
+        val obj =
+            gson.fromJson<ResponseModelClasses.DataBaseUtils?>(json, ResponseModelClasses.DataBaseUtils::class.java)
         return obj
 
     }

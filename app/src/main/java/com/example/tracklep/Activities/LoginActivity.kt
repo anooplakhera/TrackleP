@@ -22,7 +22,6 @@ import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataClasses.UtilitiesData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
-import com.example.tracklep.Utils.AppConstants
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
@@ -60,11 +59,16 @@ class LoginActivity : BaseActivity() {
                 showSuccessPopup("Please select Water District/ Agency")
                 !isValid
                 return
-            } else if (!switchBtn.isChecked) {
+           /* } else if (!switchBtn.isChecked) {
                 showSuccessPopup("Please enable Remember me")
                 !isValid
-                return
+                return*/
             } else if (isValid) {
+                if (switchBtn.isChecked){
+                    AppPrefences.setRememberMe(this,true)
+                }else{
+                    AppPrefences.setRememberMe(this,false)
+                }
                 loginApi()
             }
         } catch (e: Exception) {
@@ -140,7 +144,7 @@ class LoginActivity : BaseActivity() {
                 RequestClass.getLoginRequestModel(
                     editUserName.text.toString(),
                     editUserPass.text.toString(),
-                    tanentId
+                    tanentId,AppPrefences.getDataBaseInfo(this)!!
                 )
             )
             call.enqueue(object : Callback<ResponseModelClasses.LoginResponseModel> {
@@ -215,31 +219,31 @@ class LoginActivity : BaseActivity() {
                         AppLog.printLog("UtilityList Response- ", Gson().toJson(response.body()))
 
 
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
+                }
 
-                    override fun onFailure(
-                        call: Call<ResponseModelClasses.UtilityListResponseModel>,
-                        t: Throwable
-                    ) {
-                        try {
-                            AppLog.printLog("Failure()- ", t.message.toString())
-                            dismissDialog()
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.UtilityListResponseModel>,
+                    t: Throwable
+                ) {
+                    try {
+                        AppLog.printLog("Failure()- ", t.message.toString())
+                        dismissDialog()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
-                })
-            } catch (e: Exception) {
-                e.printStackTrace()
-                dismissDialog()
-            }
-        } else {
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
             dismissDialog()
-            showToast(getString(R.string.internet))
         }
+    } else {
+        dismissDialog()
+        showToast(getString(R.string.internet))
+    }
 
     private fun openDialog(title: String, textView: TextView) {
         try {
@@ -266,6 +270,10 @@ class LoginActivity : BaseActivity() {
                 textView.text = data.Name
                 tanentId = data.UtilityId.toString()
                 textView.setTextColor(resources.getColor(R.color.colorBlack))
+                AppPrefences.setDataBaseInfo(
+                    this@LoginActivity,
+                    ResponseModelClasses.DataBaseUtils(data.ServerName, data.DataBaseName, data.UserName, data.Password)
+                )
                 dialog.dismiss()
             }
             dialog.dialogRecycleView.adapter = mAdapter

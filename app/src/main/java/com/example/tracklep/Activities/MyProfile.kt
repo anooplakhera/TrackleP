@@ -111,7 +111,7 @@ class MyProfile : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap()))
+            val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap(AppPrefences.getDataBaseInfo(this)!!)))
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
@@ -158,7 +158,7 @@ class MyProfile : BaseActivity() {
             val call = apiService.getAccount(
                 getHeader(),
                 AppPrefences.getAccountNumber(this),
-                ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap())
+                ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap(AppPrefences.getDataBaseInfo(this)!!))
             )
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.MyProfile>> {
                 override fun onResponse(
@@ -220,7 +220,7 @@ class MyProfile : BaseActivity() {
                         editAns1Value.text.toString(),
                         editAns2Value.text.toString(),
                         sQuesID1,
-                        sQuesID2
+                        sQuesID2,AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             )
@@ -444,7 +444,7 @@ class MyProfile : BaseActivity() {
                     getHeader(),
                     ApiUrls.getJSONRequestBody(
                         RequestClass.getDeleteAccountRequestModel(
-                            AppPrefences.getAccountNumber(this)
+                            AppPrefences.getAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
                         )
                     ),
                     AppPrefences.getAccountNumber(this)

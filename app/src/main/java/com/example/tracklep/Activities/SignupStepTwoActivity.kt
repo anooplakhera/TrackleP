@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.Adapter.QuestionListAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -139,7 +140,7 @@ class SignupStepTwoActivity : BaseActivity() {
                         editAnswer2.text.toString(),
                         sQuesID1,
                         sQuesID2,
-                        Password
+                        Password,AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             call.enqueue(object : Callback<ResponseModelClasses.RegistrationResponse> {
@@ -195,7 +196,7 @@ class SignupStepTwoActivity : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap()))
+            val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap(AppPrefences.getDataBaseInfo(this)!!)))
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
                 override fun onResponse(
                     call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,

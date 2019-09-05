@@ -84,7 +84,7 @@ class BillingActivity : BaseActivity() {
                     getHeader(),
                     ApiUrls.getJSONRequestBody(
                         RequestClass.getBillingDetailsRequestModel(
-                            AppPrefences.getAccountNumber(this)
+                            AppPrefences.getAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
                         )
                     )
                 )

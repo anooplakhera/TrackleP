@@ -101,7 +101,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
                 getHeader(),
                 AppPrefences.getAccountNumber(this),
                 ApiUrls.getJSONRequestBody(
-                    RequestClass.getConnectWithUtilityRequestModel()
+                    RequestClass.getConnectWithUtilityRequestModel(AppPrefences.getDataBaseInfo(this)!!)
                 )
             )
             call.enqueue(object : Callback<ResponseModelClasses.ConnectWithUtilityResponse> {
@@ -244,7 +244,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
                         AppConstants.SelectedTopicID,
                         editSubjectValue.text.toString(),
                         editMessageValue.text.toString(),
-                        AppPrefences.getUtilityAccountNumber(this)
+                        AppPrefences.getUtilityAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             )

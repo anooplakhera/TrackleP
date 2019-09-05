@@ -1,5 +1,6 @@
 package com.example.tracklep.ApiClient
 
+import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.Utils.AppLog
 import com.google.gson.Gson
 import okhttp3.MediaType
@@ -79,10 +80,28 @@ object ApiUrls {
     const val DBUserName = "DBUserName"
     const val DBPassword = "DBPassword"
 
-    const val DataSource_value = "aquatraxserver.database.windows.net"
-    const val Database_value = "AQUATRAXDEV"
-    const val DBUserName_value = "aquatrax@aquatraxserver"
-    const val DBPassword_value = "newaqt@123"
+//    1-ServerName
+//    2-DataBaseName
+//    3-UserName
+//    4-Password
+
+    var DataSource_value = "aquatraxserver.database.windows.net"
+    var Database_value = "AQUATRAXDEV"
+    var DBUserName_value = "aquatrax@aquatraxserver"
+    var DBPassword_value = "newaqt@123"
+
+
+
+
+//    var DataSource_value = TrackleApp.appContext?.let { AppPrefences.getDataBaseInfo(it) }!!.ServerName
+//    var Database_value = TrackleApp.appContext?.let { AppPrefences.getDataBaseInfo(it) }!!.DataBaseName
+//    var DBUserName_value = TrackleApp.appContext?.let { AppPrefences.getDataBaseInfo(it) }!!.UserName
+//    var DBPassword_value = TrackleApp.appContext?.let { AppPrefences.getDataBaseInfo(it) }!!.Password
+
+//    const val DataSource_value = "aquatraxserver.database.windows.net"
+//    const val Database_value = "AQUATRAXDEV"
+//    const val DBUserName_value = "aquatrax@aquatraxserver"
+//    const val DBPassword_value = "newaqt@123"
 
     const val AccountAdd = "account/add";
     const val SetConnectMe = "SetContactUS";
@@ -91,12 +110,16 @@ object ApiUrls {
         return BASE_URL + BASE_PATH
     }
 
-    fun getBodyMap(): HashMap<String, String> {
+    fun getBodyMap(data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
         var bMap = HashMap<String, String>()
-        bMap.put(DataSource, DataSource_value)
-        bMap.put(Database, Database_value)
-        bMap.put(DBUserName, DBUserName_value)
-        bMap.put(DBPassword, DBPassword_value)
+//        bMap.put(DataSource, DataSource_value)
+//        bMap.put(Database, Database_value)
+//        bMap.put(DBUserName, DBUserName_value)
+//        bMap.put(DBPassword, DBPassword_value)
+        bMap.put(DataSource, data.ServerName)
+        bMap.put(Database, data.DataBaseName)
+        bMap.put(DBUserName, data.UserName)
+        bMap.put(DBPassword, data.Password)
         AppLog.printLog("getWaterUsageRequestModel: " + Gson().toJson(bMap))
         return bMap
     }

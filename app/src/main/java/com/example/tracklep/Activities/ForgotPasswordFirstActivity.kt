@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.Adapter.UtilitiesListAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -73,7 +74,8 @@ class ForgotPasswordFirstActivity : BaseActivity() {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getResetUserPass1(RequestClass.getForgetRequestStepOne(editEmailF1.text.toString()))
+            val call = apiService.getResetUserPass1(RequestClass.getForgetRequestStepOne(editEmailF1.text.toString(),
+                AppPrefences.getDataBaseInfo(this)!!))
             call.enqueue(object : Callback<ResponseModelClasses.ResetPassStep1Response> {
                 override fun onResponse(
                     call: Call<ResponseModelClasses.ResetPassStep1Response>,

@@ -210,7 +210,7 @@ class MainActivity : BaseActivity(), AnimationListener {
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getMeterDetailsRequestModel(
-                        AppPrefences.getAccountNumber(this)
+                        AppPrefences.getAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
                     )
                 ),
                 AppPrefences.getAccountNumber(this)
@@ -258,7 +258,7 @@ class MainActivity : BaseActivity(), AnimationListener {
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getWaterUsageRequestModel(
-                        AppPrefences.getAccountNumber(this), mType, mMode
+                        AppPrefences.getAccountNumber(this), mType, mMode,AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             )

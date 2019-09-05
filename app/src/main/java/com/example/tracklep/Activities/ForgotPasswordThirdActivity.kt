@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
@@ -49,7 +50,7 @@ class ForgotPasswordThirdActivity : BaseActivity() {
             val call = apiService.getResetUserPass3(
                 RequestClass.getForgetRequestStepThree(
                     emailId, editPassword.text.toString(),
-                    editConfirmPassword.text.toString()
+                    editConfirmPassword.text.toString(), AppPrefences.getDataBaseInfo(this)!!
                 )
             )
             call.enqueue(object : Callback<ResponseModelClasses.ResetPassStep3Response> {

@@ -65,7 +65,7 @@ class UsageNotificationActivity : BaseActivity() {
                     AppPrefences.getAccountNumber(this),
                     ApiUrls.getJSONRequestBody(
                         RequestClass.getUsageNotificationRequestModel(
-                            AppPrefences.getAccountNumber(this))
+                            AppPrefences.getAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!)
                     )
                 )
             call.enqueue(object : Callback<ArrayList<ResponseModelClasses.GetUsageNotificationResponse>> {
@@ -109,7 +109,7 @@ class UsageNotificationActivity : BaseActivity() {
                         editDailyLimit.text.toString(),
                         editMeterNumber.text.toString(),
                         AppPrefences.getAccountNumber(this),
-                        unit
+                        unit,AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             )

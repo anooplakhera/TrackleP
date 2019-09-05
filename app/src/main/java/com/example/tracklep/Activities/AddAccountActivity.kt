@@ -73,7 +73,7 @@ class AddAccountActivity : BaseActivity() {
                 RequestClass.getAddAccountRequestModel(
                     editUtilAccountNo.text.toString(),
                     editPostalCode.text.toString(),
-                    editMeterNumberValue.text.toString()
+                    editMeterNumberValue.text.toString(),AppPrefences.getDataBaseInfo(this)!!
                 )
             )
             call.enqueue(object : Callback<ResponseModelClasses.AddAccount> {

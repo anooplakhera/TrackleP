@@ -16,10 +16,12 @@ class SplashActivity : BaseActivity() {
         hideSystemUI()
 
         Handler().postDelayed(Runnable {
-            if (AppPrefences.getLogin(this)!!) {
+
+            if (AppPrefences.getRememberMe(this)!!) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
+                AppPrefences.clearAll(this)
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }

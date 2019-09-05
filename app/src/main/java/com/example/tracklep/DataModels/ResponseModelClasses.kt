@@ -423,6 +423,16 @@ object ResponseModelClasses {
         val SqlQuery: Any,
         val Parameters: Any
     )
+
+
+    //Delete Account
+    data class DataBaseUtils(
+        val ServerName: String = "",
+        val DataBaseName: String = "",
+        val UserName: String = "",
+        val Password: String = ""
+    )
+
 }
 
 
