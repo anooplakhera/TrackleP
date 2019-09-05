@@ -201,7 +201,7 @@ class LoginActivity : BaseActivity() {
                         if (dialogOpen) {
                             openDialog(getString(R.string.select_utility), textView)
                         }
-                        AppLog.printLog("UtilityList Response- ", response.body().toString())
+                        AppLog.printLog("UtilityList Response- ", Gson().toJson(response.body()))
 
                     } catch (e: Exception) {
                         e.printStackTrace()

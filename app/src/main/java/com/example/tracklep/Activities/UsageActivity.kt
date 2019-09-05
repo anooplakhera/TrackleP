@@ -61,6 +61,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 startActivity(Intent(this, UsageNotificationActivity::class.java))
             }
 
+            txtCCF.performClick()
 
             clickPerform()
 
@@ -80,17 +81,21 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
     private fun checkIsAMI() {
         try {
-            if (AppPrefences.getIsAMI(this) == true) {
-                lytBiMonthly.alpha = selectedAlpha
-                lytHourly.visibility = View.GONE
-                lytDaily.visibility = View.GONE
-                lytMonthly.visibility = View.GONE
-                mMode = "B"
+            if (AppPrefences.getIsAMI(this) == null) {
+                getMeterDetailsAMI()
             } else {
-                lytHourly.visibility = View.VISIBLE
-                lytDaily.visibility = View.VISIBLE
-                lytMonthly.visibility = View.VISIBLE
-                resetAlpha()
+                if (AppPrefences.getIsAMI(this) == true) {
+                    lytBiMonthly.alpha = selectedAlpha
+                    lytHourly.visibility = View.GONE
+                    lytDaily.visibility = View.GONE
+                    lytMonthly.visibility = View.GONE
+                    mMode = "B"
+                } else {
+                    lytHourly.visibility = View.VISIBLE
+                    lytDaily.visibility = View.VISIBLE
+                    lytMonthly.visibility = View.VISIBLE
+                    resetAlpha()
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -407,6 +412,53 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    private fun getMeterDetailsAMI() = if (Utils.isConnected(this)) {
+        showDialog()
+        try {
+            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call: Call<ResponseModelClasses.MeterDetails> = apiService.getMeterDetails(
+                getHeader(),
+                ApiUrls.getJSONRequestBody(
+                    RequestClass.getMeterDetailsRequestModel(
+                        AppPrefences.getAccountNumber(this)
+                    )
+                ),
+                AppPrefences.getAccountNumber(this)
+            )
+            call.enqueue(object : Callback<ResponseModelClasses.MeterDetails> {
+                override fun onResponse(
+                    call: Call<ResponseModelClasses.MeterDetails>,
+                    response: Response<ResponseModelClasses.MeterDetails>
+                ) {
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            UserMeterListData.clearArrayList()
+                            UserMeterListData.addArrayList(response.body()!!.Results.Table)
+                            getWaterUsage()
+                            AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
+                            AppPrefences.setIsAMI(this@UsageActivity, response.body()!!.Results.Table.get(0).IsAMI)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseModelClasses.MeterDetails>, t: Throwable) {
+                    AppLog.printLog("Failure()- ", t.message.toString())
+                    dismissDialog()
+                }
+            })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dismissDialog()
+        }
+    } else {
+        //dismissDialog()
+        showToast(getString(R.string.internet))
     }
 
     private fun getWaterUsage() = if (Utils.isConnected(this)) {

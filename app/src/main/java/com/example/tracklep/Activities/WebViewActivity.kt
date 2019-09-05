@@ -42,10 +42,8 @@ class WebViewActivity : BaseActivity() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 if (contentWebView != null) {
                     contentWebView.visibility = View.GONE
-                    //showLoading()
                     if (newProgress == 100) {
                         contentWebView.visibility = View.VISIBLE
-                      //  hideLoading()
                     }
                 }
             }
