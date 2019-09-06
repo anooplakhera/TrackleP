@@ -36,7 +36,7 @@ class BillingActivity : BaseActivity() {
         getBillingDetails()
         try {
             txtCABtitle.text = getString(R.string.billing)
-            txtCArightTop.visibility = View.VISIBLE
+            txtCArightTop.visibility = View.GONE
             txtCArightTop.text = "View Bill"
             imgCABback.setOnClickListener {
                 finish()
@@ -204,7 +204,7 @@ class BillingActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        txtCArightTop.visibility = View.VISIBLE
+        txtCArightTop.visibility = View.GONE
     }
 
 }

@@ -34,14 +34,30 @@ import retrofit2.Response
 
 class LoginActivity : BaseActivity() {
 
-    var tanentId = ""
+    var tanentId = "0"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        clickPerform()
-        getUtilityList(false, textUtilities)
+        try {
+            clickPerform()
+            getUtilityList(false, textUtilities)
 
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (AppPrefences.getRememberMe(this)!!) {
+            editUserName.setText(AppPrefences.getUserID(this))
+            editUserPass.setText(AppPrefences.getPassword(this))
+            textUtilities.text = AppPrefences.getUtilityName(this)
+            switchBtn.isChecked = true
+        }
     }
 
     private fun validationFields() {
@@ -59,15 +75,18 @@ class LoginActivity : BaseActivity() {
                 showSuccessPopup("Please select Water District/ Agency")
                 !isValid
                 return
-           /* } else if (!switchBtn.isChecked) {
-                showSuccessPopup("Please enable Remember me")
-                !isValid
-                return*/
+                /* } else if (!switchBtn.isChecked) {
+                     showSuccessPopup("Please enable Remember me")
+                     !isValid
+                     return*/
             } else if (isValid) {
-                if (switchBtn.isChecked){
-                    AppPrefences.setRememberMe(this,true)
-                }else{
-                    AppPrefences.setRememberMe(this,false)
+                if (switchBtn.isChecked) {
+                    AppPrefences.setRememberMe(this, true)
+                    AppPrefences.setUserID(this, editUserName.text.toString())
+                    AppPrefences.setPassword(this, editUserPass.text.toString())
+                    AppPrefences.setUtilityName(this, textUtilities.text.toString())
+                } else {
+                    AppPrefences.setRememberMe(this, false)
                 }
                 loginApi()
             }
@@ -144,7 +163,7 @@ class LoginActivity : BaseActivity() {
                 RequestClass.getLoginRequestModel(
                     editUserName.text.toString(),
                     editUserPass.text.toString(),
-                    tanentId,AppPrefences.getDataBaseInfo(this)!!
+                    tanentId, AppPrefences.getDataBaseInfo(this)!!
                 )
             )
             call.enqueue(object : Callback<ResponseModelClasses.LoginResponseModel> {
@@ -174,6 +193,10 @@ class LoginActivity : BaseActivity() {
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                         }
+                        else
+                        {
+                            AppLog.printLog("loginApiErrorResponse: " + response.errorBody())
+                        }
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -198,52 +221,59 @@ class LoginActivity : BaseActivity() {
         showToast(getString(R.string.internet))
     }
 
-    private fun getUtilityList(dialogOpen: Boolean = false, textView: TextView) = if (Utils.isConnected(this)) {
-        showDialog()
-        try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getUtilityList(/*ApiUrls.AuthKey*/)
-            call.enqueue(object : Callback<ResponseModelClasses.UtilityListResponseModel> {
-                override fun onResponse(
-                    call: Call<ResponseModelClasses.UtilityListResponseModel>,
-                    response: Response<ResponseModelClasses.UtilityListResponseModel>
-                ) {
-                    try {
-                        dismissDialog()
-                        if (response.body() != null)
-                            UtilitiesData.clearArrayList()
-                        UtilitiesData.addArrayList(response.body()!!.Results.Table)
-                        if (dialogOpen) {
-                            openDialog(getString(R.string.select_utility), textView)
+    private fun getUtilityList(dialogOpen: Boolean = false, textView: TextView) =
+        if (Utils.isConnected(this)) {
+            showDialog()
+            try {
+                val apiService =
+                    ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+                val call = apiService.getUtilityList(/*ApiUrls.AuthKey*/)
+                call.enqueue(object : Callback<ResponseModelClasses.UtilityListResponseModel> {
+                    override fun onResponse(
+                        call: Call<ResponseModelClasses.UtilityListResponseModel>,
+                        response: Response<ResponseModelClasses.UtilityListResponseModel>
+                    ) {
+                        try {
+                            dismissDialog()
+                            if (response.body() != null)
+                                UtilitiesData.clearArrayList()
+                            UtilitiesData.addArrayList(response.body()!!.Results.Table)
+                            val data = UtilitiesData.getArrayItem(0)
+                            textView.text = data.Name
+                            if (dialogOpen) {
+                                openDialog(getString(R.string.select_utility), textView)
+                            }
+                            AppLog.printLog(
+                                "UtilityList Response- ",
+                                Gson().toJson(response.body())
+                            )
+
+
+                        } catch (e: Exception) {
+                            e.printStackTrace()
                         }
-                        AppLog.printLog("UtilityList Response- ", Gson().toJson(response.body()))
-
-
-                    } catch (e: Exception) {
-                        e.printStackTrace()
                     }
-                }
 
-                override fun onFailure(
-                    call: Call<ResponseModelClasses.UtilityListResponseModel>,
-                    t: Throwable
-                ) {
-                    try {
-                        AppLog.printLog("Failure()- ", t.message.toString())
-                        dismissDialog()
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+                    override fun onFailure(
+                        call: Call<ResponseModelClasses.UtilityListResponseModel>,
+                        t: Throwable
+                    ) {
+                        try {
+                            AppLog.printLog("Failure()- ", t.message.toString())
+                            dismissDialog()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
-                }
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
+                })
+            } catch (e: Exception) {
+                e.printStackTrace()
+                dismissDialog()
+            }
+        } else {
             dismissDialog()
+            showToast(getString(R.string.internet))
         }
-    } else {
-        dismissDialog()
-        showToast(getString(R.string.internet))
-    }
 
     private fun openDialog(title: String, textView: TextView) {
         try {
@@ -272,7 +302,12 @@ class LoginActivity : BaseActivity() {
                 textView.setTextColor(resources.getColor(R.color.colorBlack))
                 AppPrefences.setDataBaseInfo(
                     this@LoginActivity,
-                    ResponseModelClasses.DataBaseUtils(data.ServerName, data.DataBaseName, data.UserName, data.Password)
+                    ResponseModelClasses.DataBaseUtils(
+                        data.ServerName,
+                        data.DataBaseName,
+                        data.UserName,
+                        data.Password
+                    )
                 )
                 dialog.dismiss()
             }

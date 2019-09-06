@@ -13,8 +13,8 @@ object ApiUrls {
 
 
     /*-----------------Api+Urls----------------*/
-    const val BASE_URL: String = "https://aquatraxapi-dev.azurewebsites.net/"
-    const val BASE_URL_PROD: String = "https://aquatraxportalprod-api.azurewebsites.net/"
+    //const val BASE_URL: String = "https://aquatraxapi-dev.azurewebsites.net/"
+    const val BASE_URL: String = "https://aquatraxportalprod-api.azurewebsites.net/"
     //    const val BASE_URL: String = "https://aquatraxapi.azurewebsites.net/"
     const val BASE_PATH: String = "api/customer/"
     const val LOGIN = "token";

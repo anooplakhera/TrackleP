@@ -1,5 +1,6 @@
 package com.example.tracklep.Activities
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
+import com.example.tracklep.Utils.AppConstants
 import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
@@ -32,6 +34,8 @@ class AddAccountActivity : BaseActivity() {
         clickPerform()
 
     }
+
+
 
     private fun validationFields(): Boolean {
         var isValid = true
@@ -67,13 +71,14 @@ class AddAccountActivity : BaseActivity() {
         showDialog()
 
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.AddAccount> = apiService.setAddAccount(
                 getHeader(),
                 RequestClass.getAddAccountRequestModel(
                     editUtilAccountNo.text.toString(),
                     editPostalCode.text.toString(),
-                    editMeterNumberValue.text.toString(),AppPrefences.getDataBaseInfo(this)!!
+                    editMeterNumberValue.text.toString(), AppPrefences.getDataBaseInfo(this)!!
                 )
             )
             call.enqueue(object : Callback<ResponseModelClasses.AddAccount> {
@@ -97,7 +102,17 @@ class AddAccountActivity : BaseActivity() {
                             editPostalCode.text?.clear()
                             editMeterNumberValue.text?.clear()
 
-                            showSuccessPopup(response.body()!!.Message)
+                            var alertDialog = AlertDialog.Builder(this@AddAccountActivity)
+                            alertDialog.setTitle(getString(R.string.app_name))
+                            alertDialog.setMessage(response.body()!!.Message)
+
+                            alertDialog.setPositiveButton("OK") { dialog, which ->
+                                dialog.dismiss()
+                                AppConstants.IsAccountAdded = true
+                                finish()
+                            }
+
+                            alertDialog.show()
 
                         }
                     } catch (e: Exception) {
