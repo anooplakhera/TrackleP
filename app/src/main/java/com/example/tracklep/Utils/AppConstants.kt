@@ -10,5 +10,6 @@ object AppConstants {
     var REMEMBER_USERID = ""
     var REMEMBER_PASSWORD = ""
     var REMEMBER_UTILITY = ""
+    var IsAccountAdded = false
 
 }

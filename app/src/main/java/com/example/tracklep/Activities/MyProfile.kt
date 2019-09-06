@@ -27,10 +27,7 @@ import com.example.tracklep.DataClasses.ProfileListData
 import com.example.tracklep.DataClasses.SecurityQuestionData
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
-import com.example.tracklep.Utils.AppLog
-import com.example.tracklep.Utils.RequestClass
-import com.example.tracklep.Utils.SwipeToDeleteCallback
-import com.example.tracklep.Utils.Utils
+import com.example.tracklep.Utils.*
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
@@ -45,6 +42,8 @@ class MyProfile : BaseActivity() {
     private var custID = ""
     private var sQuesID1 = ""
     private var sQuesID2 = ""
+    private var deleteCommAddAaccountNumber = ""
+    private var positionu = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +70,15 @@ class MyProfile : BaseActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (AppConstants.IsAccountAdded) {
+            AppConstants.IsAccountAdded = false
+            getUserProfile()
+        }
+
     }
 
     private fun clickPerform() {
@@ -107,54 +115,63 @@ class MyProfile : BaseActivity() {
         }
     }
 
-    private fun getSecurityQues(dialogOpen: Boolean = false, txtview: TextView) = if (Utils.isConnected(this)) {
-        showDialog()
-        try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getSecurityQuestion(ApiUrls.getJSONRequestBody(ApiUrls.getBodyMap(AppPrefences.getDataBaseInfo(this)!!)))
-            call.enqueue(object : Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
-                override fun onResponse(
-                    call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
-                    response: Response<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
-                ) {
-                    try {
-                        dismissDialog()
-                        if (response.message() != null)
-                            getUserProfile()
-                        AppLog.printLog("Response- ", response.message().toString())
-                        if (response.body() != null) {
-                            SecurityQuestionData.clearArrayList()
-                            SecurityQuestionData.addArrayList(response.body()!!)
-                            SecurityQuestionData.saveItemInHashMap()
+    private fun getSecurityQues(dialogOpen: Boolean = false, txtview: TextView) =
+        if (Utils.isConnected(this)) {
+            showDialog()
+            try {
+                val apiService =
+                    ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+                val call = apiService.getSecurityQuestion(
+                    ApiUrls.getJSONRequestBody(
+                        ApiUrls.getBodyMap(AppPrefences.getDataBaseInfo(this)!!)
+                    )
+                )
+                call.enqueue(object :
+                    Callback<ArrayList<ResponseModelClasses.SecurityQuestionResponse>> {
+                    override fun onResponse(
+                        call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
+                        response: Response<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>
+                    ) {
+                        try {
+                            dismissDialog()
+                            if (response.message() != null)
+                                getUserProfile()
+                            AppLog.printLog("Response- ", response.message().toString())
+                            if (response.body() != null) {
+                                SecurityQuestionData.clearArrayList()
+                                SecurityQuestionData.addArrayList(response.body()!!)
+                                SecurityQuestionData.saveItemInHashMap()
 
-                            if (dialogOpen) {
-                                openDialog(txtview)
+                                if (dialogOpen) {
+                                    openDialog(txtview)
+                                }
                             }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
                         }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
                     }
-                }
 
-                override fun onFailure(
-                    call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>, t: Throwable
-                ) {
-                    AppLog.printLog("Failure()- ", t.message.toString())
-                    dismissDialog()
-                }
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
-            dismissDialog()
+                    override fun onFailure(
+                        call: Call<ArrayList<ResponseModelClasses.SecurityQuestionResponse>>,
+                        t: Throwable
+                    ) {
+                        AppLog.printLog("Failure()- ", t.message.toString())
+                        dismissDialog()
+                    }
+                })
+            } catch (e: Exception) {
+                e.printStackTrace()
+                dismissDialog()
+            }
+        } else {
+            showToast(getString(R.string.internet))
         }
-    } else {
-        showToast(getString(R.string.internet))
-    }
 
     private fun getUserProfile() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getAccount(
                 getHeader(),
                 AppPrefences.getAccountNumber(this),
@@ -206,7 +223,8 @@ class MyProfile : BaseActivity() {
     private fun getUpdateUserProfile() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getUpdateAccount(
                 getHeader(),
 
@@ -220,7 +238,7 @@ class MyProfile : BaseActivity() {
                         editAns1Value.text.toString(),
                         editAns2Value.text.toString(),
                         sQuesID1,
-                        sQuesID2,AppPrefences.getDataBaseInfo(this)!!
+                        sQuesID2, AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             )
@@ -270,8 +288,10 @@ class MyProfile : BaseActivity() {
             editMobileNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
             editAns1Value.setText(data.HintsAns)
             editAns2Value.setText(data.HintsAns2)
-            txtQues1Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
-            txtQues2Value.text = SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
+            txtQues1Value.text =
+                SecurityQuestionData.getQuestionName(data.SecurityQuestionId.toString())
+            txtQues2Value.text =
+                SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
             txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
             txtCommunicationAddressValue.text = data.CommunicationAddress
             txtCommunicationAddressValue.setTextColor(resources.getColor(R.color.colorBlack))
@@ -285,7 +305,10 @@ class MyProfile : BaseActivity() {
             val dialog = Dialog(this@MyProfile)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_layout)
-            dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(true)
             dialog.show()
@@ -316,7 +339,10 @@ class MyProfile : BaseActivity() {
             val dialog = Dialog(this@MyProfile)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_layout)
-            dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(true)
             dialog.setTitle("Communication Address")
@@ -324,18 +350,30 @@ class MyProfile : BaseActivity() {
             dialog.txtTitleTop.text = title
             dialog.txtTitleTop.textSize = 13f
 
-            val mSwipeItemAdapter = SwipeItemAdapter(ProfileListData.getArrayAddress()) { position ->
-                updateViews(ProfileListData.getArrayItem(position))
-                AppPrefences.setProfileInfo(this@MyProfile, ProfileListData.getArrayItem(position))
-                AppPrefences.setAccountNumber(
-                    this@MyProfile,
-                    ProfileListData.getArrayItem(position).AccountNumber.toString()
+            val mSwipeItemAdapter =
+                SwipeItemAdapter(ProfileListData.getArrayAddress()) { position ->
+                    updateViews(ProfileListData.getArrayItem(position))
+                    AppPrefences.setProfileInfo(
+                        this@MyProfile,
+                        ProfileListData.getArrayItem(position)
+                    )
+                    /*deleteCommAddAaccountNumber =
+                        ProfileListData.getArrayItem(position).AccountNumber.toString()
+                    positionu = position.toString()*/
+                    AppPrefences.setAccountNumber(
+                        this@MyProfile,
+                        ProfileListData.getArrayItem(position).AccountNumber.toString()
+                    )
+                    dialog.dismiss()
+                }
+
+
+            dialog.dialogRecycleView.addItemDecoration(
+                DividerItemDecoration(
+                    this,
+                    DividerItemDecoration.VERTICAL
                 )
-                dialog.dismiss()
-            }
-
-
-            dialog.dialogRecycleView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+            )
             dialog.dialogRecycleView.layoutManager = LinearLayoutManager(this)
             dialog.dialogRecycleView.adapter = mSwipeItemAdapter
 
@@ -343,6 +381,9 @@ class MyProfile : BaseActivity() {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 
                     try {
+                        positionu = viewHolder.adapterPosition.toString()
+                        deleteCommAddAaccountNumber =
+                            ProfileListData.getArrayItem(positionu.toInt()).AccountNumber.toString()
                         var alertDialog = AlertDialog.Builder(this@MyProfile)
                         alertDialog.setTitle(getString(R.string.app_name))
                         alertDialog.setMessage("Are you sure you want to delete communication address?")
@@ -439,16 +480,19 @@ class MyProfile : BaseActivity() {
         if (Utils.isConnected(this)) {
             showDialog()
             try {
-                val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-                val call: Call<ResponseModelClasses.SetDeleteAccountResponseModel> = apiService.getDeleteAccount(
-                    getHeader(),
-                    ApiUrls.getJSONRequestBody(
-                        RequestClass.getDeleteAccountRequestModel(
-                            AppPrefences.getAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
-                        )
-                    ),
-                    AppPrefences.getAccountNumber(this)
-                )
+                val apiService =
+                    ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+                val call: Call<ResponseModelClasses.SetDeleteAccountResponseModel> =
+                    apiService.getDeleteAccount(
+                        getHeader(),
+                        ApiUrls.getJSONRequestBody(
+                            RequestClass.getDeleteAccountRequestModel(
+                                deleteCommAddAaccountNumber, AppPrefences.getDataBaseInfo(this)!!
+                            )
+                        ),
+                        deleteCommAddAaccountNumber
+
+                    )//AppPrefences.getAccountNumber(this)
                 call.enqueue(object : Callback<ResponseModelClasses.SetDeleteAccountResponseModel> {
                     override fun onResponse(
                         call: Call<ResponseModelClasses.SetDeleteAccountResponseModel>,
@@ -458,9 +502,15 @@ class MyProfile : BaseActivity() {
                             dismissDialog()
                             if (response.body() != null) {
 
-                                AppLog.printLog("setDeleteAccountResponse: " + Gson().toJson(response.body()));
+                                AppLog.printLog(
+                                    "setDeleteAccountResponse: " + Gson().toJson(
+                                        response.body()
+                                    )
+                                );
                                 showSuccessPopup(response.body()!!.Message)
                                 isSuccess = !response.body()!!.Status.equals("0")
+                                if (response.body()!!.Status.equals("1"))
+                                    isSuccess = true
                             }
                         } catch (e: Exception) {
                             e.printStackTrace()

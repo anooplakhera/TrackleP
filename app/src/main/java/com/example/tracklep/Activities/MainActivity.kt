@@ -72,7 +72,10 @@ class MainActivity : BaseActivity(), AnimationListener {
         try {
             lytCompanyWebsite.setOnClickListener {
                 closeDrawer()
-                startWebActivity("Company Website", AppPrefences.getLoginUserInfo(this)!!.CompanyWebsite)
+                startWebActivity(
+                    "Company Website",
+                    AppPrefences.getLoginUserInfo(this)!!.CompanyWebsite
+                )
             }
             lytPayLocation.setOnClickListener {
                 var alertDialog = AlertDialog.Builder(this)
@@ -98,7 +101,10 @@ class MainActivity : BaseActivity(), AnimationListener {
             }
             lytPrivacyPolicy.setOnClickListener {
                 closeDrawer()
-                startWebActivity("Privacy Policy", AppPrefences.getLoginUserInfo(this)!!.PrivacyPolicy)
+                startWebActivity(
+                    "Privacy Policy",
+                    AppPrefences.getLoginUserInfo(this)!!.PrivacyPolicy
+                )
             }
             lytLogout.setOnClickListener {
                 userLogOut()
@@ -193,7 +199,12 @@ class MainActivity : BaseActivity(), AnimationListener {
 
         alertDialog.setPositiveButton("Yes") { dialog, which ->
             dialog.dismiss()
-            AppPrefences.clearAll(this)
+            //AppPrefences.clearAll(this)
+
+            AppPrefences.setAccountNumber(this, "")
+            AppPrefences.setIsAMI(this, false)
+            AppPrefences.setUtilityAccountNumber(this, "")
+
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
@@ -205,12 +216,13 @@ class MainActivity : BaseActivity(), AnimationListener {
     private fun getMeterDetailsAMI() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.MeterDetails> = apiService.getMeterDetails(
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getMeterDetailsRequestModel(
-                        AppPrefences.getAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
+                        AppPrefences.getAccountNumber(this), AppPrefences.getDataBaseInfo(this)!!
                     )
                 ),
                 AppPrefences.getAccountNumber(this)
@@ -227,14 +239,20 @@ class MainActivity : BaseActivity(), AnimationListener {
                             UserMeterListData.addArrayList(response.body()!!.Results.Table)
                             getWaterUsage()
                             AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
-                            AppPrefences.setIsAMI(this@MainActivity, response.body()!!.Results.Table.get(0).IsAMI)
+                            AppPrefences.setIsAMI(
+                                this@MainActivity,
+                                response.body()!!.Results.Table.get(0).IsAMI
+                            )
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseModelClasses.MeterDetails>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.MeterDetails>,
+                    t: Throwable
+                ) {
                     AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }
@@ -253,12 +271,16 @@ class MainActivity : BaseActivity(), AnimationListener {
     private fun getWaterUsage() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.WaterUsages> = apiService.getWaterUsages(
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getWaterUsageRequestModel(
-                        AppPrefences.getAccountNumber(this), mType, mMode,AppPrefences.getDataBaseInfo(this)!!
+                        AppPrefences.getAccountNumber(this),
+                        mType,
+                        mMode,
+                        AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             )
@@ -272,7 +294,8 @@ class MainActivity : BaseActivity(), AnimationListener {
                         if (response.body() != null) {
                             AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
                             if (response.body()!!.Results.Table != null && response.body()!!.Results.Table.size > 0) {
-                                var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
+                                var data =
+                                    ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
                                 data.addAll(response.body()!!.Results.Table)
                                 data.reverse()
                                 WaterUsageData.clearArrayList()

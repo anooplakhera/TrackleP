@@ -33,6 +33,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import android.content.Intent
 import android.net.Uri
+import com.example.tracklep.DataClasses.UtilitiesData
 
 
 class ConnectWithUtilityActivity : BaseActivity() {
@@ -46,9 +47,11 @@ class ConnectWithUtilityActivity : BaseActivity() {
             imgCABback.setOnClickListener {
                 finish()
             }
+
             txtContactUsPhoneValue.setOnClickListener {
                 try {
-                    val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtContactUsPhoneValue.text))
+                    val intent =
+                        Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtContactUsPhoneValue.text))
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -56,7 +59,8 @@ class ConnectWithUtilityActivity : BaseActivity() {
             }
             txtEmergencyNumberValue.setOnClickListener {
                 try {
-                    val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtEmergencyNumberValue.text))
+                    val intent =
+                        Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtEmergencyNumberValue.text))
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -93,51 +97,61 @@ class ConnectWithUtilityActivity : BaseActivity() {
         }
     }
 
-    private fun getConnectMeDetails(dialogOpen: Boolean = false, textView: TextView) = if (Utils.isConnected(this)) {
-        showDialog()
-        try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call: Call<ResponseModelClasses.ConnectWithUtilityResponse> = apiService.getConnectWithUtility(
-                getHeader(),
-                AppPrefences.getAccountNumber(this),
-                ApiUrls.getJSONRequestBody(
-                    RequestClass.getConnectWithUtilityRequestModel(AppPrefences.getDataBaseInfo(this)!!)
-                )
-            )
-            call.enqueue(object : Callback<ResponseModelClasses.ConnectWithUtilityResponse> {
-                override fun onResponse(
-                    call: Call<ResponseModelClasses.ConnectWithUtilityResponse>,
-                    response: Response<ResponseModelClasses.ConnectWithUtilityResponse>
-                ) {
-                    try {
-                        dismissDialog()
-                        if (response.body() != null) {
-                            ConnectMeData.clearArrayList()
-                            ConnectMeData.addArrayList(response.body()!!.Results.Table1)
-                            AppLog.printLog("getConnectMeDetails: " + Gson().toJson(response.body()));
-                            updateViews(/*response.body()!!.Results.Table3, */response.body()!!.Results.Table)
+    private fun getConnectMeDetails(dialogOpen: Boolean = false, textView: TextView) =
+        if (Utils.isConnected(this)) {
+            showDialog()
+            try {
+                val apiService =
+                    ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+                val call: Call<ResponseModelClasses.ConnectWithUtilityResponse> =
+                    apiService.getConnectWithUtility(
+                        getHeader(),
+                        AppPrefences.getAccountNumber(this),
+                        ApiUrls.getJSONRequestBody(
+                            RequestClass.getConnectWithUtilityRequestModel(
+                                AppPrefences.getDataBaseInfo(
+                                    this
+                                )!!
+                            )
+                        )
+                    )
+                call.enqueue(object : Callback<ResponseModelClasses.ConnectWithUtilityResponse> {
+                    override fun onResponse(
+                        call: Call<ResponseModelClasses.ConnectWithUtilityResponse>,
+                        response: Response<ResponseModelClasses.ConnectWithUtilityResponse>
+                    ) {
+                        try {
+                            dismissDialog()
+                            if (response.body() != null) {
+                                ConnectMeData.clearArrayList()
+                                ConnectMeData.addArrayList(response.body()!!.Results.Table1)
+                                AppLog.printLog("getConnectMeDetails: " + Gson().toJson(response.body()));
+                                updateViews(/*response.body()!!.Results.Table3, */response.body()!!.Results.Table)
 
-                            if (dialogOpen) {
-                                openListDialog("Select Report Type", textView)
+                                if (dialogOpen) {
+                                    openListDialog("Select Report Type", textView)
+                                }
                             }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
                         }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
                     }
-                }
 
-                override fun onFailure(call: Call<ResponseModelClasses.ConnectWithUtilityResponse>, t: Throwable) {
-                    AppLog.printLog("Failure()- ", t.message.toString())
-                    dismissDialog()
-                }
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
-            dismissDialog()
+                    override fun onFailure(
+                        call: Call<ResponseModelClasses.ConnectWithUtilityResponse>,
+                        t: Throwable
+                    ) {
+                        AppLog.printLog("Failure()- ", t.message.toString())
+                        dismissDialog()
+                    }
+                })
+            } catch (e: Exception) {
+                e.printStackTrace()
+                dismissDialog()
+            }
+        } else {
+            showToast(getString(R.string.internet))
         }
-    } else {
-        showToast(getString(R.string.internet))
-    }
 
     fun updateViews(
         /*data: List<ResponseModelClasses.ConnectWithUtilityResponse.Results1.TableThree>,*/
@@ -211,7 +225,10 @@ class ConnectWithUtilityActivity : BaseActivity() {
         val dialog = Dialog(this@ConnectWithUtilityActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_layout)
-        dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(true)
         dialog.show()
@@ -235,7 +252,8 @@ class ConnectWithUtilityActivity : BaseActivity() {
     private fun setConnectMe() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.setConnectMe(
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
@@ -244,7 +262,8 @@ class ConnectWithUtilityActivity : BaseActivity() {
                         AppConstants.SelectedTopicID,
                         editSubjectValue.text.toString(),
                         editMessageValue.text.toString(),
-                        AppPrefences.getUtilityAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
+                        AppPrefences.getUtilityAccountNumber(this),
+                        AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             )

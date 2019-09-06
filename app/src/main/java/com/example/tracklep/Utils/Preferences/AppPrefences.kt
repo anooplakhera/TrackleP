@@ -26,6 +26,10 @@ object AppPrefences {
     private val RememberMe = "RememberMe"
     private val MyProfileDetails = "MyProfileDetails"
 
+    private val UtilityName = "UtilityName"
+    private val UserID = "UserID"
+    private val Password = "Password"
+
     fun clearAll(ctx: Context) {
         val prefs = ctx.getSharedPreferences(
             PREFS_FILE_NAME, Context.MODE_PRIVATE
@@ -320,6 +324,50 @@ object AppPrefences {
         val obj = gson.fromJson(json, object1::class.java).javaClass
         return obj
 //        return gson.fromJson<Any>(json, `object1`.javaClass)
+    }
+
+    fun getUtilityName(ctx: Context): String {
+        return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+            .getString(UtilityName, "")
+    }
+
+    fun setUtilityName(ctx: Context, data: String) {
+        val prefs = ctx.getSharedPreferences(
+            PREFS_FILE_NAME, Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString(UtilityName, data)
+        editor.commit()
+    }
+
+
+
+    fun getUserID(ctx: Context): String {
+        return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+            .getString(UserID, "")
+    }
+
+    fun setUserID(ctx: Context, data: String) {
+        val prefs = ctx.getSharedPreferences(
+            PREFS_FILE_NAME, Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString(UserID, data)
+        editor.commit()
+    }
+
+    fun getPassword(ctx: Context): String {
+        return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+            .getString(Password, "")
+    }
+
+    fun setPassword(ctx: Context, data: String) {
+        val prefs = ctx.getSharedPreferences(
+            PREFS_FILE_NAME, Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString(Password, data)
+        editor.commit()
     }
 
 }

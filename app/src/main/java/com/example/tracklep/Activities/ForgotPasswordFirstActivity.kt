@@ -73,9 +73,14 @@ class ForgotPasswordFirstActivity : BaseActivity() {
     private fun getUserEmail() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getResetUserPass1(RequestClass.getForgetRequestStepOne(editEmailF1.text.toString(),
-                AppPrefences.getDataBaseInfo(this)!!))
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call = apiService.getResetUserPass1(
+                RequestClass.getForgetRequestStepOne(
+                    editEmailF1.text.toString(),
+                    AppPrefences.getDataBaseInfo(this)!!
+                )
+            )
             call.enqueue(object : Callback<ResponseModelClasses.ResetPassStep1Response> {
                 override fun onResponse(
                     call: Call<ResponseModelClasses.ResetPassStep1Response>,
@@ -87,11 +92,17 @@ class ForgotPasswordFirstActivity : BaseActivity() {
                             if (response.body()!!.Table[0].Status != null && response.body()!!.Table[0].Status == "0") {
                                 showSuccessPopup(response.body()!!.Table[0].Message)
                             } else {
-                                AppLog.printLog("ForgetStep1reponse ", Gson().toJson(response.body()!!))
+                                AppLog.printLog(
+                                    "ForgetStep1reponse ",
+                                    Gson().toJson(response.body()!!)
+                                )
                                 ResetPassSecurityQuestionData.clearArrayList()
                                 ResetPassSecurityQuestionData.addArrayList(response.body()!!.Table)
                                 val intent =
-                                    Intent(this@ForgotPasswordFirstActivity, ForgotPasswordSecondActivity::class.java)
+                                    Intent(
+                                        this@ForgotPasswordFirstActivity,
+                                        ForgotPasswordSecondActivity::class.java
+                                    )
                                 intent.putExtra(ApiUrls.EmailID, editEmailF1.text.toString())
                                 startActivity(intent)
                             }
@@ -120,7 +131,10 @@ class ForgotPasswordFirstActivity : BaseActivity() {
             val dialog = Dialog(this@ForgotPasswordFirstActivity)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setContentView(R.layout.dialog_layout)
-            dialog.window!!.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            dialog.window!!.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(true)
             dialog.show()
@@ -136,6 +150,15 @@ class ForgotPasswordFirstActivity : BaseActivity() {
                 val data = UtilitiesData.getArrayItem(position)
                 textView.text = data.Name
                 textView.setTextColor(resources.getColor(R.color.colorBlack))
+                AppPrefences.setDataBaseInfo(
+                    this@ForgotPasswordFirstActivity,
+                    ResponseModelClasses.DataBaseUtils(
+                        data.ServerName,
+                        data.DataBaseName,
+                        data.UserName,
+                        data.Password
+                    )
+                )
                 dialog.dismiss()
             }
             dialog.dialogRecycleView.adapter = mAdapter
@@ -145,49 +168,51 @@ class ForgotPasswordFirstActivity : BaseActivity() {
 
     }
 
-    private fun getUtilityList(dialogOpen: Boolean = false, textView: TextView) = if (Utils.isConnected(this)) {
-        showDialog()
-        try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
-            val call = apiService.getUtilityList(/*ApiUrls.AuthKey*/)
-            call.enqueue(object : Callback<ResponseModelClasses.UtilityListResponseModel> {
-                override fun onResponse(
-                    call: Call<ResponseModelClasses.UtilityListResponseModel>,
-                    response: Response<ResponseModelClasses.UtilityListResponseModel>
-                ) {
-                    try {
-                        dismissDialog()
-                        if (response.body() != null)
-                            UtilitiesData.clearArrayList()
-                        UtilitiesData.addArrayList(response.body()!!.Results.Table)
-                        if (dialogOpen) {
-                            openDialog(getString(R.string.select_utility), textView)
+    private fun getUtilityList(dialogOpen: Boolean = false, textView: TextView) =
+        if (Utils.isConnected(this)) {
+            showDialog()
+            try {
+                val apiService =
+                    ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+                val call = apiService.getUtilityList(/*ApiUrls.AuthKey*/)
+                call.enqueue(object : Callback<ResponseModelClasses.UtilityListResponseModel> {
+                    override fun onResponse(
+                        call: Call<ResponseModelClasses.UtilityListResponseModel>,
+                        response: Response<ResponseModelClasses.UtilityListResponseModel>
+                    ) {
+                        try {
+                            dismissDialog()
+                            if (response.body() != null)
+                                UtilitiesData.clearArrayList()
+                            UtilitiesData.addArrayList(response.body()!!.Results.Table)
+                            if (dialogOpen) {
+                                openDialog(getString(R.string.select_utility), textView)
+                            }
+                            AppLog.printLog("UtilityList Response- ", response.body().toString())
+
+                        } catch (e: Exception) {
+                            e.printStackTrace()
                         }
-                        AppLog.printLog("UtilityList Response- ", response.body().toString())
-
-                    } catch (e: Exception) {
-                        e.printStackTrace()
                     }
-                }
 
-                override fun onFailure(
-                    call: Call<ResponseModelClasses.UtilityListResponseModel>,
-                    t: Throwable
-                ) {
-                    try {
-                        AppLog.printLog("Failure()- ", t.message.toString())
-                        dismissDialog()
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+                    override fun onFailure(
+                        call: Call<ResponseModelClasses.UtilityListResponseModel>,
+                        t: Throwable
+                    ) {
+                        try {
+                            AppLog.printLog("Failure()- ", t.message.toString())
+                            dismissDialog()
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
-                }
-            })
-        } catch (e: Exception) {
-            e.printStackTrace()
+                })
+            } catch (e: Exception) {
+                e.printStackTrace()
+                dismissDialog()
+            }
+        } else {
             dismissDialog()
+            showToast(getString(R.string.internet))
         }
-    } else {
-        dismissDialog()
-        showToast(getString(R.string.internet))
-    }
 }
