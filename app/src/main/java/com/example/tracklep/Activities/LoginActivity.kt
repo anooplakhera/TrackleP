@@ -53,9 +53,9 @@ class LoginActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         if (AppPrefences.getRememberMe(this)!!) {
-            editUserName.setText(AppPrefences.getUserID(this))
-            editUserPass.setText(AppPrefences.getPassword(this))
-            textUtilities.text = AppPrefences.getUtilityName(this)
+            editUserName.setText(AppPrefences!!.getUserID(this))
+            editUserPass.setText(AppPrefences!!.getPassword(this))
+            textUtilities.text = AppPrefences!!.getUtilityName(this)
             switchBtn.isChecked = true
         }
     }
@@ -81,14 +81,10 @@ class LoginActivity : BaseActivity() {
                      return*/
             } else if (isValid) {
                 if (switchBtn.isChecked) {
-                    AppPrefences.setRememberMe(this, true)
-                    AppPrefences.setUserID(this, editUserName.text.toString())
-                    AppPrefences.setPassword(this, editUserPass.text.toString())
-                    AppPrefences.setUtilityName(this, textUtilities.text.toString())
+                    loginApi(true)
                 } else {
-                    AppPrefences.setRememberMe(this, false)
+                    loginApi(false)
                 }
-                loginApi()
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -155,7 +151,7 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private fun loginApi() = if (Utils.isConnected(this)) {
+    private fun loginApi(isChecked: Boolean) = if (Utils.isConnected(this)) {
         showDialog()
         try {
             val apiService = ApiClient.getClient(ApiUrls.BASE_URL).create(ApiInterface::class.java)
@@ -175,26 +171,26 @@ class LoginActivity : BaseActivity() {
                         dismissDialog()
                         if (response.body() != null) {
 
-                            var loginResponseModel: ResponseModelClasses.LoginResponseModel? =
-                                response.body()
+                            var loginResponseModel: ResponseModelClasses.LoginResponseModel? = response.body()
                             AppPrefences.setLoginUserInfo(this@LoginActivity, loginResponseModel)
-                            AppPrefences.setAccountNumber(
-                                this@LoginActivity,
-                                loginResponseModel!!.AccountNumber
-                            )
-                            AppPrefences.setUtilityAccountNumber(
-                                this@LoginActivity,
-                                loginResponseModel!!.UtilityAccountNumber
-                            )
+                            AppPrefences.setAccountNumber(this@LoginActivity, loginResponseModel!!.AccountNumber)
+                            AppPrefences.setUtilityAccountNumber(this@LoginActivity, loginResponseModel!!.UtilityAccountNumber)
+
                             AppLog.printLog("loginApiResponse: " + Gson().toJson(response.body()));
-                            AppLog.printLog(("Login Name " + AppPrefences.getLoginUserInfo(this@LoginActivity)!!.Name))
                             AppPrefences.setLogin(this@LoginActivity, true)
+
+                            if (isChecked) {
+                                AppPrefences.setRememberMe(this@LoginActivity, true)
+                                AppPrefences.setUserID(this@LoginActivity, editUserName.text.toString())
+                                AppPrefences.setPassword(this@LoginActivity, editUserPass.text.toString())
+                                AppPrefences.setUtilityName(this@LoginActivity, textUtilities.text.toString())
+                            } else {
+                                AppPrefences.setRememberMe(this@LoginActivity, false)
+                            }
 
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
-                        }
-                        else
-                        {
+                        } else {
                             AppLog.printLog("loginApiErrorResponse: " + response.errorBody())
                         }
                     } catch (e: Exception) {
@@ -240,6 +236,16 @@ class LoginActivity : BaseActivity() {
                             UtilitiesData.addArrayList(response.body()!!.Results.Table)
                             val data = UtilitiesData.getArrayItem(0)
                             textView.text = data.Name
+                            textView.setTextColor(resources.getColor(R.color.colorBlack))
+                            AppPrefences.setDataBaseInfo(
+                                this@LoginActivity,
+                                ResponseModelClasses.DataBaseUtils(
+                                    data.ServerName,
+                                    data.DataBaseName,
+                                    data.UserName,
+                                    data.Password
+                                )
+                            )
                             if (dialogOpen) {
                                 openDialog(getString(R.string.select_utility), textView)
                             }
