@@ -11,7 +11,6 @@ import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
 import com.example.tracklep.DataModels.ResponseModelClasses
 import com.example.tracklep.R
-import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.RequestClass
 import com.example.tracklep.Utils.Utils
 import com.google.gson.Gson

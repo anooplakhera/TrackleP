@@ -38,7 +38,6 @@ object ApiUrls {
     const val AuthKey =
         "Bearer KQut6fhk1BLmO8eVIaMteTcljOes4CfuB2QiuqDvp4Gmoy9Yk_k-umomjcq_IndzuyyMTFm5gVLAcWClmJrdks3Uvhwqg-SYNH74AzVpjYMcgdY4WDIdo-EGHktAYrF70KjUzxeWXLVxeQVs2prmeNWZKlYm73DI16ls4dwoAMBVij4hISTcqCnWat9Ou3-8jRt_TWLCQAG7K6Iq_0yAoVaa1AF6sOgBf-wBB8OMx6MtnAdgzIUY4iLnA2iy4EvGdVmmL4LpHmpL92GxJi2BAL8vn3wAzUhhxu1mPRsk6PacOT5oJQq3eWhM-ZyYGLv3V_xnkfBBnkM1cM2RLFeJ6kYY7Jh1sb1mQ0F-3UurErsA9Y95HvEGDJo7kg_o2ZzivnQhbIiZqX8gbmsiWI_d-DjSnWPHO_RtlpIAcM55r_XCHjlKMcAR-TaI_9nhpKmAWi0DyF6ySBK0RT9_OA8J-w";
 
-
     /*---------------Params-----------------*/
     /*ResetPass*/
     const val UserName = "UserName"
@@ -85,19 +84,6 @@ object ApiUrls {
 //    3-UserName
 //    4-Password
 
-    var DataSource_value = "aquatraxserver.database.windows.net"
-    var Database_value = "AQUATRAXDEV"
-    var DBUserName_value = "aquatrax@aquatraxserver"
-    var DBPassword_value = "newaqt@123"
-
-
-
-
-//    var DataSource_value = TrackleApp.appContext?.let { AppPrefences.getDataBaseInfo(it) }!!.ServerName
-//    var Database_value = TrackleApp.appContext?.let { AppPrefences.getDataBaseInfo(it) }!!.DataBaseName
-//    var DBUserName_value = TrackleApp.appContext?.let { AppPrefences.getDataBaseInfo(it) }!!.UserName
-//    var DBPassword_value = TrackleApp.appContext?.let { AppPrefences.getDataBaseInfo(it) }!!.Password
-
 //    const val DataSource_value = "aquatraxserver.database.windows.net"
 //    const val Database_value = "AQUATRAXDEV"
 //    const val DBUserName_value = "aquatrax@aquatraxserver"
@@ -112,10 +98,6 @@ object ApiUrls {
 
     fun getBodyMap(data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
         var bMap = HashMap<String, String>()
-//        bMap.put(DataSource, DataSource_value)
-//        bMap.put(Database, Database_value)
-//        bMap.put(DBUserName, DBUserName_value)
-//        bMap.put(DBPassword, DBPassword_value)
         bMap.put(DataSource, data.ServerName)
         bMap.put(Database, data.DataBaseName)
         bMap.put(DBUserName, data.UserName)
@@ -128,14 +110,12 @@ object ApiUrls {
         val jsonObject = JSONObject()
         if (stringHashMap != null && stringHashMap.size > 0) {
             try {
-
                 for ((key, value) in stringHashMap) {
                     jsonObject.put(key, value)
                 }
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
-
         }
         return RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
     }
