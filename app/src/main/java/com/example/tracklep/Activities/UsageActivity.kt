@@ -443,6 +443,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                             getWaterUsage()
                             AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
                             AppPrefences.setIsAMI(this@UsageActivity, response.body()!!.Results.Table.get(0).IsAMI)
+                            checkIsAMI()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
