@@ -17,11 +17,11 @@ class SplashActivity : BaseActivity() {
 
         Handler().postDelayed(Runnable {
 
-            if (AppPrefences.getRememberMe(this)!!) {
+            if (AppPrefences.getLogin(this)!! && AppPrefences.getRememberMe(this)!!) {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
-                AppPrefences.clearAll(this)
+//                AppPrefences.clearAll(this)
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }

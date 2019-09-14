@@ -19,13 +19,18 @@ public class MyBarDataSet extends BarDataSet {
     @Override
     public int getColor(int index) throws IndexOutOfBoundsException, NullPointerException {
 
-        if (getEntryForIndex(index).getY() <= allowValue.get(index).getCount()) // less than 95 green
-//        if (getEntryForIndex(index).getY() <= 10.0f) // less than 95 green
-            return mColors.get(0);
-        else // greater or equal than 100 red
-            return mColors.get(1);
+        int color = 0;
+        try {
+            if (getEntryForIndex(index).getY() <= allowValue.get(index).getCount()) // less than 95 green
+                //        if (getEntryForIndex(index).getY() <= 10.0f) // less than 95 green
+                color = mColors.get(0);
+            else // greater or equal than 100 red
+                color = mColors.get(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-
+        return color;
     }
 
 }

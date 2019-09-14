@@ -246,7 +246,7 @@
                 <!--Graph Layout-->
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/dp_10">
                     
                     <com.example.tracklep.Widgets.VerticalTextView
@@ -260,7 +260,7 @@
                     <com.github.mikephil.charting.charts.BarChart
                         android:id="@+id/chartUsage"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="350dp"
                         android:layout_marginLeft="@dimen/dp_22"
                         android:paddingBottom="@dimen/dp_10"/>
                 

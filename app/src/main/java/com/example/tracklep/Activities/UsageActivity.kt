@@ -61,7 +61,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 startActivity(Intent(this, UsageNotificationActivity::class.java))
             }
 
-            txtCCF.performClick()
 
             clickPerform()
 
@@ -70,6 +69,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             getWaterUsage()
 
             txtUsageChartDesc.setText(R.string.usage_ccf)
+            txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
 
             setupSpinner()
 
@@ -113,7 +113,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 checkIsAMI()
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_ccf)
-                txtusage_disclaimer.setText(getString(R.string.usage_disclaimer))
+                txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
 
             }
 
@@ -126,7 +126,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 checkIsAMI()
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_gallon)
-                txtusage_disclaimer.setText(getString(R.string.usage_disclaimer))
+                txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
             }
 
             txtDollar.setOnClickListener {
@@ -138,7 +138,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 checkIsAMI()
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_dollar)
-                txtusage_disclaimer.setText(getString(R.string.u_dollar_disclaimer))
+                txtusage_disclaimer.text = getString(R.string.u_dollar_disclaimer)
 
             }
 
@@ -425,7 +425,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getMeterDetailsRequestModel(
-                        AppPrefences.getAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
+                        AppPrefences.getAccountNumber(this), AppPrefences.getDataBaseInfo(this)!!
                     )
                 ),
                 AppPrefences.getAccountNumber(this)
@@ -443,6 +443,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                             getWaterUsage()
                             AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
                             AppPrefences.setIsAMI(this@UsageActivity, response.body()!!.Results.Table.get(0).IsAMI)
+                            checkIsAMI()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -473,7 +474,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getWaterUsageRequestModel(
-                        AppPrefences.getAccountNumber(this), mType, mMode,AppPrefences.getDataBaseInfo(this)!!
+                        AppPrefences.getAccountNumber(this), mType, mMode, AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             )

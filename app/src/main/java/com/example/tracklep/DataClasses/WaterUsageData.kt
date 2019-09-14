@@ -76,8 +76,8 @@ object WaterUsageData {
             for (i in 0 until getCount()) {
                 array.add(
                     ResponseModelClasses.BarChart(
-                        mArrayList!!.get(i).AllocationValue.toFloat(),
-                        mArrayList!!.get(i).HIGHEST.toFloat()
+                        mArrayList!![i].AllocationValue.toFloat(),
+                        mArrayList!![i].HIGHEST.toFloat()
                     )
                 )
             }

@@ -60,15 +60,12 @@ interface ApiInterface {
         @Header(ApiUrls.Authorization) auth: String/*, @Header("unit") unit: String*/, @Body bodyMap: RequestBody, @Path("AccountNumber") value: String,@Path("unit") unit1: String
     ): Call<ResponseModelClasses.CompareDataResponse>
 
-
     @FormUrlEncoded
     @POST(ApiUrls.AccountAdd)
     fun setAddAccount(@Header(ApiUrls.Authorization) auth: String, @FieldMap fieldMap: Map<String, String>): Call<ResponseModelClasses.AddAccount>
 
-
     @POST(ApiUrls.UsageNotification)
     fun setUsageNotification(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.UpdateUsageNotification>
-
 
     @POST(ApiUrls.SetConnectMe)
     fun setConnectMe(@Header(ApiUrls.Authorization) Auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.SetConnectMeResponseModel>

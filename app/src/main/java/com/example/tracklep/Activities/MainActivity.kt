@@ -24,7 +24,6 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.navigation_menu_layout.*
 import pl.droidsonroids.gif.AnimationListener
-import pl.droidsonroids.gif.GifDrawable
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -201,9 +200,10 @@ class MainActivity : BaseActivity(), AnimationListener {
             dialog.dismiss()
             //AppPrefences.clearAll(this)
 
-            //AppPrefences.setAccountNumber(this, "")
-            //AppPrefences.setIsAMI(this, false)
-            //AppPrefences.setUtilityAccountNumber(this, "")
+            AppPrefences.setLogin(this, false)
+            AppPrefences.setAccountNumber(this, "")
+            AppPrefences.setIsAMI(this, false)
+            AppPrefences.setUtilityAccountNumber(this, "")
 
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
