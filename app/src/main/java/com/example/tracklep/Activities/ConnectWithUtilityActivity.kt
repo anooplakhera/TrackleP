@@ -1,5 +1,6 @@
 package com.example.tracklep.Activities
 
+import android.Manifest
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -32,7 +33,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.support.v4.app.ActivityCompat
 import com.example.tracklep.DataClasses.UtilitiesData
 
 
@@ -52,6 +55,13 @@ class ConnectWithUtilityActivity : BaseActivity() {
                 try {
                     val intent =
                         Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtContactUsPhoneValue.text))
+                    if (ActivityCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.CALL_PHONE
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        return@setOnClickListener;
+                    }
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -61,6 +71,13 @@ class ConnectWithUtilityActivity : BaseActivity() {
                 try {
                     val intent =
                         Intent(Intent.ACTION_CALL, Uri.parse("tel:" + txtEmergencyNumberValue.text))
+                    if (ActivityCompat.checkSelfPermission(
+                            this,
+                            Manifest.permission.CALL_PHONE
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        return@setOnClickListener;
+                    }
                     startActivity(intent)
                 } catch (e: Exception) {
                     e.printStackTrace()

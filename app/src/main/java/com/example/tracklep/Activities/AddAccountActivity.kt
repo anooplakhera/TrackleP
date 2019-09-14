@@ -36,11 +36,16 @@ class AddAccountActivity : BaseActivity() {
     }
 
 
-
     private fun validationFields(): Boolean {
         var isValid = true
         try {
-            if (editUtilAccountNo.text!!.isEmpty() || editUtilAccountNo.length() < 7) {
+            if (editUtilAccountNo.text!!.isEmpty() &&
+                editMeterNumberValue.text!!.isEmpty() &&
+                editPostalCode.text!!.isEmpty()
+            ) {
+                isValid = false
+                showSuccessPopup("Please enter mandatory details.")
+            } else if (editUtilAccountNo.text!!.isEmpty() || editUtilAccountNo.length() < 7) {
                 showSuccessPopup("Please enter Utility Account Number.")
                 isValid = false
             } else if (editMeterNumberValue.text!!.isEmpty() || editMeterNumberValue.length() < 8) {
@@ -62,7 +67,7 @@ class AddAccountActivity : BaseActivity() {
             if (validationFields())
 
                 addAccountAPI()
-            else showSuccessPopup("Please enter mandatory details.")
+            //else showSuccessPopup("Please enter mandatory details.")
 
         }
     }

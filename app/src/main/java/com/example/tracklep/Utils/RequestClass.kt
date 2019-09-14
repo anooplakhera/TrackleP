@@ -19,7 +19,7 @@ object RequestClass {
         map.put(ApiUrls.UserName, username)
         map.put(ApiUrls.Password, password)
         map.put(ApiUrls.GrantType, ApiUrls.Password.toLowerCase())
-        map.put(ApiUrls.TanentId, tanentId)
+        map.put(ApiUrls.TanentId, "1")
         map.put(ApiUrls.DataSource, data.ServerName)
         map.put(ApiUrls.Database, data.DataBaseName)
         map.put(ApiUrls.DBUserName, data.UserName)

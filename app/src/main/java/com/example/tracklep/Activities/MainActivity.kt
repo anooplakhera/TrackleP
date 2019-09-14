@@ -201,9 +201,9 @@ class MainActivity : BaseActivity(), AnimationListener {
             dialog.dismiss()
             //AppPrefences.clearAll(this)
 
-            AppPrefences.setAccountNumber(this, "")
-            AppPrefences.setIsAMI(this, false)
-            AppPrefences.setUtilityAccountNumber(this, "")
+            //AppPrefences.setAccountNumber(this, "")
+            //AppPrefences.setIsAMI(this, false)
+            //AppPrefences.setUtilityAccountNumber(this, "")
 
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
