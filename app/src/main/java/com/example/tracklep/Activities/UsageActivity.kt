@@ -112,7 +112,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 txtDollar.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
 
                 mType = "W"
-                checkIsAMI()
+                mMode = "H"
+                resetAlpha()
+//                checkIsAMI()
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_ccf)
                 txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
@@ -125,7 +127,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 txtDollar.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
 
                 mType = "G"
-                checkIsAMI()
+                mMode = "H"
+                resetAlpha()
+//                checkIsAMI()
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_gallon)
                 txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
@@ -137,7 +141,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 txtDollar.background = getDrawable(R.drawable.tab_rounded_corner_selected)
 
                 mType = "D"
-                checkIsAMI()
+                mMode = "H"
+                resetAlpha()
+//                checkIsAMI()
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_dollar)
                 txtusage_disclaimer.text = getString(R.string.u_dollar_disclaimer)
@@ -145,9 +151,13 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             }
 
             lytHourly.setOnClickListener {
-                resetAlpha()
+                lytHourly.alpha = selectedAlpha
+                lytDaily.alpha = 1.0f
+                lytMonthly.alpha = 1.0f
+                lytBiMonthly.alpha = 1.0f
+//                resetAlpha()
                 mMode = "H"
-                checkIsAMI()
+//                checkIsAMI()
                 getWaterUsageHourly()
             }
 
@@ -158,7 +168,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 lytBiMonthly.alpha = 1.0f
 
                 mMode = "D"
-                checkIsAMI()
+//                checkIsAMI()
                 getWaterUsage()
             }
 
@@ -169,7 +179,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 lytBiMonthly.alpha = 1.0f
 
                 mMode = "M"
-                checkIsAMI()
+//                checkIsAMI()
                 getWaterUsage()
             }
 
@@ -180,7 +190,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 lytDaily.alpha = 1.0f
 
                 mMode = "B"
-                checkIsAMI()
+//                checkIsAMI()
                 getWaterUsage()
             }
         } catch (e: Exception) {
@@ -300,6 +310,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             l.yEntrySpace = 0f
             l.textSize = 10f
 
+            chartUsage.getLegend().setEnabled(false);   // Hide the legend
             //X-axis
             val xAxis = chartUsage.xAxis
             xAxis.granularity = 1f
@@ -681,7 +692,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     }
 
     private fun resetAlpha() {
-
+        lytHourly.alpha = selectedAlpha
+        lytDaily.alpha = 1.0f
+        lytMonthly.alpha = 1.0f
+        lytBiMonthly.alpha = 1.0f
     }
 
     override fun onNothingSelected() {
