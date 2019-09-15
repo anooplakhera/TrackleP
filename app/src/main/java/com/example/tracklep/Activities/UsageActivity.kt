@@ -43,7 +43,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
     private var selectedAlpha = 0.5f
     private var mType = "W"
-    private var mMode = "D"
+    private var mMode = "H"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +52,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
         try {
             txtCABtitle.text = getString(R.string.track_usage)
-            imgCABadd.visibility = View.VISIBLE
+
 
             imgCABback.setOnClickListener {
                 finish()
@@ -65,8 +65,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             clickPerform()
 
             checkIsAMI()
-
-            getWaterUsage()
 
             txtUsageChartDesc.setText(R.string.usage_ccf)
             txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
@@ -84,17 +82,21 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             if (AppPrefences.getIsAMI(this) == null) {
                 getMeterDetailsAMI()
             } else {
-                if (AppPrefences.getIsAMI(this) == true) {
+                if (AppPrefences.getIsAMI(this) == false) {
                     lytBiMonthly.alpha = selectedAlpha
                     lytHourly.visibility = View.GONE
                     lytDaily.visibility = View.GONE
                     lytMonthly.visibility = View.GONE
                     mMode = "B"
+                    imgCABadd.visibility = View.GONE
+                    getWaterUsage()
                 } else {
                     lytHourly.visibility = View.VISIBLE
                     lytDaily.visibility = View.VISIBLE
                     lytMonthly.visibility = View.VISIBLE
-                    resetAlpha()
+                    getWaterUsageHourly()
+                    imgCABadd.visibility = View.VISIBLE
+                    //resetAlpha()
                 }
             }
         } catch (e: Exception) {
@@ -144,6 +146,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
             lytHourly.setOnClickListener {
                 resetAlpha()
+                mMode = "H"
+                checkIsAMI()
+                getWaterUsageHourly()
             }
 
             lytDaily.setOnClickListener {
@@ -151,6 +156,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 lytHourly.alpha = 1.0f
                 lytMonthly.alpha = 1.0f
                 lytBiMonthly.alpha = 1.0f
+
+                mMode = "D"
+                checkIsAMI()
+                getWaterUsage()
             }
 
             lytMonthly.setOnClickListener {
@@ -158,6 +167,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 lytHourly.alpha = 1.0f
                 lytDaily.alpha = 1.0f
                 lytBiMonthly.alpha = 1.0f
+
+                mMode = "M"
+                checkIsAMI()
+                getWaterUsage()
             }
 
             lytBiMonthly.setOnClickListener {
@@ -165,6 +178,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 lytHourly.alpha = 1.0f
                 lytMonthly.alpha = 1.0f
                 lytDaily.alpha = 1.0f
+
+                mMode = "B"
+                checkIsAMI()
+                getWaterUsage()
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -197,12 +214,24 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             val barSpace = 0f
             val groupSpace = 0.4f
 
-            txtHighestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST
-            txtLowestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.LOWEST
-            txtSoFartThisMonthValue.text = WaterUsageData.mArrayList?.get(0)?.TotalValue
-            txtProjectedUsageValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
+            if (mMode == "H") {
+                txtHighestThisPeriodValue.text = WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST
+                txtLowestThisPeriodValue.text = WaterUsageData.mArrayListHourly?.get(0)?.LOWEST
+                txtSoFartThisMonthValue.text = WaterUsageData.mArrayListHourly?.get(0)?.TotalValue
+                txtProjectedUsageValue.text =
+                    WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST//TO BE UPDATED
 
-            txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod()
+                txt_date_from_to_usage.text = WaterUsageData.mArrayListHourly?.get(0)?.UsageDate
+            } else {
+                txtHighestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST
+                txtLowestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.LOWEST
+                txtSoFartThisMonthValue.text = WaterUsageData.mArrayList?.get(0)?.TotalValue
+                txtProjectedUsageValue.text =
+                    WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
+
+                txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod()
+            }
+
 
             chartUsage.description = null
             chartUsage.setPinchZoom(false)
@@ -253,8 +282,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             chartUsage.xAxis.axisMaximum =
                 0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
-            chartUsage.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
-            chartUsage.moveViewToX(10F);
+            chartUsage.setVisibleXRangeMaximum(5f); // allow 20 values to be displayed at once on the x-axis, not more
+            chartUsage.moveViewToX(5F);
 
             chartUsage.groupBars(0F, groupSpace, barSpace)
             chartUsage.data.isHighlightEnabled = false
@@ -375,7 +404,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             chartUsage.xAxis.axisMaximum =
                 0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
-            chartUsage.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
+            chartUsage.setVisibleXRangeMaximum(5f); // allow 20 values to be displayed at once on the x-axis, not more
             chartUsage.moveViewToX(10F);
 
             chartUsage.groupBars(0F, groupSpace, barSpace)
@@ -420,7 +449,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     private fun getMeterDetailsAMI() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.MeterDetails> = apiService.getMeterDetails(
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
@@ -438,11 +468,15 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     try {
                         dismissDialog()
                         if (response.body() != null) {
+                            AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
                             UserMeterListData.clearArrayList()
                             UserMeterListData.addArrayList(response.body()!!.Results.Table)
                             getWaterUsage()
-                            AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
-                            AppPrefences.setIsAMI(this@UsageActivity, response.body()!!.Results.Table.get(0).IsAMI)
+
+                            AppPrefences.setIsAMI(
+                                this@UsageActivity,
+                                response.body()!!.Results.Table.get(0).IsAMI
+                            )
                             checkIsAMI()
                         }
                     } catch (e: Exception) {
@@ -450,7 +484,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     }
                 }
 
-                override fun onFailure(call: Call<ResponseModelClasses.MeterDetails>, t: Throwable) {
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.MeterDetails>,
+                    t: Throwable
+                ) {
                     AppLog.printLog("Failure()- ", t.message.toString())
                     dismissDialog()
                 }
@@ -474,7 +511,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
                     RequestClass.getWaterUsageRequestModel(
-                        AppPrefences.getAccountNumber(this), mType, mMode, AppPrefences.getDataBaseInfo(this)!!
+                        AppPrefences.getAccountNumber(this),
+                        mType,
+                        mMode,
+                        AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
             )
@@ -486,6 +526,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     try {
                         dismissDialog()
                         if (response.body() != null) {
+                            AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
                             var data =
                                 ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
                             data.addAll(response.body()!!.Results.Table)
@@ -495,26 +536,49 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
 
                             if (mType == "D") {
-                                setChartDataDollar(
-                                    WaterUsageData.getUsageConsumedBar(),
-                                    WaterUsageData.getUsageBar(),
-                                    WaterUsageData.getUsageEmptyBar(),
-                                    WaterUsageData.getMonthList(),
-                                    getString(R.string.c_this_year),
-                                    getString(R.string.u_allocation)
-                                )
+
+                                if (mMode == "M") {
+                                    setChartDataDollar(
+                                        WaterUsageData.getUsageConsumedBar(),
+                                        WaterUsageData.getUsageBar(),
+                                        WaterUsageData.getUsageEmptyBar(),
+                                        WaterUsageData.getMonthListMonthly(),
+                                        getString(R.string.c_this_year),
+                                        getString(R.string.u_allocation)
+                                    )
+                                } else {
+                                    setChartDataDollar(
+                                        WaterUsageData.getUsageConsumedBar(),
+                                        WaterUsageData.getUsageBar(),
+                                        WaterUsageData.getUsageEmptyBar(),
+                                        WaterUsageData.getMonthList(),
+                                        getString(R.string.c_this_year),
+                                        getString(R.string.u_allocation)
+                                    )
+                                }
                             } else {
-                                setChartData(
-                                    WaterUsageData.getUsageConsumedBar(),
-                                    WaterUsageData.getUsageBar(),
-                                    WaterUsageData.getUsageEmptyBar(),
-                                    WaterUsageData.getMonthList(),
-                                    getString(R.string.u_usage),
-                                    getString(R.string.u_allocation)
-                                )
+                                if (mMode == "M") {
+                                    setChartData(
+                                        WaterUsageData.getUsageConsumedBar(),
+                                        WaterUsageData.getUsageBar(),
+                                        WaterUsageData.getUsageEmptyBar(),
+                                        WaterUsageData.getMonthListMonthly(),
+                                        getString(R.string.u_usage),
+                                        getString(R.string.u_allocation)
+                                    )
+                                } else {
+                                    setChartData(
+                                        WaterUsageData.getUsageConsumedBar(),
+                                        WaterUsageData.getUsageBar(),
+                                        WaterUsageData.getUsageEmptyBar(),
+                                        WaterUsageData.getMonthList(),
+                                        getString(R.string.u_usage),
+                                        getString(R.string.u_allocation)
+                                    )
+                                }
                             }
 
-                            AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
+
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -535,11 +599,89 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
         showToast(getString(R.string.internet))
     }
 
+
+    private fun getWaterUsageHourly() = if (Utils.isConnected(this)) {
+        showDialog()
+        try {
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call: Call<ResponseModelClasses.WaterUsagesHourly> =
+                apiService.getWaterUsagesHourly(
+                    getHeader(),
+                    ApiUrls.getJSONRequestBody(
+                        RequestClass.getWaterUsageRequestModel(
+                            AppPrefences.getAccountNumber(this),
+                            mType,
+                            mMode,
+                            AppPrefences.getDataBaseInfo(this)!!
+                        )
+                    )
+                )
+            call.enqueue(object : Callback<ResponseModelClasses.WaterUsagesHourly> {
+                override fun onResponse(
+                    call: Call<ResponseModelClasses.WaterUsagesHourly>,
+                    response: Response<ResponseModelClasses.WaterUsagesHourly>
+                ) {
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
+                            var data =
+                                ArrayList<ResponseModelClasses.WaterUsagesHourly.Results1.TableOne>()
+                            data.addAll(response.body()!!.Results.Table)
+                            data.reverse()
+                            WaterUsageData.clearArrayList()
+                            WaterUsageData.addArrayListHourly(data)
+
+
+                            if (mType == "D") {
+                                if (mMode == "H") {
+                                    setChartDataDollar(
+                                        WaterUsageData.getUsageConsumedBarHourly(),
+                                        WaterUsageData.getUsageBarHourly(),
+                                        WaterUsageData.getUsageEmptyBarHourly(),
+                                        WaterUsageData.getMonthListHourly(),
+                                        getString(R.string.c_this_year),
+                                        getString(R.string.u_allocation)
+                                    )
+                                }
+                            } else {
+                                if (mMode == "H") {
+                                    setChartData(
+                                        WaterUsageData.getUsageConsumedBarHourly(),
+                                        WaterUsageData.getUsageBarHourly(),
+                                        WaterUsageData.getUsageEmptyBarHourly(),
+                                        WaterUsageData.getMonthListHourly(),
+                                        getString(R.string.u_usage),
+                                        getString(R.string.u_allocation)
+                                    )
+                                }
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.WaterUsagesHourly>,
+                    t: Throwable
+                ) {
+                    AppLog.printLog("Failure()- ", t.message.toString())
+                    dismissDialog()
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dismissDialog()
+        }
+    } else {
+        //dismissDialog()
+        showToast(getString(R.string.internet))
+    }
+
     private fun resetAlpha() {
-        lytHourly.alpha = selectedAlpha
-        lytDaily.alpha = 1.0f
-        lytMonthly.alpha = 1.0f
-        lytBiMonthly.alpha = 1.0f
+
     }
 
     override fun onNothingSelected() {

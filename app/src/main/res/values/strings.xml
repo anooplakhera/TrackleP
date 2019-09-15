@@ -127,9 +127,9 @@
     <string name="compare_zip">Compare Neighbours</string>
     <string name="compare_utility">Compare with Everyone</string>
     <string name="compare_all">Composite View</string>
-    <string name="view_ccf">CCF</string>
-    <string name="view_dollar">Dollar</string>
-    <string name="view_gallon">Gallon</string>
+    <string name="view_ccf">View CCF</string>
+    <string name="view_dollar">View $</string>
+    <string name="view_gallon">View Gallon</string>
     <string name="bi_monthly">Bi Monthly</string>
     <string name="monthly">Monthly</string>
     <string name="daily">Daily</string>

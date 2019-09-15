@@ -96,6 +96,7 @@
                     android:layout_width="0sp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:alpha="0.5"
                     android:background="@drawable/ripple_background"
                     android:orientation="vertical"
                     android:padding="@dimen/dp_5">

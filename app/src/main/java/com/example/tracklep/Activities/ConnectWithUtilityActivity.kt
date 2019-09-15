@@ -293,7 +293,10 @@ class ConnectWithUtilityActivity : BaseActivity() {
                         dismissDialog()
                         if (response.body() != null) {
                             AppLog.printLog("SetConnectMeResponse: " + Gson().toJson(response.body()))
-                            showSuccessPopup(response.body()!!.Message)
+                            if (response.body()!!.Status == "1")
+                                showSuccessPopup("Thank you for contacting us. We have received your request and will get back as soon as possible.")
+                            else
+                                showSuccessPopup(response.body()!!.Message)
 
                             editSubjectValue.setText("")
                             editMessageValue.setText("")

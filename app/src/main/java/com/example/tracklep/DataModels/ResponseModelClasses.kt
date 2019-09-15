@@ -164,6 +164,35 @@ object ResponseModelClasses {
         )
     }
 
+    //WaterUsages
+    data class WaterUsagesHourly(
+        val Query: Query1,
+        val Results: Results1
+    ) {
+        data class Results1(
+            val Table: List<TableOne>
+
+        ) {
+            data class TableOne(
+                /*val Month: String,
+                val Year: String,*/
+                val TotalValue: String,
+                val ZipCode: String,
+                val AVERAGE: String,
+                val HIGHEST: String,
+                /*val AllocationValue: String,
+                val HighUsage: String,*/
+                val UsageDate: String,
+                val LOWEST: String
+            )
+        }
+
+        data class Query1(
+            val Parameters: Any,
+            val SqlQuery: Any
+        )
+    }
+
 
     //My Profile
     data class MyProfile(
