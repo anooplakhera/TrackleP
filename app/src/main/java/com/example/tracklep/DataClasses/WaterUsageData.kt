@@ -83,7 +83,9 @@ object WaterUsageData {
         var array = ArrayList<String>()
         try {
             for (i in 0 until getCount()) {
-                array.add(Utils.getNameOfMonth(mArrayList?.get(i)!!.Month + ", " + mArrayList?.get(i)!!.Year))
+                var month =
+                    Utils.getNameOfMonth(mArrayList!!.get(i).Month) + ", " + mArrayList!!.get(i).Year
+                array.add(month)
 //                array.add(mArrayList?.get(i)!!.UsageDate)
             }
         } catch (e: Exception) {
@@ -109,9 +111,13 @@ object WaterUsageData {
     @Synchronized
     fun getUsagePeriod(): String {
         var title = ""
-        title += Utils.getNameOfMonth(mArrayList!![getCount() - 1].Month) + " " + mArrayList!![getCount() - 1].Year + " to " + Utils.getNameOfMonth(
-            mArrayList!![0].Month
-        ) + " " + mArrayList!![0].Year
+        if (mArrayList!![0].Month != null && mArrayList!![0].Year != null) {
+            title += Utils.getNameOfMonth(mArrayList!![getCount() - 1].Month) + " " + mArrayList!![getCount() - 1].Year + " to " + Utils.getNameOfMonth(
+                mArrayList!![0].Month
+            ) + " " + mArrayList!![0].Year
+        } else {
+            title += mArrayList!![0].UsageDate
+        }
 
         return title
     }
@@ -121,7 +127,7 @@ object WaterUsageData {
         val array = ArrayList<ResponseModelClasses.BarChart>()
         try {
             for (i in 0 until getCount()) {
-                if (mArrayList!![i].AllocationValue.toFloat() != null) {
+                if (mArrayList!![i].AllocationValue != null) {
                     array.add(
                         ResponseModelClasses.BarChart(
                             mArrayList!![i].AllocationValue.toFloat(),

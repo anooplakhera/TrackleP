@@ -349,10 +349,19 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             val barSpace = 0f
             val groupSpace = 0.4f
 
-            txtHighestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST
-            txtLowestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.LOWEST
-            txtSoFartThisMonthValue.text = WaterUsageData.mArrayList?.get(0)?.TotalValue
-            txtProjectedUsageValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
+            if(mMode =="H") {
+                txtHighestThisPeriodValue.text = WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST
+                txtLowestThisPeriodValue.text = WaterUsageData.mArrayListHourly?.get(0)?.LOWEST
+                txtSoFartThisMonthValue.text = WaterUsageData.mArrayListHourly?.get(0)?.TotalValue
+                txtProjectedUsageValue.text =
+                    WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST//TO BE UPDATED
+            } else {
+                txtHighestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST
+                txtLowestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.LOWEST
+                txtSoFartThisMonthValue.text = WaterUsageData.mArrayList?.get(0)?.TotalValue
+                txtProjectedUsageValue.text =
+                    WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
+            }
 
             txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod()
 
@@ -418,7 +427,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             chartUsage.setVisibleXRangeMaximum(5f); // allow 20 values to be displayed at once on the x-axis, not more
             chartUsage.moveViewToX(10F);
 
-            chartUsage.groupBars(0F, groupSpace, barSpace)
+           // chartUsage.groupBars(0F, groupSpace, barSpace)
             chartUsage.data.isHighlightEnabled = false
             chartUsage.invalidate()
 
