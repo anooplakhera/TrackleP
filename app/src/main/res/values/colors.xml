@@ -22,10 +22,10 @@
     <color name="colorConservation2">#7DAC93</color>
     <color name="colorConservation3">#6767FF</color>
     
-    <color name="colorCompareThisYear">#7CAB92</color>
-    <color name="colorComparePreviousYear">#C56E6E</color>
-    <color name="colorCompareUtility">#D39D76</color>
-    <color name="colorCompareZip">#7A99BB</color>
+    <color name="colorCompareThisYear">#8bd643</color>
+    <color name="colorComparePreviousYear">#fe5558</color>
+    <color name="colorCompareUtility">#63cfe0</color>
+    <color name="colorCompareZip">#0175a9</color>
     
     
     <color name="colorUsageWithin">#89BF6E</color>

@@ -51,6 +51,12 @@ class ConnectWithUtilityActivity : BaseActivity() {
                 finish()
             }
 
+            txtContactUsEmailValue.setText("admin@eocwd.com")
+            txtContactUsPhoneValue.setText("(714) 538-5815")
+            txtEmergencyNumberValue.setText("(714) 538-5815")
+            txtAddressValue.setText("185 N McPherson Rd, Orange, CA 92869, USA")
+            txtCustomerServiceHourValue.setText("8:00 AM to 5:00 PM")
+
             txtContactUsPhoneValue.setOnClickListener {
                 try {
                     val intent =
@@ -67,6 +73,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
                     e.printStackTrace()
                 }
             }
+
             txtEmergencyNumberValue.setOnClickListener {
                 try {
                     val intent =
@@ -83,6 +90,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
                     e.printStackTrace()
                 }
             }
+
             txtContactUsEmailValue.setOnClickListener {
                 try {
                     val intent = Intent(Intent.ACTION_SENDTO)
@@ -96,8 +104,6 @@ class ConnectWithUtilityActivity : BaseActivity() {
 
             }
 
-            getConnectMeDetails(false, txtTopicName)
-
             txtTopicName.setOnClickListener {
                 if (ConnectMeData.getCount() > 0) {
                     openListDialog("Select Report Type", txtTopicName)
@@ -109,6 +115,8 @@ class ConnectWithUtilityActivity : BaseActivity() {
             btnConnectMeSubmit.setOnClickListener {
                 validationField()
             }
+
+            getConnectMeDetails(false, txtTopicName)
         } catch (e: Exception) {
             e.printStackTrace()
         }

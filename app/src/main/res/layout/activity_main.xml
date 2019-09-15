@@ -157,8 +157,8 @@
                             
                             <com.github.lzyzsd.circleprogress.ArcProgress
                                 android:id="@+id/arc_progress"
-                                android:layout_width="150dp"
-                                android:layout_height="150dp"
+                                android:layout_width="170dp"
+                                android:layout_height="170dp"
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/roboto"
                                 custom:arc_finished_color="@color/colorProgress"

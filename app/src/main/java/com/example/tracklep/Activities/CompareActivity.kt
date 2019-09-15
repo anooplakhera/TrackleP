@@ -38,6 +38,7 @@ import retrofit2.Response
 class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
     var unitName = "K"
+    var selectedComparision = "Me"
     var selectedAlpha = 0.5f
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,6 +100,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             }
 
             lytCompareMe.setOnClickListener {
+                selectedComparision = "Me"
                 setChartData(
                     CompareSpendingData.getCurrentBar(),
                     CompareSpendingData.getPreviousBar(),
@@ -107,10 +109,12 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                     getString(R.string.c_previous_year)
                 )
                 resetAlpha()
+
                 txt_date_from_to.text = CompareSpendingData.getCompareMeTitle()
             }
 
             lytCompareZip.setOnClickListener {
+                selectedComparision = "Zip"
                 setChartData(
                     CompareSpendingData.getCurrentBar(),
                     CompareSpendingData.getZipBar(),
@@ -122,10 +126,12 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 lytCompareMe.alpha = 1.0f
                 lytCompareUtility.alpha = 1.0f
                 lytCompareAll.alpha = 1.0f
+
                 txt_date_from_to.text = CompareSpendingData.getZipTitle()
             }
 
             lytCompareUtility.setOnClickListener {
+                selectedComparision = "Util"
                 setChartData(
                     CompareSpendingData.getCurrentBar(),
                     CompareSpendingData.getUtilityBar(),
@@ -137,10 +143,12 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 lytCompareMe.alpha = 1.0f
                 lytCompareUtility.alpha = selectedAlpha
                 lytCompareAll.alpha = 1.0f
+
                 txt_date_from_to.text = CompareSpendingData.getUtilityTitle()
             }
 
             lytCompareAll.setOnClickListener {
+                selectedComparision = "All"
                 setChartData(
                     CompareSpendingData.getCurrentBar(),
                     CompareSpendingData.getPreviousBar(),
@@ -151,6 +159,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 lytCompareZip.alpha = 1.0f
                 lytCompareMe.alpha = 1.0f
                 lytCompareUtility.alpha = 1.0f
+
                 lytCompareAll.alpha = selectedAlpha
             }
         } catch (e: Exception) {
@@ -175,7 +184,8 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                     getHeader(),
                     ApiUrls.getJSONRequestBody(
                         RequestClass.getMeterDetailsRequestModel(
-                            AppPrefences.getAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
+                            AppPrefences.getAccountNumber(this),
+                            AppPrefences.getDataBaseInfo(this)!!
                         )
                     ),
                     AppPrefences.getAccountNumber(this), unitName
@@ -258,8 +268,15 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
             val set1 = BarDataSet(yVals1, label1)
             set1.color = resources.getColor(R.color.colorCompareThisYear)
+
             val set2 = BarDataSet(yVals2, label2)
-            set2.color = resources.getColor(R.color.colorComparePreviousYear)
+            if (selectedComparision == "Me")
+                set2.color = resources.getColor(R.color.colorComparePreviousYear)
+            else if (selectedComparision == "Zip")
+                set2.color = resources.getColor(R.color.colorCompareZip)
+            else if (selectedComparision == "Util")
+                set2.color = resources.getColor(R.color.colorCompareUtility)
+
             val data = BarData(set1, set2)
 //        data.setValueFormatter(LargeValueFormatter() as ValueFormatter?)
             data.setValueFormatter(MyValueFormatter() as ValueFormatter?)
@@ -270,7 +287,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.xAxis.axisMaximum =
                 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
-            chart.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
+            chart.setVisibleXRangeMaximum(10F); // allow 20 values to be displayed at once on the x-axis, not more
             chart.moveViewToX(10F);
 
             chart.groupBars(0F, groupSpace, barSpace)
@@ -293,6 +310,8 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             xAxis.isGranularityEnabled = true
             xAxis.setCenterAxisLabels(true)
             xAxis.setDrawGridLines(false)
+            xAxis.textSize = 7f
+            xAxis.labelRotationAngle = -45f
 //        xAxis.axisMaximum = 6f
 //        xAxis.textSize = 9f
             xAxis.labelCount = year.size
@@ -323,7 +342,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         try {
             val barWidth: Float = 0.6f
             val barSpace: Float = 0.2f
-            val groupSpace: Float = 0.8f
+            val groupSpace: Float = 0.4f
             val groupCount: Int = 4
 
             chart.description = null;
@@ -333,7 +352,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.setDrawGridBackground(false);
             chart.setVisibleXRangeMaximum(5f)
             chart.isHorizontalScrollBarEnabled = true
-            chart.canScrollHorizontally(1)
+            //chart.canScrollHorizontally(1)
             chart.animateXY(1000, 1000);
 
             val yVals1 = ArrayList<BarEntry>()
@@ -372,7 +391,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.xAxis.axisMaximum =
                 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
-            chart.setVisibleXRangeMaximum(20F); // allow 20 values to be displayed at once on the x-axis, not more
+            chart.setVisibleXRangeMaximum(10F); // allow 20 values to be displayed at once on the x-axis, not more
             chart.moveViewToX(10F);
 
             chart.groupBars(0F, groupSpace, barSpace)
@@ -395,6 +414,8 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             xAxis.isGranularityEnabled = true
             xAxis.setCenterAxisLabels(true)
             xAxis.setDrawGridLines(false)
+            xAxis.textSize = 7f
+            xAxis.labelRotationAngle = -45f
 //        xAxis.axisMaximum = 6f
 
             xAxis.labelCount = year.size
