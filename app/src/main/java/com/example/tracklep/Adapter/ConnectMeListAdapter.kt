@@ -4,15 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.tracklep.Activities.ConnectWithUtilityActivity
 import com.example.tracklep.DataClasses.ConnectMeData
-import com.example.tracklep.DataClasses.UtilitiesData
 import com.example.tracklep.R
 import com.example.tracklep.Utils.AppConstants
 import kotlinx.android.synthetic.main.question_list_layout.view.*
 
 class ConnectMeListAdapter(val itemClick: (Int) -> Unit) : RecyclerView.Adapter<ConnectMeListAdapter.MyHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): MyHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.question_list_layout, parent, false)

@@ -40,9 +40,7 @@ object ConnectMeData {
     @Synchronized
     fun clearArrayList() {
         mArrayList!!.removeAll(mArrayList!!)
-
     }
-
 
 }
 

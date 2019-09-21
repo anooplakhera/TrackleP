@@ -54,7 +54,7 @@ class MainActivity : BaseActivity(), AnimationListener {
 
             getMeterDetailsAMI()
 
-            setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
+//            setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
 
 //            var gifDrawable = GifDrawable(resources, R.drawable.waterflow567)
 //            gifDrawable.stop();
@@ -331,6 +331,7 @@ class MainActivity : BaseActivity(), AnimationListener {
             txtUsagesMessage.text =
                 "You have consumed " + data.AVERAGE + " Gallons water so far this calendar month"
             txtMeterValue.text = data.AVERAGE + "\nGallons"
+            AppLog.printLog(data.AllocationValue + " " + data.AVERAGE)
             arc_progress.progress =
                 Utils.getProgressValue(data.AllocationValue.toDouble(), data.AVERAGE.toDouble())
                     .roundToInt()

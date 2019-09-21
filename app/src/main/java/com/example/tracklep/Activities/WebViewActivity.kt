@@ -111,7 +111,7 @@ class WebViewActivity : BaseActivity() {
     /**
      * Instantiate the interface and set the context
      */
-    (var mContext: Context) {
+        (var mContext: Context) {
 
 
         @JavascriptInterface

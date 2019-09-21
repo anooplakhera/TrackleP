@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/dp_40"
-    android:fitsSystemWindows="true"
-    android:focusableInTouchMode="true"
-    tools:context=".Activities.LoginActivity">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dp_40"
+                android:fitsSystemWindows="true"
+                android:focusableInTouchMode="true"
+                tools:context=".Activities.LoginActivity">
     
     
     <FrameLayout
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:src="@drawable/login_background" />
+            android:src="@drawable/login_background"/>
         
         <!--Rest of your coding-->
         <LinearLayout
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/login_title"
                         android:textColor="@color/colorPrimary"
-                        app:fontFamily="@font/roboto" />
+                        app:fontFamily="@font/roboto"/>
                     
                     <!--Trackle Logo Layout-->
                     <LinearLayout
@@ -64,19 +64,19 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:src="@drawable/common_drop_image" />
+                            android:src="@drawable/common_drop_image"/>
                         
                         <ImageView
                             android:layout_width="0dp"
                             android:layout_height="@dimen/dp_60"
                             android:layout_weight="1"
-                            android:src="@drawable/trackle_logo" />
+                            android:src="@drawable/trackle_logo"/>
                         
                         <ImageView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:src="@drawable/common_drop_image" />
+                            android:src="@drawable/common_drop_image"/>
                     </LinearLayout>
                     
                     <RelativeLayout
@@ -95,7 +95,7 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:src="@drawable/ic_right_arrow" />
+                            android:src="@drawable/ic_right_arrow"/>
                         
                         <TextView
                             android:id="@+id/textUtilities"
@@ -105,7 +105,7 @@
                             android:padding="@dimen/dp_2"
                             android:text="@string/select_utility"
                             android:textColor="@color/colorDarkGray"
-                            android:textSize="@dimen/sp_16" />
+                            android:textSize="@dimen/sp_16"/>
                     
                     </RelativeLayout>
                     
@@ -120,7 +120,7 @@
                         android:fontFamily="@font/roboto"
                         android:hint="@string/email"
                         android:padding="@dimen/dp_10"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/sp_16"/>
                     
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/etPasswordLayout"
@@ -141,7 +141,7 @@
                             android:hint="@string/password"
                             android:inputType="textPassword"
                             android:padding="@dimen/dp_10"
-                            android:textSize="@dimen/sp_16" />
+                            android:textSize="@dimen/sp_16"/>
                     </android.support.design.widget.TextInputLayout>
                     
                     <android.support.v7.widget.SwitchCompat
@@ -154,7 +154,7 @@
                         android:layoutDirection="rtl"
                         android:text="@string/remember_me"
                         android:textColor="@color/colorLightBlack"
-                        app:switchPadding="8dp" />
+                        app:switchPadding="8dp"/>
                     
                     <android.support.v7.widget.AppCompatButton
                         android:id="@+id/btnLogin"
@@ -168,7 +168,7 @@
                         android:text="@string/login"
                         android:textAllCaps="false"
                         android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/sp_18" />
+                        android:textSize="@dimen/sp_18"/>
                     
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/txtForgotPassword"
@@ -179,7 +179,7 @@
                         android:fontFamily="@font/roboto"
                         android:text="@string/forgot_password"
                         android:textColor="@color/colorLightBlack"
-                        android:textSize="@dimen/sp_16" />
+                        android:textSize="@dimen/sp_16"/>
                     
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -199,7 +199,7 @@
                             <ImageView
                                 android:layout_width="@dimen/dp_50"
                                 android:layout_height="@dimen/dp_50"
-                                android:src="@drawable/user_blue" />
+                                android:src="@drawable/user_blue"/>
                             
                             <TextView
                                 android:layout_width="match_parent"
@@ -209,7 +209,7 @@
                                 android:gravity="center"
                                 android:text="@string/register_now"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/sp_12" />
+                                android:textSize="@dimen/sp_12"/>
                         </LinearLayout>
                         
                         <LinearLayout
@@ -224,7 +224,7 @@
                             <ImageView
                                 android:layout_width="@dimen/dp_50"
                                 android:layout_height="@dimen/dp_50"
-                                android:src="@drawable/billing_blue" />
+                                android:src="@drawable/billing_blue"/>
                             
                             <TextView
                                 android:layout_width="match_parent"
@@ -234,7 +234,7 @@
                                 android:gravity="center"
                                 android:text="@string/pay_bill"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/sp_12" />
+                                android:textSize="@dimen/sp_12"/>
                         </LinearLayout>
                         
                         <LinearLayout
@@ -249,7 +249,7 @@
                             <ImageView
                                 android:layout_width="@dimen/dp_50"
                                 android:layout_height="@dimen/dp_50"
-                                android:src="@drawable/connect_blue" />
+                                android:src="@drawable/connect_blue"/>
                             
                             <TextView
                                 android:layout_width="match_parent"
@@ -259,7 +259,7 @@
                                 android:gravity="center"
                                 android:text="@string/connect_with_utility"
                                 android:textColor="@color/colorPrimary"
-                                android:textSize="@dimen/sp_12" />
+                                android:textSize="@dimen/sp_12"/>
                         </LinearLayout>
                     </LinearLayout>
                     
@@ -278,12 +278,12 @@
                             android:fontFamily="@font/roboto"
                             android:text="@string/powered_by"
                             android:textColor="@color/colorDarkGray"
-                            android:textSize="@dimen/sp_10" />
+                            android:textSize="@dimen/sp_10"/>
                         
                         <ImageView
                             android:layout_width="@dimen/dp_100"
                             android:layout_height="@dimen/dp_30"
-                            android:src="@drawable/logo1" />
+                            android:src="@drawable/logo1"/>
                     </LinearLayout>
                 </LinearLayout>
             </ScrollView>
