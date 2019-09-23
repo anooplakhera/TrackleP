@@ -4,82 +4,126 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/drawable_background_gradient"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:focusableInTouchMode="true"
+    android:orientation="vertical"
     tools:context=".Activities.MyProfile">
     
     <include
-        layout="@layout/custom_action_bar"
-        android:id="@+id/lytAction" />
+        android:id="@+id/lytAction"
+        layout="@layout/custom_action_bar" />
     
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"
+        android:layout_below="@id/lytAction"
         android:fillViewport="true"
-        android:layout_below="@id/lytAction">
+        android:overScrollMode="never">
         
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginBottom="@dimen/dp_40"
-            android:padding="@dimen/dp_10"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_10">
             
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/drawable_round_corner"
                 android:orientation="vertical"
-                android:padding="@dimen/dp_10"
-                android:background="@drawable/drawable_round_corner">
+                android:padding="@dimen/dp_10">
                 
                 <!--User Name-->
                 <TextView
                     android:id="@+id/txtUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:gravity="center"
-                    android:textSize="@dimen/sp_18"
                     android:fontFamily="@font/roboto"
+                    android:gravity="center"
                     android:padding="@dimen/dp_5"
-                    android:textColor="@color/colorBlack" />
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
                 
                 <!--AccNumber-->
                 <TextView
                     android:id="@+id/txtAccNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:gravity="center"
-                    android:textSize="@dimen/sp_15"
                     android:fontFamily="@font/roboto"
+                    android:gravity="center"
                     android:padding="@dimen/dp_5"
-                    android:textColor="@color/colorLightBlack" />
+                    android:text=""
+                    android:textColor="@color/colorLightBlack"
+                    android:textSize="@dimen/sp_15" />
             
             </LinearLayout>
             
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginTop="@dimen/dp_10"
-                android:padding="@dimen/dp_10"
-                android:background="@drawable/drawable_round_corner">
+                android:background="@drawable/drawable_round_corner"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
                 
                 <TextView
                     android:id="@+id/txtAccountInformationLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_2"
-                    android:textSize="@dimen/sp_16"
                     android:fontFamily="@font/roboto"
+                    android:padding="@dimen/dp_2"
+                    android:text="@string/account_information"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="@string/account_information" />
+                    android:textSize="@dimen/sp_16" />
+                
+                <!--Mobile Phone-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    
+                    <ImageView
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_call_" />
+                    
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_2">
+                        
+                        <TextView
+                            android:id="@+id/txtMobilePhoneLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/mobile_number"
+                            android:textColor="@color/commonLabelTextColor"
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold" />
+                        
+                        <android.support.v7.widget.AppCompatEditText
+                            android:id="@+id/editMobilePhoneValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/txtMobilePhoneLabel"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/roboto"
+                            android:inputType="phone"
+                            android:maxLength="14"
+                            android:padding="@dimen/dp_2"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_14" />
+                    
+                    </RelativeLayout>
+                </LinearLayout>
                 
                 <!--Home Phone Number-->
                 <LinearLayout
@@ -90,8 +134,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_home_phone_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_home_phone_" />
                     
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -102,25 +146,25 @@
                             android:id="@+id/txtHomePhoneNumberLabel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
-                            android:textStyle="bold"
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/home_phone_number"
                             android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/home_phone_number" />
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold" />
                         
                         <android.support.v7.widget.AppCompatEditText
                             android:id="@+id/editHomePhoneNumberValue"
-                            android:layout_below="@id/txtHomePhoneNumberLabel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorBlack"
-                            android:maxLength="14"
-                            android:inputType="phone"
-                            android:textSize="@dimen/sp_14"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtHomePhoneNumberLabel"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:inputType="phone"
+                            android:maxLength="14"
+                            android:padding="@dimen/dp_2"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
@@ -128,13 +172,13 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
                     android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
                     android:layout_marginRight="@dimen/dp_6"
                     android:layout_marginBottom="@dimen/dp_3"
                     android:background="@color/colorLightGray100" />
                 
-                <!--Mobile Number-->
+                <!--Business Phone Number-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -143,8 +187,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_call_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_home_phone_" />
                     
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -152,28 +196,28 @@
                         android:layout_margin="@dimen/dp_2">
                         
                         <TextView
-                            android:id="@+id/txtMobileNumberLabel"
+                            android:id="@+id/txtBusinessPhoneNumberLabel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
-                            android:textStyle="bold"
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/business_phone_number"
                             android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/mobile_number" />
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold" />
                         
                         <android.support.v7.widget.AppCompatEditText
-                            android:id="@+id/editMobileNumberValue"
-                            android:layout_below="@id/txtMobileNumberLabel"
+                            android:id="@+id/editBusinessPhoneNumberValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/colorBlack"
-                            android:maxLength="14"
-                            android:inputType="phone"
-                            android:textSize="@dimen/sp_14"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtBusinessPhoneNumberLabel"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:inputType="phone"
+                            android:maxLength="14"
+                            android:padding="@dimen/dp_2"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
@@ -181,10 +225,10 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:layout_marginBottom="@dimen/dp_3"
                     android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
                     android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
                     android:background="@color/colorLightGray100" />
                 
                 <!--Email-->
@@ -196,8 +240,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_email_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_email_" />
                     
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -208,26 +252,26 @@
                             android:id="@+id/txtEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
-                            android:textStyle="bold"
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/email_address"
                             android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/email_address" />
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold" />
                         
                         
                         <android.support.v7.widget.AppCompatEditText
                             android:id="@+id/editEmail"
-                            android:layout_below="@id/txtEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            android:inputType="textEmailAddress"
-                            android:textSize="@dimen/sp_14"
-                            android:maxLength="50"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtEmail"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:inputType="textEmailAddress"
+                            android:maxLength="50"
+                            android:padding="@dimen/dp_2"
+                            android:text=""
+                            android:textSize="@dimen/sp_14" />
                     
                     
                     </RelativeLayout>
@@ -236,10 +280,10 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:layout_marginBottom="@dimen/dp_3"
                     android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
                     android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
                     android:background="@color/colorLightGray100" />
                 
                 <!--Communication Address-->
@@ -252,8 +296,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_address_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_address_" />
                     
                     <RelativeLayout
                         android:id="@+id/rytCommunicationAddress"
@@ -265,33 +309,33 @@
                             android:id="@+id/txtCommunicationAddressLabel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
                             android:fontFamily="@font/roboto"
-                            android:textSize="@dimen/sp_14"
-                            android:textStyle="bold"
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/address"
                             android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/address" />
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold" />
                         
                         <ImageView
                             android:layout_width="@dimen/dp_30"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_right_arrow"
+                            android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:padding="@dimen/dp_5"
-                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_right_arrow"
                             android:visibility="gone" />
                         
                         <TextView
                             android:id="@+id/txtCommunicationAddressValue"
-                            android:layout_below="@id/txtCommunicationAddressLabel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_below="@id/txtCommunicationAddressLabel"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/roboto"
+                            android:padding="@dimen/dp_2"
                             android:text=""
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_14"
-                            android:fontFamily="@font/roboto"
-                            android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
@@ -301,11 +345,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/dp_10"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/drawable_round_corner">
+                android:background="@drawable/drawable_round_corner"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
                 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:padding="@dimen/dp_2"
+                    android:text="@string/security_questions"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/sp_16" />
                 <!--Ques1-->
                 <RelativeLayout
                     android:id="@+id/r_lyt_quesP1"
@@ -317,42 +369,42 @@
                         android:id="@+id/txtQues1Label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
-                        android:textSize="@dimen/sp_14"
-                        android:textStyle="bold"
+                        android:padding="@dimen/dp_2"
+                        android:text="@string/security_ques1"
                         android:textColor="@color/commonLabelTextColor"
-                        android:text="@string/security_ques1" />
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold" />
                     
                     <ImageView
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_right_arrow"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:padding="@dimen/dp_5"
-                        android:visibility="gone"
-                        android:layout_alignParentRight="true" />
+                        android:src="@drawable/ic_right_arrow"
+                        android:visibility="gone" />
                     
                     <TextView
                         android:id="@+id/txtQues1Value"
-                        android:layout_below="@id/txtQues1Label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/txtQues1Label"
                         android:fontFamily="@font/roboto"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="@dimen/sp_14"
                         android:padding="@dimen/dp_2"
-                        android:text="@string/mandatory" />
+                        android:text="@string/mandatory"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/sp_14" />
                 
                 </RelativeLayout>
                 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:layout_marginBottom="@dimen/dp_3"
                     android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
                     android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
                     android:background="@color/colorLightGray100" />
                 
                 <!--Answer 1-->
@@ -364,8 +416,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_password_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_password_" />
                     
                     <RelativeLayout
                         android:id="@+id/r_lyt_quesP2"
@@ -377,24 +429,24 @@
                             android:id="@+id/txtAns1Label"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
                             android:fontFamily="@font/roboto"
-                            android:textSize="@dimen/sp_14"
-                            android:textStyle="bold"
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/security_ans1"
                             android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/security_ans1" />
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold" />
                         
                         <android.support.v7.widget.AppCompatEditText
                             android:id="@+id/editAns1Value"
-                            android:layout_below="@id/txtAns1Label"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_14"
-                            android:maxLength="20"
-                            android:inputType="textPassword"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtAns1Label"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:inputType="textPassword"
+                            android:maxLength="20"
+                            android:padding="@dimen/dp_2"
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
@@ -402,10 +454,10 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:layout_marginBottom="@dimen/dp_3"
                     android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
                     android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
                     android:background="@color/colorLightGray100" />
                 
                 <RelativeLayout
@@ -418,42 +470,42 @@
                         android:id="@+id/txtQues2Label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_2"
                         android:fontFamily="@font/roboto"
-                        android:textSize="@dimen/sp_14"
-                        android:textStyle="bold"
+                        android:padding="@dimen/dp_2"
+                        android:text="@string/security_ques2"
                         android:textColor="@color/commonLabelTextColor"
-                        android:text="@string/security_ques2" />
+                        android:textSize="@dimen/sp_14"
+                        android:textStyle="bold" />
                     
                     <ImageView
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_right_arrow"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:padding="@dimen/dp_5"
-                        android:visibility="gone"
-                        android:layout_alignParentRight="true" />
+                        android:src="@drawable/ic_right_arrow"
+                        android:visibility="gone" />
                     
                     <TextView
                         android:id="@+id/txtQues2Value"
-                        android:layout_below="@id/txtQues2Label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sp_14"
-                        android:textColor="@color/colorBlack"
+                        android:layout_below="@id/txtQues2Label"
                         android:fontFamily="@font/roboto"
                         android:padding="@dimen/dp_2"
-                        android:text="@string/mandatory" />
+                        android:text="@string/mandatory"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/sp_14" />
                 
                 </RelativeLayout>
                 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.8dp"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:layout_marginBottom="@dimen/dp_3"
                     android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
                     android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
                     android:background="@color/colorLightGray100" />
                 
                 <!--Answer 2-->
@@ -465,8 +517,8 @@
                     <ImageView
                         android:layout_width="@dimen/dp_30"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_password_"
-                        android:padding="@dimen/dp_5" />
+                        android:padding="@dimen/dp_5"
+                        android:src="@drawable/ic_password_" />
                     
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -477,42 +529,87 @@
                             android:id="@+id/txtAns2Label"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/dp_2"
-                            android:textSize="@dimen/sp_14"
                             android:fontFamily="@font/roboto"
-                            android:textStyle="bold"
+                            android:padding="@dimen/dp_2"
+                            android:text="@string/security_ans2"
                             android:textColor="@color/commonLabelTextColor"
-                            android:text="@string/security_ans2" />
+                            android:textSize="@dimen/sp_14"
+                            android:textStyle="bold" />
                         
                         <android.support.v7.widget.AppCompatEditText
                             android:id="@+id/editAns2Value"
-                            android:layout_below="@id/txtAns2Label"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text=""
-                            android:textSize="@dimen/sp_14"
-                            android:maxLength="20"
-                            android:inputType="textPassword"
-                            android:fontFamily="@font/roboto"
+                            android:layout_below="@id/txtAns2Label"
                             android:background="@android:color/transparent"
-                            android:padding="@dimen/dp_2" />
+                            android:fontFamily="@font/roboto"
+                            android:inputType="textPassword"
+                            android:maxLength="20"
+                            android:padding="@dimen/dp_2"
+                            android:text=""
+                            android:textSize="@dimen/sp_14" />
                     
                     </RelativeLayout>
                 </LinearLayout>
+            </LinearLayout>
+            
+            <!--Billing Preferences-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/drawable_round_corner"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
+                
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:padding="@dimen/dp_2"
+                    android:text="@string/billing_preference"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/sp_16" />
+                
+                <RadioGroup
+                    android:id="@+id/rg_billing_preference"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    
+                    <RadioButton
+                        android:id="@+id/rb_paperless_bill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Paperless Bill" />
+                    
+                    <RadioButton
+                        android:id="@+id/rb_paper_bill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Paper Bill" />
+                    
+                    <RadioButton
+                        android:id="@+id/rb_both_bill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Both" />
+                </RadioGroup>
+            
             </LinearLayout>
             
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnSaveProfile"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
-                android:text="@string/submit"
-                android:layout_marginBottom="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_40"
+                android:background="@drawable/rounded_corner_blue"
+                android:fontFamily="@font/roboto"
+                android:text="@string/submit"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
-                android:fontFamily="@font/roboto"
-                android:textSize="@dimen/sp_18"
-                android:background="@drawable/rounded_corner_blue" />
+                android:textSize="@dimen/sp_18" />
         </LinearLayout>
     
     </ScrollView>

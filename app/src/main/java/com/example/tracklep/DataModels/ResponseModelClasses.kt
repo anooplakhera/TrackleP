@@ -225,7 +225,9 @@ object ResponseModelClasses {
         val SecurityQuestionId2: Int,
         val SqlQuery: Any,
         val StateName: String,
-        val UtilityAccountNumber: String
+        val UtilityAccountNumber: String,
+        val BusinessHomePhone : String,
+        val BillingPreference : String
     )
 
 

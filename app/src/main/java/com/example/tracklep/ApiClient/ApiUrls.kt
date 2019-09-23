@@ -14,9 +14,8 @@ object ApiUrls {
 
     /*-----------------Api+Urls----------------*/
 
-//    const val BASE_URL: String = "https://aquatraxapi-dev.azurewebsites.net/"
+    //    const val BASE_URL: String = "https://aquatraxapi-dev.azurewebsites.net/"
     const val BASE_URL: String = "https://aquatraxportalprod-api.azurewebsites.net/"
-    //    const val BASE_URL: String = "https://aquatraxapi.azurewebsites.net/"
     const val BASE_PATH: String = "api/customer/"
     const val LOGIN = "token";
     const val GET_UTILS = "getutilities"
@@ -69,6 +68,8 @@ object ApiUrls {
     const val HomePhone = "HomePhone"
     const val MobilePhone = "MobilePhone"
     const val Custid = "Custid"
+    const val BusinessHomePhone = "BusinessHomePhone"
+    const val BillingPreference = "BillingPreference"
 
     //Connect Me
     const val TopicID = "TopicID"
@@ -118,6 +119,9 @@ object ApiUrls {
                 e.printStackTrace()
             }
         }
-        return RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonObject.toString())
+        return RequestBody.create(
+            MediaType.parse("application/json; charset=utf-8"),
+            jsonObject.toString()
+        )
     }
 }

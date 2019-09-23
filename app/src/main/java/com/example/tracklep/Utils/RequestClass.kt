@@ -14,7 +14,8 @@ object RequestClass {
         username: String,
         password: String,
         tanentId: String,
-        data: ResponseModelClasses.DataBaseUtils): Map<String, String> {
+        data: ResponseModelClasses.DataBaseUtils
+    ): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.UserName, username)
         map.put(ApiUrls.Password, password)
@@ -28,7 +29,10 @@ object RequestClass {
         return map;
     }
 
-    fun getMeterDetailsRequestModel(AccountNumber: String, data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
+    fun getMeterDetailsRequestModel(
+        AccountNumber: String,
+        data: ResponseModelClasses.DataBaseUtils
+    ): HashMap<String, String> {
         var map = HashMap<String, String>()
         map[ApiUrls.AccountNumber] = AccountNumber
         map.put(ApiUrls.DataSource, data.ServerName)
@@ -59,7 +63,10 @@ object RequestClass {
         return map;
     }
 
-    fun getBillingDetailsRequestModel(AccountNumber: String, data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
+    fun getBillingDetailsRequestModel(
+        AccountNumber: String,
+        data: ResponseModelClasses.DataBaseUtils
+    ): HashMap<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.AccountNumber, AccountNumber)
         map.put(ApiUrls.DataSource, data.ServerName)
@@ -123,6 +130,8 @@ object RequestClass {
         email: String,
         HomePhone: String,
         MobilePhone: String,
+        BusinessHomePhone: String,
+        BillingPreference: String,
         Custid: String,
         AccountNumber: String,
         editAnswer1: String,
@@ -134,6 +143,8 @@ object RequestClass {
         map.put(ApiUrls.EmailID, email)
         map.put(ApiUrls.HomePhone, HomePhone)
         map.put(ApiUrls.MobilePhone, MobilePhone)
+        map.put(ApiUrls.BusinessHomePhone, BusinessHomePhone)
+        map.put(ApiUrls.BillingPreference, BillingPreference)
         map.put(ApiUrls.Custid, Custid)
         map.put(ApiUrls.AccountNumber, AccountNumber)
         map.put(ApiUrls.SecurityQuestionId, sQuesID1)
@@ -148,7 +159,10 @@ object RequestClass {
         return map;
     }
 
-    fun getForgetRequestStepOne(username: String, data: ResponseModelClasses.DataBaseUtils): Map<String, String> {
+    fun getForgetRequestStepOne(
+        username: String,
+        data: ResponseModelClasses.DataBaseUtils
+    ): Map<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.UserName, username);
         map.put(ApiUrls.DataSource, data.ServerName)
@@ -243,7 +257,10 @@ object RequestClass {
 
     /*["AccountNumber": "3", "DataSource": "aquatraxserver.database.windows.net", "Database": "AQUATRAXDEV", "DBPassword": "newaqt@123", "DBUserName": "aquatrax"]*/
     //Get Usage Notification
-    fun getUsageNotificationRequestModel(AccountNumber: String, data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
+    fun getUsageNotificationRequestModel(
+        AccountNumber: String,
+        data: ResponseModelClasses.DataBaseUtils
+    ): HashMap<String, String> {
         var map = HashMap<String, String>()
         map.put(ApiUrls.AccountNumber, AccountNumber)
         map.put(ApiUrls.DataSource, data.ServerName)
@@ -311,7 +328,10 @@ object RequestClass {
         return map;
     }
 
-    fun getDeleteAccountRequestModel(AccountNumber: String, data: ResponseModelClasses.DataBaseUtils): HashMap<String, String> {
+    fun getDeleteAccountRequestModel(
+        AccountNumber: String,
+        data: ResponseModelClasses.DataBaseUtils
+    ): HashMap<String, String> {
         var map = HashMap<String, String>()
 
         map.put(ApiUrls.DataSource, data.ServerName)

@@ -223,6 +223,14 @@ class MyProfile : BaseActivity() {
     private fun getUpdateUserProfile() = if (Utils.isConnected(this)) {
         showDialog()
         try {
+            var billingPrefrence = "0";
+            if (rb_paperless_bill.isChecked)
+                billingPrefrence = "1";
+            else if (rb_paper_bill.isChecked)
+                billingPrefrence = "2";
+            else if (rb_both_bill.isChecked)
+                billingPrefrence = "2";
+
             val apiService =
                 ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call = apiService.getUpdateAccount(
@@ -232,7 +240,9 @@ class MyProfile : BaseActivity() {
                     RequestClass.getUpdateAccountRequestModel(
                         editEmail.text.toString(),
                         editHomePhoneNumberValue.text.toString(),
-                        editMobileNumberValue.text.toString(),
+                        editMobilePhoneValue.text.toString(),
+                        editBusinessPhoneNumberValue.text.toString(),
+                        billingPrefrence,
                         custID,
                         AppPrefences.getAccountNumber(this),
                         editAns1Value.text.toString(),
@@ -283,9 +293,11 @@ class MyProfile : BaseActivity() {
             txtUserName.text = data.FullName
             editEmail.setText(data.EmailId)
             editHomePhoneNumberValue.setText(data.HomePhone)
-            editMobileNumberValue.setText(data.MobilePhone)
+            editMobilePhoneValue.setText(data.MobilePhone)
+            editBusinessPhoneNumberValue.setText(data.BusinessHomePhone)
             editHomePhoneNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
-            editMobileNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
+            editMobilePhoneValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
+            editBusinessPhoneNumberValue.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
             editAns1Value.setText(data.HintsAns)
             editAns2Value.setText(data.HintsAns2)
             txtQues1Value.text =
@@ -295,6 +307,20 @@ class MyProfile : BaseActivity() {
             txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
             txtCommunicationAddressValue.text = data.CommunicationAddress
             txtCommunicationAddressValue.setTextColor(resources.getColor(R.color.colorBlack))
+
+            if (data.BillingPreference.equals("1")) {
+                rb_paperless_bill.isChecked = true
+                rb_paper_bill.isChecked = false
+                rb_both_bill.isChecked = false
+            } else if (data.BillingPreference.equals("2")) {
+                rb_paperless_bill.isChecked = false
+                rb_paper_bill.isChecked = true
+                rb_both_bill.isChecked = false
+            } else if (data.BillingPreference.equals("3")) {
+                rb_paperless_bill.isChecked = false
+                rb_paper_bill.isChecked = false
+                rb_both_bill.isChecked = true
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -428,7 +454,7 @@ class MyProfile : BaseActivity() {
         try {
             var allValid = true
             if (editEmail.text!!.isEmpty()) {
-                showSuccessPopup("Please enter Email")
+                showSuccessPopup(getString(R.string.error_message_enter_email))
                 !allValid
                 return
             } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString())) {
@@ -443,11 +469,11 @@ class MyProfile : BaseActivity() {
                 showSuccessPopup("Please enter 10 digits Home Phone Number")
                 !allValid
                 return
-            } else if (editMobileNumberValue.text!!.isEmpty()) {
+            } else if (editMobilePhoneValue.text!!.isEmpty()) {
                 showSuccessPopup("Please enter Mobile Number")
                 !allValid
                 return
-            } else if (!editMobileNumberValue.text!!.isEmpty() && editMobileNumberValue.text!!.length < 10) {
+            } else if (!editMobilePhoneValue.text!!.isEmpty() && editMobilePhoneValue.text!!.length < 10) {
                 showSuccessPopup("Please enter 10 digits Mobile Number")
                 !allValid
                 return
