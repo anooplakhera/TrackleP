@@ -159,7 +159,7 @@
                         android:src="@drawable/ic_info" />
                 </LinearLayout>
                 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editAccountNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
                         android:src="@drawable/ic_info" />
                 </LinearLayout>
                 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editMeterNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -265,7 +265,7 @@
                         android:src="@drawable/ic_info" />
                 </LinearLayout>
                 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editServiceZipCode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -319,7 +319,7 @@
                         android:visibility="gone" />
                 </LinearLayout>
                 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -356,7 +356,7 @@
                     android:text="@string/password"
                     android:textColor="@color/colorBlack" />
                 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -395,7 +395,7 @@
                     android:text="@string/confirm_pass"
                     android:textColor="@color/colorBlack" />
                 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editCPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -415,7 +415,7 @@
     
     </ScrollView>
     
-    <android.support.v7.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSubmitRegister"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"

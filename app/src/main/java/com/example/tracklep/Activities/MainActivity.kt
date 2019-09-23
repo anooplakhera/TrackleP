@@ -4,9 +4,9 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.view.GravityCompat
 import android.view.Gravity
 import android.view.View
+import androidx.core.view.GravityCompat
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -133,7 +133,6 @@ class MainActivity : BaseActivity(), AnimationListener {
     private fun clickPerform() {
         try {
             lytAccount.setOnClickListener(View.OnClickListener {
-
                 startActivity(Intent(this, MyProfile::class.java))
             })
 //        lytAccount.setOnClickListener {
@@ -301,6 +300,8 @@ class MainActivity : BaseActivity(), AnimationListener {
                                 WaterUsageData.clearArrayList()
                                 WaterUsageData.addArrayList(data)
 
+
+                                AppLog.printLog("Index_Zero"+ Gson().toJson(data[0]))
                                 AppPrefences.setMeterUsageData(this@MainActivity, data[0])
 
                                 setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
@@ -328,8 +329,7 @@ class MainActivity : BaseActivity(), AnimationListener {
 
     fun setMeterData(data: ResponseModelClasses.WaterUsages.Results1.TableOne) {
         try {
-            txtUsagesMessage.text =
-                "You have consumed " + data.AVERAGE + " Gallons water so far this calendar month"
+            txtUsagesMessage.text = "You have consumed " + data.AVERAGE + " Gallons water so far this calendar month"
             txtMeterValue.text = data.AVERAGE + "\nGallons"
             AppLog.printLog(data.AllocationValue + " " + data.AVERAGE)
             arc_progress.progress =

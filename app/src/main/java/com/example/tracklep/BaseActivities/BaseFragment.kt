@@ -2,10 +2,10 @@ package com.example.tracklep.BaseActivities
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.View
 
-public abstract class BaseFragment : Fragment() {
+public abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
 
     private var mActivity: BaseActivity? = null

@@ -3,7 +3,7 @@ package com.example.tracklep.Activities
 import android.content.Intent
 import android.graphics.RectF
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -322,7 +322,9 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             chartUsage.groupBars(0F, groupSpace, barSpace)
             chartUsage.data.isHighlightEnabled = false
             chartUsage.invalidate()
-
+            chartUsage.setFitBars(true)
+//            chartUsage.setScaleEnabled(false);
+//            chartUsage.isDoubleTapToZoomEnabled = false;
 
             val l = chartUsage.legend
             l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
@@ -334,7 +336,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             l.yEntrySpace = 0f
             l.textSize = 10f
 
-            chartUsage.getLegend().setEnabled(false);   // Hide the legend
+            chartUsage.legend.isEnabled = false;   // Hide the legend
             //X-axis
             val xAxis = chartUsage.xAxis
             xAxis.granularity = 1f

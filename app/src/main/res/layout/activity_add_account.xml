@@ -55,7 +55,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/utility_account_number" />
                 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editUtilAccountNo"
                     android:layout_below="@id/txtUtilAcc"
                     android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/meter_number" />
                 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editMeterNumberValue"
                     android:layout_below="@id/txtMeterNumber"
                     android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:text="@string/postal_code" />
                 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/editPostalCode"
                     android:layout_below="@id/txtPostalCode"
                     android:layout_width="match_parent"
@@ -138,7 +138,7 @@
             
             </RelativeLayout>
             
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAddAccountSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"

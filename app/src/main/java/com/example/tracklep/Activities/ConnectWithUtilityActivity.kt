@@ -5,9 +5,9 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.LinearLayout
@@ -35,7 +35,7 @@ import retrofit2.Response
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.support.v4.app.ActivityCompat
+import androidx.core.app.ActivityCompat
 import com.example.tracklep.DataClasses.UtilitiesData
 
 
@@ -261,7 +261,10 @@ class ConnectWithUtilityActivity : BaseActivity() {
 
         val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         dialog.dialogRecycleView.layoutManager = layoutManager as RecyclerView.LayoutManager?
-        val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val itemDecor = DividerItemDecoration(
+            this,
+            DividerItemDecoration.VERTICAL
+        )
         dialog.dialogRecycleView.addItemDecoration(itemDecor)
         val mAdapter = ConnectMeListAdapter() { position ->
             val data = ConnectMeData.getArrayItem(position)

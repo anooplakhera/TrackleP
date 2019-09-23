@@ -140,7 +140,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:text="@string/daily_limit" />
                     
-                    <android.support.v7.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/editDailyLimit"
                         android:layout_below="@id/txtDailyLimit"
                         android:layout_width="match_parent"
@@ -179,7 +179,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:text="@string/monthly_limit" />
                     
-                    <android.support.v7.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/editMonthlyLimit"
                         android:layout_below="@id/txtMonthlyLimit"
                         android:layout_width="match_parent"

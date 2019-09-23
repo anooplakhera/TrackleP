@@ -84,7 +84,7 @@ class BillingActivity : BaseActivity() {
                     getHeader(),
                     ApiUrls.getJSONRequestBody(
                         RequestClass.getBillingDetailsRequestModel(
-                            AppPrefences.getAccountNumber(this),AppPrefences.getDataBaseInfo(this)!!
+                            AppPrefences.getAccountNumber(this), AppPrefences.getDataBaseInfo(this)!!
                         )
                     )
                 )
@@ -167,20 +167,19 @@ class BillingActivity : BaseActivity() {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy", Locale.ENGLISH)
                         val formatter2 = DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH)
-                        val date =
-                            LocalDate.parse(data[i].Value.toString(), formatter)
+                        val date = LocalDate.parse(data[i].Value.toString(), formatter)
                         val currentDate = LocalDate.now()
                         val dueDays = ChronoUnit.DAYS.between(currentDate, date)
                         val format_date = date.format(formatter2)
-                        AppLog.printLog("Updated Date: " + date.toString())
-                        AppLog.printLog("Formatted Date: " + format_date.toString())
-                        AppLog.printLog("Days Due: " + dueDays)
-                        txtPaymentDueDateMain.text = "Due Date: " + format_date.toString()
+                        AppLog.printLog("Updated Date: $date")
+                        AppLog.printLog("Formatted Date: $format_date")
+                        AppLog.printLog("Days Due: $dueDays")
+                        txtPaymentDueDateMain.text = "Due Date: $format_date"
 
                         if (dueDays.toInt() < 0)
                             txtMeterValue.text = (dueDays.toInt() * -1).toString() + " days due"
                         else
-                            txtMeterValue.text = dueDays.toString() + " days left"
+                            txtMeterValue.text = "$dueDays days left"
 
                         arc_progress.progress =
                             Utils.getProgressValue(30.0, 12.0)

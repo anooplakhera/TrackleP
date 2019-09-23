@@ -109,7 +109,7 @@
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/home_phone_number" />
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/editHomePhoneNumberValue"
                             android:layout_below="@id/txtHomePhoneNumberLabel"
                             android:layout_width="match_parent"
@@ -162,7 +162,7 @@
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/mobile_number" />
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/editMobileNumberValue"
                             android:layout_below="@id/txtMobileNumberLabel"
                             android:layout_width="match_parent"
@@ -216,7 +216,7 @@
                             android:text="@string/email_address" />
                         
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/editEmail"
                             android:layout_below="@id/txtEmail"
                             android:layout_width="match_parent"
@@ -384,7 +384,7 @@
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/security_ans1" />
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/editAns1Value"
                             android:layout_below="@id/txtAns1Label"
                             android:layout_width="match_parent"
@@ -484,7 +484,7 @@
                             android:textColor="@color/commonLabelTextColor"
                             android:text="@string/security_ans2" />
                         
-                        <android.support.v7.widget.AppCompatEditText
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/editAns2Value"
                             android:layout_below="@id/txtAns2Label"
                             android:layout_width="match_parent"
@@ -501,7 +501,7 @@
                 </LinearLayout>
             </LinearLayout>
             
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSaveProfile"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"

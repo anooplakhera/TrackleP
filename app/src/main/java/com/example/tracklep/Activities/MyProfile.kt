@@ -6,10 +6,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
 import android.view.ViewGroup
@@ -316,7 +316,10 @@ class MyProfile : BaseActivity() {
 
             val layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
             dialog.dialogRecycleView.layoutManager = layoutManager
-            val itemDecor = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+            val itemDecor = DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
             dialog.dialogRecycleView.addItemDecoration(itemDecor)
             val mAdapter = QuestionListAdapter { position ->
                 val data = SecurityQuestionData.getArrayItem(position)

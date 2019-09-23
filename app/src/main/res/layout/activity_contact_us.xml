@@ -376,7 +376,7 @@
                         android:text="Customer Name"
                         android:textColor="@color/colorBlack" />
                     
-                    <android.support.v7.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/editCustomerName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -406,7 +406,7 @@
                         android:text="Service Account Number"
                         android:textColor="@color/colorBlack" />
                     
-                    <android.support.v7.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/editServiceAccNum"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -436,7 +436,7 @@
                         android:text="Email"
                         android:textColor="@color/colorBlack" />
                     
-                    <android.support.v7.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/editCustomerEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -512,7 +512,7 @@
                         android:text="@string/subject"
                         android:textColor="@color/colorBlack" />
                     
-                    <android.support.v7.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/editSubjectValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -543,7 +543,7 @@
                         android:text="Message"
                         android:textColor="@color/colorBlack" />
                     
-                    <android.support.v7.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/editMessageValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -559,7 +559,7 @@
                 
                 </RelativeLayout>
                 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnConnectMeSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"

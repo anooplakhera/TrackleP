@@ -3,7 +3,7 @@ package com.example.tracklep.Utils;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 public class StatusBar {
 

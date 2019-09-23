@@ -116,7 +116,7 @@
                                     custom:arc_finished_color="@color/colorProgress"
                                     custom:arc_unfinished_color="@color/colorWhiteGray3" />
                                 
-                                <android.support.v7.widget.AppCompatTextView
+                                <androidx.appcompat.widget.AppCompatTextView
                                     android:visibility="visible"
                                     android:id="@+id/txtMeterValue"
                                     android:layout_width="wrap_content"
@@ -628,7 +628,7 @@
                         android:textColor="@color/colorLightBlack" />
                 </LinearLayout>
                 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnPayNow"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_40"
