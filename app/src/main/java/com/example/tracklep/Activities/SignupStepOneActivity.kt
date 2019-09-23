@@ -130,7 +130,7 @@ class SignupStepOneActivity : BaseActivity() {
                 !allValid
                 return
             } else if (editEmail.text!!.isEmpty()) {
-                showSuccessPopup("Please enter Email")
+                showSuccessPopup(getString(R.string.error_message_enter_email))
                 !allValid
                 return
             } else if (!editEmail.text!!.isEmpty() && !Utils.isValidEmail(editEmail.text.toString().trim())) {

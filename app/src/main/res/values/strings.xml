@@ -6,10 +6,10 @@
     <string name="login_title">Hey There, Welcome to</string>
     <string name="remember_me">Remember Me</string>
     <string name="login">Login</string>
-    <string name="email_address">Email Address</string>
+    <string name="email_address">Email</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="forgot_password">Forgot Password?</string>
+    <string name="forgot_password">Forgot Password</string>
     <string name="register_now">Register Now</string>
     <string name="pay_bill">Pay Bill</string>
     <string name="connect_with_utility">Connect with Agency</string>
@@ -58,12 +58,15 @@
     <string name="home_phone_number">Home Phone Number</string>
     <string name="phone_number">Phone Number</string>
     <string name="mobile_number">Mobile Number</string>
+    <string name="business_phone_number">Business Phone Number</string>
+    <string name="security_questions">Security Questions</string>
     <string name="address">Communication Address</string>
     <string name="add_account">Add Account</string>
+    <string name="billing_preference">Billing Preference</string>
     
     
     <!--Navigation Menu-->
-    <string name="nav_menu_1">Connect with EOCWD</string>
+    <string name="nav_menu_1">Connect with East Orange County Water District</string>
     <string name="nav_menu_2">Company Website</string>
     <string name="nav_menu_3">Payment Locations</string>
     <string name="nav_menu_4">Visit Facebook</string>
@@ -105,7 +108,7 @@
     <string name="billing_period">Billing Period</string>
     <string name="billing_period_from">Billing Period From</string>
     <string name="billing_period_to">Billing Period To</string>
-    <string name="account_information">Account Information</string>
+    <string name="account_information">Contact Information</string>
     <string name="n_a">N/A</string>
     <string name="current_meter_reading">Current Meter Reading</string>
     <string name="total_water_usage">Total Water Usage</string>
@@ -162,5 +165,6 @@
     <string name="emergency_number">Emergency Number</string>
     <string name="connect_address">Address</string>
     <string name="password_validation_message">Password must be atleast 8 characters(1 special letter, 1 number, 1 capital letter.</string>
+    <string name="error_message_enter_email">Please enter Email</string>
 
 </resources>
