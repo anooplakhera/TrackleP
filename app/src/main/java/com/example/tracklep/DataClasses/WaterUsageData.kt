@@ -5,8 +5,7 @@ import com.example.tracklep.Utils.Utils
 
 object WaterUsageData {
     var mArrayList: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>? = null
-    var mArrayListHourly: ArrayList<ResponseModelClasses.WaterUsagesHourly.Results1.TableOne>? =
-        null
+    var mArrayListHourly: ArrayList<ResponseModelClasses.WaterUsagesHourly.Results1.TableOne>? = null
 
     init {
         if (mArrayList == null)
@@ -99,7 +98,8 @@ object WaterUsageData {
         var array = ArrayList<String>()
         try {
             for (i in 0 until getCountHourly()) {
-                array.add(Utils.parseDateToddMMyyyy(mArrayListHourly?.get(i)!!.UsageDate))
+//                array.add(Utils.parseDateToddMMyyyy(mArrayListHourly?.get(i)!!.UsageDate))
+                array.add(mArrayListHourly?.get(i)!!.Hourly)
 //                array.add(mArrayList?.get(i)!!.UsageDate)
             }
         } catch (e: Exception) {

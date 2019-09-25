@@ -171,12 +171,12 @@ object ResponseModelClasses {
     ) {
         data class Results1(
             val Table: List<TableOne>
-
         ) {
             data class TableOne(
                 /*val Month: String,
                 val Year: String,*/
                 val TotalValue: String,
+                val Hourly: String,
                 val ZipCode: String,
                 val AVERAGE: String,
                 val HIGHEST: String,

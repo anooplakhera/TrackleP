@@ -3,11 +3,11 @@ package com.example.tracklep.Activities
 import android.content.Intent
 import android.graphics.RectF
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -50,7 +50,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_usage)
         window.decorView.systemUiVisibility =
-            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         try {
             txtCABtitle.text = getString(R.string.track_usage)
 
@@ -162,6 +162,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 //                resetAlpha()
                 mMode = "H"
 //                checkIsAMI()
+                imgCalendar.visibility = View.VISIBLE
                 getWaterUsageHourly()
             }
 
@@ -170,7 +171,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 lytHourly.alpha = 1.0f
                 lytMonthly.alpha = 1.0f
                 lytBiMonthly.alpha = 1.0f
-
+                imgCalendar.visibility = View.VISIBLE
                 mMode = "D"
 //                checkIsAMI()
                 getWaterUsage()
@@ -182,6 +183,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 lytDaily.alpha = 1.0f
                 lytBiMonthly.alpha = 1.0f
 
+                imgCalendar.visibility = View.GONE
                 mMode = "M"
 //                checkIsAMI()
                 getWaterUsage()
@@ -193,6 +195,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 lytMonthly.alpha = 1.0f
                 lytDaily.alpha = 1.0f
 
+                imgCalendar.visibility = View.GONE
                 mMode = "B"
 //                checkIsAMI()
                 getWaterUsage()
@@ -243,9 +246,11 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txtHighestThisPeriodValue.text =
                         WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit
 
-                    txtLowestThisPeriodValue.text =WaterUsageData.mArrayListHourly?.get(0)?.LOWEST + " " + selectedUnit
-                    txtSoFartThisMonthValue.text = WaterUsageData.mArrayListHourly?.get(0)?.TotalValue + " " + selectedUnit
-                    txtProjectedUsageValue.text = WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                    txtLowestThisPeriodValue.text = WaterUsageData.mArrayListHourly?.get(0)?.LOWEST + " " + selectedUnit
+                    txtSoFartThisMonthValue.text =
+                        WaterUsageData.mArrayListHourly?.get(0)?.TotalValue + " " + selectedUnit
+                    txtProjectedUsageValue.text =
+                        WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
                 }
                 txt_date_from_to_usage.text = WaterUsageData.mArrayListHourly?.get(0)?.UsageDate
             } else {
@@ -255,7 +260,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txtLowestThisPeriodValue.text = selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.LOWEST
                     txtSoFartThisMonthValue.text = selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
-                        WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
+                            WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
                 } else {
                     txtHighestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit
                     txtLowestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.LOWEST + " " + selectedUnit
@@ -379,7 +384,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 if (selectedUnit == "$") {
                     txtHighestThisPeriodValue.text = selectedUnit + "" +
                             WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST
-                    txtLowestThisPeriodValue.text = selectedUnit + "" +  WaterUsageData.mArrayListHourly?.get(0)?.LOWEST
+                    txtLowestThisPeriodValue.text = selectedUnit + "" + WaterUsageData.mArrayListHourly?.get(0)?.LOWEST
                     txtSoFartThisMonthValue.text = selectedUnit + "" +
                             WaterUsageData.mArrayListHourly?.get(0)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
@@ -400,7 +405,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txtSoFartThisMonthValue.text = selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
                             WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
-                }else {
+                } else {
                     txtHighestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit
                     txtLowestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.LOWEST + " " + selectedUnit
                     txtSoFartThisMonthValue.text = WaterUsageData.mArrayList?.get(0)?.TotalValue + " " + selectedUnit

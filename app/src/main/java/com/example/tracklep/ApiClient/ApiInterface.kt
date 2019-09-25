@@ -61,7 +61,9 @@ interface ApiInterface {
 
     @POST(ApiUrls.CompareSpending + "/{AccountNumber}" + "/{unit}")
     fun getCompareSpendingDetails(
-        @Header(ApiUrls.Authorization) auth: String/*, @Header("unit") unit: String*/, @Body bodyMap: RequestBody, @Path("AccountNumber") value: String,@Path("unit") unit1: String
+        @Header(ApiUrls.Authorization) auth: String/*, @Header("unit") unit: String*/, @Body bodyMap: RequestBody, @Path(
+            "AccountNumber"
+        ) value: String, @Path("unit") unit1: String
     ): Call<ResponseModelClasses.CompareDataResponse>
 
     @FormUrlEncoded
