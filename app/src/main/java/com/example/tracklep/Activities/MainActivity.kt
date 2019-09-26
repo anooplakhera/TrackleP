@@ -36,7 +36,7 @@ class MainActivity : BaseActivity(), AnimationListener {
     }
 
     private var mType = "G"
-    private var mMode = "D"
+    private var mMode = "M"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
