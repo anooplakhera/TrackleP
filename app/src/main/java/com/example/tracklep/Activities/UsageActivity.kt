@@ -1,5 +1,6 @@
 package com.example.tracklep.Activities
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.RectF
 import android.os.Bundle
@@ -37,6 +38,9 @@ import kotlinx.android.synthetic.main.custom_action_bar.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     AdapterView.OnItemSelectedListener {
@@ -45,6 +49,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     private var mType = "W"
     private var mMode = "H"
     private var selectedUnit = "CCF"
+    var myCalendar = Calendar.getInstance();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +83,13 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
         }
     }
 
+    private fun updateDateInView() {
+        val myFormat = "MM/dd/yyyy" // mention the format you need
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        showToast(sdf.format(myCalendar.getTime()))
+//        textview_date!!.text = sdf.format(cal.getTime())
+    }
+
     private fun checkIsAMI() {
         try {
             if (AppPrefences.getIsAMI(this) == null) {
@@ -105,8 +117,35 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
         }
     }
 
+    fun date(): DatePickerDialog.OnDateSetListener {
+        var dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, monthOfYear)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateDateInView()
+        }
+        return dateSetListener
+    }
+
     private fun clickPerform() {
         try {
+
+            imgCalendar.setOnClickListener {
+                var picker = DatePickerDialog(
+                    this@UsageActivity,
+                    date(),
+                    // set DatePickerDialog to point to today's date when it loads up
+                    myCalendar.get(Calendar.YEAR),
+                    myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)
+                )
+                picker.datePicker.maxDate = System.currentTimeMillis()
+                picker.show()
+
+
+            }
+            // create an OnDateSetListener
+
             txtCCF.setOnClickListener {
                 txtGallon.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
                 txtCCF.background = getDrawable(R.drawable.tab_rounded_corner_selected)
