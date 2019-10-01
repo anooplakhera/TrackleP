@@ -56,7 +56,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:gravity="bottom"
-                        android:src="@drawable/ic_menu_icon" />
+                        android:src="@drawable/ic_more_vert_white" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -241,20 +241,20 @@
                                             android:layout_width="@dimen/dp_50"
                                             android:layout_height="@dimen/dp_50"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_account"
+                                            android:src="@mipmap/dash_account"
                                             android:visibility="gone" />
 
                                     <com.mikhaellopez.circularimageview.CircularImageView
                                             android:layout_width="@dimen/dp_55"
                                             android:layout_height="@dimen/dp_55"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_account"
+                                            android:src="@mipmap/dash_account"
                                             app:civ_border_color="#ffffff"
                                             app:civ_border_width="4dp"
                                             app:civ_circle_color="#ffffff"
                                             app:civ_shadow="true"
                                             app:civ_shadow_color="#ffffff"
-                                            app:civ_shadow_radius="10" />
+                                            app:civ_shadow_radius="5" />
 
                                     <TextView
                                             android:layout_width="match_parent"
@@ -281,14 +281,14 @@
                                             android:layout_width="@dimen/dp_50"
                                             android:layout_height="@dimen/dp_50"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_billing"
+                                            android:src="@mipmap/dash_billing"
                                             android:visibility="gone" />
 
                                     <com.mikhaellopez.circularimageview.CircularImageView
                                             android:layout_width="@dimen/dp_55"
                                             android:layout_height="@dimen/dp_55"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_billing"
+                                            android:src="@mipmap/dash_billing"
                                             app:civ_border_color="#ffffff"
                                             app:civ_border_width="4dp"
                                             app:civ_circle_color="#ffffff"
@@ -322,14 +322,14 @@
                                             android:layout_width="@dimen/dp_50"
                                             android:layout_height="@dimen/dp_50"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_connect"
+                                            android:src="@mipmap/dash_connect"
                                             android:visibility="gone" />
 
                                     <com.mikhaellopez.circularimageview.CircularImageView
                                             android:layout_width="@dimen/dp_55"
                                             android:layout_height="@dimen/dp_55"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_connect"
+                                            android:src="@mipmap/dash_connect"
                                             app:civ_border_color="#ffffff"
                                             app:civ_border_width="4dp"
                                             app:civ_circle_color="#ffffff"
@@ -369,14 +369,14 @@
                                             android:layout_width="@dimen/dp_50"
                                             android:layout_height="@dimen/dp_50"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_usage"
+                                            android:src="@mipmap/dash_usage"
                                             android:visibility="gone" />
 
                                     <com.mikhaellopez.circularimageview.CircularImageView
                                             android:layout_width="@dimen/dp_55"
                                             android:layout_height="@dimen/dp_55"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_usage"
+                                            android:src="@mipmap/dash_usage"
                                             app:civ_border_color="#ffffff"
                                             app:civ_border_width="4dp"
                                             app:civ_circle_color="#ffffff"
@@ -409,14 +409,14 @@
                                             android:layout_width="@dimen/dp_50"
                                             android:layout_height="@dimen/dp_50"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_comapre"
+                                            android:src="@mipmap/dash_comapre"
                                             android:visibility="gone" />
 
                                     <com.mikhaellopez.circularimageview.CircularImageView
                                             android:layout_width="@dimen/dp_55"
                                             android:layout_height="@dimen/dp_55"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_comapre"
+                                            android:src="@mipmap/dash_comapre"
                                             app:civ_border_color="#ffffff"
                                             app:civ_border_width="4dp"
                                             app:civ_circle_color="#ffffff"
@@ -449,14 +449,14 @@
                                             android:layout_width="@dimen/dp_50"
                                             android:layout_height="@dimen/dp_50"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_conservation"
+                                            android:src="@mipmap/dash_conservation"
                                             android:visibility="gone" />
 
                                     <com.mikhaellopez.circularimageview.CircularImageView
                                             android:layout_width="@dimen/dp_55"
                                             android:layout_height="@dimen/dp_55"
                                             android:layout_gravity="top|center"
-                                            android:src="@drawable/dash_conservation"
+                                            android:src="@mipmap/dash_conservation"
                                             app:civ_border_color="#ffffff"
                                             app:civ_border_width="4dp"
                                             app:civ_circle_color="#ffffff"
@@ -476,7 +476,7 @@
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>
+                    </LinearLayout>c
                 </RelativeLayout>
 
             </ScrollView>

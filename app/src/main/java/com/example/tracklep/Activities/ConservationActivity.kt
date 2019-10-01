@@ -11,9 +11,9 @@ import kotlinx.android.synthetic.main.custom_action_bar.*
 class ConservationActivity : BaseActivity() {
 
     val imageArray = intArrayOf(
-        R.drawable.conserve_water,
-        R.drawable.connect_blue,
-        R.drawable.conserve_water
+        R.drawable.conservation1,
+        R.drawable.conservation2,
+        R.drawable.conservation3
     )
     val backgroundColorArray = intArrayOf(
         R.color.colorConservation1,

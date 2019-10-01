@@ -243,7 +243,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     ) {
 
         try {
-            val barWidth = 0.6f
+            val barWidth = 0.4f
             val barSpace = 0f
             val groupSpace = 0.4f
 
@@ -296,13 +296,13 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
             val l = chart.legend
             l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-            l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
             l.orientation = Legend.LegendOrientation.HORIZONTAL
             l.setDrawInside(false)
             l.yOffset = 20f
             l.xOffset = 0f
             l.yEntrySpace = 0f
-            l.textSize = 10f
+            l.textSize = 7f
 
             //X-axis
             val xAxis = chart.xAxis
@@ -340,7 +340,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     ) {
 
         try {
-            val barWidth: Float = 0.6f
+            val barWidth: Float = 0.4f
             val barSpace: Float = 0.2f
             val groupSpace: Float = 0.4f
             val groupCount: Int = 4
@@ -400,13 +400,13 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
             val l = chart.legend
             l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-            l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
             l.orientation = Legend.LegendOrientation.HORIZONTAL
             l.setDrawInside(false)
             l.yOffset = 20f
             l.xOffset = 0f
             l.yEntrySpace = 0f
-            l.textSize = 10f
+            l.textSize = 7f
 
             //X-axis
             val xAxis = chart.xAxis
