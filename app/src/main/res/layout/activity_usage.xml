@@ -294,7 +294,7 @@
                             android:gravity="center_vertical">
                         <ImageView android:layout_width="@dimen/dp_10"
                                    android:layout_height="10dp"
-                                   android:background="@drawable/dot_shape_green"/>
+                                   android:background="@drawable/dot_shape_green_usage"/>
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -311,7 +311,7 @@
                             android:gravity="center_vertical">
                         <ImageView android:layout_width="@dimen/dp_10"
                                    android:layout_height="10dp"
-                                   android:background="@drawable/dot_shape_red"/>
+                                   android:background="@drawable/dot_shape_red_usage"/>
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -328,7 +328,7 @@
                             android:gravity="center_vertical">
                         <ImageView android:layout_width="@dimen/dp_10"
                                    android:layout_height="10dp"
-                                   android:background="@drawable/dot_shape_blue_light"/>
+                                   android:background="@drawable/dot_shape_blue_light_usage"/>
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
