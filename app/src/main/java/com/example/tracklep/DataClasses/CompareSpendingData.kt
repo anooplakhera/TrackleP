@@ -127,7 +127,7 @@ object CompareSpendingData {
             array.add(
                 ResponseModelClasses.BarChart(
                     mArrayList1!!.get(i).Consumed.toFloat(),
-                    mArrayList1!!.get(i).AllocationValue.toFloat()
+                    mArrayList1!!.get(i).MOD.toFloat()
                 )
             )
         }
@@ -141,7 +141,7 @@ object CompareSpendingData {
             array.add(
                 ResponseModelClasses.BarChart(
                     mArrayList2!!.get(i).Consumed.toFloat(),
-                    mArrayList2!!.get(i).AllocationValue.toFloat()
+                    mArrayList2!!.get(i).MOD.toFloat()
                 )
             )
         }
@@ -155,7 +155,7 @@ object CompareSpendingData {
             array.add(
                 ResponseModelClasses.BarChart(
                     mArrayList3!!.get(i).Consumed.toFloat(),
-                    mArrayList3!!.get(i).AllocationValue.toFloat()
+                    mArrayList3!!.get(i).MOD.toFloat()
                 )
             )
         }
@@ -169,7 +169,7 @@ object CompareSpendingData {
             array.add(
                 ResponseModelClasses.BarChart(
                     mArrayList4!!.get(i).Consumed.toFloat(),
-                    mArrayList4!!.get(i).AllocationValue.toFloat()
+                    mArrayList4!!.get(i).MOD.toFloat()
                 )
             )
         }
@@ -181,8 +181,7 @@ object CompareSpendingData {
         val array = ArrayList<String>()
         for (i in 0 until getCount2()) {
             array.add(
-                Utils.getNameOfMonth(mArrayList2!!.get(i).MOD)// + ", " + mArrayList2!!.get(i).YOD)
-            )
+                Utils.getNameOfMonth(mArrayList2!!.get(i).MOD) + ", " + mArrayList2!!.get(i).YOD)
         }
         return array
     }

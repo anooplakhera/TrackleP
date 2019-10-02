@@ -3,6 +3,7 @@ package com.example.tracklep.Activities
 import android.graphics.RectF
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
@@ -54,6 +55,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             getCompareDetails()
 
             clickPerform()
+            getLegendView("MC")
 
             resetAlpha()
 
@@ -74,6 +76,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 getCompareDetails()
                 txtChartDesc.setText(R.string.compare_ccf)
                 resetAlpha()
+                getLegendView("MC")
             }
             txtGallon.setOnClickListener {
                 txtGallon.setBackground(resources.getDrawable(R.drawable.tab_rounded_corner_selected))
@@ -84,6 +87,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 getCompareDetails()
                 txtChartDesc.setText(R.string.compare_gallon)
                 resetAlpha()
+                getLegendView("MC")
 
             }
 
@@ -96,6 +100,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 getCompareDetails()
                 txtChartDesc.setText(R.string.compare_dollar)
                 resetAlpha()
+                getLegendView("MC")
 
             }
 
@@ -109,6 +114,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                     getString(R.string.c_previous_year)
                 )
                 resetAlpha()
+                getLegendView("MC")
 
                 txt_date_from_to.text = CompareSpendingData.getCompareMeTitle()
             }
@@ -127,6 +133,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 lytCompareUtility.alpha = 1.0f
                 lytCompareAll.alpha = 1.0f
 
+                getLegendView("CN")
                 txt_date_from_to.text = CompareSpendingData.getZipTitle()
             }
 
@@ -144,6 +151,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 lytCompareUtility.alpha = selectedAlpha
                 lytCompareAll.alpha = 1.0f
 
+                getLegendView("CE")
                 txt_date_from_to.text = CompareSpendingData.getUtilityTitle()
             }
 
@@ -160,6 +168,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                 lytCompareMe.alpha = 1.0f
                 lytCompareUtility.alpha = 1.0f
 
+                getLegendView("CV")
                 lytCompareAll.alpha = selectedAlpha
             }
         } catch (e: Exception) {
@@ -205,6 +214,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                             CompareSpendingData.addArrayList5(response.body()!!.Results.Table4)
                             AppLog.printLog("getCompareDetails: " + Gson().toJson(response.body()));
 
+                            txt_date_from_to.text = CompareSpendingData.getCompareMeTitle()
                             setChartData(
                                 CompareSpendingData.getCurrentBar(),
                                 CompareSpendingData.getPreviousBar(),
@@ -212,7 +222,6 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                                 getString(R.string.c_this_year),
                                 getString(R.string.c_previous_year)
                             )
-                            txt_date_from_to.text = CompareSpendingData.getCompareMeTitle()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -235,6 +244,30 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
         showToast(getString(R.string.internet))
     }
 
+    private fun getLegendView(type: String) {
+        if (type == "MC") {
+            lytLegendGreen.visibility = View.VISIBLE
+            lytLegendRed.visibility = View.VISIBLE
+            lytLegendBlueDark.visibility = View.GONE
+            lytLegendBlueLight.visibility = View.GONE
+        } else if (type == "CN") {
+            lytLegendGreen.visibility = View.VISIBLE
+            lytLegendRed.visibility = View.GONE
+            lytLegendBlueDark.visibility = View.VISIBLE
+            lytLegendBlueLight.visibility = View.GONE
+        } else if (type == "CE") {
+            lytLegendGreen.visibility = View.VISIBLE
+            lytLegendRed.visibility = View.GONE
+            lytLegendBlueDark.visibility = View.GONE
+            lytLegendBlueLight.visibility = View.VISIBLE
+        } else if (type == "CV") {
+            lytLegendGreen.visibility = View.VISIBLE
+            lytLegendRed.visibility = View.VISIBLE
+            lytLegendBlueDark.visibility = View.VISIBLE
+            lytLegendBlueLight.visibility = View.VISIBLE
+        }
+    }
+
     private fun setChartData(
         bar1: ArrayList<ResponseModelClasses.BarChart>,
         bar2: ArrayList<ResponseModelClasses.BarChart>,
@@ -243,7 +276,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     ) {
 
         try {
-            val barWidth = 0.6f
+            val barWidth = 0.4f
             val barSpace = 0f
             val groupSpace = 0.4f
 
@@ -284,8 +317,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.data = data
             chart.barData.barWidth = barWidth
             chart.xAxis.axisMinimum = 0F
-            chart.xAxis.axisMaximum =
-                0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
+            chart.xAxis.axisMaximum = 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
             chart.setVisibleXRangeMaximum(10F); // allow 20 values to be displayed at once on the x-axis, not more
             chart.moveViewToX(10F);
@@ -294,15 +326,20 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.data.isHighlightEnabled = false
             chart.invalidate()
 
+
+            chart.legend.isEnabled = false;   // Hide the legend
+            chart.isDoubleTapToZoomEnabled = false //Disable double click zoom
+
+
             val l = chart.legend
-            l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-            l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+            l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
             l.orientation = Legend.LegendOrientation.HORIZONTAL
             l.setDrawInside(false)
             l.yOffset = 20f
             l.xOffset = 0f
             l.yEntrySpace = 0f
-            l.textSize = 10f
+            l.textSize = 7f
 
             //X-axis
             val xAxis = chart.xAxis
@@ -340,17 +377,21 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     ) {
 
         try {
-            val barWidth: Float = 0.6f
-            val barSpace: Float = 0.2f
-            val groupSpace: Float = 0.4f
-            val groupCount: Int = 4
+            val barWidth = 0.4f
+            val barSpace = 0.2f
+            val groupSpace = 0.4f
 
             chart.description = null;
+
             chart.setPinchZoom(false);
-            chart.setScaleEnabled(false);
+            chart.setScaleEnabled(true);
             chart.setDrawBarShadow(false);
-            chart.setDrawGridBackground(false);
-            chart.setVisibleXRangeMaximum(5f)
+
+//            chart.setPinchZoom(false);
+//            chart.setScaleEnabled(false);
+//            chart.setDrawBarShadow(false);
+//            chart.setDrawGridBackground(false);
+//            chart.setVisibleXRangeMaximum(5f)
             chart.isHorizontalScrollBarEnabled = true
             //chart.canScrollHorizontally(1)
             chart.animateXY(1000, 1000);
@@ -398,15 +439,19 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.data.isHighlightEnabled = false
             chart.invalidate()
 
+
+            chart.legend.isEnabled = false;   // Hide the legend
+            chart.isDoubleTapToZoomEnabled = false //Disable double click zoom
+
             val l = chart.legend
-            l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-            l.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+            l.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
             l.orientation = Legend.LegendOrientation.HORIZONTAL
             l.setDrawInside(false)
             l.yOffset = 20f
             l.xOffset = 0f
             l.yEntrySpace = 0f
-            l.textSize = 10f
+            l.textSize = 7f
 
             //X-axis
             val xAxis = chart.xAxis

@@ -52,6 +52,7 @@ class MyProfile : BaseActivity() {
         try {
             txtCABtitle.text = getString(R.string.my_account)
             imgCABadd.visibility = View.VISIBLE
+            imgCABadd.setBackgroundResource(R.drawable.ic_add)
             imgCABback.setOnClickListener {
                 finish()
             }

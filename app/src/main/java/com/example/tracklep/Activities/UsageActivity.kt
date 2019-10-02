@@ -42,12 +42,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
-    AdapterView.OnItemSelectedListener {
+class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.OnItemSelectedListener {
 
     private var selectedAlpha = 0.5f
     private var mType = "W"
-    private var mMode = "H"
+    private var mMode = "B"
     private var selectedUnit = "CCF"
     var myCalendar = Calendar.getInstance();
 
@@ -59,14 +58,14 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
         try {
             txtCABtitle.text = getString(R.string.track_usage)
 
-
             imgCABback.setOnClickListener {
                 finish()
             }
+
+            imgCABadd.setBackgroundResource(R.drawable.usage_notification)
             imgCABadd.setOnClickListener {
                 startActivity(Intent(this, UsageNotificationActivity::class.java))
             }
-
 
             clickPerform()
 
@@ -76,7 +75,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
 
             setupSpinner()
-
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -104,10 +102,11 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     imgCABadd.visibility = View.GONE
                     getWaterUsage()
                 } else {
+                    lytBiMonthly.alpha = selectedAlpha
                     lytHourly.visibility = View.VISIBLE
                     lytDaily.visibility = View.VISIBLE
                     lytMonthly.visibility = View.VISIBLE
-                    getWaterUsageHourly()
+                    getWaterUsage()
                     imgCABadd.visibility = View.VISIBLE
                     //resetAlpha()
                 }
@@ -152,7 +151,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 txtDollar.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
 
                 mType = "W"
-                mMode = "H"
+                mMode = "B"
                 resetAlpha()
 //                checkIsAMI()
                 selectedUnit = "CCF"
@@ -168,7 +167,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 txtDollar.background = getDrawable(R.drawable.tab_rounded_corner_unselected)
 
                 mType = "G"
-                mMode = "H"
+                mMode = "B"
                 resetAlpha()
 //                checkIsAMI()
                 selectedUnit = "Gal"
@@ -183,7 +182,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 txtDollar.background = getDrawable(R.drawable.tab_rounded_corner_selected)
 
                 mType = "D"
-                mMode = "H"
+                mMode = "B"
                 resetAlpha()
 //                checkIsAMI()
                 selectedUnit = "$"
@@ -239,6 +238,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 //                checkIsAMI()
                 getWaterUsage()
             }
+
+            imgCalendar.setOnClickListener {
+                getSelectedDate()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -285,7 +288,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txtHighestThisPeriodValue.text =
                         WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit
 
-                    txtLowestThisPeriodValue.text = WaterUsageData.mArrayListHourly?.get(0)?.LOWEST + " " + selectedUnit
+                    txtLowestThisPeriodValue.text =
+                        WaterUsageData.mArrayListHourly?.get(0)?.LOWEST + " " + selectedUnit
                     txtSoFartThisMonthValue.text =
                         WaterUsageData.mArrayListHourly?.get(0)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
@@ -295,21 +299,26 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             } else {
 
                 if (selectedUnit == "$") {
-                    txtHighestThisPeriodValue.text = selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.HIGHEST
-                    txtLowestThisPeriodValue.text = selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.LOWEST
-                    txtSoFartThisMonthValue.text = selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.TotalValue
+                    txtHighestThisPeriodValue.text =
+                        selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.HIGHEST
+                    txtLowestThisPeriodValue.text =
+                        selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.LOWEST
+                    txtSoFartThisMonthValue.text =
+                        selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
                             WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
                 } else {
-                    txtHighestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit
-                    txtLowestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.LOWEST + " " + selectedUnit
-                    txtSoFartThisMonthValue.text = WaterUsageData.mArrayList?.get(0)?.TotalValue + " " + selectedUnit
+                    txtHighestThisPeriodValue.text =
+                        WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit
+                    txtLowestThisPeriodValue.text =
+                        WaterUsageData.mArrayList?.get(0)?.LOWEST + " " + selectedUnit
+                    txtSoFartThisMonthValue.text =
+                        WaterUsageData.mArrayList?.get(0)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
                         WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
                 }
                 txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod()
             }
-
 
             chartUsage.description = null
             chartUsage.setPinchZoom(false)
@@ -365,14 +374,17 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
             chartUsage.groupBars(0F, groupSpace, barSpace)
             chartUsage.data.isHighlightEnabled = false
-            chartUsage.invalidate()
             chartUsage.setFitBars(true)
 //            chartUsage.setScaleEnabled(false);
 //            chartUsage.isDoubleTapToZoomEnabled = false;
 
+            chartUsage.legend.isEnabled = false;   // Hide the legend
+            chartUsage.isDoubleTapToZoomEnabled = false //Disable double click zoom
+
+
             val l = chartUsage.legend
             l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-            l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
             l.orientation = Legend.LegendOrientation.HORIZONTAL
             l.setDrawInside(false)
             l.yOffset = 20f
@@ -380,7 +392,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             l.yEntrySpace = 0f
             l.textSize = 10f
 
-            chartUsage.legend.isEnabled = false;   // Hide the legend
             //X-axis
             val xAxis = chartUsage.xAxis
             xAxis.granularity = 1f
@@ -401,6 +412,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             leftAxis.setDrawGridLines(false)
             leftAxis.spaceTop = 35f
             leftAxis.axisMinimum = 0f
+
+            chartUsage.invalidate()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -423,7 +436,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 if (selectedUnit == "$") {
                     txtHighestThisPeriodValue.text = selectedUnit + "" +
                             WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST
-                    txtLowestThisPeriodValue.text = selectedUnit + "" + WaterUsageData.mArrayListHourly?.get(0)?.LOWEST
+                    txtLowestThisPeriodValue.text =
+                        selectedUnit + "" + WaterUsageData.mArrayListHourly?.get(0)?.LOWEST
                     txtSoFartThisMonthValue.text = selectedUnit + "" +
                             WaterUsageData.mArrayListHourly?.get(0)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
@@ -431,7 +445,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 } else {
                     txtHighestThisPeriodValue.text =
                         WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit
-                    txtLowestThisPeriodValue.text = WaterUsageData.mArrayListHourly?.get(0)?.LOWEST + " " + selectedUnit
+                    txtLowestThisPeriodValue.text =
+                        WaterUsageData.mArrayListHourly?.get(0)?.LOWEST + " " + selectedUnit
                     txtSoFartThisMonthValue.text =
                         WaterUsageData.mArrayListHourly?.get(0)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
@@ -439,15 +454,21 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 }
             } else {
                 if (selectedUnit == "$") {
-                    txtHighestThisPeriodValue.text = selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.HIGHEST
-                    txtLowestThisPeriodValue.text = selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.LOWEST
-                    txtSoFartThisMonthValue.text = selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.TotalValue
+                    txtHighestThisPeriodValue.text =
+                        selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.HIGHEST
+                    txtLowestThisPeriodValue.text =
+                        selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.LOWEST
+                    txtSoFartThisMonthValue.text =
+                        selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
                             WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
                 } else {
-                    txtHighestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit
-                    txtLowestThisPeriodValue.text = WaterUsageData.mArrayList?.get(0)?.LOWEST + " " + selectedUnit
-                    txtSoFartThisMonthValue.text = WaterUsageData.mArrayList?.get(0)?.TotalValue + " " + selectedUnit
+                    txtHighestThisPeriodValue.text =
+                        WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit
+                    txtLowestThisPeriodValue.text =
+                        WaterUsageData.mArrayList?.get(0)?.LOWEST + " " + selectedUnit
+                    txtSoFartThisMonthValue.text =
+                        WaterUsageData.mArrayList?.get(0)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
                         WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
                 }
@@ -519,11 +540,13 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
             // chartUsage.groupBars(0F, groupSpace, barSpace)
             chartUsage.data.isHighlightEnabled = false
-            chartUsage.invalidate()
 
+
+            chartUsage.legend.isEnabled = false;   // Hide the legend
+            chartUsage.isDoubleTapToZoomEnabled = false //Disable double click zoom
             val l = chartUsage.legend
             l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-            l.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+            l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
             l.orientation = Legend.LegendOrientation.HORIZONTAL
             l.setDrawInside(false)
             l.yOffset = 20f
@@ -551,6 +574,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             leftAxis.setDrawGridLines(false)
             leftAxis.spaceTop = 35f
             leftAxis.axisMinimum = 0f
+            chartUsage.invalidate()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -743,7 +767,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                             WaterUsageData.clearArrayList()
                             WaterUsageData.addArrayListHourly(data)
 
-
                             if (mType == "D") {
                                 if (mMode == "H") {
                                     setChartDataDollar(
@@ -791,10 +814,10 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     }
 
     private fun resetAlpha() {
-        lytHourly.alpha = selectedAlpha
+        lytHourly.alpha = 1.0f
         lytDaily.alpha = 1.0f
         lytMonthly.alpha = 1.0f
-        lytBiMonthly.alpha = 1.0f
+        lytBiMonthly.alpha = selectedAlpha
     }
 
     override fun onNothingSelected() {
@@ -835,5 +858,27 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     override fun onNothingSelected(arg0: AdapterView<*>) {
     }
 
+    private fun getSelectedDate() {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+        val dpd = DatePickerDialog(
+            this@UsageActivity,
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+
+                // Display Selected date in textbox
+                //lblDate.setText("" + dayOfMonth + " " + monthOfYear + ", " + year)
+                Log.e("Selected Date", "" + dayOfMonth + " " + monthOfYear + ", " + year)
+            },
+            year,
+            month,
+            day
+        )
+        dpd.getDatePicker().setMaxDate(System.currentTimeMillis())
+        dpd.show()
+    }
 }
 
