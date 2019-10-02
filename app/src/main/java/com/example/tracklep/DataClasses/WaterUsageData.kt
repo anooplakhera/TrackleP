@@ -5,7 +5,8 @@ import com.example.tracklep.Utils.Utils
 
 object WaterUsageData {
     var mArrayList: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>? = null
-    var mArrayListHourly: ArrayList<ResponseModelClasses.WaterUsagesHourly.Results1.TableOne>? = null
+    var mArrayListHourly: ArrayList<ResponseModelClasses.WaterUsagesHourly.Results1.TableOne>? =
+        null
 
     init {
         if (mArrayList == null)
@@ -111,12 +112,21 @@ object WaterUsageData {
     @Synchronized
     fun getUsagePeriod(): String {
         var title = ""
-        if (mArrayList!![0].Month != null && mArrayList!![0].Year != null) {
-            title += Utils.getNameOfMonth(mArrayList!![getCount() - 1].Month) + " " + mArrayList!![getCount() - 1].Year + " to " + Utils.getNameOfMonth(
-                mArrayList!![0].Month
-            ) + " " + mArrayList!![0].Year
-        } else {
-            title += mArrayList!![0].UsageDate
+        if (mArrayList!!.size > 0) {
+            if (mArrayList!![0].Month != null && mArrayList!![0].Year != null) {
+                title += Utils.getNameOfMonth(mArrayList!![getCount() - 1].Month) + " " + mArrayList!![getCount() - 1].Year + " to " + Utils.getNameOfMonth(
+                    mArrayList!![0].Month
+                ) + " " + mArrayList!![0].Year
+            } else {
+                title += mArrayList!![0].UsageDate
+            }
+        } else if (mArrayListHourly!!.size > 0) {
+            if (mArrayListHourly!![0].Hourly != null) {
+                title += mArrayListHourly!![getCount() - 1].Hourly + " to " + mArrayListHourly!![0].Hourly
+
+            } else {
+                title += mArrayListHourly!![0].UsageDate
+            }
         }
 
         return title

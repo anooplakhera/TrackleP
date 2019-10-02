@@ -664,7 +664,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                             var data =
                                 ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
                             data.addAll(response.body()!!.Results.Table)
-                            data.reverse()
+                            //data.reverse()
                             WaterUsageData.clearArrayList()
                             WaterUsageData.addArrayList(data)
 
