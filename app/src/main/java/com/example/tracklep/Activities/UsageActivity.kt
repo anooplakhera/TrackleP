@@ -146,7 +146,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             if (AppPrefences.getIsAMI(this) == null) {
                 getMeterDetailsAMI()
             } else {
-
                 spinnerMeter.text = AppPrefences.getMeterNumber(this)
                 if (AppPrefences.getIsAMI(this) == false) {
                     lytBiMonthly.alpha = selectedAlpha
@@ -712,8 +711,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                         dismissDialog()
                         if (response.body() != null) {
                             AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
-                            var data =
-                                ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
+                            var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
                             data.addAll(response.body()!!.Results.Table)
                             //data.reverse()
                             WaterUsageData.clearArrayList()
@@ -957,6 +955,12 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     selectedMeter = UserMeterListData.getArrayItem(position).MeterNumber
                     spinnerMeter.text = selectedMeter
                     dialog.dismiss()
+                    if (mMode == "H") {
+                        getWaterUsageHourly()
+                    } else {
+                        getWaterUsage()
+                    }
+
                 }
 
             dialog.dialogRecycleView.addItemDecoration(
