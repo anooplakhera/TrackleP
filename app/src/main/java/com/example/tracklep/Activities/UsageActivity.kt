@@ -1,6 +1,5 @@
 package com.example.tracklep.Activities
 
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Intent
@@ -14,19 +13,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.hp.togelresultapp.Preferences.AppPrefences
 import com.example.tracklep.Adapter.SwipeItemAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
-import com.example.tracklep.DataClasses.ProfileListData
 import com.example.tracklep.DataClasses.UserMeterListData
 import com.example.tracklep.DataClasses.WaterUsageData
 import com.example.tracklep.DataModels.ResponseModelClasses
@@ -84,12 +80,45 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 startActivity(Intent(this, UsageNotificationActivity::class.java))
             }
 
+
             clickPerform()
 
             checkIsAMI()
 
             txtUsageChartDesc.setText(R.string.usage_ccf)
             txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
+
+            // create an OnDateSetListener
+            val dateSetListener = object : DatePickerDialog.OnDateSetListener {
+                override fun onDateSet(
+                    view: DatePicker, year: Int, monthOfYear: Int,
+                    dayOfMonth: Int
+                ) {
+                    myCalendar.set(Calendar.YEAR, year)
+                    myCalendar.set(Calendar.MONTH, monthOfYear)
+                    myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                    updateDateInView()
+                }
+            }
+            imgCalendar!!.setOnClickListener(object : View.OnClickListener {
+                override fun onClick(view: View) {
+                    var picker = DatePickerDialog(
+                        this@UsageActivity,
+                        dateSetListener,
+                        // set DatePickerDialog to point to today's date when it loads up
+                        myCalendar.get(Calendar.YEAR),
+                        myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)
+                    )
+                    picker.datePicker.maxDate = System.currentTimeMillis()
+
+                    picker.show()
+
+
+                }
+
+            })
+
 
             //setupSpinner()
 
@@ -102,6 +131,13 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
         val myFormat = "MM/dd/yyyy" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         showToast(sdf.format(myCalendar.getTime()))
+        filterDate = sdf.format(myCalendar.getTime())
+        AppLog.printLog(filterDate)
+        if (mMode == "H") {
+            getWaterUsageHourly()
+        } else {
+            getWaterUsage()
+        }
 //        textview_date!!.text = sdf.format(cal.getTime())
     }
 
@@ -110,6 +146,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             if (AppPrefences.getIsAMI(this) == null) {
                 getMeterDetailsAMI()
             } else {
+
+                spinnerMeter.text = AppPrefences.getMeterNumber(this)
                 if (AppPrefences.getIsAMI(this) == false) {
                     lytBiMonthly.alpha = selectedAlpha
                     lytHourly.visibility = View.GONE
@@ -133,34 +171,23 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
         }
     }
 
-    fun date(): DatePickerDialog.OnDateSetListener {
-        var dateSetListener =
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                myCalendar.set(Calendar.YEAR, year)
-                myCalendar.set(Calendar.MONTH, monthOfYear)
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateDateInView()
-            }
-        return dateSetListener
-    }
-
     private fun clickPerform() {
         try {
 
-            imgCalendar.setOnClickListener {
-                var picker = DatePickerDialog(
-                    this@UsageActivity,
-                    date(),
-                    // set DatePickerDialog to point to today's date when it loads up
-                    myCalendar.get(Calendar.YEAR),
-                    myCalendar.get(Calendar.MONTH),
-                    myCalendar.get(Calendar.DAY_OF_MONTH)
-                )
-                picker.datePicker.maxDate = System.currentTimeMillis()
-                picker.show()
+            /* imgCalendar.setOnClickListener {
+                 var picker = DatePickerDialog(
+                     this@UsageActivity,
+                     date(),
+                     // set DatePickerDialog to point to today's date when it loads up
+                     myCalendar.get(Calendar.YEAR),
+                     myCalendar.get(Calendar.MONTH),
+                     myCalendar.get(Calendar.DAY_OF_MONTH)
+                 )
+                 picker.datePicker.maxDate = System.currentTimeMillis()
+                 picker.show()
 
 
-            }
+             }*/
             // create an OnDateSetListener
 
             txtCCF.setOnClickListener {
@@ -270,17 +297,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
     }
 
-    /*private fun setupSpinner() {
-        spinnerMeter!!.onItemSelectedListener = this
-        val aa = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_item,
-            UserMeterListData.getMeterNumberList()
-        )
-        aa.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerMeter!!.adapter = aa
-    }*/
 
     private fun setChartData(
         bar1: ArrayList<ResponseModelClasses.BarChart>,
@@ -674,8 +690,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     private fun getWaterUsage() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService =
-                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.WaterUsages> = apiService.getWaterUsages(
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
@@ -683,6 +698,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                         AppPrefences.getAccountNumber(this),
                         mType,
                         mMode,
+                        filterDate,
                         AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
@@ -783,6 +799,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                             AppPrefences.getAccountNumber(this),
                             mType,
                             mMode,
+                            filterDate,
                             AppPrefences.getDataBaseInfo(this)!!
                         )
                     )
@@ -938,7 +955,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
                     spinnerMeter.text = UserMeterListData.getArrayItem(position).MeterNumber
                     selectedMeter = UserMeterListData.getArrayItem(position).MeterNumber
-
+                    spinnerMeter.text = selectedMeter
                     dialog.dismiss()
                 }
 

@@ -25,6 +25,7 @@ object AppPrefences {
     private val MeterUsage = "MeterUsage"
     private val RememberMe = "RememberMe"
     private val MyProfileDetails = "MyProfileDetails"
+    private val MeterNumber = "MeterNumber"
 
     private val UtilityName = "UtilityName"
     private val UserID = "UserID"
@@ -64,6 +65,20 @@ object AppPrefences {
         )
         val editor = prefs.edit()
         editor.putString(USERID, data)
+        editor.commit()
+    }
+
+    fun getMeterNumber(ctx: Context): String? {
+        return ctx.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
+            .getString(MeterNumber, "")
+    }
+
+    fun setMeterNumber(ctx: Context, data: String) {
+        val prefs = ctx.getSharedPreferences(
+            PREFS_FILE_NAME, Context.MODE_PRIVATE
+        )
+        val editor = prefs.edit()
+        editor.putString(MeterNumber, data)
         editor.commit()
     }
 
@@ -339,7 +354,6 @@ object AppPrefences {
         editor.putString(UtilityName, data)
         editor.commit()
     }
-
 
 
     fun getUserID(ctx: Context): String {

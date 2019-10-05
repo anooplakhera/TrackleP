@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/drawable_background_gradient"
-        android:fitsSystemWindows="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        tools:context=".Activities.UsageActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/drawable_background_gradient"
+              android:fitsSystemWindows="true"
+              android:focusableInTouchMode="true"
+              android:orientation="vertical"
+              tools:context=".Activities.UsageActivity">
 
     <include
             android:id="@+id/lytAction"
-            layout="@layout/custom_action_bar" />
+            layout="@layout/custom_action_bar"/>
 
     <ScrollView
             android:layout_width="match_parent"
@@ -45,12 +45,12 @@
                         android:padding="@dimen/dp_4"
                         android:text="@string/view_ccf"
                         android:textColor="@color/colorWhite"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"/>
 
                 <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="@color/colorPrimaryDark" />
+                        android:background="@color/colorPrimaryDark"/>
 
                 <TextView
                         android:id="@+id/txtGallon"
@@ -62,12 +62,12 @@
                         android:padding="@dimen/dp_4"
                         android:text="@string/view_gallon"
                         android:textColor="@color/colorWhite"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"/>
 
                 <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="@color/colorPrimaryDark" />
+                        android:background="@color/colorPrimaryDark"/>
 
                 <TextView
                         android:id="@+id/txtDollar"
@@ -79,7 +79,7 @@
                         android:padding="@dimen/dp_4"
                         android:text="@string/view_dollar"
                         android:textColor="@color/colorWhite"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"/>
             </LinearLayout>
 
             <!--View CCF, Gallon, Dollar-->
@@ -105,7 +105,7 @@
                             android:layout_width="@dimen/dp_45"
                             android:layout_height="@dimen/dp_45"
                             android:layout_gravity="top|center"
-                            android:src="@drawable/ic_hourly" />
+                            android:src="@drawable/ic_hourly"/>
 
                     <TextView
                             android:layout_width="match_parent"
@@ -114,7 +114,7 @@
                             android:fontFamily="@font/roboto"
                             android:gravity="center"
                             android:text="@string/hourly"
-                            android:textSize="@dimen/sp_13" />
+                            android:textSize="@dimen/sp_13"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -130,7 +130,7 @@
                             android:layout_width="@dimen/dp_45"
                             android:layout_height="@dimen/dp_45"
                             android:layout_gravity="top|center"
-                            android:src="@drawable/ic_daily" />
+                            android:src="@drawable/ic_daily"/>
 
                     <TextView
                             android:layout_width="match_parent"
@@ -139,7 +139,7 @@
                             android:fontFamily="@font/roboto"
                             android:gravity="center"
                             android:text="@string/daily"
-                            android:textSize="@dimen/sp_13" />
+                            android:textSize="@dimen/sp_13"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -155,7 +155,7 @@
                             android:layout_width="@dimen/dp_45"
                             android:layout_height="@dimen/dp_45"
                             android:layout_gravity="top|center"
-                            android:src="@drawable/ic_monthly" />
+                            android:src="@drawable/ic_monthly"/>
 
                     <TextView
                             android:layout_width="match_parent"
@@ -164,7 +164,7 @@
                             android:fontFamily="@font/roboto"
                             android:gravity="center"
                             android:text="@string/monthly"
-                            android:textSize="@dimen/sp_13" />
+                            android:textSize="@dimen/sp_13"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -181,7 +181,7 @@
                             android:layout_width="@dimen/dp_45"
                             android:layout_height="@dimen/dp_45"
                             android:layout_gravity="top|center"
-                            android:src="@drawable/ic_bimonthly" />
+                            android:src="@drawable/ic_bimonthly"/>
 
                     <TextView
                             android:layout_width="match_parent"
@@ -190,7 +190,7 @@
                             android:fontFamily="@font/roboto"
                             android:gravity="center"
                             android:text="@string/bi_monthly"
-                            android:textSize="@dimen/sp_13" />
+                            android:textSize="@dimen/sp_13"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -216,7 +216,7 @@
                             android:gravity="start|center"
                             android:padding="@dimen/dp_4"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_12" />
+                            android:textSize="@dimen/sp_12"/>
 
                     <ImageView
                             android:id="@+id/imgCalendar"
@@ -224,7 +224,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:src="@android:drawable/ic_menu_my_calendar"
-                            android:visibility="invisible" />
+                            android:visibility="invisible"/>
 
                     <RelativeLayout
                             android:id="@+id/r_lyt_meterList"
@@ -239,7 +239,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:gravity="center"
-                                android:src="@drawable/ic_right_arrow" />
+                                android:src="@drawable/ic_right_arrow"/>
 
                         <!--<Spinner
                                 android:id="@+id/spinnerMeter"
@@ -255,9 +255,10 @@
                         <TextView
                                 android:id="@+id/spinnerMeter"
                                 android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_5"
                                 android:padding="@dimen/dp_2"
-                                android:textSize="@dimen/sp_12"
-                                android:layout_height="wrap_content" />
+                                android:textSize="@dimen/sp_12"/>
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -275,14 +276,14 @@
                             android:layout_gravity="center_vertical"
                             android:textColor="@color/cardview_dark_background"
                             android:textSize="@dimen/dp_12"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                     <com.github.mikephil.charting.charts.BarChart
                             android:id="@+id/chartUsage"
                             android:layout_width="match_parent"
                             android:layout_height="350dp"
                             android:layout_marginLeft="@dimen/dp_22"
-                            android:paddingBottom="@dimen/dp_10" />
+                            android:paddingBottom="@dimen/dp_10"/>
 
                 </FrameLayout>
 
@@ -305,7 +306,7 @@
                         <ImageView
                                 android:layout_width="@dimen/dp_10"
                                 android:layout_height="10dp"
-                                android:background="@drawable/dot_shape_green_usage" />
+                                android:background="@drawable/dot_shape_green_usage"/>
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -313,7 +314,7 @@
                                 android:layout_marginLeft="@dimen/dp_6"
                                 android:text="Usage within \nBudget"
                                 android:textColor="@color/colorLightBlack"
-                                android:textSize="@dimen/dp_12" />
+                                android:textSize="@dimen/dp_12"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -326,7 +327,7 @@
                         <ImageView
                                 android:layout_width="@dimen/dp_10"
                                 android:layout_height="10dp"
-                                android:background="@drawable/dot_shape_red_usage" />
+                                android:background="@drawable/dot_shape_red_usage"/>
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -334,7 +335,7 @@
                                 android:layout_marginLeft="@dimen/dp_6"
                                 android:text="Usage over \nBudget"
                                 android:textColor="@color/colorLightBlack"
-                                android:textSize="@dimen/dp_12" />
+                                android:textSize="@dimen/dp_12"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -347,7 +348,7 @@
                         <ImageView
                                 android:layout_width="@dimen/dp_10"
                                 android:layout_height="10dp"
-                                android:background="@drawable/dot_shape_blue_light_usage" />
+                                android:background="@drawable/dot_shape_blue_light_usage"/>
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -355,7 +356,7 @@
                                 android:layout_marginLeft="@dimen/dp_6"
                                 android:text="Water \nBudget"
                                 android:textColor="@color/colorLightBlack"
-                                android:textSize="@dimen/dp_12" />
+                                android:textSize="@dimen/dp_12"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -384,7 +385,7 @@
                             android:padding="@dimen/dp_4"
                             android:text="@string/highest_this_period"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_12" />
+                            android:textSize="@dimen/sp_12"/>
 
                     <TextView
                             android:id="@+id/txtLowestThisPeriod"
@@ -396,7 +397,7 @@
                             android:padding="@dimen/dp_4"
                             android:text="@string/lowest_this_period"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_12" />
+                            android:textSize="@dimen/sp_12"/>
 
                     <TextView
                             android:id="@+id/txtSoFartThisMonth"
@@ -408,7 +409,7 @@
                             android:padding="@dimen/dp_2"
                             android:text="@string/current_usage"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_12" />
+                            android:textSize="@dimen/sp_12"/>
 
                     <TextView
                             android:id="@+id/txtProjectedUsage"
@@ -420,7 +421,7 @@
                             android:padding="@dimen/dp_2"
                             android:text="@string/usage_forecast"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/sp_12" />
+                            android:textSize="@dimen/sp_12"/>
 
                 </LinearLayout>
 
@@ -442,7 +443,7 @@
                             android:padding="@dimen/dp_2"
                             android:textColor="@color/commonBackgroundGradient1"
                             android:textSize="@dimen/sp_12"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:id="@+id/txtLowestThisPeriodValue"
@@ -454,7 +455,7 @@
                             android:padding="@dimen/dp_2"
                             android:textColor="@color/commonBackgroundGradient1"
                             android:textSize="@dimen/sp_12"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:id="@+id/txtSoFartThisMonthValue"
@@ -466,7 +467,7 @@
                             android:padding="@dimen/dp_2"
                             android:textColor="@color/commonBackgroundGradient1"
                             android:textSize="@dimen/sp_12"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:id="@+id/txtProjectedUsageValue"
@@ -478,7 +479,7 @@
                             android:padding="@dimen/dp_2"
                             android:textColor="@color/commonBackgroundGradient1"
                             android:textSize="@dimen/sp_12"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                 </LinearLayout>
 
@@ -492,7 +493,7 @@
                     android:layout_marginBottom="@dimen/dp_40"
                     android:background="@drawable/drawable_round_corner"
                     android:padding="@dimen/dp_4"
-                    android:textSize="@dimen/dp_10" />
+                    android:textSize="@dimen/dp_10"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

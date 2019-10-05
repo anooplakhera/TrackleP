@@ -238,10 +238,12 @@ class MainActivity : BaseActivity(), AnimationListener {
                             UserMeterListData.addArrayList(response.body()!!.Results.Table)
                             getWaterUsage()
                             AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
-                            AppPrefences.setIsAMI(
+                            AppPrefences.setIsAMI(this@MainActivity, response.body()!!.Results.Table[0].IsAMI)
+                            AppPrefences.setMeterNumber(
                                 this@MainActivity,
-                                response.body()!!.Results.Table.get(0).IsAMI
+                                response.body()!!.Results.Table[0].MeterNumber
                             )
+
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -279,6 +281,7 @@ class MainActivity : BaseActivity(), AnimationListener {
                         AppPrefences.getAccountNumber(this),
                         mType,
                         mMode,
+                        "",
                         AppPrefences.getDataBaseInfo(this)!!
                     )
                 )
@@ -301,7 +304,7 @@ class MainActivity : BaseActivity(), AnimationListener {
                                 WaterUsageData.addArrayList(data)
 
 
-                                AppLog.printLog("Index_Zero"+ Gson().toJson(data[0]))
+                                AppLog.printLog("Index_Zero" + Gson().toJson(data[0]))
                                 AppPrefences.setMeterUsageData(this@MainActivity, data[0])
 
                                 setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
