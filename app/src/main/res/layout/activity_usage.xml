@@ -267,7 +267,7 @@
                 <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/dp_10">
+                        android:layout_marginBottom="@dimen/dp_20">
 
                     <com.example.tracklep.Widgets.VerticalTextView
                             android:id="@+id/txtUsageChartDesc"
@@ -288,6 +288,7 @@
                 </FrameLayout>
 
                 <LinearLayout
+                        android:id="@+id/lytLegends"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
