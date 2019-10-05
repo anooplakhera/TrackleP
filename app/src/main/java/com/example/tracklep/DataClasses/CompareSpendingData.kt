@@ -181,7 +181,7 @@ object CompareSpendingData {
         val array = ArrayList<String>()
         for (i in 0 until getCount2()) {
             array.add(
-                Utils.getNameOfMonth(mArrayList2!!.get(i).MOD) + ", " + mArrayList2!!.get(i).YOD)
+                Utils.getNameOfMonth(mArrayList2!!.get(i).MOD))// + ", " + mArrayList2!!.get(i).YOD)
         }
         return array
     }

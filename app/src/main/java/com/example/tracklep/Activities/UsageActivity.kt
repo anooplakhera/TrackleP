@@ -1,19 +1,32 @@
 package com.example.tracklep.Activities
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.RectF
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hp.togelresultapp.Preferences.AppPrefences
+import com.example.tracklep.Adapter.SwipeItemAdapter
 import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataClasses.ProfileListData
 import com.example.tracklep.DataClasses.UserMeterListData
 import com.example.tracklep.DataClasses.WaterUsageData
 import com.example.tracklep.DataModels.ResponseModelClasses
@@ -35,6 +48,7 @@ import com.github.mikephil.charting.utils.MPPointF
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_usage.*
 import kotlinx.android.synthetic.main.custom_action_bar.*
+import kotlinx.android.synthetic.main.dialog_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,12 +56,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.OnItemSelectedListener {
+class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
+    AdapterView.OnItemSelectedListener {
 
     private var selectedAlpha = 0.5f
     private var mType = "W"
     private var mMode = "B"
     private var selectedUnit = "CCF"
+    private var selectedMeter = ""
+    private var filterDate = ""
     var myCalendar = Calendar.getInstance();
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,7 +91,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             txtUsageChartDesc.setText(R.string.usage_ccf)
             txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
 
-            setupSpinner()
+            //setupSpinner()
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -117,12 +134,13 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
     }
 
     fun date(): DatePickerDialog.OnDateSetListener {
-        var dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            myCalendar.set(Calendar.YEAR, year)
-            myCalendar.set(Calendar.MONTH, monthOfYear)
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateDateInView()
-        }
+        var dateSetListener =
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                myCalendar.set(Calendar.YEAR, year)
+                myCalendar.set(Calendar.MONTH, monthOfYear)
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateInView()
+            }
         return dateSetListener
     }
 
@@ -170,7 +188,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                 mMode = "B"
                 resetAlpha()
 //                checkIsAMI()
-                selectedUnit = "Gal"
+                selectedUnit = "Gallons"
                 getWaterUsage()
                 txtUsageChartDesc.setText(R.string.usage_gallon)
                 txtusage_disclaimer.text = getString(R.string.usage_disclaimer)
@@ -221,7 +239,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                 lytDaily.alpha = 1.0f
                 lytBiMonthly.alpha = 1.0f
 
-                imgCalendar.visibility = View.GONE
+                imgCalendar.visibility = View.INVISIBLE
                 mMode = "M"
 //                checkIsAMI()
                 getWaterUsage()
@@ -233,7 +251,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                 lytMonthly.alpha = 1.0f
                 lytDaily.alpha = 1.0f
 
-                imgCalendar.visibility = View.GONE
+                imgCalendar.visibility = View.INVISIBLE
                 mMode = "B"
 //                checkIsAMI()
                 getWaterUsage()
@@ -242,13 +260,17 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             imgCalendar.setOnClickListener {
                 getSelectedDate()
             }
+
+            r_lyt_meterList.setOnClickListener {
+                openDialogList()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
     }
 
-    private fun setupSpinner() {
+    /*private fun setupSpinner() {
         spinnerMeter!!.onItemSelectedListener = this
         val aa = ArrayAdapter(
             this,
@@ -258,7 +280,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         aa.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerMeter!!.adapter = aa
-    }
+    }*/
 
     private fun setChartData(
         bar1: ArrayList<ResponseModelClasses.BarChart>,
@@ -274,52 +296,62 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
             val groupSpace = 0.4f
 
             if (mMode == "H") {
+
+                var abc: ArrayList<ResponseModelClasses.WaterUsagesHourly.Results1.TableOne> =
+                    WaterUsageData.mArrayListHourly!!
+
                 if (selectedUnit == "$") {
-                    txtHighestThisPeriodValue.text = selectedUnit + "" +
-                            WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST
+                    txtHighestThisPeriodValue.text =
+                        selectedUnit + "" + abc.get(abc.size - 1)?.HIGHEST
 
                     txtLowestThisPeriodValue.text =
-                        selectedUnit + "" + WaterUsageData.mArrayListHourly?.get(0)?.LOWEST
+                        selectedUnit + "" + abc.get(abc.size - 1)?.LOWEST
                     txtSoFartThisMonthValue.text = selectedUnit + "" +
-                            WaterUsageData.mArrayListHourly?.get(0)?.TotalValue
+                            abc.get(abc.size - 1)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
-                            WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST//TO BE UPDATED
+                            abc.get(abc.size - 1)?.HIGHEST//TO BE UPDATED
                 } else {
                     txtHighestThisPeriodValue.text =
-                        WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit
+                        abc.get(abc.size - 1)?.HIGHEST + " " + selectedUnit
 
                     txtLowestThisPeriodValue.text =
-                        WaterUsageData.mArrayListHourly?.get(0)?.LOWEST + " " + selectedUnit
+                        abc.get(abc.size - 1)?.LOWEST + " " + selectedUnit
                     txtSoFartThisMonthValue.text =
-                        WaterUsageData.mArrayListHourly?.get(0)?.TotalValue + " " + selectedUnit
+                        abc.get(abc.size - 1)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
-                        WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                        abc.get(abc.size - 1)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
                 }
-                txt_date_from_to_usage.text = WaterUsageData.mArrayListHourly?.get(0)?.UsageDate
+                //txt_date_from_to_usage.text = abc?.get(0)?.UsageDate
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod(mMode)
+                }
             } else {
-
+                var def: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne> =
+                    WaterUsageData.mArrayList!!
                 if (selectedUnit == "$") {
                     txtHighestThisPeriodValue.text =
-                        selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.HIGHEST
+                        selectedUnit + "" + def?.get(def.size - 1)?.HIGHEST
                     txtLowestThisPeriodValue.text =
-                        selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.LOWEST
+                        selectedUnit + "" + def?.get(def.size - 1)?.LOWEST
                     txtSoFartThisMonthValue.text =
-                        selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.TotalValue
+                        selectedUnit + "" + def?.get(def.size - 1)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
-                            WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
+                            def?.get(def.size - 1)?.HIGHEST//TO BE UPDATED
                 } else {
                     txtHighestThisPeriodValue.text =
-                        WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit
+                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit
                     txtLowestThisPeriodValue.text =
-                        WaterUsageData.mArrayList?.get(0)?.LOWEST + " " + selectedUnit
+                        def?.get(def.size - 1)?.LOWEST + " " + selectedUnit
                     txtSoFartThisMonthValue.text =
-                        WaterUsageData.mArrayList?.get(0)?.TotalValue + " " + selectedUnit
+                        def?.get(def.size - 1)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
-                        WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
                 }
-                txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod(mMode)
+                }
             }
-
+            chartUsage.clear()
             chartUsage.description = null
             chartUsage.setPinchZoom(false)
             chartUsage.setScaleEnabled(false)
@@ -474,8 +506,11 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                 }
             }
 
-            txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod(mMode)
+            }
 
+            chartUsage.clear()
             chartUsage.description = null;
             chartUsage.setPinchZoom(false);
             chartUsage.setScaleEnabled(false);
@@ -606,7 +641,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                             UserMeterListData.clearArrayList()
                             UserMeterListData.addArrayList(response.body()!!.Results.Table)
                             getWaterUsage()
-
+                            spinnerMeter.text = UserMeterListData.getArrayItem(0).MeterNumber
                             AppPrefences.setIsAMI(
                                 this@UsageActivity,
                                 response.body()!!.Results.Table.get(0).IsAMI
@@ -666,6 +701,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
                             data.addAll(response.body()!!.Results.Table)
                             //data.reverse()
                             WaterUsageData.clearArrayList()
+
                             WaterUsageData.addArrayList(data)
 
 
@@ -880,5 +916,47 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener, AdapterView.
         dpd.getDatePicker().setMaxDate(System.currentTimeMillis())
         dpd.show()
     }
-}
 
+    private fun openDialogList() {
+        try {
+            val dialog = Dialog(this@UsageActivity)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setContentView(R.layout.dialog_layout)
+            dialog.window!!.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.setCancelable(true)
+            dialog.setTitle("Meter Number")
+            dialog.show()
+            dialog.txtTitleTop.text = title
+            dialog.txtTitleTop.textSize = 13f
+
+            val mSwipeItemAdapter =
+                SwipeItemAdapter(UserMeterListData.getMeterNumberList()) { position ->
+
+                    spinnerMeter.text = UserMeterListData.getArrayItem(position).MeterNumber
+                    selectedMeter = UserMeterListData.getArrayItem(position).MeterNumber
+
+                    dialog.dismiss()
+                }
+
+            dialog.dialogRecycleView.addItemDecoration(
+                DividerItemDecoration(
+                    this,
+                    DividerItemDecoration.VERTICAL
+                )
+            )
+            dialog.dialogRecycleView.layoutManager = LinearLayoutManager(this)
+            dialog.dialogRecycleView.adapter = mSwipeItemAdapter
+
+            /*val itemTouchHelper = ItemTouchHelper(swipeHandler)
+            itemTouchHelper.attachToRecyclerView(dialog.dialogRecycleView)*/
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+}

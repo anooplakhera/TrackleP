@@ -291,7 +291,7 @@ class ConnectWithUtilityActivity : BaseActivity() {
                         AppConstants.SelectedTopicID,
                         editSubjectValue.text.toString(),
                         editMessageValue.text.toString(),
-                        AppPrefences.getUtilityAccountNumber(this),
+                        AppPrefences.getAccountNumber(this),
                         AppPrefences.getDataBaseInfo(this)!!
                     )
                 )

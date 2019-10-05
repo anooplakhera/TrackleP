@@ -1,7 +1,15 @@
 package com.example.tracklep.DataClasses
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.tracklep.DataModels.ResponseModelClasses
+import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+import java.util.*
+import kotlin.collections.ArrayList
 
 object WaterUsageData {
     var mArrayList: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>? = null
@@ -109,24 +117,45 @@ object WaterUsageData {
         return array
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @Synchronized
-    fun getUsagePeriod(): String {
+    fun getUsagePeriod(mMode: String): String {
         var title = ""
-        if (mArrayList!!.size > 0) {
+        /*if (mArrayList!!.size > 0) {
             if (mArrayList!![0].Month != null && mArrayList!![0].Year != null) {
-                title += Utils.getNameOfMonth(mArrayList!![getCount() - 1].Month) + " " + mArrayList!![getCount() - 1].Year + " to " + Utils.getNameOfMonth(
-                    mArrayList!![0].Month
-                ) + " " + mArrayList!![0].Year
+                title += Utils.getNameOfMonth(mArrayList!![0].Month) + " " + mArrayList!![0].Year + " To " + Utils.getNameOfMonth(
+                    mArrayList!![getCount() - 1].Month
+                ) + " " + mArrayList!![getCount() - 1].Year
             } else {
                 title += mArrayList!![0].UsageDate
             }
         } else if (mArrayListHourly!!.size > 0) {
             if (mArrayListHourly!![0].Hourly != null) {
-                title += mArrayListHourly!![getCount() - 1].Hourly + " to " + mArrayListHourly!![0].Hourly
+                title += mArrayListHourly!![0].Hourly + " To " + mArrayListHourly!![getCount() - 1].Hourly
 
             } else {
                 title += mArrayListHourly!![0].UsageDate
             }
+        }*/
+
+        val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy", Locale.ENGLISH)
+        val formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH)
+
+        if (mMode == "H") {
+            val date = LocalDate.parse(mArrayListHourly!![0].UsageDate, formatter)
+
+            val format_date = date.format(formatter2)
+
+            title = "Hourly usage for " + format_date
+        } else if (mMode == "D" || mMode == "M" || mMode == "B") {
+
+            val dateFrom = LocalDate.parse(mArrayList!![0].UsageDate, formatter)
+            val dateTo = LocalDate.parse(mArrayList!![getCount() - 1].UsageDate, formatter)
+
+            val format_dateFrom = dateFrom.format(formatter2)
+            val format_dateTo = dateTo.format(formatter2)
+
+            title = format_dateFrom + " To " + format_dateTo
         }
 
         return title

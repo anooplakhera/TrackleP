@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Trackle</string>
-    
-    
+
+
     <!--Login-->
     <string name="login_title">Hey There, Welcome to</string>
     <string name="remember_me">Remember Me</string>
@@ -15,7 +15,7 @@
     <string name="connect_with_utility">Connect with Agency</string>
     <string name="powered_by">Powered by</string>
     <string name="usage_notification">Usage Notification</string>
-    
+
     <!--Forgot Password-->
     <string name="step1">Step 1</string>
     <string name="step2">Step 2</string>
@@ -27,7 +27,7 @@
     <string name="security_answer">Security Answer</string>
     <string name="question_eg">What was the name of your elementary / primary school?</string>
     <string name="answer_security_ques">Please answer security questions to verify your identity.</string>
-    
+
     <!--Register User-->
     <string name="registration_title">Registration</string>
     <string name="registration_title_new">Create your Account</string>
@@ -43,7 +43,7 @@
     <string name="security_ques2">Security Question 2</string>
     <string name="security_ans1">Security Answer 1</string>
     <string name="security_ans2">Security Answer 2</string>
-    
+
     <!--Dashboard-->
     <string name="welcome_text">Welcome DES JARDINS ROBERT</string>
     <string name="my_account">Account Details</string>
@@ -52,8 +52,8 @@
     <string name="track_usage">Track Usage</string>
     <string name="compare">Compare Water Use</string>
     <string name="water_conversation">Water Conversation</string>
-    
-    
+
+
     <!--Profile-->
     <string name="home_phone_number">Home Phone Number</string>
     <string name="phone_number">Phone Number</string>
@@ -63,8 +63,8 @@
     <string name="address">Communication Address</string>
     <string name="add_account">Add Account</string>
     <string name="billing_preference">Billing Preference</string>
-    
-    
+
+
     <!--Navigation Menu-->
     <string name="nav_menu_1">Connect with East Orange County Water District</string>
     <string name="nav_menu_2">Company Website</string>
@@ -74,10 +74,10 @@
     <string name="nav_menu_6">Privacy Policy</string>
     <string name="nav_menu_7">Logout</string>
     <string name="version">2019 Aquatrax Water Solutions \nVersion: 1.0(1)</string>
-    
+
     <string name="loading">Loading…</string>
     <string name="internet">Please Check Internet Connection</string>
-    
+
     <string name="utility_bill">Utility Bill</string>
     <string name="history">History</string>
     <string name="budget_my_bill">Budget My Bill</string>
@@ -92,7 +92,7 @@
     <string name="contactus_description">If you need assistance please use the below contact information to reach our customer service staff.   </string>
     <string name="usagenotification_description">You will be notified if you exceed your Daily/Monthly threshold limit. </string>
     <string name="usagenotification_description2">We recommend to set 50% of water budget as your threshold limit.</string>
-    
+
     <string name="contactus_email">Email</string>
     <string name="contactus_phone">Phone</string>
     <string name="contactus_online">Online : Please visit us at <u>www.eocwd.com/contact</u></string>
@@ -121,7 +121,7 @@
     <string name="highest_this_period">Highest Usage</string>
     <string name="utility_account_number">Utility Account Number</string>
     <string name="add_account_header">Please enter below details to add account</string>
-    <string name="postal_code">Postal Code</string>
+    <string name="postal_code">Service Zip Code</string>
     <string name="usage_forecast">Usage Forecast</string>
     <string name="current_usage">Current Usage</string>
     <string name="usage_disclaimer">Disclaimer : 1 CFF (100 CU. FT.) = 1 HCF = 748 Gallons</string>
@@ -143,11 +143,11 @@
     <string name="subject">Subject</string>
     <string name="billing_history_link">Billing History >></string>
     <string name="billing_disclaimer">The billing information on this page is informational only and may not display total of all charges currently due. To pay your bill please log into EOCWD online bill payment system or visit our payment location.</string>
-    
+
     <string name="next">Next</string>
     <string name="step_1_account_information">Step 1: Account Information</string>
     <string name="step_2_security_questions">Step 2: Security Questions</string>
-    
+
     <string name="compare_ccf">Water Units Consumed (CCF)</string>
     <string name="compare_gallon">Water Units Consumed (Gallon)</string>
     <string name="compare_dollar">Water Consumed (Dollar)</string>

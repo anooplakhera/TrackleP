@@ -329,11 +329,11 @@ class MainActivity : BaseActivity(), AnimationListener {
 
     fun setMeterData(data: ResponseModelClasses.WaterUsages.Results1.TableOne) {
         try {
-            txtUsagesMessage.text = "You have consumed " + data.AVERAGE + " Gallons water so far this calendar month"
-            txtMeterValue.text = data.AVERAGE + "\nGallons"
-            AppLog.printLog(data.AllocationValue + " " + data.AVERAGE)
+            txtUsagesMessage.text = "You have consumed " + data.TotalValue + " Gallons water so far this calendar month"
+            txtMeterValue.text = data.TotalValue + "\nGallons"
+            AppLog.printLog(data.AllocationValue + " " + data.TotalValue)
             arc_progress.progress =
-                Utils.getProgressValue(data.AllocationValue.toDouble(), data.AVERAGE.toDouble())
+                Utils.getProgressValue(data.AVERAGE.toDouble(), data.TotalValue.toDouble())
                     .roundToInt()
         } catch (e: Exception) {
             e.printStackTrace()
