@@ -306,8 +306,12 @@ class MyProfile : BaseActivity() {
             txtQues2Value.text =
                 SecurityQuestionData.getQuestionName(data.SecurityQuestionId2.toString())
             txtAccNumber.text = "Account Number : " + data.UtilityAccountNumber
+
             txtCommunicationAddressValue.text = data.CommunicationAddress
             txtCommunicationAddressValue.setTextColor(resources.getColor(R.color.colorBlack))
+
+            txtMailingAddressValue.text = data.Properties
+            txtMailingAddressValue.setTextColor(resources.getColor(R.color.colorBlack))
 
             if (data.BillingPreference.equals("1")) {
                 rb_paperless_bill.isChecked = true

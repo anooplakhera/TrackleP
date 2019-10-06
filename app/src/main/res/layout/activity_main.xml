@@ -54,9 +54,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:gravity="bottom"
-                        android:src="@drawable/ic_more_vert_white" />
+                        android:paddingTop="@dimen/dp_5"
+                        android:gravity="center"
+                        android:src="@drawable/ic_more_vert_white_50dp" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -174,8 +176,8 @@
                                     android:orientation="vertical">
 
                                 <ImageView
-                                        android:layout_width="@dimen/dp_40"
-                                        android:layout_height="@dimen/dp_40"
+                                        android:layout_width="@dimen/dp_45"
+                                        android:layout_height="@dimen/dp_45"
                                         android:layout_centerHorizontal="true"
                                         android:src="@drawable/ic_logo_png" />
 
@@ -476,7 +478,8 @@
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-                    </LinearLayout>c
+                    </LinearLayout>
+                    c
                 </RelativeLayout>
 
             </ScrollView>

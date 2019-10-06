@@ -31,8 +31,8 @@
     <!--Register User-->
     <string name="registration_title">Registration</string>
     <string name="registration_title_new">Create your Account</string>
-    <string name="utility">Utility Name</string>
-    <string name="select_utility">Select Water District/ Agency</string>
+    <string name="utility">Water District/Agency</string>
+    <string name="select_utility">Select</string>
     <string name="select_topic">Select Report Type</string>
     <string name="mandatory">Mandatory</string>
     <string name="acc_no">Account Number</string>
@@ -55,12 +55,13 @@
 
 
     <!--Profile-->
-    <string name="home_phone_number">Home Phone Number</string>
+    <string name="home_phone_number">Home Number</string>
     <string name="phone_number">Phone Number</string>
     <string name="mobile_number">Mobile Number</string>
-    <string name="business_phone_number">Business Phone Number</string>
+    <string name="business_phone_number">Work Number</string>
     <string name="security_questions">Security Questions</string>
     <string name="address">Communication Address</string>
+    <string name="mailing_address">Mailing Address</string>
     <string name="add_account">Add Account</string>
     <string name="billing_preference">Billing Preference</string>
 
@@ -108,7 +109,7 @@
     <string name="billing_period">Billing Period</string>
     <string name="billing_period_from">Billing Period From</string>
     <string name="billing_period_to">Billing Period To</string>
-    <string name="account_information">Contact Information</string>
+    <string name="account_information">Profile Information</string>
     <string name="n_a">N/A</string>
     <string name="current_meter_reading">Current Meter Reading</string>
     <string name="total_water_usage">Total Water Usage</string>
@@ -166,5 +167,7 @@
     <string name="connect_address">Address</string>
     <string name="password_validation_message">Password must be atleast 8 characters(1 special letter, 1 number, 1 capital letter.</string>
     <string name="error_message_enter_email">Please enter Email</string>
+    <string name="myprofile_disclaimer">Disclaimer: Personal data is classified as confidential and shall not be shared with anyone.
+</string>
 
 </resources>

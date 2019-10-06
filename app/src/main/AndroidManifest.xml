@@ -93,6 +93,7 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.ForgotPasswordThirdActivity" />
+        <activity android:name=".Activities.EditMailingAddressActivity" />
     </application>
 
 </manifest>
