@@ -70,6 +70,7 @@ object ApiUrls {
     const val Custid = "Custid"
     const val BusinessHomePhone = "BusinessHomePhone"
     const val BillingPreference = "BillingPreference"
+    const val FilterDate = "filterdate"
 
     //Connect Me
     const val TopicID = "TopicID"

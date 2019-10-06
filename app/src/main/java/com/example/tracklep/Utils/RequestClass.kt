@@ -46,7 +46,7 @@ object RequestClass {
     fun getWaterUsageRequestModel(
         AccountNumber: String,
         type: String,
-        mode: String, data: ResponseModelClasses.DataBaseUtils
+        mode: String, filterDate: String, data: ResponseModelClasses.DataBaseUtils
     ): HashMap<String, String> {
         var map = HashMap<String, String>()
         map[ApiUrls.AccountNumber] = AccountNumber
@@ -54,6 +54,7 @@ object RequestClass {
         map.put(ApiUrls.Database, data.DataBaseName)
         map.put(ApiUrls.DBUserName, data.UserName)
         map.put(ApiUrls.DBPassword, data.Password)
+        map.put(ApiUrls.FilterDate, filterDate)
         map["Type"] = type
         map["HourlyType"] = "H"
         map["Mode"] = mode
