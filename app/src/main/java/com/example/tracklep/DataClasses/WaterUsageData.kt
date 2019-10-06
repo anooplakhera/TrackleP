@@ -3,11 +3,9 @@ package com.example.tracklep.DataClasses
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.tracklep.DataModels.ResponseModelClasses
-import com.example.tracklep.Utils.AppLog
 import com.example.tracklep.Utils.Utils
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -146,8 +144,10 @@ object WaterUsageData {
 
             val format_date = date.format(formatter2)
 
-            title = "Hourly usage for " + format_date
-        } else if (mMode == "D" || mMode == "M" || mMode == "B") {
+            title = "Hourly usage for $format_date"
+        } else if (mMode == "M" ) {
+            title = Utils.getNameOfMonth(mArrayList!![0].Month) + ", " + mArrayList!![0].Year +" to "+ Utils.getNameOfMonth(mArrayList!![mArrayList!!.size-1].Month) + ", " + mArrayList!![mArrayList!!.size-1].Year
+        } else if (mMode == "D" || mMode == "B") {
 
             val dateFrom = LocalDate.parse(mArrayList!![0].UsageDate, formatter)
             val dateTo = LocalDate.parse(mArrayList!![getCount() - 1].UsageDate, formatter)
@@ -155,7 +155,7 @@ object WaterUsageData {
             val format_dateFrom = dateFrom.format(formatter2)
             val format_dateTo = dateTo.format(formatter2)
 
-            title = format_dateFrom + " To " + format_dateTo
+            title = "$format_dateFrom To $format_dateTo"
         }
 
         return title

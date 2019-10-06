@@ -670,6 +670,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     ) {
 
 
+
         val barWidth = 0.3f
         val barSpace = 0f
         val groupSpace = 0.4f
@@ -745,56 +746,32 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
             val yVals1 = ArrayList<BarEntry>()
 
+            AppLog.printLog("ArrayOfGraph", Gson().toJson(bar1))
             for (i in 0 until bar1.size) {
-//                yVals1.add(BarEntry(bar1[i].range, bar1[i].count))
-                yVals1.add(BarEntry(0f, bar1[i].count/* bar1[i].count*/))
+                yVals1.add(BarEntry((0 + i).toFloat(), bar1[i].count))
+
             }
-            AppLog.printLog("ArrayOfGraph", Gson().toJson(yVals1))
-            AppLog.printLog("ArrayOfGraphSize", yVals1.size.toString())
-            AppLog.printLog("ArrayOfGraphSizeYear", year.size.toString())
-
-
-            /*val set2 = BarDataSet(yVals1, "")
-            val data = BarData(set2)
-            chartUsage.data = data
-            set2.color = resources.getColor(R.color.colorUsageWithin)
-            set2.valueTextColor = Color.BLACK;
-            set2.valueTextSize = 18f;*/
 
             val set2 = BarDataSet(yVals1, "")
             val data = BarData(set2)
             chartUsage.data = data
             set2.color = resources.getColor(R.color.colorUsageWithin)
 
-            data.barWidth = 0.8f;
+//            data.barWidth = 1f;
             data.setValueFormatter(MyValueFormatter() as ValueFormatter?)
             chartUsage.barData.barWidth = barWidth
             chartUsage.xAxis.axisMinimum = 0F
-            chartUsage.xAxis.axisMaximum =
-                0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
+             chartUsage.xAxis.axisMaximum =
+                 0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
-//            chartUsage.setVisibleXRangeMaximum(5f); // allow 20 values to be displayed at once on the x-axis, not more
-//            chartUsage.moveViewToX(5F);
+            chartUsage.moveViewToX(5F);
 
-//            chartUsage.groupBars(0F, groupSpace, barSpace)
             chartUsage.data.isHighlightEnabled = false
-//            chartUsage.setFitBars(true)
+            chartUsage.setFitBars(true)
 //            chartUsage.setScaleEnabled(false);
-//            chartUsage.isDoubleTapToZoomEnabled = false;
 
             chartUsage.legend.isEnabled = false;   // Hide the legend
             chartUsage.isDoubleTapToZoomEnabled = false //Disable double click zoom
-
-
-            /*val l = chartUsage.legend
-            l.verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
-            l.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
-            l.orientation = Legend.LegendOrientation.HORIZONTAL
-            l.setDrawInside(false)
-            l.yOffset = 20f
-            l.xOffset = 0f
-            l.yEntrySpace = 0f
-            l.textSize = 10f*/
 
             //X-axis
             val xAxis = chartUsage.xAxis
@@ -802,7 +779,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             xAxis.isGranularityEnabled = true
             xAxis.setCenterAxisLabels(true)
             xAxis.setDrawGridLines(false)
-//        xAxis.axisMaximum = 6f
             xAxis.labelCount = year.size
             xAxis.axisMaximum = year.size.toFloat()
             xAxis.position = XAxis.XAxisPosition.BOTTOM
@@ -825,33 +801,48 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
         }
     }
 
-    private fun setBarChart() {
-        val entries = ArrayList<BarEntry>()
-        entries.add(BarEntry(8f, 0f))
-        entries.add(BarEntry(2f, 1f))
-        entries.add(BarEntry(5f, 2f))
-        entries.add(BarEntry(20f, 3f))
-        entries.add(BarEntry(15f, 4f))
-        entries.add(BarEntry(19f, 5f))
+    private fun setupBarChartData(
+        bar1: ArrayList<ResponseModelClasses.BarChart>,
+        year: ArrayList<String>
+    ) {
+        // create BarEntry for Bar Group
+        val bargroup = ArrayList<BarEntry>()
+        /* bargroup.add(BarEntry(0f, 30f ))
+         bargroup.add(BarEntry(1f, 2f))
+         bargroup.add(BarEntry(2f, 4f))
+         bargroup.add(BarEntry(3f, 6f))
+         bargroup.add(BarEntry(4f, 8f))
+         bargroup.add(BarEntry(5f, 10f))
+         bargroup.add(BarEntry(6f, 22f))
+         bargroup.add(BarEntry(7f, 12.5f))
+         bargroup.add(BarEntry(8f, 22f))
+         bargroup.add(BarEntry(9f, 32f))
+         bargroup.add(BarEntry(10f, 54f))
+         bargroup.add(BarEntry(11f, 28f))*/
 
-        val barDataSet = BarDataSet(entries, "Cells")
+        AppLog.printLog("ArrayOfGraph", Gson().toJson(bar1))
+        for (i in 0 until bar1.size) {
+            bargroup.add(BarEntry((0 + i).toFloat(), bar1[i].count))
+//            bargroup.add(BarEntry(0f, bar1[i].count/* bar1[i].count*/))
+        }
 
-        val labels = ArrayList<String>()
-        labels.add("18-Jan")
-        labels.add("19-Jan")
-        labels.add("20-Jan")
-        labels.add("21-Jan")
-        labels.add("22-Jan")
-        labels.add("23-Jan")
+        // creating dataset for Bar Group
+        val barDataSet = BarDataSet(bargroup, "")
+
+        barDataSet.color = ContextCompat.getColor(this, R.color.colorUsageOver)
+
         val data = BarData(barDataSet)
-        chartUsage.data = data // set the data and list of lables into chart
-
-//        chartUsage.setDescription("Set Bar Chart Description")  // set the description
-
-        //barDataSet.setColors(ColorTemplate.COLORFUL_COLORS)
-        barDataSet.color = resources.getColor(R.color.colorAccent)
-
-        chartUsage.animateY(5000)
+        chartUsage.setData(data)
+        chartUsage.xAxis.position = XAxis.XAxisPosition.BOTTOM
+        chartUsage.xAxis.labelCount = year.size
+        chartUsage.xAxis.enableGridDashedLine(5f, 5f, 0f)
+        chartUsage.axisRight.enableGridDashedLine(5f, 5f, 0f)
+        chartUsage.axisLeft.enableGridDashedLine(5f, 5f, 0f)
+//        chartUsage.description.isEnabled = false
+        chartUsage.animateY(1000)
+        chartUsage.legend.isEnabled = false
+        chartUsage.setPinchZoom(true)
+        chartUsage.data.setDrawValues(false)
     }
 
     private fun getMeterDetailsAMI() = if (Utils.isConnected(this)) {
@@ -942,43 +933,18 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
                             WaterUsageData.addArrayList(data)
 
-
+                            filterDate = ""
                             if (mType == "D") {
-
                                 if (mMode == "M") {
-                                      setChartDataDollar(
-                                          WaterUsageData.getUsageConsumedBar(),
-                                          WaterUsageData.getUsageBar(),
-                                          WaterUsageData.getUsageEmptyBar(),
-                                          WaterUsageData.getMonthListMonthly(),
-                                          getString(R.string.c_this_year),
-                                          getString(R.string.u_allocation)
-                                      )
-                                    /*setSingleGraphChartData(
+                                    setSingleGraphChartData(
                                         WaterUsageData.getUsageConsumedBar(),
-                                        *//*   WaterUsageData.getUsageBar(),
-                                           WaterUsageData.getUsageEmptyBar(),*//*
                                         WaterUsageData.getMonthListMonthly()
-//                                        getString(R.string.c_this_year),
-//                                        getString(R.string.u_allocation)
-                                    )*/
+                                    )
                                 } else {
-                                     setChartDataDollar(
-                                         WaterUsageData.getUsageConsumedBar(),
-                                         WaterUsageData.getUsageBar(),
-                                         WaterUsageData.getUsageEmptyBar(),
-                                         WaterUsageData.getMonthList(),
-                                         getString(R.string.c_this_year),
-                                         getString(R.string.u_allocation)
-                                     )
-                                    /*setSingleGraphChartData(
+                                    setSingleGraphChartData(
                                         WaterUsageData.getUsageConsumedBar(),
-                                        *//*   WaterUsageData.getUsageBar(),
-                                           WaterUsageData.getUsageEmptyBar(),*//*
                                         WaterUsageData.getMonthList()
-//                                        getString(R.string.c_this_year),
-//                                        getString(R.string.u_allocation)
-                                    )*/
+                                    )
                                 }
                             } else {
                                 if (mMode == "M") {
@@ -990,7 +956,12 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                                         getString(R.string.u_usage),
                                         getString(R.string.u_allocation)
                                     )
-                                } else {
+                                }else if (mMode == "D"){
+                                    setSingleGraphChartData(
+                                        WaterUsageData.getUsageConsumedBar(),
+                                        WaterUsageData.getMonthList()
+                                    )
+                                } else{
                                     setChartData(
                                         WaterUsageData.getUsageConsumedBar(),
                                         WaterUsageData.getUsageBar(),
@@ -1058,40 +1029,21 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                             WaterUsageData.clearArrayList()
                             WaterUsageData.addArrayListHourly(data)
 
+                            filterDate = ""
                             if (mType == "D") {
                                 if (mMode == "H") {
-                                    setChartDataDollar(
+                                    setSingleGraphChartData(
                                         WaterUsageData.getUsageConsumedBarHourly(),
-                                        WaterUsageData.getUsageBarHourly(),
-                                        WaterUsageData.getUsageEmptyBarHourly(),
-                                        WaterUsageData.getMonthListHourly(),
-                                        getString(R.string.c_this_year),
-                                        getString(R.string.u_allocation)
-                                    )
-                                   /* setSingleGraphChartData(
-                                        WaterUsageData.getUsageConsumedBarHourly(),
-//                                        WaterUsageData.getUsageBarHourly(),
-//                                        WaterUsageData.getUsageEmptyBarHourly(),
                                         WaterUsageData.getMonthListHourly()
-                                    )*/
+                                    )
+
                                 }
                             } else {
                                 if (mMode == "H") {
-                                    setChartData(
+                                    setSingleGraphChartData(
                                         WaterUsageData.getUsageConsumedBarHourly(),
-                                        WaterUsageData.getUsageBarHourly(),
-                                        WaterUsageData.getUsageEmptyBarHourly(),
-                                        WaterUsageData.getMonthListHourly(),
-                                        getString(R.string.u_usage),
-                                        getString(R.string.u_allocation)
-                                    )
-
-                                    /*setSingleGraphChartData(
-                                        WaterUsageData.getUsageConsumedBarHourly(),
-//                                        WaterUsageData.getUsageBarHourly(),
-//                                        WaterUsageData.getUsageEmptyBarHourly(),
                                         WaterUsageData.getMonthListHourly()
-                                    )*/
+                                    )
                                 }
                             }
                         }
