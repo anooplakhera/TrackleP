@@ -32,6 +32,7 @@ object ApiUrls {
     const val Account = "account"
     const val UpdateAccount = "update-account"
     const val MeterDetails = "meter-details"
+    const val TentativeDetails = "tentative-uses"
     const val WaterUsages = "water-usages"
     const val CompareSpending = "water-compare-spending"
     const val AccountDelete = "account/delete"

@@ -23,6 +23,7 @@ import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataClasses.TentativeUsageData
 import com.example.tracklep.DataClasses.UserMeterListData
 import com.example.tracklep.DataClasses.WaterUsageData
 import com.example.tracklep.DataModels.ResponseModelClasses
@@ -355,20 +356,20 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
                     txtLowestThisPeriodValue.text =
                         selectedUnit + "" + abc.get(abc.size - 1)?.LOWEST
-                    txtSoFartThisMonthValue.text = selectedUnit + "" +
+                    /*txtSoFartThisMonthValue.text = selectedUnit + "" +
                             abc.get(abc.size - 1)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
-                            abc.get(abc.size - 1)?.HIGHEST//TO BE UPDATED
+                            abc.get(abc.size - 1)?.HIGHEST*/
                 } else {
                     txtHighestThisPeriodValue.text =
                         abc.get(abc.size - 1)?.HIGHEST + " " + selectedUnit
 
                     txtLowestThisPeriodValue.text =
                         abc.get(abc.size - 1)?.LOWEST + " " + selectedUnit
-                    txtSoFartThisMonthValue.text =
+                    /*txtSoFartThisMonthValue.text =
                         abc.get(abc.size - 1)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
-                        abc.get(abc.size - 1)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                        abc.get(abc.size - 1)?.HIGHEST + " " + selectedUnit*/
                 }
                 //txt_date_from_to_usage.text = abc?.get(0)?.UsageDate
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -382,57 +383,47 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                         selectedUnit + "" + def?.get(def.size - 1)?.HIGHEST
                     txtLowestThisPeriodValue.text =
                         selectedUnit + "" + def?.get(def.size - 1)?.LOWEST
-                    txtSoFartThisMonthValue.text =
+                    /*txtSoFartThisMonthValue.text =
                         selectedUnit + "" + def?.get(def.size - 1)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
-                            def?.get(def.size - 1)?.HIGHEST//TO BE UPDATED
+                            def?.get(def.size - 1)?.HIGHEST*/
                 } else {
                     txtHighestThisPeriodValue.text =
                         def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit
                     txtLowestThisPeriodValue.text =
                         def?.get(def.size - 1)?.LOWEST + " " + selectedUnit
-                    txtSoFartThisMonthValue.text =
+                    /*txtSoFartThisMonthValue.text =
                         def?.get(def.size - 1)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
-                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit*/
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod(mMode)
                 }
             }
 
-            /*if (mType == "W" || mType == "G") {//vikash update tentive service
+            if (AppPrefences.getIsAMI(this@UsageActivity)!!) {//vikash update tentive service
 
-                var def: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne> =
-                    WaterUsageData.mArrayList!!
-                if (selectedUnit == "$") {
-                    txtHighestThisPeriodValue.text =
-                        selectedUnit + "" + def?.get(def.size - 1)?.HIGHEST
-                    txtLowestThisPeriodValue.text =
-                        selectedUnit + "" + def?.get(def.size - 1)?.LOWEST
-
-                    if(mType == "W") {
-                        txtSoFartThisMonthValue.text =
-                            selectedUnit + "" + def?.get(def.size - 1)?.TotalValue
-                        txtProjectedUsageValue.text = selectedUnit + "" +
-                                def?.get(def.size - 1)?.HIGHEST//TO BE UPDATED
-                    } else{
-                        txtSoFartThisMonthValue.text =
-                            selectedUnit + "" + def?.get(def.size - 1)?.TotalValue
-                        txtProjectedUsageValue.text = selectedUnit + "" +
-                                def?.get(def.size - 1)?.HIGHEST//TO BE UPDATED
-                    }
-                } else {
-                    txtHighestThisPeriodValue.text =
-                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit
-                    txtLowestThisPeriodValue.text =
-                        def?.get(def.size - 1)?.LOWEST + " " + selectedUnit
+                if (mType == "W") {
                     txtSoFartThisMonthValue.text =
-                        def?.get(def.size - 1)?.TotalValue + " " + selectedUnit
+                        TentativeUsageData.mArrayList!![0].WaterUnitUsageSoFar + " " + selectedUnit
                     txtProjectedUsageValue.text =
-                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                        TentativeUsageData.mArrayList!![0].WaterUnitExpectedUsage + " " + selectedUnit
+                } else if (mType == "G") {
+                    txtSoFartThisMonthValue.text =
+                        (Math.round(TentativeUsageData.mArrayList!![0].WaterUnitUsageSoFar.toDouble() * 748)).toString() + " " + selectedUnit
+                    txtProjectedUsageValue.text =
+                        (Math.round(TentativeUsageData.mArrayList!![0].WaterUnitExpectedUsage.toDouble() * 748)).toString() + " " + selectedUnit
+                } else if (mType == "D") {
+                    txtSoFartThisMonthValue.text =
+                        selectedUnit + "" + TentativeUsageData.mArrayList!![0].WaterUsageSoFar
+                    txtProjectedUsageValue.text = selectedUnit + "" +
+                            TentativeUsageData.mArrayList!![0].WaterExpectedUsage
                 }
-            }*/
+            } else {
+                txtSoFartThisMonthValue.visibility = View.GONE
+                txtProjectedUsageValue.visibility = View.GONE
+            }
 
             chartUsage.clear()
             chartUsage.description = null
@@ -485,7 +476,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
             chartUsage.setVisibleXRangeMaximum(5f); // allow 20 values to be displayed at once on the x-axis, not more
-            chartUsage.moveViewToX(5F);
+            chartUsage.moveViewToX(0F);
 
             chartUsage.groupBars(0F, groupSpace, barSpace)
             chartUsage.data.isHighlightEnabled = false
@@ -556,7 +547,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txtSoFartThisMonthValue.text = selectedUnit + "" +
                             WaterUsageData.mArrayListHourly?.get(0)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
-                            WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST//TO BE UPDATED
+                            WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST
                 } else {
                     txtHighestThisPeriodValue.text =
                         WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit
@@ -565,7 +556,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txtSoFartThisMonthValue.text =
                         WaterUsageData.mArrayListHourly?.get(0)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
-                        WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                        WaterUsageData.mArrayListHourly?.get(0)?.HIGHEST + " " + selectedUnit
                 }
             } else {
                 if (selectedUnit == "$") {
@@ -576,7 +567,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txtSoFartThisMonthValue.text =
                         selectedUnit + "" + WaterUsageData.mArrayList?.get(0)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
-                            WaterUsageData.mArrayList?.get(0)?.HIGHEST//TO BE UPDATED
+                            WaterUsageData.mArrayList?.get(0)?.HIGHEST
                 } else {
                     txtHighestThisPeriodValue.text =
                         WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit
@@ -585,7 +576,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txtSoFartThisMonthValue.text =
                         WaterUsageData.mArrayList?.get(0)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
-                        WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                        WaterUsageData.mArrayList?.get(0)?.HIGHEST + " " + selectedUnit
                 }
             }
 
@@ -654,7 +645,7 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                 0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
             chartUsage.setVisibleXRangeMaximum(5f); // allow 20 values to be displayed at once on the x-axis, not more
-            chartUsage.moveViewToX(10F);
+            chartUsage.moveViewToX(0F);
 
             // chartUsage.groupBars(0F, groupSpace, barSpace)
             chartUsage.data.isHighlightEnabled = false
@@ -720,20 +711,20 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
 
                     txtLowestThisPeriodValue.text =
                         selectedUnit + "" + abc.get(abc.size - 1)?.LOWEST
-                    txtSoFartThisMonthValue.text = selectedUnit + "" +
+                    /*txtSoFartThisMonthValue.text = selectedUnit + "" +
                             abc.get(abc.size - 1)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
-                            abc.get(abc.size - 1)?.HIGHEST//TO BE UPDATED
+                            abc.get(abc.size - 1)?.HIGHEST*/
                 } else {
                     txtHighestThisPeriodValue.text =
                         abc.get(abc.size - 1)?.HIGHEST + " " + selectedUnit
 
                     txtLowestThisPeriodValue.text =
                         abc.get(abc.size - 1)?.LOWEST + " " + selectedUnit
-                    txtSoFartThisMonthValue.text =
+                    /*txtSoFartThisMonthValue.text =
                         abc.get(abc.size - 1)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
-                        abc.get(abc.size - 1)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                        abc.get(abc.size - 1)?.HIGHEST + " " + selectedUnit*/
                 }
                 //txt_date_from_to_usage.text = abc?.get(0)?.UsageDate
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -747,22 +738,45 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                         selectedUnit + "" + def?.get(def.size - 1)?.HIGHEST
                     txtLowestThisPeriodValue.text =
                         selectedUnit + "" + def?.get(def.size - 1)?.LOWEST
-                    txtSoFartThisMonthValue.text =
+                    /*txtSoFartThisMonthValue.text =
                         selectedUnit + "" + def?.get(def.size - 1)?.TotalValue
                     txtProjectedUsageValue.text = selectedUnit + "" +
-                            def?.get(def.size - 1)?.HIGHEST//TO BE UPDATED
+                            def?.get(def.size - 1)?.HIGHEST*/
                 } else {
                     txtHighestThisPeriodValue.text =
                         def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit
                     txtLowestThisPeriodValue.text =
                         def?.get(def.size - 1)?.LOWEST + " " + selectedUnit
-                    txtSoFartThisMonthValue.text =
+                    /*txtSoFartThisMonthValue.text =
                         def?.get(def.size - 1)?.TotalValue + " " + selectedUnit
                     txtProjectedUsageValue.text =
-                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit*/
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod(mMode)
+                }
+            }
+
+            if (AppPrefences.getIsAMI(this@UsageActivity)!!) {//vikash update tentive service
+
+                if (mType == "W") {
+                    txtSoFartThisMonthValue.text =
+                        TentativeUsageData.mArrayList!![0].WaterUnitUsageSoFar + " " + selectedUnit
+                    txtProjectedUsageValue.text =
+                        TentativeUsageData.mArrayList!![0].WaterUnitExpectedUsage + " " + selectedUnit
+                } else if (mType == "G") {
+                    txtSoFartThisMonthValue.text =
+                        (Math.round(TentativeUsageData.mArrayList!![0].WaterUnitUsageSoFar.toDouble() * 748)).toString() + " " + selectedUnit
+                    txtProjectedUsageValue.text =
+                        (Math.round(TentativeUsageData.mArrayList!![0].WaterUnitExpectedUsage.toDouble() * 748)).toString() + " " + selectedUnit
+                } else if (mType == "D") {
+                    txtSoFartThisMonthValue.text =
+                        selectedUnit + "" + TentativeUsageData.mArrayList!![0].WaterUsageSoFar
+                    txtProjectedUsageValue.text = selectedUnit + "" +
+                            TentativeUsageData.mArrayList!![0].WaterExpectedUsage
+                } else {
+                    txtSoFartThisMonthValue.visibility = View.GONE
+                    txtProjectedUsageValue.visibility = View.GONE
                 }
             }
 

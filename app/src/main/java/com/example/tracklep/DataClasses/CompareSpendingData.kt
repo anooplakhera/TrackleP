@@ -181,7 +181,8 @@ object CompareSpendingData {
         val array = ArrayList<String>()
         for (i in 0 until getCount2()) {
             array.add(
-                Utils.getNameOfMonth(mArrayList2!!.get(i).MOD))// + ", " + mArrayList2!!.get(i).YOD)
+                Utils.getNameOfMonth(mArrayList2!!.get(i).MOD)
+            )// + ", " + mArrayList2!!.get(i).YOD)
         }
         return array
     }
@@ -191,8 +192,8 @@ object CompareSpendingData {
     fun getCompareMeTitle(): String {
         var title = ""
         title += Utils.getNameOfMonth(mArrayList1!![0].MOD) + " " + mArrayList1!![0].YOD + " to " + Utils.getNameOfMonth(
-            mArrayList2!![getCount2() - 1].MOD
-        ) + " " + mArrayList2!![getCount2() - 1].YOD
+            mArrayList1!![getCount1() - 1].MOD
+        ) + " " + mArrayList1!![getCount1() - 1].YOD
         return title
     }
 

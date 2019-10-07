@@ -106,7 +106,7 @@ object ResponseModelClasses {
         val SqlQuery: String
     )
 
-    //MeterDetails Resposne
+    //MeterDetails Respoe
 
     data class MeterDetails(
         val Query: Query1,
@@ -126,6 +126,54 @@ object ResponseModelClasses {
                 val MeterNumber: String,
                 val MeterType: String,
                 val Status: Int
+            )
+        }
+
+        data class Query1(
+            val Parameters: Any,
+            val SqlQuery: Any
+        )
+    }
+
+    data class TentativeDetails(
+        val Results: Results1,
+        val Query: Query1
+    ) {
+        data class Results1(
+            val Table: ArrayList<TableTwo>,
+            val Table1: ArrayList<TableOne>
+        ) {
+            data class TableOne(
+                val UtilityID: String,
+                val ModuleName: String,
+                val ConfigOption: String,
+                val ConfigValue: String
+            )
+
+            data class TableTwo(
+                val SKey: String,
+                val AccountNumber: String,
+                val UsageDate: String,
+                val PowerUnitUsageSoFar: String,
+                val PowerUnitExpectedUsage: String,
+                val PowerUsageSoFar: String,
+                val PowerExpectedUsage: String,
+                val WaterUnitUsageSoFar: String,
+                val WaterUnitExpectedUsage: String,
+                val WaterUsageSoFar: String,
+                val WaterExpectedUsage: String,
+                val GasUnitUsageSoFar: String,
+                val GasUsageSoFar: String,
+                val GasExpectedUsage: String,
+                val SolarUnitUsageSoFar: String,
+                val SolarUnitExpectedUsage: String,
+                val SolarUsageSoFar: String,
+                val SolarExpectedUsage: String,
+                val MyBudget: String,
+                val PeakLoadDollar: String,
+                val PeakLoadKWH: String,
+                val LoadFactorDollar: String,
+                val LoadFactorKWH: String
             )
         }
 
@@ -226,8 +274,8 @@ object ResponseModelClasses {
         val SqlQuery: Any,
         val StateName: String,
         val UtilityAccountNumber: String,
-        val BusinessHomePhone : String,
-        val BillingPreference : String
+        val BusinessHomePhone: String,
+        val BillingPreference: String
     )
 
 

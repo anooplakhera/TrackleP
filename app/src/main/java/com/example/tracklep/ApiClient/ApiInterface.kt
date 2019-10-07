@@ -50,7 +50,18 @@ interface ApiInterface {
     fun getUpdateAccount(@Header(ApiUrls.Authorization) Auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.UpdateProfile>
 
     @POST(ApiUrls.MeterDetails + "/{AccountNumber}")
-    fun getMeterDetails(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path("AccountNumber") value: String): Call<ResponseModelClasses.MeterDetails>
+    fun getMeterDetails(
+        @Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path(
+            "AccountNumber"
+        ) value: String
+    ): Call<ResponseModelClasses.MeterDetails>
+
+    @POST(ApiUrls.TentativeDetails + "/{AccountNumber}")
+    fun getTentativeDetails(
+        @Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path(
+            "AccountNumber"
+        ) value: String
+    ): Call<ResponseModelClasses.TentativeDetails>
 
     @POST(ApiUrls.WaterUsages)
     fun getWaterUsages(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.WaterUsages>
@@ -77,7 +88,11 @@ interface ApiInterface {
     fun setConnectMe(@Header(ApiUrls.Authorization) Auth: String, @Body bodyMap: RequestBody): Call<ResponseModelClasses.SetConnectMeResponseModel>
 
     @POST(ApiUrls.AccountDelete + "/{AccountNumber}")
-    fun getDeleteAccount(@Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path("AccountNumber") value: String): Call<ResponseModelClasses.SetDeleteAccountResponseModel>
+    fun getDeleteAccount(
+        @Header(ApiUrls.Authorization) auth: String, @Body bodyMap: RequestBody, @Path(
+            "AccountNumber"
+        ) value: String
+    ): Call<ResponseModelClasses.SetDeleteAccountResponseModel>
 
 
 }

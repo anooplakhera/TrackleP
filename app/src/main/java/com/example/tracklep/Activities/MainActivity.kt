@@ -12,6 +12,7 @@ import com.example.tracklep.ApiClient.ApiClient
 import com.example.tracklep.ApiClient.ApiInterface
 import com.example.tracklep.ApiClient.ApiUrls
 import com.example.tracklep.BaseActivities.BaseActivity
+import com.example.tracklep.DataClasses.TentativeUsageData
 import com.example.tracklep.DataClasses.UserMeterListData
 import com.example.tracklep.DataClasses.WaterUsageData
 import com.example.tracklep.DataModels.ResponseModelClasses
@@ -53,6 +54,7 @@ class MainActivity : BaseActivity(), AnimationListener {
             txtDashTitle.text = "Welcome " + AppPrefences.getLoginUserInfo(this)!!.Name
 
             getMeterDetailsAMI()
+
 
 //            setMeterData(AppPrefences.getMeterUsageData(this@MainActivity))
 
@@ -238,7 +240,11 @@ class MainActivity : BaseActivity(), AnimationListener {
                             UserMeterListData.addArrayList(response.body()!!.Results.Table)
                             getWaterUsage()
                             AppLog.printLog("MeterDetailsResponse: " + Gson().toJson(response.body()));
-                            AppPrefences.setIsAMI(this@MainActivity, response.body()!!.Results.Table[0].IsAMI)
+                            AppPrefences.setIsAMI(
+                                this@MainActivity,
+                                response.body()!!.Results.Table[0].IsAMI
+                            )
+
                             AppPrefences.setMeterNumber(
                                 this@MainActivity,
                                 response.body()!!.Results.Table[0].MeterNumber
@@ -246,6 +252,8 @@ class MainActivity : BaseActivity(), AnimationListener {
 
                         }
                     } catch (e: Exception) {
+
+                        dismissDialog()
                         e.printStackTrace()
                     }
                 }
@@ -303,7 +311,9 @@ class MainActivity : BaseActivity(), AnimationListener {
                                 WaterUsageData.clearArrayList()
                                 WaterUsageData.addArrayList(data)
 
-
+                                if (AppPrefences.getIsAMI(this@MainActivity)!!) {
+                                    getTentativeDetails()
+                                }
                                 AppLog.printLog("Index_Zero" + Gson().toJson(data[0]))
                                 AppPrefences.setMeterUsageData(this@MainActivity, data[0])
 
@@ -312,6 +322,8 @@ class MainActivity : BaseActivity(), AnimationListener {
 
                         }
                     } catch (e: Exception) {
+
+                        dismissDialog()
                         e.printStackTrace()
                     }
                 }
@@ -332,7 +344,8 @@ class MainActivity : BaseActivity(), AnimationListener {
 
     fun setMeterData(data: ResponseModelClasses.WaterUsages.Results1.TableOne) {
         try {
-            txtUsagesMessage.text = "You have consumed " + data.TotalValue + " Gallons water so far this calendar month"
+            txtUsagesMessage.text =
+                "You have consumed " + data.TotalValue + " Gallons water so far this calendar month"
             txtMeterValue.text = data.TotalValue + "\nGallons"
             AppLog.printLog(data.AllocationValue + " " + data.TotalValue)
             arc_progress.progress =
@@ -342,4 +355,63 @@ class MainActivity : BaseActivity(), AnimationListener {
             e.printStackTrace()
         }
     }
+
+
+    private fun getTentativeDetails() = if (Utils.isConnected(this)) {
+        showDialog()
+        try {
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val call: Call<ResponseModelClasses.TentativeDetails> = apiService.getTentativeDetails(
+                getHeader(),
+                ApiUrls.getJSONRequestBody(
+                    RequestClass.getTentativeDetailsRequestModel(
+                        AppPrefences.getAccountNumber(this), AppPrefences.getDataBaseInfo(this)!!
+                    )
+                ),
+                AppPrefences.getAccountNumber(this)
+            )
+            call.enqueue(object : Callback<ResponseModelClasses.TentativeDetails> {
+                override fun onResponse(
+                    call: Call<ResponseModelClasses.TentativeDetails>,
+                    response: Response<ResponseModelClasses.TentativeDetails>
+                ) {
+                    try {
+                        dismissDialog()
+                        if (response.body() != null) {
+                            AppLog.printLog("TentativeDetailsResponse: " + Gson().toJson(response.body()));
+                            TentativeUsageData.clearArrayList()
+                            TentativeUsageData.addArrayList(response.body()!!.Results.Table)
+                            /*AppPrefences.setIsAMI(this@MainActivity, response.body()!!.Results.Table[0].IsAMI)
+                            AppPrefences.setMeterNumber(
+                                this@MainActivity,
+                                response.body()!!.Results.Table[0].MeterNumber
+                            )*/
+
+                        }
+                    } catch (e: Exception) {
+
+                        dismissDialog()
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<ResponseModelClasses.TentativeDetails>,
+                    t: Throwable
+                ) {
+                    AppLog.printLog("Failure()- ", t.message.toString())
+                    dismissDialog()
+                }
+            })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            dismissDialog()
+        }
+    } else {
+        //dismissDialog()
+        showToast(getString(R.string.internet))
+    }
+
 }

@@ -207,12 +207,12 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
                     try {
                         dismissDialog()
                         if (response.body() != null) {
+                            AppLog.printLog("getCompareDetails: " + Gson().toJson(response.body()));
                             CompareSpendingData.addArrayList1(response.body()!!.Results.Table)
                             CompareSpendingData.addArrayList2(response.body()!!.Results.Table1)
                             CompareSpendingData.addArrayList3(response.body()!!.Results.Table2)
                             CompareSpendingData.addArrayList4(response.body()!!.Results.Table3)
                             CompareSpendingData.addArrayList5(response.body()!!.Results.Table4)
-                            AppLog.printLog("getCompareDetails: " + Gson().toJson(response.body()));
 
                             txt_date_from_to.text = CompareSpendingData.getCompareMeTitle()
                             setChartData(
@@ -276,16 +276,19 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     ) {
 
         try {
-            val barWidth = 0.4f
+            val barWidth = 0.2f
             val barSpace = 0f
-            val groupSpace = 0.4f
+            val groupSpace = 0.6f
 
+            chart.clear()
             chart.description = null;
             chart.setPinchZoom(false);
             chart.setScaleEnabled(true);
             chart.setDrawBarShadow(false);
             chart.isHorizontalScrollBarEnabled = true
+            chart.setVisibleXRangeMaximum(3f)
             chart.setDrawGridBackground(false);
+            chart.canScrollHorizontally(1)
             chart.animateXY(1000, 1000);
 
             val yVals1 = ArrayList<BarEntry>()
@@ -317,15 +320,15 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.data = data
             chart.barData.barWidth = barWidth
             chart.xAxis.axisMinimum = 0F
-            chart.xAxis.axisMaximum = 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
+            chart.xAxis.axisMaximum =
+                0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
-            chart.setVisibleXRangeMaximum(10F); // allow 20 values to be displayed at once on the x-axis, not more
-            chart.moveViewToX(10F);
+            chart.setVisibleXRangeMaximum(4F); // allow 20 values to be displayed at once on the x-axis, not more
+            chart.moveViewToX(0F);
 
             chart.groupBars(0F, groupSpace, barSpace)
             chart.data.isHighlightEnabled = false
-            chart.invalidate()
-
+            chart.setFitBars(true)
 
             chart.legend.isEnabled = false;   // Hide the legend
             chart.isDoubleTapToZoomEnabled = false //Disable double click zoom
@@ -363,6 +366,9 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             leftAxis.setDrawGridLines(false)
             leftAxis.spaceTop = 35f
             leftAxis.axisMinimum = 0f
+
+            chart.invalidate()
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -377,24 +383,20 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
     ) {
 
         try {
-            val barWidth = 0.4f
-            val barSpace = 0.2f
-            val groupSpace = 0.4f
+            val barWidth = 0.2f
+            val barSpace = 0.0f
+            val groupSpace = 0.2f
 
+            chart.clear()
             chart.description = null;
-
             chart.setPinchZoom(false);
             chart.setScaleEnabled(true);
             chart.setDrawBarShadow(false);
-
-//            chart.setPinchZoom(false);
-//            chart.setScaleEnabled(false);
-//            chart.setDrawBarShadow(false);
-//            chart.setDrawGridBackground(false);
-//            chart.setVisibleXRangeMaximum(5f)
+            chart.setDrawGridBackground(false);
+            chart.setVisibleXRangeMaximum(3f)
             chart.isHorizontalScrollBarEnabled = true
-            //chart.canScrollHorizontally(1)
-            chart.animateXY(1000, 1000);
+            chart.canScrollHorizontally(1)
+            chart.animateXY(1000, 1000)
 
             val yVals1 = ArrayList<BarEntry>()
             val yVals2 = ArrayList<BarEntry>()
@@ -432,13 +434,12 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             chart.xAxis.axisMaximum =
                 0 + chart.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
-            chart.setVisibleXRangeMaximum(10F); // allow 20 values to be displayed at once on the x-axis, not more
-            chart.moveViewToX(10F);
+            //chart.setVisibleXRangeMaximum(3F); // allow 20 values to be displayed at once on the x-axis, not more
+            chart.moveViewToX(0F);
 
             chart.groupBars(0F, groupSpace, barSpace)
             chart.data.isHighlightEnabled = false
-            chart.invalidate()
-
+            chart.setFitBars(true)
 
             chart.legend.isEnabled = false;   // Hide the legend
             chart.isDoubleTapToZoomEnabled = false //Disable double click zoom
@@ -455,6 +456,7 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
 
             //X-axis
             val xAxis = chart.xAxis
+
             xAxis.granularity = 1f
             xAxis.isGranularityEnabled = true
             xAxis.setCenterAxisLabels(true)
@@ -475,6 +477,8 @@ class CompareActivity : BaseActivity(), OnChartValueSelectedListener {
             leftAxis.setDrawGridLines(false)
             leftAxis.spaceTop = 35f
             leftAxis.axisMinimum = 0f
+
+            chart.invalidate()
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -343,4 +343,17 @@ object RequestClass {
         return map;
     }
 
+    fun getTentativeDetailsRequestModel(
+        AccountNumber: String,
+        data: ResponseModelClasses.DataBaseUtils
+    ): HashMap<String, String> {
+        var map = HashMap<String, String>()
+        //map[ApiUrls.AccountNumber] = AccountNumber
+        map.put(ApiUrls.DataSource, data.ServerName)
+        map.put(ApiUrls.Database, data.DataBaseName)
+        map.put(ApiUrls.DBUserName, data.UserName)
+        map.put(ApiUrls.DBPassword, data.Password)
+        AppLog.printLog("getTentativeDetailsRequestModel: " + Gson().toJson(map))
+        return map;
+    }
 }
