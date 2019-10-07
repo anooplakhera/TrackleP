@@ -34,8 +34,6 @@ class UsageNotificationActivity : BaseActivity() {
 
             getUsageNotificationDetails()
 
-
-
             btnUsageNotificationSubmit.setOnClickListener {
                 validationField()
             }

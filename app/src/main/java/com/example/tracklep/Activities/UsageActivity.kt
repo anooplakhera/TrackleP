@@ -400,6 +400,40 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod(mMode)
                 }
             }
+
+            /*if (mType == "W" || mType == "G") {//vikash update tentive service
+
+                var def: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne> =
+                    WaterUsageData.mArrayList!!
+                if (selectedUnit == "$") {
+                    txtHighestThisPeriodValue.text =
+                        selectedUnit + "" + def?.get(def.size - 1)?.HIGHEST
+                    txtLowestThisPeriodValue.text =
+                        selectedUnit + "" + def?.get(def.size - 1)?.LOWEST
+
+                    if(mType == "W") {
+                        txtSoFartThisMonthValue.text =
+                            selectedUnit + "" + def?.get(def.size - 1)?.TotalValue
+                        txtProjectedUsageValue.text = selectedUnit + "" +
+                                def?.get(def.size - 1)?.HIGHEST//TO BE UPDATED
+                    } else{
+                        txtSoFartThisMonthValue.text =
+                            selectedUnit + "" + def?.get(def.size - 1)?.TotalValue
+                        txtProjectedUsageValue.text = selectedUnit + "" +
+                                def?.get(def.size - 1)?.HIGHEST//TO BE UPDATED
+                    }
+                } else {
+                    txtHighestThisPeriodValue.text =
+                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit
+                    txtLowestThisPeriodValue.text =
+                        def?.get(def.size - 1)?.LOWEST + " " + selectedUnit
+                    txtSoFartThisMonthValue.text =
+                        def?.get(def.size - 1)?.TotalValue + " " + selectedUnit
+                    txtProjectedUsageValue.text =
+                        def?.get(def.size - 1)?.HIGHEST + " " + selectedUnit//TO BE UPDATED
+                }
+            }*/
+
             chartUsage.clear()
             chartUsage.description = null
             chartUsage.setPinchZoom(false)
@@ -670,7 +704,6 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     ) {
 
 
-
         val barWidth = 0.3f
         val barSpace = 0f
         val groupSpace = 0.4f
@@ -707,7 +740,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                     txt_date_from_to_usage.text = WaterUsageData.getUsagePeriod(mMode)
                 }
             } else {
-                var def: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne> = WaterUsageData.mArrayList!!
+                var def: ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne> =
+                    WaterUsageData.mArrayList!!
                 if (selectedUnit == "$") {
                     txtHighestThisPeriodValue.text =
                         selectedUnit + "" + def?.get(def.size - 1)?.HIGHEST
@@ -761,8 +795,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
             data.setValueFormatter(MyValueFormatter() as ValueFormatter?)
             chartUsage.barData.barWidth = barWidth
             chartUsage.xAxis.axisMinimum = 0F
-             chartUsage.xAxis.axisMaximum =
-                 0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
+            chartUsage.xAxis.axisMaximum =
+                0 + chartUsage.barData.getGroupWidth(groupSpace, barSpace) * year.size
 
             chartUsage.moveViewToX(5F);
 
@@ -904,7 +938,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
     private fun getWaterUsage() = if (Utils.isConnected(this)) {
         showDialog()
         try {
-            val apiService = ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
+            val apiService =
+                ApiClient.getClient(ApiUrls.getBasePathUrl()).create(ApiInterface::class.java)
             val call: Call<ResponseModelClasses.WaterUsages> = apiService.getWaterUsages(
                 getHeader(),
                 ApiUrls.getJSONRequestBody(
@@ -926,7 +961,8 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                         dismissDialog()
                         if (response.body() != null) {
                             AppLog.printLog("WaterDetails: " + Gson().toJson(response.body()));
-                            var data = ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
+                            var data =
+                                ArrayList<ResponseModelClasses.WaterUsages.Results1.TableOne>()
                             data.addAll(response.body()!!.Results.Table)
                             //data.reverse()
                             WaterUsageData.clearArrayList()
@@ -956,12 +992,22 @@ class UsageActivity : BaseActivity(), OnChartValueSelectedListener,
                                         getString(R.string.u_usage),
                                         getString(R.string.u_allocation)
                                     )
-                                }else if (mMode == "D"){
-                                    setSingleGraphChartData(
+                                } else if (mMode == "D") {
+                                    /*setSingleGraphChartData(
                                         WaterUsageData.getUsageConsumedBar(),
                                         WaterUsageData.getMonthList()
+                                    )*/
+
+                                    setChartData(
+                                        WaterUsageData.getUsageConsumedBar(),
+                                        WaterUsageData.getUsageBar(),
+                                        WaterUsageData.getUsageEmptyBar(),
+                                        WaterUsageData.getMonthList(),
+                                        getString(R.string.u_usage),
+                                        getString(R.string.u_allocation)
                                     )
-                                } else{
+
+                                } else {
                                     setChartData(
                                         WaterUsageData.getUsageConsumedBar(),
                                         WaterUsageData.getUsageBar(),

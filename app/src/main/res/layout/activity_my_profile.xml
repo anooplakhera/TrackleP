@@ -676,11 +676,10 @@
                     android:id="@+id/txtusage_disclaimer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp_5"
                     android:layout_marginBottom="@dimen/dp_40"
-                    android:text="@string/address"
                     android:background="@drawable/drawable_round_corner"
-                    android:padding="@dimen/dp_4"
+                    android:padding="@dimen/dp_10"
+                    android:text="@string/myprofile_disclaimer"
                     android:textSize="@dimen/dp_10" />
 
             <androidx.appcompat.widget.AppCompatButton
