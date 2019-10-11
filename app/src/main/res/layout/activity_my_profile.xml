@@ -676,6 +676,7 @@
                     android:id="@+id/txtusage_disclaimer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:layout_marginBottom="@dimen/dp_40"
                     android:background="@drawable/drawable_round_corner"
                     android:padding="@dimen/dp_10"
