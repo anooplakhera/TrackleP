@@ -1,4 +1,4 @@
-package com.example.tracklep
+package com.aquatrax.tracklep
 
 import org.junit.Test
 

@@ -1,229 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/drawable_background_gradient"
-    android:fitsSystemWindows="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical"
-    tools:context=".Activities.SignupStepOneActivity">
-    
-    <include
-        android:id="@+id/lytAction"
-        layout="@layout/custom_action_bar" />
-    
-    <ScrollView
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/btnSubmitRegister"
-        android:layout_below="@id/lytAction"
         android:background="@drawable/drawable_background_gradient"
-        android:overScrollMode="never">
-        
-        <LinearLayout
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        tools:context=".Activities.SignupStepOneActivity">
+
+    <include
+            android:id="@+id/lytAction"
+            layout="@layout/custom_action_bar" />
+
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_10"
-            android:background="@drawable/drawable_round_corner"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="@dimen/dp_10">
-            
+            android:layout_above="@id/btnSubmitRegister"
+            android:layout_below="@id/lytAction"
+            android:background="@drawable/drawable_background_gradient"
+            android:overScrollMode="never">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                android:background="@drawable/drawable_round_corner"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_10">
+
             <!--Trackle Logo Layout-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3">
-                
-                <ImageView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/common_drop_image" />
-                
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_60"
-                    android:layout_weight="1"
-                    android:src="@drawable/trackle_logo" />
-                
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/common_drop_image" />
+
                 <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:src="@drawable/common_drop_image" />
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_60"
+                        android:layout_weight="1"
+                        android:src="@drawable/trackle_logo" />
+
+                <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/common_drop_image" />
             </LinearLayout>
-            
+
             <RelativeLayout
-                android:id="@+id/r_lyt_utility"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_2">
-                
-                <TextView
-                    android:id="@+id/txtStep1header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto"
-                    android:padding="@dimen/dp_2"
-                    android:text="@string/step_2_security_questions"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/sp_18" />
-            
-            </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginRight="@dimen/dp_6"
-                android:layout_marginBottom="@dimen/dp_3"
-                android:background="@color/colorLightGray100" />
-            
-            <RelativeLayout
-                android:id="@+id/r_lyt_ques1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_2">
-                
-                <TextView
-                    android:id="@+id/txtQues1"
+                    android:id="@+id/r_lyt_utility"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edittext_border"
-                    android:drawableRight="@drawable/ic_right_arrow"
-                    android:fontFamily="@font/roboto"
-                    android:padding="@dimen/dp_8"
-                    android:text="@string/security_ques1"
-                    android:textColor="@color/colorBlack" />
-                
+                    android:layout_margin="@dimen/dp_2">
+
+                <TextView
+                        android:id="@+id/txtStep1header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_2"
+                        android:text="@string/step_2_security_questions"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/sp_18" />
+
+            </RelativeLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
+                    android:background="@color/colorLightGray100" />
+
+            <RelativeLayout
+                    android:id="@+id/r_lyt_ques1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_2">
+
+                <TextView
+                        android:id="@+id/txtQues1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_border"
+                        android:drawableRight="@drawable/ic_right_arrow"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_8"
+                        android:text="@string/security_ques1"
+                        android:textColor="@color/colorBlack" />
+
                 <ImageView
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_right_arrow"
-                    android:visibility="gone" />
-            
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_right_arrow"
+                        android:visibility="gone" />
+
             </RelativeLayout>
-            
+
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginRight="@dimen/dp_6"
-                android:layout_marginBottom="@dimen/dp_3"
-                android:background="@color/colorLightGray100" />
-            
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_2">
-                
-                
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editAnswer1"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_100"
-                    android:background="@drawable/edittext_border"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="start"
-                    android:hint="Enter Security Answer"
-                    android:padding="@dimen/dp_4"
-                    android:paddingTop="@dimen/dp_4"
-                    android:textSize="@dimen/sp_14" />
-            
-            </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginRight="@dimen/dp_6"
-                android:layout_marginBottom="@dimen/dp_3"
-                android:background="@color/colorLightGray100" />
-            
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
+                    android:background="@color/colorLightGray100" />
+
             <RelativeLayout
-                android:id="@+id/r_lyt_ques2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_2">
-                
-                <TextView
-                    android:id="@+id/txtQues2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edittext_border"
-                    android:drawableRight="@drawable/ic_right_arrow"
-                    android:fontFamily="@font/roboto"
-                    android:padding="@dimen/dp_8"
-                    android:text="@string/security_ques2"
-                    android:textColor="@color/colorBlack" />
-                
-                <ImageView
-                    android:layout_width="@dimen/dp_30"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ic_right_arrow"
-                    android:visibility="gone" />
-            
-            
-            </RelativeLayout>
-            
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginRight="@dimen/dp_6"
-                android:layout_marginBottom="@dimen/dp_3"
-                android:background="@color/colorLightGray100" />
-            
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_2">
-                
+                    android:layout_margin="@dimen/dp_2">
+
+
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editAnswer2"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_100"
-                    android:background="@drawable/edittext_border"
-                    android:fontFamily="@font/roboto"
-                    android:hint="@string/mandatory"
-                    android:padding="@dimen/dp_4"
-                    android:textSize="@dimen/sp_14" />
-            
+                        android:id="@+id/editAnswer1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_100"
+                        android:background="@drawable/edittext_border"
+                        android:fontFamily="@font/roboto"
+                        android:gravity="start"
+                        android:hint="Enter Security Answer"
+                        android:padding="@dimen/dp_4"
+                        android:paddingTop="@dimen/dp_4"
+                        android:textSize="@dimen/sp_14" />
+
             </RelativeLayout>
-            
+
             <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginLeft="@dimen/dp_6"
-                android:layout_marginTop="@dimen/dp_3"
-                android:layout_marginRight="@dimen/dp_6"
-                android:layout_marginBottom="@dimen/dp_3"
-                android:background="@color/colorLightGray100" />
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
+                    android:background="@color/colorLightGray100" />
+
+            <RelativeLayout
+                    android:id="@+id/r_lyt_ques2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_2">
+
+                <TextView
+                        android:id="@+id/txtQues2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext_border"
+                        android:drawableRight="@drawable/ic_right_arrow"
+                        android:fontFamily="@font/roboto"
+                        android:padding="@dimen/dp_8"
+                        android:text="@string/security_ques2"
+                        android:textColor="@color/colorBlack" />
+
+                <ImageView
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_right_arrow"
+                        android:visibility="gone" />
+
+
+            </RelativeLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
+                    android:background="@color/colorLightGray100" />
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp_2">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/editAnswer2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_100"
+                        android:background="@drawable/edittext_border"
+                        android:fontFamily="@font/roboto"
+                        android:hint="@string/mandatory"
+                        android:padding="@dimen/dp_4"
+                        android:textSize="@dimen/sp_14" />
+
+            </RelativeLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:layout_marginBottom="@dimen/dp_3"
+                    android:background="@color/colorLightGray100" />
         </LinearLayout>
-    
+
     </ScrollView>
-    
+
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSubmitRegister"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark"
-        android:fontFamily="@font/roboto"
-        android:text="@string/register_now"
-        android:textAllCaps="false"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/sp_18" />
+            android:id="@+id/btnSubmitRegister"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="@font/roboto"
+            android:text="@string/register_now"
+            android:textAllCaps="false"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/sp_18" />
 
 </RelativeLayout>
